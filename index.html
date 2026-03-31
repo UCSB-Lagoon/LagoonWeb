@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lagoon — Your UCSB Campus Life, Simplified</title>
-  <meta name="description" content="Classes, dining, events, and campus news — all in one beautiful iOS app for UC Santa Barbara students." />
-  <meta property="og:title" content="Lagoon — Your UCSB Campus Life, Simplified" />
-  <meta property="og:description" content="One beautiful iOS app for every UCSB student." />
+  <title>Lagoon - UCSB Campus Life, Beautifully Simple</title>
+  <meta name="description" content="Lagoon brings schedules, dining, events, and grade data into one polished iPhone app for UCSB students. Join the public beta on TestFlight." />
+  <meta property="og:title" content="Lagoon - UCSB Campus Life, Beautifully Simple" />
+  <meta property="og:description" content="The all-in-one UCSB app is now live in public beta on TestFlight." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #03070f;
-      --surface:  #080e1c;
-      --surface2: #0c1528;
-      --surface3: #111d35;
+      --bg:       #04101f;
+      --surface:  #08182d;
+      --surface2: #0b1f38;
+      --surface3: #102949;
       --border:   rgba(255,255,255,0.06);
       --border2:  rgba(255,255,255,0.12);
       --navy:     #003660;
@@ -27,16 +27,25 @@
       --text:     #f0f4ff;
       --muted:    rgba(240,244,255,0.55);
       --subtle:   rgba(240,244,255,0.28);
+      --cream:    #f5efe2;
+      --shadow:   0 30px 80px rgba(0,0,0,0.38);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top, rgba(21,68,120,0.45) 0%, rgba(4,16,31,0) 34%),
+        radial-gradient(circle at 80% 20%, rgba(34,211,238,0.08) 0%, rgba(4,16,31,0) 22%),
+        linear-gradient(180deg, #04101f 0%, #061528 28%, #04101f 100%);
       color: var(--text);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+    }
+
+    h1, h2, h3, .nav-wordmark, .stat-n, .asb-main {
+      font-family: 'Sora', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     /* ══════════════════════════════════════════
@@ -93,6 +102,13 @@
       font-weight: 600;
       color: var(--gold);
       letter-spacing: 0.1px;
+      text-decoration: none;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+    .nav-pill:hover {
+      transform: translateY(-1px);
+      background: rgba(254,188,17,0.18);
+      border-color: rgba(254,188,17,0.36);
     }
 
     .pill-dot {
@@ -165,7 +181,16 @@
     }
 
     /* Hero content */
-    .hero-body { position: relative; z-index: 1; }
+    .hero-body {
+      position: relative;
+      z-index: 1;
+      width: min(1200px, 100%);
+    }
+
+    .hero .rv {
+      opacity: 1;
+      transform: none;
+    }
 
     .hero-tag {
       display: inline-flex;
@@ -208,7 +233,7 @@
     .hero-sub {
       font-size: clamp(16px, 2.2vw, 20px);
       color: var(--muted);
-      max-width: 490px;
+      max-width: 640px;
       margin: 0 auto 44px;
       line-height: 1.65;
       font-weight: 400;
@@ -219,7 +244,7 @@
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 72px;
+      margin-bottom: 26px;
     }
 
     .btn-gold {
@@ -253,6 +278,103 @@
       transition: background 0.18s ease, transform 0.18s ease;
     }
     .btn-ghost:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); }
+
+    .hero-proof {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 54px;
+    }
+
+    .hero-proof-item {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(240,244,255,0.8);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.1px;
+    }
+
+    .hero-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      align-items: end;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .shot-card {
+      position: relative;
+      padding: 14px;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(245,239,226,0.09) 0%, rgba(255,255,255,0.02) 100%),
+        rgba(8,24,45,0.86);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      text-align: left;
+      overflow: hidden;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+    }
+
+    .shot-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(34,211,238,0.09) 0%, rgba(34,211,238,0) 40%);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      pointer-events: none;
+    }
+
+    .shot-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.14);
+    }
+
+    .shot-card:hover::before { opacity: 1; }
+    .shot-card.center { transform: translateY(-18px); }
+    .shot-card.center:hover { transform: translateY(-24px); }
+
+    .shot-media {
+      display: block;
+      width: 100%;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0c2341;
+    }
+
+    .shot-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .shot-copy {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 4px 4px;
+    }
+
+    .shot-label {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #fff;
+    }
+
+    .shot-note {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
 
     /* ══════════════════════════════════════════
        PHONE MOCKUPS (CSS-only)
@@ -611,7 +733,7 @@
     .hl-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 80px;
+      gap: 56px;
       align-items: center;
       margin-top: 64px;
     }
@@ -645,9 +767,47 @@
       color: #34d399;
     }
 
-    .hl-phone { display: flex; justify-content: center; }
-    .hl-phone .pf { width: 272px; }
-    .hl-phone .ps { height: 556px; }
+    .hl-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      align-items: end;
+    }
+
+    .hl-shot {
+      padding: 14px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(245,239,226,0.08) 0%, rgba(255,255,255,0.02) 100%),
+        rgba(8,24,45,0.9);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .hl-shot:first-child { transform: translateY(18px); }
+
+    .hl-shot img {
+      display: block;
+      width: 100%;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hl-shot-title {
+      display: block;
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.2px;
+    }
+
+    .hl-shot-sub {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
 
     /* ══════════════════════════════════════════
        CTA
@@ -719,6 +879,14 @@
     .asb-main { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; display: block; }
 
     .cta-note { margin-top: 26px; font-size: 13px; color: var(--subtle); }
+
+    .cta-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
 
     /* ══════════════════════════════════════════
        FOOTER
@@ -933,7 +1101,10 @@
       .bc.c3 { grid-column: span 6; }
       .bc.c2 { grid-column: span 3; }
       .hl-grid { grid-template-columns: 1fr; gap: 56px; }
-      .hl-phone { order: -1; }
+      .hl-gallery { order: -1; }
+      .hero-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .shot-card.center { transform: none; }
+      .shot-card.center:hover { transform: translateY(-6px); }
     }
 
     @media (max-width: 768px) {
@@ -942,6 +1113,10 @@
       .bc.c2 { grid-column: span 6; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       footer { padding: 36px 20px; flex-direction: column; align-items: flex-start; }
+      .hero-showcase { grid-template-columns: 1fr; }
+      .shot-card:nth-child(n + 2) { display: none; }
+      .hl-gallery { grid-template-columns: 1fr; }
+      .hl-shot:first-child { transform: none; }
     }
 
     @media (max-width: 480px) {
@@ -964,10 +1139,10 @@
     </div>
     <span class="nav-wordmark">Lagoon</span>
   </a>
-  <div class="nav-pill">
+  <a class="nav-pill" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer">
     <span class="pill-dot"></span>
-    Coming to App Store
-  </div>
+    Public beta on TestFlight
+  </a>
 </nav>
 
 <!-- ── HERO ── -->
@@ -981,154 +1156,63 @@
   <div class="hero-body">
     <div class="hero-tag rv">
       <span class="tag-dot"></span>
-      Built exclusively for UC Santa Barbara
+      Public beta now open for UCSB students
     </div>
 
     <h1 class="rv d1">
-      <span class="h1-plain">Campus life,</span>
-      <span class="h1-gradient">beautifully simple.</span>
+      <span class="h1-plain">Everything UCSB.</span>
+      <span class="h1-gradient">Finally in one place.</span>
     </h1>
 
     <p class="hero-sub rv d2">
-      Built for Gauchos, by Gauchos. Your classes from GOLD, Carrillo's menu, tonight's event at Storke Plaza — one app, zero friction.
+      Lagoon brings together your GOLD schedule, dining halls, campus events, Daily Nexus news, and grade data in one polished iPhone app built by Gauchos, for Gauchos.
     </p>
 
     <div class="hero-cta rv d3">
-      <a href="#features" class="btn-gold">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
-        Explore features
+      <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-gold" target="_blank" rel="noreferrer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M6 11l6-6 6 6"/></svg>
+        Join the public beta
       </a>
-      <a href="#cta" class="btn-ghost">Get early access →</a>
+      <a href="#features" class="btn-ghost">See what's inside</a>
     </div>
 
-    <!-- PHONE MOCKUPS -->
-    <div class="phones rv d4">
+    <div class="hero-proof rv d4">
+      <span class="hero-proof-item">Public TestFlight beta</span>
+      <span class="hero-proof-item">Native iPhone app</span>
+      <span class="hero-proof-item">Built for campus life at UCSB</span>
+    </div>
 
-      <!-- Left: Dining -->
-      <div class="pw side">
-        <div class="pf">
-          <div class="ps scr-dining">
-            <div class="di"></div>
-            <div class="scr-status">
-              <span class="scr-time">9:41</span>
-              <span class="scr-icons">● ▲ ■</span>
-            </div>
-            <div class="scr-label">Live Menus</div>
-            <div class="scr-title">Dining</div>
-            <div class="sd-hall">
-              <div class="sd-hall-row">
-                <span class="sd-hall-name">Carrillo DH</span>
-                <span class="sd-open">Open</span>
-              </div>
-              <div class="sd-menu">Pasta · Stir Fry · Salad Bar</div>
-            </div>
-            <div class="sd-hall">
-              <div class="sd-hall-row">
-                <span class="sd-hall-name">De La Guerra</span>
-                <span class="sd-open">Open</span>
-              </div>
-              <div class="sd-menu">Tacos · Soup · Sandwiches</div>
-            </div>
-            <div class="sd-hall">
-              <div class="sd-hall-row">
-                <span class="sd-hall-name">Ortega</span>
-                <span class="sd-open">Open</span>
-              </div>
-              <div class="sd-menu">Burgers · Fries · Vegan Bowl</div>
-            </div>
-            <div class="sd-hall">
-              <div class="sd-hall-row">
-                <span class="sd-hall-name">Portola</span>
-                <span class="sd-closed">Closed</span>
-              </div>
-              <div class="sd-menu">Opens at 5:00 PM</div>
-            </div>
-            <div class="ptab">
-              <span class="ptab-icon">🏠</span>
-              <span class="ptab-icon on">🍽️</span>
-              <span class="ptab-icon">📅</span>
-              <span class="ptab-icon">🎉</span>
-              <span class="ptab-icon">📰</span>
-            </div>
-          </div>
-          <div class="prefl"></div>
+    <div class="hero-showcase rv d5">
+      <article class="shot-card">
+        <a class="shot-media" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer" aria-label="Open Lagoon TestFlight beta">
+          <img src="output/04_dining_framed.png" alt="Lagoon dining screen screenshot" />
+        </a>
+        <div class="shot-copy">
+          <span class="shot-label">Know what's open</span>
+          <span class="shot-note">Dining halls</span>
         </div>
-      </div>
+      </article>
 
-      <!-- Center: Home -->
-      <div class="pw center">
-        <div class="pf">
-          <div class="ps scr-home">
-            <div class="di"></div>
-            <div class="scr-status">
-              <span class="scr-time">9:41</span>
-              <span class="scr-icons">● ▲ ■</span>
-            </div>
-            <div class="sh-greeting">Good morning</div>
-            <div class="sh-name">Alex Gaucho 👋</div>
-            <div class="sh-card">
-              <div class="sh-card-tag">Up Next</div>
-              <div class="sh-card-title">CS 130A — Data Structures</div>
-              <div class="sh-card-sub">GIRV 1004 &nbsp;·&nbsp; 9:00 AM &nbsp;·&nbsp; In 42 min</div>
-            </div>
-            <div class="sh-card" style="border-color:rgba(254,188,17,0.15);background:rgba(254,188,17,0.04);">
-              <div class="sh-card-tag" style="color:var(--gold);">Tonight</div>
-              <div class="sh-card-title">Jazz Night @ Storke Plaza</div>
-              <div class="sh-card-sub">Campus Events &nbsp;·&nbsp; 7:00 PM</div>
-            </div>
-            <div class="sh-chips">
-              <div class="sh-chip"><div class="sh-chip-ico">🍽️</div><span class="sh-chip-lbl">Dining</span></div>
-              <div class="sh-chip"><div class="sh-chip-ico">📅</div><span class="sh-chip-lbl">Schedule</span></div>
-              <div class="sh-chip"><div class="sh-chip-ico">📰</div><span class="sh-chip-lbl">News</span></div>
-              <div class="sh-chip"><div class="sh-chip-ico">📊</div><span class="sh-chip-lbl">Grades</span></div>
-            </div>
-            <div class="ptab">
-              <span class="ptab-icon on">🏠</span>
-              <span class="ptab-icon">🍽️</span>
-              <span class="ptab-icon">📅</span>
-              <span class="ptab-icon">🎉</span>
-              <span class="ptab-icon">📰</span>
-            </div>
-          </div>
-          <div class="prefl"></div>
+      <article class="shot-card center">
+        <a class="shot-media" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer" aria-label="Join Lagoon public beta on TestFlight">
+          <img src="output/05_schedule_framed.png" alt="Lagoon schedule screen screenshot" />
+        </a>
+        <div class="shot-copy">
+          <span class="shot-label">Your week, beautifully organized</span>
+          <span class="shot-note">Schedule</span>
         </div>
-      </div>
+      </article>
 
-      <!-- Right: Schedule -->
-      <div class="pw side">
-        <div class="pf">
-          <div class="ps scr-schedule">
-            <div class="di"></div>
-            <div class="scr-status">
-              <span class="scr-time">9:41</span>
-              <span class="scr-icons">● ▲ ■</span>
-            </div>
-            <div class="scr-label">This Week</div>
-            <div class="scr-title">Schedule</div>
-            <div class="ss-days">
-              <div class="ss-day">M</div>
-              <div class="ss-day">T</div>
-              <div class="ss-day active">W</div>
-              <div class="ss-day">Th</div>
-              <div class="ss-day">F</div>
-            </div>
-            <div class="ss-class blue"><div class="ss-cn">CS 130A</div><div class="ss-ct">9:00–10:15 AM · GIRV 1004</div></div>
-            <div class="ss-class purple"><div class="ss-cn">MATH 4A</div><div class="ss-ct">11:00 AM–12:15 PM · SH 1431</div></div>
-            <div class="ss-class green"><div class="ss-cn">ENGL 10</div><div class="ss-ct">2:00–3:15 PM · Phelps 1444</div></div>
-            <div class="ss-class amber"><div class="ss-cn">CHEM 1A Lab</div><div class="ss-ct">4:00–6:50 PM · Chem 1171</div></div>
-            <div class="ptab">
-              <span class="ptab-icon">🏠</span>
-              <span class="ptab-icon">🍽️</span>
-              <span class="ptab-icon on">📅</span>
-              <span class="ptab-icon">🎉</span>
-              <span class="ptab-icon">📰</span>
-            </div>
-          </div>
-          <div class="prefl"></div>
+      <article class="shot-card">
+        <a class="shot-media" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer" aria-label="Preview Lagoon events view">
+          <img src="output/03_events_framed.png" alt="Lagoon events screen screenshot" />
+        </a>
+        <div class="shot-copy">
+          <span class="shot-label">Never miss campus energy</span>
+          <span class="shot-note">Events</span>
         </div>
-      </div>
-
-    </div><!-- /phones -->
+      </article>
+    </div>
   </div><!-- /hero-body -->
 </section>
 
@@ -1317,64 +1401,32 @@
 <section class="highlight">
   <div class="container highlight-inner">
     <div class="eyebrow rv">See it in action</div>
-    <h2 class="sec-title rv d1">Designed to<br>feel effortless.</h2>
+    <h2 class="sec-title rv d1">Real screens.<br>Real campus flow.</h2>
 
     <div class="hl-grid">
       <div class="hl-text rv d1">
-        <h3>Your entire week,<br>always in focus.</h3>
-        <p>Lagoon's schedule view pulls your classes from GOLD and presents them in a clean, color-coded layout. See today's agenda the moment you open the app.</p>
-        <p>Smart notifications remind you before class — not at 3am, not 10 minutes before — at exactly the right moment.</p>
+        <h3>From first sign-in to smarter course picks.</h3>
+        <p>Lagoon is designed to feel calm right away. The onboarding is simple, the visual language is consistent, and the app gets useful fast instead of making you dig.</p>
+        <p>Once you're in, course search and grade data help you make better decisions before add/drop chaos hits. It is the kind of tool you keep open all quarter.</p>
         <ul class="hl-list">
-          <li><span class="chk">✓</span> Syncs directly from GOLD</li>
-          <li><span class="chk">✓</span> Color-coded by course</li>
-          <li><span class="chk">✓</span> Finals & midterms highlighted</li>
-          <li><span class="chk">✓</span> Native iOS widgets</li>
+          <li><span class="chk">✓</span> Fast onboarding with Apple or email</li>
+          <li><span class="chk">✓</span> Historical grade context in search</li>
+          <li><span class="chk">✓</span> Schedule, events, and dining in one app</li>
+          <li><span class="chk">✓</span> Clean native iPhone experience</li>
         </ul>
       </div>
 
-      <div class="hl-phone rv d2">
-        <div class="pf" style="width:272px;">
-          <div class="ps scr-schedule" style="height:556px;">
-            <div class="di"></div>
-            <div class="scr-status" style="padding:0 4px;margin-bottom:18px;">
-              <span class="scr-time">9:41</span>
-              <span class="scr-icons">● ▲ ■</span>
-            </div>
-            <div class="scr-label">This Week</div>
-            <div class="scr-title" style="font-size:20px;margin-bottom:12px;">Schedule</div>
-            <div class="ss-days" style="margin-bottom:14px;">
-              <div class="ss-day">M</div>
-              <div class="ss-day">T</div>
-              <div class="ss-day active">W</div>
-              <div class="ss-day">Th</div>
-              <div class="ss-day">F</div>
-            </div>
-            <div class="ss-class blue" style="padding:10px 14px;margin-bottom:8px;">
-              <div class="ss-cn" style="font-size:12px;">CS 130A — Data Structures</div>
-              <div class="ss-ct" style="font-size:9.5px;">9:00–10:15 AM · GIRV 1004</div>
-            </div>
-            <div class="ss-class purple" style="padding:10px 14px;margin-bottom:8px;">
-              <div class="ss-cn" style="font-size:12px;">MATH 4A — Linear Algebra</div>
-              <div class="ss-ct" style="font-size:9.5px;">11:00 AM–12:15 PM · SH 1431</div>
-            </div>
-            <div class="ss-class green" style="padding:10px 14px;margin-bottom:8px;">
-              <div class="ss-cn" style="font-size:12px;">ENGL 10 — Writing</div>
-              <div class="ss-ct" style="font-size:9.5px;">2:00–3:15 PM · Phelps 1444</div>
-            </div>
-            <div class="ss-class amber" style="padding:10px 14px;margin-bottom:8px;">
-              <div class="ss-cn" style="font-size:12px;">CHEM 1A Laboratory</div>
-              <div class="ss-ct" style="font-size:9.5px;">4:00–6:50 PM · Chem 1171</div>
-            </div>
-            <div class="ptab">
-              <span class="ptab-icon">🏠</span>
-              <span class="ptab-icon">🍽️</span>
-              <span class="ptab-icon on">📅</span>
-              <span class="ptab-icon">🎉</span>
-              <span class="ptab-icon">📰</span>
-            </div>
-          </div>
-          <div class="prefl"></div>
-        </div>
+      <div class="hl-gallery rv d2">
+        <article class="hl-shot">
+          <img src="output/01_welcome_framed.png" alt="Lagoon welcome screen screenshot" />
+          <span class="hl-shot-title">Onboarding that feels premium</span>
+          <span class="hl-shot-sub">Clear first-run experience built for students, not enterprise software.</span>
+        </article>
+        <article class="hl-shot">
+          <img src="output/02_course_search_framed.png" alt="Lagoon course search screenshot" />
+          <span class="hl-shot-title">Search with context, not guesswork</span>
+          <span class="hl-shot-sub">Browse sections, GPA data, and availability in one clean view.</span>
+        </article>
       </div>
     </div>
   </div>
@@ -1388,25 +1440,27 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
       </svg>
-      Coming to iOS soon
+      Public beta available now
     </div>
 
-    <h2 class="rv d1">Ready for UCSB<br>to feel simple?</h2>
-    <p class="cta-sub rv d2">Lagoon is coming to the App Store soon. Be the first to know when it drops.</p>
+    <h2 class="rv d1">Install Lagoon<br>on TestFlight.</h2>
+    <p class="cta-sub rv d2">The public beta is live. Join in a tap, try the app on your iPhone, and help shape the best version of Lagoon before the App Store launch.</p>
 
-    <div class="rv d3">
-      <a href="https://apps.apple.com" class="asb">
+    <div class="cta-links rv d3">
+      <a href="https://testflight.apple.com/join/hfmrM9K7" class="asb" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
         </svg>
         <div class="asb-lbl">
-          <span class="asb-sub">Coming soon to the</span>
-          <span class="asb-main">App Store</span>
+          <span class="asb-sub">Install the public beta on</span>
+          <span class="asb-main">TestFlight</span>
         </div>
       </a>
+
+      <a href="#features" class="btn-ghost">Explore every feature</a>
     </div>
 
-    <p class="cta-note rv d4">iOS 17+ &nbsp;·&nbsp; Free to download &nbsp;·&nbsp; Made for Gauchos</p>
+    <p class="cta-note rv d4">iOS 17+ &nbsp;·&nbsp; Free to join &nbsp;·&nbsp; Made for Gauchos</p>
   </div>
 </section>
 
