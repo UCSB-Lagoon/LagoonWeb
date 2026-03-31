@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lagoon — Campus life, beautifully simplified.</title>
-  <meta name="description" content="Lagoon is a native iPhone app for UCSB students — your schedule, dining halls, campus events, and the Daily Nexus, beautifully in one place. Join the TestFlight beta." />
-  <meta property="og:title" content="Lagoon — Campus life, beautifully simplified." />
-  <meta property="og:description" content="Native iPhone app for UC Santa Barbara. Schedule, dining, events, news — beautiful by design. Public beta on TestFlight." />
+  <title>Lagoon — Your UCSB hub</title>
+  <meta name="description" content="Classes, dining, events, and campus life — all in one beautifully designed app for UC Santa Barbara students. Join the public beta on TestFlight." />
+  <meta property="og:title" content="Lagoon — Your UCSB hub" />
+  <meta property="og:description" content="One beautifully designed app for every UCSB student. Schedule, dining, events, news." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -14,26 +14,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Warm dark palette */
-      --bg:      #0b0906;
-      --s1:      #130f09;
-      --s2:      #1c1710;
-      --s3:      #262016;
-      --b1:      rgba(240,220,180,0.07);
-      --b2:      rgba(240,220,180,0.14);
-      /* Brand accents */
-      --terra:   #c4572a;
-      --ochre:   #c98b2a;
-      --gold:    #febc11;
-      --navy:    #003660;
-      --cyan:    #22d3ee;
-      /* Text */
-      --cream:   #f0e6d0;
-      --text:    #ede3d0;
-      --muted:   rgba(237,227,208,0.56);
-      --subtle:  rgba(237,227,208,0.30);
-      /* Shadows */
-      --glow:    0 40px 100px rgba(0,0,0,0.55);
+      --bg:      #f5ede3;
+      --bg-alt:  #ede0d4;
+      --card:    #faf5ef;
+      --dark:    #2b1a0d;
+      --terra:   #bf5527;
+      --terra-d: #a34420;
+      --amber:   #c98b2a;
+      --text:    #1f1209;
+      --muted:   #6b4c3a;
+      --subtle:  #9c7a68;
+      --border:  rgba(100,50,20,0.1);
+      --border2: rgba(100,50,20,0.18);
     }
 
     html { scroll-behavior: smooth; }
@@ -46,1412 +38,1129 @@
       overflow-x: hidden;
     }
 
-    h1, h2, h3, .serif { font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif; }
+    h1, h2, h3, h4 { font-family: 'DM Serif Display', Georgia, serif; }
 
-    /* Warm paper-like noise layer */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    /* ═══════════════════════════════════════════════
+    /* ═══════════════════════════════════════
        NAV
-    ═══════════════════════════════════════════════ */
+    ═══════════════════════════════════════ */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 300;
-      height: 58px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 32px;
-      background: rgba(11,9,6,0.78);
-      backdrop-filter: blur(20px) saturate(140%);
-      -webkit-backdrop-filter: blur(20px) saturate(140%);
-      border-bottom: 1px solid var(--b1);
-      transition: border-color 0.3s;
+      padding: 0 48px;
+      height: 60px;
     }
 
     .nav-brand {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       text-decoration: none;
     }
 
-    .nav-icon {
-      width: 28px; height: 28px;
-      border-radius: 7px;
-      background: linear-gradient(145deg, #1a4a7a 0%, #0057b0 100%);
+    .nav-logo-tile {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--terra);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 0 14px rgba(0,87,176,0.35);
+    }
+    .nav-logo-tile span {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: #fff;
+      line-height: 1;
     }
 
     .nav-name {
       font-family: 'DM Serif Display', serif;
-      font-size: 19px;
-      color: var(--cream);
+      font-size: 20px;
+      color: var(--text);
       letter-spacing: 0.01em;
     }
 
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 16px;
-      background: rgba(254,188,17,0.12);
-      border: 1px solid rgba(254,188,17,0.28);
-      border-radius: 100px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--gold);
-      text-decoration: none;
-      letter-spacing: 0.01em;
-      transition: background 0.18s, border-color 0.18s, transform 0.18s;
-    }
-    .nav-cta:hover { background: rgba(254,188,17,0.2); border-color: rgba(254,188,17,0.42); transform: translateY(-1px); }
-
-    .nav-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: pulse 2.2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.25; } }
-
-    /* ═══════════════════════════════════════════════
-       HERO
-    ═══════════════════════════════════════════════ */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 90px 24px 64px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Warm atmosphere */
-    .hero-atmo {
-      position: absolute; inset: 0; pointer-events: none;
-      background:
-        radial-gradient(ellipse 100% 65% at 50% -5%, rgba(0,50,100,0.85) 0%, transparent 58%),
-        radial-gradient(ellipse 50% 40% at 10% 75%, rgba(196,87,42,0.1) 0%, transparent 55%),
-        radial-gradient(ellipse 35% 30% at 90% 55%, rgba(201,139,42,0.07) 0%, transparent 50%);
-    }
-
-    /* Warm grid */
-    .hero-grid {
-      position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(240,220,170,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(240,220,170,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 100%);
-    }
-
-    /* Orbs */
-    .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; animation: drift 20s ease-in-out infinite; }
-    .orb-a { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,70,160,0.45), transparent 70%); top: -220px; left: -140px; }
-    .orb-b { width: 380px; height: 380px; background: radial-gradient(circle, rgba(196,87,42,0.18), transparent 70%); bottom: -80px; right: -60px; animation-delay: -9s; }
-    .orb-c { width: 260px; height: 260px; background: radial-gradient(circle, rgba(201,139,42,0.12), transparent 70%); top: 50%; right: 10%; animation-delay: -15s; }
-    @keyframes drift { 0%,100%{ transform:translate(0,0) scale(1); } 33%{ transform:translate(20px,-16px) scale(1.03); } 66%{ transform:translate(-16px,22px) scale(0.97); } }
-
-    /* Hero content */
-    .hero-body { position: relative; z-index: 1; width: min(1160px, 100%); }
-
-    .hero-eyebrow {
+    .nav-dl {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
-      background: rgba(237,227,208,0.05);
-      border: 1px solid var(--b2);
+      padding: 9px 20px;
+      background: var(--terra);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .nav-dl:hover { background: var(--terra-d); }
+    .nav-dl svg { width: 14px; height: 14px; }
+
+    /* ═══════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════ */
+    .hero {
+      padding: 72px 24px 0;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-pill {
+      display: inline-block;
+      padding: 5px 14px;
+      border: 1px solid var(--terra);
       border-radius: 100px;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
-      color: var(--muted);
-      margin-bottom: 32px;
+      color: var(--terra);
+      margin-bottom: 28px;
       letter-spacing: 0.01em;
     }
-    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 8px var(--terra); }
 
     .hero h1 {
-      font-size: clamp(50px, 9vw, 98px);
-      line-height: 0.97;
+      font-size: clamp(46px, 7vw, 80px);
+      line-height: 1.0;
       letter-spacing: -0.01em;
-      margin-bottom: 28px;
-    }
-    .h1-warm { display: block; color: var(--cream); }
-    .h1-accent {
-      display: block;
-      color: transparent;
-      background: linear-gradient(100deg, #f0c060 0%, var(--terra) 55%, #e86820 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      font-style: italic;
+      color: var(--text);
+      margin-bottom: 20px;
+      max-width: 700px;
     }
 
     .hero-sub {
-      font-size: clamp(16px, 2vw, 19px);
+      font-size: 18px;
       color: var(--muted);
-      max-width: 520px;
-      margin: 0 auto 44px;
-      line-height: 1.7;
+      line-height: 1.65;
+      max-width: 480px;
+      margin: 0 auto 40px;
       font-weight: 400;
     }
 
-    .hero-actions {
+    .hero-btns {
       display: flex;
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 20px;
+      margin-bottom: 60px;
     }
 
-    .btn-primary {
+    .btn-dark {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       padding: 14px 28px;
-      background: var(--gold);
-      color: #1a0f00;
+      background: var(--text);
+      color: var(--bg);
       font-size: 15px;
-      font-weight: 800;
-      border-radius: 14px;
+      font-weight: 700;
+      border-radius: 12px;
       text-decoration: none;
-      letter-spacing: -0.01em;
-      transition: transform 0.18s, box-shadow 0.18s;
+      transition: opacity 0.18s, transform 0.18s;
     }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(254,188,17,0.35); }
+    .btn-dark:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-dark svg { width: 15px; height: 15px; }
 
-    .btn-secondary {
+    .btn-outline {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 26px;
-      background: rgba(237,227,208,0.05);
-      border: 1px solid var(--b2);
-      color: var(--cream);
+      gap: 9px;
+      padding: 14px 28px;
+      background: transparent;
+      border: 1.5px solid var(--border2);
+      color: var(--text);
       font-size: 15px;
       font-weight: 600;
-      border-radius: 14px;
+      border-radius: 12px;
       text-decoration: none;
       transition: background 0.18s, transform 0.18s;
     }
-    .btn-secondary:hover { background: rgba(237,227,208,0.09); transform: translateY(-3px); }
+    .btn-outline:hover { background: rgba(100,50,20,0.05); transform: translateY(-2px); }
 
-    .hero-trust {
+    /* ═══════════════════════════════════════
+       HERO PHONE (single, centered)
+    ═══════════════════════════════════════ */
+    .hero-phone {
       display: flex;
-      gap: 6px;
       justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 72px;
-    }
-    .trust-chip {
-      font-size: 11.5px;
-      font-weight: 500;
-      color: var(--subtle);
-      padding: 5px 12px;
-      background: rgba(237,227,208,0.04);
-      border: 1px solid rgba(237,227,208,0.07);
-      border-radius: 100px;
-    }
-
-    /* ═══════════════════════════════════════════════
-       PHONE MOCKUPS (CSS-only, warm-themed)
-    ═══════════════════════════════════════════════ */
-    .phones {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .ph-wrap { transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
-    .ph-wrap.side { opacity: 0.6; transform: scale(0.8) translateY(40px); }
-    .ph-wrap.side:hover { opacity: 0.76; transform: scale(0.83) translateY(24px); }
-    .ph-wrap.center:hover { transform: translateY(-12px); }
-
-    .ph-frame {
-      background: #1a1816;
-      padding: 10px;
-      position: relative;
-      border-radius: 46px;
-      box-shadow:
-        0 0 0 1px rgba(255,240,200,0.12),
-        0 0 0 2px rgba(0,0,0,0.85),
-        0 60px 120px rgba(0,0,0,0.85),
-        inset 0 1px 0 rgba(255,240,200,0.07);
-    }
-    .ph-wrap.side  .ph-frame { width: 188px; }
-    .ph-wrap.center .ph-frame { width: 228px; }
-
-    .ph-screen {
-      border-radius: 36px;
-      overflow: hidden;
-      position: relative;
-    }
-    .ph-wrap.side   .ph-screen { height: 382px; }
-    .ph-wrap.center .ph-screen { height: 464px; }
-
-    /* Dynamic island */
-    .di { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 68px; height: 21px; background: #000; border-radius: 11px; z-index: 20; }
-
-    /* Status bar */
-    .sb { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px; margin-bottom: 10px; }
-    .sb-time { font-size: 9px; font-weight: 800; color: rgba(240,230,210,0.7); }
-    .sb-icons { font-size: 7.5px; color: rgba(240,230,210,0.55); letter-spacing: 1.5px; }
-
-    /* Warm screen labels */
-    .scr-eyebrow { font-size: 7.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--terra); margin-bottom: 2px; }
-    .scr-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--cream); margin-bottom: 12px; }
-
-    /* ── HOME SCREEN (warm) ── */
-    .scr-home { background: linear-gradient(165deg, #0f0b06 0%, #140e08 60%, #0f0a05 100%); padding: 42px 14px 68px; }
-    .sh-greet { font-size: 9.5px; color: rgba(237,227,208,0.42); font-weight: 500; margin-bottom: 1px; }
-    .sh-name  { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--cream); margin-bottom: 14px; }
-
-    .sh-card {
-      background: rgba(237,220,180,0.05);
-      border: 1px solid rgba(237,220,180,0.09);
-      border-radius: 13px;
-      padding: 10px 12px;
-      margin-bottom: 7px;
-    }
-    .sh-card-tag   { font-size: 7px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ochre); margin-bottom: 3px; }
-    .sh-card-title { font-size: 11px; font-weight: 700; color: var(--cream); margin-bottom: 2px; }
-    .sh-card-sub   { font-size: 8px; color: rgba(237,227,208,0.38); }
-
-    .sh-chips { display: flex; gap: 5px; margin-top: 8px; }
-    .sh-chip  { flex: 1; background: rgba(237,220,180,0.04); border: 1px solid rgba(237,220,180,0.07); border-radius: 10px; padding: 8px 4px; text-align: center; }
-    .sh-chip-ico { font-size: 12px; }
-    .sh-chip-lbl { font-size: 7px; color: rgba(237,227,208,0.42); font-weight: 500; margin-top: 1px; display: block; }
-
-    /* ── EVENTS SCREEN (warm) ── */
-    .scr-events { background: linear-gradient(165deg, #0d0806 0%, #120c07 60%, #0d0806 100%); padding: 42px 14px 68px; }
-    .ev-card {
-      background: rgba(237,220,180,0.05);
-      border: 1px solid rgba(237,220,180,0.09);
-      border-radius: 12px;
-      padding: 9px 11px;
-      margin-bottom: 6px;
-      display: flex;
-      gap: 9px;
-      align-items: flex-start;
-    }
-    .ev-icon { width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
-    .ev-name { font-size: 10px; font-weight: 700; color: var(--cream); margin-bottom: 2px; }
-    .ev-loc  { font-size: 7.5px; color: rgba(237,227,208,0.38); }
-    .ev-time { font-size: 7.5px; font-weight: 600; color: var(--ochre); margin-top: 2px; }
-
-    /* ── SCHEDULE SCREEN (warm) ── */
-    .scr-sched { background: linear-gradient(165deg, #080609 0%, #0d0a0e 60%, #080609 100%); padding: 42px 14px 68px; }
-    .ss-days { display: flex; gap: 3px; margin-bottom: 10px; }
-    .ss-day { flex: 1; text-align: center; font-size: 7px; color: rgba(237,227,208,0.28); padding-bottom: 4px; }
-    .ss-day.on { color: var(--gold); font-weight: 700; border-bottom: 2px solid var(--gold); }
-    .ss-row { border-left: 3px solid; border-radius: 0 9px 9px 0; padding: 7px 10px; margin-bottom: 6px; background: rgba(237,220,180,0.04); }
-    .ss-row.bl { border-color: #4f87e8; }
-    .ss-row.pu { border-color: #a855f7; }
-    .ss-row.gn { border-color: #5ac47a; }
-    .ss-row.am { border-color: var(--ochre); }
-    .ss-cn { font-size: 10px; font-weight: 700; color: var(--cream); }
-    .ss-ct { font-size: 7.5px; color: rgba(237,227,208,0.36); margin-top: 2px; }
-
-    /* Phone tab bar */
-    .ph-tab {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 62px;
-      background: rgba(12,9,5,0.88);
-      backdrop-filter: blur(12px);
-      border-top: 1px solid rgba(237,220,180,0.06);
-      display: flex; align-items: center; justify-content: space-around;
-      padding: 0 8px 14px;
-    }
-    .ph-tab-i { font-size: 17px; opacity: 0.32; }
-    .ph-tab-i.on { opacity: 1; }
-
-    /* Screen glass reflection */
-    .ph-refl { position: absolute; top: 10px; left: 10px; right: 10px; height: 36%; background: linear-gradient(180deg, rgba(255,245,220,0.03) 0%, transparent 100%); border-radius: 34px 34px 0 0; pointer-events: none; }
-
-    /* ═══════════════════════════════════════════════
-       MARQUEE
-    ═══════════════════════════════════════════════ */
-    .marquee {
-      overflow: hidden;
-      padding: 22px 0;
-      background: linear-gradient(90deg, #1c1208 0%, #251a0e 50%, #1c1208 100%);
-      border-top: 1px solid rgba(237,220,180,0.07);
-      border-bottom: 1px solid rgba(237,220,180,0.07);
-    }
-    .mq-track { display: flex; width: max-content; animation: mq 34s linear infinite; }
-    .mq-track:hover { animation-play-state: paused; }
-    @keyframes mq { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-    .mq-item { display: flex; align-items: center; gap: 9px; padding: 0 30px; font-size: 13px; font-weight: 600; color: rgba(237,220,180,0.55); white-space: nowrap; }
-    .mq-ico { font-size: 15px; }
-    .mq-sep { color: rgba(201,139,42,0.45); font-size: 18px; align-self: center; }
-
-    /* ═══════════════════════════════════════════════
-       SHARED / CONTAINER
-    ═══════════════════════════════════════════════ */
-    .wrap { max-width: 1080px; margin: 0 auto; }
-
-    .sec-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--ochre);
-      margin-bottom: 14px;
-    }
-    .sec-title {
-      font-size: clamp(34px, 5.5vw, 60px);
-      line-height: 1.0;
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
-      color: var(--cream);
-    }
-    .sec-sub {
-      font-size: 17px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 500px;
-    }
-
-    /* ═══════════════════════════════════════════════
-       FEATURES BENTO
-    ═══════════════════════════════════════════════ */
-    .features {
-      padding: 110px 24px;
-      background: var(--s1);
       position: relative;
     }
 
-    .features-head { text-align: center; margin-bottom: 68px; }
-    .features-head .sec-sub { margin: 0 auto; }
-
-    .bento {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 13px;
-    }
-
-    .bc {
-      background: var(--s2);
-      border: 1px solid var(--b1);
-      border-radius: 22px;
-      padding: 26px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.22s, transform 0.22s, background 0.22s;
-    }
-    .bc::after {
-      content: ''; position: absolute; inset: 0; border-radius: 22px;
-      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(237,220,180,0.025), transparent);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .bc:hover { border-color: var(--b2); transform: translateY(-4px); background: var(--s3); }
-    .bc:hover::after { opacity: 1; }
-
-    .bc.c4 { grid-column: span 4; }
-    .bc.c2 { grid-column: span 2; }
-
-    .bc-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 21px; margin-bottom: 18px; }
-    .bc h3 { font-size: 17px; margin-bottom: 8px; color: var(--cream); }
-    .bc.big h3 { font-size: 22px; }
-    .bc p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
-    .bc.big p { font-size: 15px; }
-
-    /* Mini schedule inside big card */
-    .mini-sched { margin-top: 18px; display: flex; flex-direction: column; gap: 5px; }
-    .mc { border-left: 3px solid; border-radius: 0 8px 8px 0; padding: 6px 10px; background: rgba(237,220,180,0.04); display: flex; align-items: center; justify-content: space-between; }
-    .mc-n { font-size: 11px; font-weight: 600; color: rgba(237,227,208,0.8); }
-    .mc-t { font-size: 9px; color: rgba(237,227,208,0.32); }
-
-    /* ═══════════════════════════════════════════════
-       WIDGETS SECTION
-    ═══════════════════════════════════════════════ */
-    .widgets {
-      padding: 110px 24px;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-    }
-    .widgets-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    /* iPhone home screen with widget */
-    .widget-phone-wrap { display: flex; justify-content: center; }
-
-    .widget-phone .ph-frame { width: 260px; }
-    .widget-phone .ph-screen { height: 530px; background: linear-gradient(160deg, #1a1410 0%, #100d08 100%); padding: 40px 10px 10px; }
-
-    .wp-homescreen {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    /* Lock screen time */
-    .wp-time { text-align: center; margin-bottom: 4px; }
-    .wp-time-h { font-family: 'DM Serif Display', serif; font-size: 36px; color: rgba(237,227,208,0.9); line-height: 1; }
-    .wp-time-d { font-size: 10px; color: rgba(237,227,208,0.42); font-weight: 500; margin-top: 2px; }
-
-    /* Widget card */
-    .lagoon-widget {
-      background: rgba(237,220,180,0.06);
-      border: 1px solid rgba(237,220,180,0.1);
-      border-radius: 18px;
-      padding: 14px;
-      flex-shrink: 0;
-    }
-    .wgt-header { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
-    .wgt-icon { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(135deg, #1a4a7a, #0057b0); display: flex; align-items: center; justify-content: center; }
-    .wgt-name { font-size: 10px; font-weight: 700; color: rgba(237,227,208,0.5); letter-spacing: 0.5px; }
-    .wgt-title { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ochre); margin-bottom: 8px; }
-    .wgt-row { display: flex; align-items: center; gap: 7px; padding: 4px 0; border-bottom: 1px solid rgba(237,220,180,0.05); }
-    .wgt-row:last-child { border-bottom: none; }
-    .wgt-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .wgt-class { font-size: 10px; font-weight: 600; color: rgba(237,227,208,0.8); flex: 1; }
-    .wgt-time  { font-size: 9px; color: rgba(237,227,208,0.35); }
-
-    /* Home screen app icon grid */
-    .wp-apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; flex: 1; padding: 0 4px; }
-    .wp-app { aspect-ratio: 1; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-
-    /* Dock */
-    .wp-dock {
-      display: flex; justify-content: space-around; align-items: center;
-      background: rgba(237,220,180,0.04);
-      border: 1px solid rgba(237,220,180,0.07);
-      border-radius: 14px;
-      padding: 8px 12px;
-      flex-shrink: 0;
-    }
-    .wp-dock-i { font-size: 18px; }
-
-    /* Widgets text */
-    .widgets-text { }
-    .widgets-text .sec-sub { margin-bottom: 32px; }
-
-    .wgt-features { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
-    .wgt-feat { display: flex; gap: 14px; align-items: flex-start; }
-    .wgt-feat-ico {
-      width: 40px; height: 40px;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-      border: 1px solid rgba(237,220,180,0.07);
-    }
-    .wgt-feat h4 { font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
-    .wgt-feat p  { font-size: 13px; color: var(--muted); line-height: 1.55; }
-
-    /* ═══════════════════════════════════════════════
-       NEWS SECTION
-    ═══════════════════════════════════════════════ */
-    .news-section {
-      padding: 110px 24px;
-      background: var(--s1);
-    }
-    .news-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    .news-phone .ph-frame { width: 260px; }
-    .news-phone .ph-screen { height: 530px; }
-
-    /* News reading screen */
-    .scr-news { background: linear-gradient(165deg, #0e0b08 0%, #130f0a 100%); padding: 42px 12px 68px; }
-
-    .news-feed { display: flex; flex-direction: column; gap: 8px; }
-
-    .news-featured {
-      background: rgba(196,87,42,0.08);
-      border: 1px solid rgba(196,87,42,0.15);
-      border-radius: 13px;
-      padding: 12px;
-      margin-bottom: 2px;
-    }
-    .news-cat { font-size: 7.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--terra); margin-bottom: 5px; }
-    .news-headline { font-family: 'DM Serif Display', serif; font-size: 12px; color: var(--cream); line-height: 1.35; margin-bottom: 5px; }
-    .news-meta { font-size: 7.5px; color: rgba(237,227,208,0.35); }
-
-    .news-card {
-      background: rgba(237,220,180,0.04);
-      border: 1px solid rgba(237,220,180,0.07);
-      border-radius: 11px;
-      padding: 10px 11px;
-    }
-    .news-card .news-cat { color: var(--ochre); }
-
-    /* News text side */
-    .news-text .sec-sub { margin-bottom: 24px; }
-    .news-details { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
-    .news-detail { display: flex; gap: 12px; align-items: flex-start; }
-    .chk {
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      background: rgba(196,87,42,0.12);
-      border: 1px solid rgba(196,87,42,0.25);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      font-size: 10px;
-      color: var(--terra);
-    }
-    .news-detail-text { font-size: 14px; color: var(--muted); line-height: 1.55; }
-
-    /* ═══════════════════════════════════════════════
-       SOCIAL / COMPARE SCHEDULES
-    ═══════════════════════════════════════════════ */
-    .social {
-      padding: 110px 24px;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-    }
-    .social::before {
-      content: ''; position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 15% 50%, rgba(196,87,42,0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 85% 50%, rgba(201,139,42,0.04) 0%, transparent 55%);
+    /* Soft glow behind phone */
+    .hero-phone::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 300px;
+      bottom: -40px; left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse, rgba(191,85,39,0.12) 0%, transparent 70%);
       pointer-events: none;
     }
 
-    .social-head { text-align: center; margin-bottom: 68px; }
-    .social-head .sec-sub { margin: 0 auto; }
+    /* ═══════════════════════════════════════
+       PHONE FRAME (shared)
+    ═══════════════════════════════════════ */
+    .pf {
+      background: #1c1410;
+      border-radius: 46px;
+      padding: 10px;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.25),
+        0 40px 80px rgba(0,0,0,0.22),
+        0 8px 20px rgba(0,0,0,0.12);
+    }
 
-    .social-grid {
+    .ps {
+      border-radius: 36px;
+      overflow: hidden;
+      position: relative;
+      background: #fdf8f3;
+    }
+
+    /* Dynamic island */
+    .di {
+      position: absolute;
+      top: 9px; left: 50%;
+      transform: translateX(-50%);
+      width: 70px; height: 22px;
+      background: #000;
+      border-radius: 11px;
+      z-index: 20;
+    }
+
+    /* Status bar */
+    .sb {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px 2px;
+    }
+    .sb-t { font-size: 9px; font-weight: 800; color: #1f1209; }
+    .sb-i { font-size: 8px; color: #1f1209; opacity: 0.6; letter-spacing: 1px; }
+
+    /* ── HERO HOME SCREEN ── */
+    .scr-home {
+      background: #fdf8f3;
+      padding: 42px 14px 72px;
+    }
+
+    .h-date  { font-size: 8.5px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #9c7a68; margin-bottom: 4px; }
+    .h-gm    { font-family: 'DM Serif Display', serif; font-size: 22px; color: #1f1209; line-height: 1.1; }
+    .h-gaucho { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--terra); display: inline; }
+    .h-tagline { font-size: 9px; color: #9c7a68; font-weight: 500; margin-left: 6px; display: inline; }
+    .h-section { display: block; margin-bottom: 14px; }
+
+    .h-card {
+      background: #fff;
+      border: 1px solid rgba(100,50,20,0.1);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .h-card-label { font-size: 7.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #9c7a68; margin-bottom: 3px; display: flex; justify-content: space-between; }
+    .h-card-label span { color: #5a8a5a; font-size: 7px; }
+    .h-card-title { font-size: 12px; font-weight: 800; color: #1f1209; margin-bottom: 2px; }
+    .h-card-sub   { font-size: 8px; color: #9c7a68; display: flex; gap: 8px; }
+
+    .h-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 8px; }
+    .h-stat  {
+      background: #fff;
+      border: 1px solid rgba(100,50,20,0.1);
+      border-radius: 11px;
+      padding: 9px 11px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .h-stat-label { font-size: 7px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #9c7a68; margin-bottom: 3px; }
+    .h-stat-value { font-size: 14px; font-weight: 800; color: #1f1209; }
+    .h-stat-sub   { font-size: 7.5px; color: #9c7a68; margin-top: 1px; }
+    .h-closed { font-size: 7px; font-weight: 700; color: #bf5527; }
+
+    .h-dining-label { font-size: 7.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #9c7a68; margin-bottom: 5px; display: flex; justify-content: space-between; }
+    .h-dining-label span { color: #bf5527; font-size: 7px; }
+    .h-dining-row { display: flex; align-items: center; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(100,50,20,0.07); font-size: 9.5px; color: #1f1209; font-weight: 600; }
+    .h-dining-row:last-child { border-bottom: none; }
+    .h-hall-icon { width: 14px; height: 14px; border-radius: 4px; background: rgba(191,85,39,0.12); display: inline-flex; align-items: center; justify-content: center; margin-right: 6px; font-size: 8px; }
+    .h-closed-tag { font-size: 7px; font-weight: 700; color: #bf5527; background: rgba(191,85,39,0.1); padding: 1px 5px; border-radius: 3px; }
+
+    /* Phone tab bar */
+    .ptab {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 62px;
+      background: rgba(253,248,243,0.95);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(100,50,20,0.08);
+      display: flex; align-items: center; justify-content: space-around;
+      padding: 0 6px 14px;
+    }
+    .ptab-i { font-size: 20px; opacity: 0.3; }
+    .ptab-i.on { opacity: 1; }
+
+    /* ═══════════════════════════════════════
+       FEATURES
+    ═══════════════════════════════════════ */
+    .features {
+      padding: 100px 24px;
+      background: var(--bg);
+    }
+
+    .sec-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .sec-head h2 {
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .sec-head p {
+      font-size: 17px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* Asymmetric grid: 3 top, 2 bottom centered */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Last 2 cards centered */
+    .feat-grid .fc:nth-child(4) { grid-column: 1 / span 1; margin-left: auto; width: 100%; }
+    .feat-grid .fc:nth-child(5) { grid-column: 2 / span 1; }
+
+    .fc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .fc:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(100,50,20,0.1); }
+
+    .fc-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+
+    .fc h3 {
+      font-size: 18px;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .fc p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ═══════════════════════════════════════
+       SCREENSHOTS HORIZONTAL SCROLL
+    ═══════════════════════════════════════ */
+    .shots {
+      padding: 100px 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .shots-head {
+      text-align: center;
+      margin-bottom: 56px;
+      padding: 0 24px;
+    }
+    .shots-head h2 { font-size: clamp(36px, 5vw, 58px); letter-spacing: -0.01em; margin-bottom: 12px; }
+    .shots-head p  { font-size: 17px; color: var(--muted); }
+
+    .shots-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 16px 60px 40px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+      align-items: flex-start;
+    }
+    .shots-scroll::-webkit-scrollbar { display: none; }
+    .shots-scroll:active { cursor: grabbing; }
+
+    /* Progress bar */
+    .shots-bar-wrap {
+      padding: 0 60px;
+      margin-top: -20px;
+    }
+    .shots-bar {
+      height: 3px;
+      background: var(--border2);
+      border-radius: 2px;
+      max-width: 300px;
+    }
+    .shots-bar-fill {
+      height: 100%;
+      width: 40%;
+      background: var(--terra);
+      border-radius: 2px;
+    }
+
+    /* Screenshot phone card */
+    .shot-wrap { flex-shrink: 0; }
+    .shot-wrap .pf { width: 240px; }
+    .shot-wrap .ps { height: 490px; }
+
+    /* Schedule screen */
+    .scr-schedule { background: #fdf8f3; padding: 40px 12px 68px; }
+
+    .sch-quarter { font-size: 7.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #9c7a68; margin-bottom: 2px; }
+    .sch-title   { font-family: 'DM Serif Display', serif; font-size: 18px; color: #1f1209; margin-bottom: 12px; }
+
+    .sch-days { display: flex; gap: 4px; margin-bottom: 12px; }
+    .sch-day  { flex: 1; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: #9c7a68; background: transparent; }
+    .sch-day.on { background: var(--terra); color: #fff; }
+
+    .sch-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+    .sch-block {
+      border-radius: 5px;
+      padding: 4px 3px;
+      font-size: 7px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .sch-block.empty { background: transparent; height: 36px; }
+    .sch-block.b1 { background: #4a7fd4; }
+    .sch-block.b2 { background: #9b59b6; }
+    .sch-block.b3 { background: #27ae60; }
+    .sch-block.b4 { background: var(--amber); }
+    .sch-block.b5 { background: var(--terra); }
+    .sch-tall { grid-row: span 2; }
+
+    /* Events screen */
+    .scr-events-light { background: #fdf8f3; padding: 40px 12px 68px; }
+
+    .ev-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: #1f1209; margin-bottom: 10px; }
+
+    .ev-tabs { display: flex; gap: 5px; margin-bottom: 12px; flex-wrap: wrap; }
+    .ev-tab {
+      font-size: 8px; font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 100px;
+      background: rgba(100,50,20,0.07);
+      color: #6b4c3a;
+      border: 1px solid rgba(100,50,20,0.12);
+    }
+    .ev-tab.on { background: var(--terra); color: #fff; border-color: var(--terra); }
+
+    .ev-card-l {
+      background: #fff;
+      border: 1px solid rgba(100,50,20,0.1);
+      border-radius: 11px;
+      padding: 10px 11px;
+      margin-bottom: 7px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .ev-cat  { font-size: 7px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--terra); margin-bottom: 4px; }
+    .ev-name { font-size: 10.5px; font-weight: 700; color: #1f1209; margin-bottom: 3px; line-height: 1.3; }
+    .ev-meta { font-size: 7.5px; color: #9c7a68; }
+
+    /* Dining screen for shots */
+    .scr-dining-light { background: #fdf8f3; padding: 40px 12px 68px; }
+    .dn-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: #1f1209; margin-bottom: 12px; }
+    .dn-card {
+      background: #fff;
+      border: 1px solid rgba(100,50,20,0.1);
+      border-radius: 12px;
+      padding: 11px 13px;
+      margin-bottom: 7px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .dn-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .dn-name { font-size: 11px; font-weight: 700; color: #1f1209; }
+    .dn-open  { font-size: 8px; font-weight: 700; color: #3d8a50; background: rgba(61,138,80,0.1); padding: 2px 7px; border-radius: 4px; }
+    .dn-closed{ font-size: 8px; font-weight: 700; color: #bf5527; background: rgba(191,85,39,0.1); padding: 2px 7px; border-radius: 4px; }
+    .dn-menu  { font-size: 8px; color: #9c7a68; }
+
+    /* Course search screen */
+    .scr-courses { background: #fdf8f3; padding: 40px 12px 68px; }
+    .cs-title { font-family: 'DM Serif Display', serif; font-size: 18px; color: #1f1209; margin-bottom: 10px; }
+    .cs-row {
+      background: #fff;
+      border: 1px solid rgba(100,50,20,0.08);
+      border-radius: 10px;
+      padding: 9px 11px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .cs-name { font-size: 10.5px; font-weight: 700; color: #1f1209; }
+    .cs-sub  { font-size: 8px; color: #9c7a68; margin-top: 1px; }
+    .cs-gpa  { font-size: 10px; font-weight: 800; }
+    .cs-gpa.hi  { color: #3d8a50; }
+    .cs-gpa.mid { color: var(--amber); }
+    .cs-gpa.lo  { color: var(--terra); }
+    .cs-gpa-bar { width: 40px; height: 4px; border-radius: 2px; background: rgba(100,50,20,0.1); margin-top: 3px; overflow: hidden; }
+    .cs-gpa-fill { height: 100%; border-radius: 2px; }
+
+    /* ═══════════════════════════════════════
+       SOCIAL / COMPARE  (light)
+    ═══════════════════════════════════════ */
+    .social {
+      padding: 100px 24px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .social-inner {
+      max-width: 1000px;
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 72px;
       align-items: center;
-      max-width: 1080px;
-      margin: 0 auto;
     }
 
-    /* Share card — warm editorial tone */
-    .share-card-wrap { display: flex; justify-content: center; }
-    .share-card {
-      width: 310px;
-      background: linear-gradient(160deg, #1e1710 0%, #160f09 100%);
-      border: 1px solid rgba(237,220,180,0.1);
-      border-radius: 24px;
+    .sc-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 22px;
       padding: 22px;
-      box-shadow: 0 0 0 1px rgba(237,220,180,0.04), 0 40px 80px rgba(0,0,0,0.55), 0 0 50px rgba(196,87,42,0.06);
+      box-shadow: 0 8px 32px rgba(100,50,20,0.08);
     }
-    .sc-hdr { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-    .sc-avs { display: flex; }
-    .sc-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; border: 2px solid #140f09; }
-    .sc-names { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--cream); }
-    .sc-sub2  { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
-    .sc-div { height: 1px; background: rgba(237,220,180,0.07); margin: 14px 0; }
-    .sc-tag { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 9px; }
-    .sc-tag.cyan  { color: #5abfd4; }
-    .sc-tag.amber { color: var(--ochre); }
-    .sc-classes { display: flex; flex-direction: column; gap: 6px; }
-    .sc-class {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 12.5px; font-weight: 600;
-      color: rgba(237,227,208,0.82);
-      background: rgba(237,220,180,0.04);
-      border: 1px solid rgba(237,220,180,0.07);
+    .scc-hdr { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .scc-avs { display: flex; }
+    .scc-av  {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; color: #fff;
+      border: 2px solid var(--card);
+    }
+    .scc-names { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text); }
+    .scc-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .scc-div   { height: 1px; background: var(--border); margin: 14px 0; }
+    .scc-tag   { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 9px; }
+    .scc-tag.t { color: var(--terra); }
+    .scc-tag.a { color: var(--amber); }
+    .scc-classes { display: flex; flex-direction: column; gap: 6px; }
+    .scc-class {
+      display: flex; align-items: center; gap: 9px;
+      background: rgba(100,50,20,0.04);
+      border: 1px solid var(--border);
       border-radius: 9px;
       padding: 7px 10px;
+      font-size: 13px; font-weight: 600; color: var(--text);
     }
-    .sc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .sc-loc { font-size: 10px; color: var(--muted); font-weight: 400; margin-left: auto; }
-    .sc-window {
-      font-size: 13.5px; font-weight: 700; color: var(--cream);
+    .scc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .scc-loc { font-size: 10.5px; color: var(--muted); margin-left: auto; font-weight: 400; }
+    .scc-window {
+      font-size: 14px; font-weight: 700;
       background: rgba(201,139,42,0.08);
-      border: 1px solid rgba(201,139,42,0.18);
+      border: 1px solid rgba(201,139,42,0.2);
       border-radius: 10px;
       padding: 9px 12px;
-      letter-spacing: -0.01em;
+      color: var(--text);
     }
-    .sc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
-    .sc-logo { display: flex; align-items: center; gap: 6px; font-family: 'DM Serif Display', serif; font-size: 12px; color: rgba(237,220,180,0.45); }
-    .sc-share { font-size: 11px; color: var(--ochre); font-weight: 600; }
+    .scc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+    .scc-logo { display: flex; align-items: center; gap: 6px; font-family: 'DM Serif Display', serif; font-size: 12px; color: var(--subtle); }
+    .scc-share-hint { font-size: 11px; color: var(--terra); font-weight: 700; }
 
-    /* Social features list */
-    .social-feats { display: flex; flex-direction: column; gap: 26px; }
-    .sf { display: flex; gap: 16px; align-items: flex-start; }
-    .sf-ico { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; border: 1px solid rgba(237,220,180,0.06); }
-    .sf h4 { font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+    .social-text .sec-sub-p { font-size: 17px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .social-feats { display: flex; flex-direction: column; gap: 22px; }
+    .sf { display: flex; gap: 14px; align-items: flex-start; }
+    .sf-ico {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 19px; flex-shrink: 0;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+    .sf h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
     .sf p  { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
 
-    /* ═══════════════════════════════════════════════
-       STATS
-    ═══════════════════════════════════════════════ */
-    .stats {
-      padding: 80px 24px;
-      background: var(--s1);
-      border-top: 1px solid var(--b1);
-      border-bottom: 1px solid var(--b1);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--b1);
-      border-radius: 22px;
-      overflow: hidden;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .stat { background: var(--s2); padding: 40px 20px; text-align: center; }
-    .stat-n {
-      font-family: 'DM Serif Display', serif;
-      font-size: 52px;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 8px;
-      letter-spacing: -0.02em;
-    }
-    .stat-l { font-size: 13px; color: var(--muted); font-weight: 500; }
-
-    /* ═══════════════════════════════════════════════
-       CTA
-    ═══════════════════════════════════════════════ */
+    /* ═══════════════════════════════════════
+       CTA (dark section)
+    ═══════════════════════════════════════ */
     .cta {
-      padding: 140px 24px;
-      background: var(--bg);
+      padding: 100px 24px;
+      background: var(--dark);
       text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-atmo {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(0,50,100,0.65) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 35% at 20% 50%, rgba(196,87,42,0.06) 0%, transparent 55%);
-      pointer-events: none;
-    }
-    .cta-body { position: relative; z-index: 1; }
-
-    .cta-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 18px;
-      background: rgba(254,188,17,0.1);
-      border: 1px solid rgba(254,188,17,0.22);
-      border-radius: 100px;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--gold);
-      margin-bottom: 36px;
     }
 
     .cta h2 {
-      font-size: clamp(44px, 7.5vw, 80px);
-      line-height: 0.97;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-      color: var(--cream);
+      font-size: clamp(40px, 6vw, 68px);
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      color: var(--bg);
+      margin-bottom: 20px;
     }
+
     .cta-sub {
-      font-size: 18px;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 440px;
-      margin: 0 auto 50px;
+      font-size: 17px;
+      color: rgba(245,237,227,0.6);
+      line-height: 1.65;
+      max-width: 420px;
+      margin: 0 auto 44px;
     }
 
-    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    .btn-tf {
+    .btn-terra {
       display: inline-flex;
       align-items: center;
-      gap: 14px;
-      padding: 16px 32px;
-      background: var(--cream);
-      color: #1a0f00;
-      border-radius: 18px;
+      gap: 10px;
+      padding: 15px 32px;
+      background: var(--terra);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-      transition: transform 0.18s, box-shadow 0.18s;
+      transition: background 0.18s, transform 0.18s;
     }
-    .btn-tf:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(240,230,200,0.12); }
-    .btn-tf svg { width: 26px; height: 26px; }
-    .btn-tf-lbl { text-align: left; }
-    .btn-tf-sub  { font-size: 10px; font-weight: 600; opacity: 0.5; display: block; }
-    .btn-tf-main { font-family: 'DM Serif Display', serif; font-size: 17px; display: block; }
+    .btn-terra:hover { background: var(--terra-d); transform: translateY(-2px); }
+    .btn-terra svg { width: 16px; height: 16px; }
 
-    .cta-note { margin-top: 26px; font-size: 13px; color: var(--subtle); }
+    .cta-note {
+      margin-top: 22px;
+      font-size: 13px;
+      color: rgba(245,237,227,0.35);
+    }
 
-    /* ═══════════════════════════════════════════════
+    /* ═══════════════════════════════════════
        FOOTER
-    ═══════════════════════════════════════════════ */
+    ═══════════════════════════════════════ */
     footer {
-      background: var(--s1);
-      border-top: 1px solid var(--b1);
-      padding: 40px 32px;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      padding: 40px 48px;
       flex-wrap: wrap;
+      gap: 20px;
     }
-    .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .footer-brand-icon {
-      width: 28px; height: 28px; border-radius: 7px;
-      background: linear-gradient(145deg, #1a4a7a 0%, #0057b0 100%);
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .footer-brand-tile {
+      width: 30px; height: 30px;
+      border-radius: 7px;
+      background: var(--terra);
       display: flex; align-items: center; justify-content: center;
     }
-    .footer-brand-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--cream); }
-    .footer-copy { font-size: 12px; color: var(--subtle); }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a { font-size: 12px; color: var(--subtle); text-decoration: none; transition: color 0.15s; }
-    .footer-links a:hover { color: var(--muted); }
+    .footer-brand-tile span { font-family: 'DM Serif Display', serif; font-size: 17px; color: #fff; line-height: 1; }
+    .footer-brand-name { font-family: 'DM Serif Display', serif; font-size: 18px; color: var(--text); }
 
-    /* ═══════════════════════════════════════════════
-       SCROLL REVEAL
-    ═══════════════════════════════════════════════ */
-    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-    .rv.vis { opacity: 1; transform: translateY(0); }
-    .rv.d1 { transition-delay: 0.1s; }
-    .rv.d2 { transition-delay: 0.2s; }
-    .rv.d3 { transition-delay: 0.3s; }
-    .rv.d4 { transition-delay: 0.4s; }
-    .rv.d5 { transition-delay: 0.5s; }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text); }
 
-    /* ═══════════════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════════════ */
-    @media (max-width: 960px) {
-      .bc.c4 { grid-column: span 6; }
-      .bc.c2 { grid-column: span 3; }
-      .widgets-inner,
-      .news-inner,
-      .social-grid { grid-template-columns: 1fr; gap: 56px; }
-      .widget-phone-wrap,
-      .news-phone-wrap,
-      .share-card-wrap { order: -1; }
+    .footer-copy {
+      text-align: center;
+      padding: 20px 48px 32px;
+      font-size: 13px;
+      color: var(--subtle);
     }
+
+    /* ═══════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════ */
+    .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+    .rv.vis { opacity: 1; transform: translateY(0); }
+    .rv.d1 { transition-delay: 0.08s; }
+    .rv.d2 { transition-delay: 0.16s; }
+    .rv.d3 { transition-delay: 0.24s; }
+    .rv.d4 { transition-delay: 0.32s; }
+    .rv.d5 { transition-delay: 0.40s; }
+
+    /* ═══════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .feat-grid { grid-template-columns: repeat(2, 1fr); }
+      .feat-grid .fc:nth-child(4) { grid-column: auto; margin-left: 0; }
+      .feat-grid .fc:nth-child(5) { grid-column: auto; }
+      .social-inner { grid-template-columns: 1fr; gap: 52px; }
+      .sc-card { max-width: 360px; margin: 0 auto; }
+    }
+
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .ph-wrap.side { display: none; }
-      .bc.c2 { grid-column: span 6; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 480px) {
-      .hero h1 { letter-spacing: -0.005em; }
-      .bento { gap: 9px; }
-      .bc { padding: 20px; }
+      .hero { padding: 56px 20px 0; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .shots-scroll { padding: 16px 24px 40px; }
+      .shots-bar-wrap { padding: 0 24px; }
+      footer .footer-top { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
+      footer .footer-copy { padding: 16px 20px 28px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ─── NAV ─────────────────────────────────── -->
-<nav id="nav">
+<!-- ── NAV ─────────────────────────────── -->
+<nav>
   <a href="#" class="nav-brand">
-    <div class="nav-icon">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M2 12c3.5-4.5 5.5-6 10-6s6.5 1.5 10 6" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </div>
+    <div class="nav-logo-tile"><span>L</span></div>
     <span class="nav-name">Lagoon</span>
   </a>
-  <a class="nav-cta" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer">
-    <span class="nav-dot"></span>
-    Public beta on TestFlight
+  <a class="nav-dl" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M6 11l6-6 6 6"/></svg>
+    Download
   </a>
 </nav>
 
-<!-- ─── HERO ─────────────────────────────────── -->
+<!-- ── HERO ──────────────────────────────── -->
 <section class="hero">
-  <div class="hero-atmo"></div>
-  <div class="hero-grid"></div>
-  <div class="orb orb-a"></div>
-  <div class="orb orb-b"></div>
-  <div class="orb orb-c"></div>
+  <span class="hero-pill rv">For UCSB Students</span>
 
-  <div class="hero-body">
-    <div class="hero-eyebrow rv">
-      <span class="eyebrow-dot"></span>
-      Public beta · Built by Gauchos, for Gauchos
-    </div>
+  <h1 class="rv d1">Your UCSB hub</h1>
 
-    <h1 class="rv d1">
-      <span class="h1-warm">Campus life,</span>
-      <span class="h1-accent">beautifully yours.</span>
-    </h1>
+  <p class="hero-sub rv d2">
+    Classes, dining, events, and campus life — all in one beautifully designed app.
+  </p>
 
-    <p class="hero-sub rv d2">
-      Lagoon is a native iPhone app that brings your GOLD schedule, Carrillo's menu, Storke Plaza events, and the Daily Nexus together in one calm, polished home — designed to feel like it was made with care.
-    </p>
+  <div class="hero-btns rv d3">
+    <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-dark" target="_blank" rel="noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M6 11l6-6 6 6"/></svg>
+      Download on the App Store
+    </a>
+    <a href="#features" class="btn-outline">Learn More</a>
+  </div>
 
-    <div class="hero-actions rv d3">
-      <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-primary" target="_blank" rel="noreferrer">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M6 11l6-6 6 6"/></svg>
-        Join on TestFlight
-      </a>
-      <a href="#features" class="btn-secondary">See what's inside</a>
-    </div>
+  <!-- Single centered phone -->
+  <div class="hero-phone rv d4">
+    <div class="pf" style="width:300px;">
+      <div class="ps scr-home" style="height:610px;">
+        <div class="di"></div>
+        <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
 
-    <div class="hero-trust rv d4">
-      <span class="trust-chip">Public beta · available now</span>
-      <span class="trust-chip">Native iPhone app</span>
-      <span class="trust-chip">iOS 17+</span>
-      <span class="trust-chip">Free to join</span>
-    </div>
+        <div style="padding:0 2px;">
+          <div class="h-date">Tuesday, March 31</div>
+          <div class="h-section">
+            <span class="h-gm">Good Morning,</span><br>
+            <span class="h-gaucho">Gaucho</span><span class="h-tagline">Your day, beautifully organized</span>
+          </div>
 
-    <!-- CSS Phone Mockups -->
-    <div class="phones rv d5">
-
-      <!-- Left: Events -->
-      <div class="ph-wrap side">
-        <div class="ph-frame">
-          <div class="ph-screen scr-events">
-            <div class="di"></div>
-            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
-            <div class="scr-eyebrow">Today</div>
-            <div class="scr-title">Happenings</div>
-            <div class="ev-card">
-              <div class="ev-icon" style="background:rgba(196,87,42,0.15);">🎵</div>
-              <div>
-                <div class="ev-name">Jazz Night</div>
-                <div class="ev-loc">Storke Plaza</div>
-                <div class="ev-time">7:00 PM</div>
-              </div>
-            </div>
-            <div class="ev-card">
-              <div class="ev-icon" style="background:rgba(201,139,42,0.12);">🎭</div>
-              <div>
-                <div class="ev-name">Comedy Showcase</div>
-                <div class="ev-loc">Campbell Hall</div>
-                <div class="ev-time">9:00 PM</div>
-              </div>
-            </div>
-            <div class="ev-card">
-              <div class="ev-icon" style="background:rgba(90,196,122,0.12);">🎓</div>
-              <div>
-                <div class="ev-name">Grad School Panel</div>
-                <div class="ev-loc">Buchanan 1920</div>
-                <div class="ev-time">Tomorrow 11am</div>
-              </div>
-            </div>
-            <div class="ph-tab">
-              <span class="ph-tab-i">🏠</span>
-              <span class="ph-tab-i">🍽️</span>
-              <span class="ph-tab-i">📅</span>
-              <span class="ph-tab-i on">🎉</span>
-              <span class="ph-tab-i">📰</span>
+          <div class="h-card">
+            <div class="h-card-label">Next Class <span>In 537 min</span></div>
+            <div class="h-card-title">ECON 140A</div>
+            <div class="h-card-sub">
+              <span>⏰ 9:30 AM</span>
+              <span>📍 IV THEA1</span>
             </div>
           </div>
-          <div class="ph-refl"></div>
-        </div>
-      </div>
 
-      <!-- Center: Home -->
-      <div class="ph-wrap center">
-        <div class="ph-frame">
-          <div class="ph-screen scr-home">
-            <div class="di"></div>
-            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
-            <div class="sh-greet">Good morning</div>
-            <div class="sh-name">Alex Gaucho 👋</div>
-            <div class="sh-card">
-              <div class="sh-card-tag">Up next</div>
-              <div class="sh-card-title">CS 130A — Data Structures</div>
-              <div class="sh-card-sub">GIRV 1004 &nbsp;·&nbsp; 9:00 AM &nbsp;·&nbsp; In 42 min</div>
+          <div class="h-stats">
+            <div class="h-stat">
+              <div class="h-stat-label"><span class="h-closed">● CLOSED</span></div>
+              <div class="h-stat-value">Dining Halls</div>
+              <div class="h-stat-sub">Opens next meal</div>
             </div>
-            <div class="sh-card" style="border-color:rgba(201,139,42,0.14);background:rgba(201,139,42,0.04);">
-              <div class="sh-card-tag" style="color:var(--ochre);">Tonight</div>
-              <div class="sh-card-title">Jazz Night @ Storke Plaza</div>
-              <div class="sh-card-sub">Happenings &nbsp;·&nbsp; 7:00 PM</div>
-            </div>
-            <div class="sh-chips">
-              <div class="sh-chip"><div class="sh-chip-ico">🍽️</div><span class="sh-chip-lbl">Dining</span></div>
-              <div class="sh-chip"><div class="sh-chip-ico">📅</div><span class="sh-chip-lbl">Schedule</span></div>
-              <div class="sh-chip"><div class="sh-chip-ico">📰</div><span class="sh-chip-lbl">News</span></div>
-              <div class="sh-chip"><div class="sh-chip-ico">📊</div><span class="sh-chip-lbl">Grades</span></div>
-            </div>
-            <div class="ph-tab">
-              <span class="ph-tab-i on">🏠</span>
-              <span class="ph-tab-i">🍽️</span>
-              <span class="ph-tab-i">📅</span>
-              <span class="ph-tab-i">🎉</span>
-              <span class="ph-tab-i">📰</span>
+            <div class="h-stat">
+              <div class="h-stat-label">Classes Left</div>
+              <div class="h-stat-value">2</div>
+              <div class="h-stat-sub">Today</div>
             </div>
           </div>
-          <div class="ph-refl"></div>
-        </div>
-      </div>
 
-      <!-- Right: Schedule -->
-      <div class="ph-wrap side">
-        <div class="ph-frame">
-          <div class="ph-screen scr-sched">
-            <div class="di"></div>
-            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
-            <div class="scr-eyebrow">This week</div>
-            <div class="scr-title">Schedule</div>
-            <div class="ss-days">
-              <div class="ss-day">M</div>
-              <div class="ss-day">T</div>
-              <div class="ss-day on">W</div>
-              <div class="ss-day">Th</div>
-              <div class="ss-day">F</div>
+          <div style="background:#fff;border:1px solid rgba(100,50,20,0.1);border-radius:12px;padding:10px 12px;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+            <div class="h-dining-label">Dining <span>Closed</span></div>
+            <div class="h-dining-row">
+              <span><span class="h-hall-icon">🥗</span>De La Guerra</span>
+              <span class="h-closed-tag">CLOSED</span>
             </div>
-            <div class="ss-row bl"><div class="ss-cn">CS 130A</div><div class="ss-ct">9:00–10:15 AM · GIRV 1004</div></div>
-            <div class="ss-row pu"><div class="ss-cn">MATH 4A</div><div class="ss-ct">11:00 AM–12:15 PM · SH 1431</div></div>
-            <div class="ss-row gn"><div class="ss-cn">ENGL 10</div><div class="ss-ct">2:00–3:15 PM · Phelps 1444</div></div>
-            <div class="ss-row am"><div class="ss-cn">CHEM 1A Lab</div><div class="ss-ct">4:00–6:50 PM · Chem 1171</div></div>
-            <div class="ph-tab">
-              <span class="ph-tab-i">🏠</span>
-              <span class="ph-tab-i">🍽️</span>
-              <span class="ph-tab-i on">📅</span>
-              <span class="ph-tab-i">🎉</span>
-              <span class="ph-tab-i">📰</span>
+            <div class="h-dining-row">
+              <span><span class="h-hall-icon">🍜</span>Ortega</span>
+              <span class="h-closed-tag">CLOSED</span>
+            </div>
+            <div class="h-dining-row">
+              <span><span class="h-hall-icon">🍱</span>Carrillo</span>
+              <span class="h-closed-tag">CLOSED</span>
+            </div>
+            <div class="h-dining-row" style="border-bottom:none;">
+              <span><span class="h-hall-icon">🥘</span>Portola</span>
+              <span class="h-closed-tag">CLOSED</span>
             </div>
           </div>
-          <div class="ph-refl"></div>
+        </div>
+
+        <div class="ptab">
+          <span class="ptab-i on">🏠</span>
+          <span class="ptab-i">📅</span>
+          <span class="ptab-i">👥</span>
+          <span class="ptab-i">⋯</span>
         </div>
       </div>
-
-    </div><!-- /phones -->
-  </div><!-- /hero-body -->
+    </div>
+  </div>
 </section>
 
-<!-- ─── MARQUEE ────────────────────────────── -->
-<div class="marquee">
-  <div class="mq-track">
-    <span class="mq-item"><span class="mq-ico">📅</span> Schedule</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🍽️</span> Live Dining</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🎉</span> Campus Happenings</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📰</span> Daily Nexus</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📊</span> Grade Data</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🏛️</span> Student Gov</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">👥</span> Friends &amp; Share Cards</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📲</span> Widgets</span><span class="mq-sep">·</span>
-    <!-- duplicate for seamless loop -->
-    <span class="mq-item"><span class="mq-ico">📅</span> Schedule</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🍽️</span> Live Dining</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🎉</span> Campus Happenings</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📰</span> Daily Nexus</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📊</span> Grade Data</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🏛️</span> Student Gov</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">👥</span> Friends &amp; Share Cards</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📲</span> Widgets</span><span class="mq-sep">·</span>
-  </div>
-</div>
-
-<!-- ─── FEATURES ──────────────────────────── -->
+<!-- ── FEATURES ───────────────────────── -->
 <section class="features" id="features">
-  <div class="wrap">
-    <div class="features-head">
-      <p class="sec-eyebrow rv">Everything you need</p>
-      <h2 class="sec-title rv d1">One app.<br>Your whole campus.</h2>
-      <p class="sec-sub rv d2">Stop switching between a dozen different apps. Lagoon is the one home for your entire UCSB life — built to feel native, calm, and genuinely beautiful.</p>
+  <div class="sec-head">
+    <h2 class="rv">Everything you need</h2>
+    <p class="rv d1">Designed to make your UCSB experience effortless</p>
+  </div>
+
+  <div class="feat-grid">
+    <div class="fc rv">
+      <div class="fc-icon" style="background:#bf5527;">📅</div>
+      <h3>Your schedule, simplified</h3>
+      <p>See your classes, office hours, and commitments at a glance with a clean weekly view.</p>
     </div>
-
-    <div class="bento">
-      <!-- Big: Schedule -->
-      <div class="bc c4 big rv">
-        <div class="bc-icon" style="background:rgba(79,135,232,0.1);">📅</div>
-        <h3>Smart Schedule</h3>
-        <p>Your GOLD classes, beautifully laid out. See what's next, when finals hit, and never bike to HSSB for a cancelled lecture again. Plus gorgeous iOS widgets that surface what matters — without opening the app.</p>
-        <div class="mini-sched">
-          <div class="mc" style="border-color:#4f87e8;"><span class="mc-n">CS 130A</span><span class="mc-t">9:00 AM · GIRV 1004</span></div>
-          <div class="mc" style="border-color:#a855f7;"><span class="mc-n">MATH 4A</span><span class="mc-t">11:00 AM · SH 1431</span></div>
-          <div class="mc" style="border-color:#5ac47a;"><span class="mc-n">ENGL 10</span><span class="mc-t">2:00 PM · Phelps 1444</span></div>
-        </div>
-      </div>
-
-      <!-- Small cards -->
-      <div class="bc c2 rv d1">
-        <div class="bc-icon" style="background:rgba(90,196,122,0.1);">🍽️</div>
-        <h3>Live Dining</h3>
-        <p>Real-time menus for Carrillo, De La Guerra, Ortega, and Portola. Know what's open before you make the bike ride.</p>
-      </div>
-      <div class="bc c2 rv d2">
-        <div class="bc-icon" style="background:rgba(196,87,42,0.12);">🎉</div>
-        <h3>Campus Happenings</h3>
-        <p>Concerts at Storke Plaza, AS workshops, sports, lectures — browsable, alive, and always current.</p>
-      </div>
-
-      <div class="bc c2 rv">
-        <div class="bc-icon" style="background:rgba(201,139,42,0.1);">📊</div>
-        <h3>Grade Data</h3>
-        <p>Historical grade distributions from every UCSB course — so you can enroll smart, not blindly.</p>
-      </div>
-      <div class="bc c2 rv d1">
-        <div class="bc-icon" style="background:rgba(0,54,96,0.22);">🏛️</div>
-        <h3>Student Gov</h3>
-        <p>Track how Associated Students spends your lock-in fees. Finance reports and meeting minutes, transparent by design.</p>
-      </div>
-      <div class="bc c2 rv d2">
-        <div class="bc-icon" style="background:rgba(167,139,250,0.1);">📰</div>
-        <h3>Daily Nexus</h3>
-        <p>UCSB's independent student newspaper — 10 categories, native reading experience, beautiful typography.</p>
-      </div>
+    <div class="fc rv d1">
+      <div class="fc-icon" style="background:#c98b2a;">🔔</div>
+      <h3>Finals on autopilot</h3>
+      <p>We automatically tell you when your finals are — no more hunting through syllabi.</p>
+    </div>
+    <div class="fc rv d2">
+      <div class="fc-icon" style="background:#bf5527;">📊</div>
+      <h3>Grade distributions revealed</h3>
+      <p>See how classes are graded before you enroll. Real data, smarter choices.</p>
+    </div>
+    <div class="fc rv d1">
+      <div class="fc-icon" style="background:#c98b2a;">👥</div>
+      <h3>Find your scene</h3>
+      <p>Explore campus events, clubs, and activities tailored to your interests.</p>
+    </div>
+    <div class="fc rv d2">
+      <div class="fc-icon" style="background:#c98b2a;">📰</div>
+      <h3>Campus news, curated</h3>
+      <p>Get the latest from UCSB in a feed designed to keep you in the know.</p>
     </div>
   </div>
 </section>
 
-<!-- ─── WIDGETS ───────────────────────────── -->
-<section class="widgets" id="widgets">
-  <div class="widgets-inner">
-    <!-- iPhone with widget -->
-    <div class="widget-phone-wrap rv">
-      <div class="widget-phone">
-        <div class="ph-frame" style="width:260px;">
-          <div class="ph-screen" style="height:530px;background:linear-gradient(160deg,#1e1810 0%,#130e08 100%);padding:38px 12px 12px;">
-            <div class="di"></div>
-            <div class="wp-homescreen">
-              <div class="wp-time">
-                <div class="wp-time-h">9:41</div>
-                <div class="wp-time-d">Wednesday, March 5</div>
-              </div>
+<!-- ── SCREENSHOTS ────────────────────── -->
+<section class="shots" id="screenshots">
+  <div class="shots-head">
+    <h2 class="rv">See it in action</h2>
+    <p class="rv d1">A beautifully crafted experience for every part of campus life</p>
+  </div>
 
-              <!-- Lagoon schedule widget -->
-              <div class="lagoon-widget">
-                <div class="wgt-header">
-                  <div class="wgt-icon">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
-                      <path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                    </svg>
-                  </div>
-                  <span class="wgt-name">LAGOON</span>
-                </div>
-                <div class="wgt-title">Today's Classes</div>
-                <div class="wgt-row">
-                  <span class="wgt-dot" style="background:#4f87e8;"></span>
-                  <span class="wgt-class">CS 130A</span>
-                  <span class="wgt-time">9:00 AM</span>
-                </div>
-                <div class="wgt-row">
-                  <span class="wgt-dot" style="background:#a855f7;"></span>
-                  <span class="wgt-class">MATH 4A</span>
-                  <span class="wgt-time">11:00 AM</span>
-                </div>
-                <div class="wgt-row">
-                  <span class="wgt-dot" style="background:#5ac47a;"></span>
-                  <span class="wgt-class">ENGL 10</span>
-                  <span class="wgt-time">2:00 PM</span>
-                </div>
-                <div class="wgt-row">
-                  <span class="wgt-dot" style="background:var(--ochre);"></span>
-                  <span class="wgt-class">CHEM 1A Lab</span>
-                  <span class="wgt-time">4:00 PM</span>
-                </div>
-              </div>
+  <div class="shots-scroll" id="shotsScroll">
 
-              <!-- App icons grid -->
-              <div class="wp-apps">
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📸</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">🎵</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📧</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">🗺️</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📱</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">🛍️</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📖</div>
-                <div class="wp-app" style="background:rgba(237,220,180,0.06);">⚙️</div>
-              </div>
-
-              <!-- Dock -->
-              <div class="wp-dock">
-                <div class="wp-dock-i">📞</div>
-                <div class="wp-dock-i">💬</div>
-                <div class="wp-dock-i">🌊</div>
-                <div class="wp-dock-i">🎵</div>
-              </div>
+    <!-- Phone 1: Home -->
+    <div class="shot-wrap rv">
+      <div class="pf" style="width:240px;">
+        <div class="ps scr-home" style="height:490px;">
+          <div class="di"></div>
+          <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+          <div style="padding:0 2px;">
+            <div class="h-date">Tuesday, March 31</div>
+            <div class="h-section">
+              <span class="h-gm" style="font-size:18px;">Good Morning,</span><br>
+              <span class="h-gaucho" style="font-size:18px;">Gaucho</span>
             </div>
-            <div class="ph-refl"></div>
+            <div class="h-card">
+              <div class="h-card-label">Next Class <span>In 537 min</span></div>
+              <div class="h-card-title" style="font-size:11px;">ECON 140A</div>
+              <div class="h-card-sub"><span>9:30 AM</span><span>IV THEA1</span></div>
+            </div>
+            <div class="h-stats">
+              <div class="h-stat"><div class="h-closed" style="margin-bottom:2px;">● CLOSED</div><div class="h-stat-value" style="font-size:11px;">Dining Halls</div></div>
+              <div class="h-stat"><div class="h-stat-label">Today</div><div class="h-stat-value" style="font-size:18px;">2</div><div class="h-stat-sub">Classes left</div></div>
+            </div>
+            <div style="background:#fff;border:1px solid rgba(100,50,20,0.1);border-radius:10px;padding:9px 11px;">
+              <div class="h-dining-label">Dining <span>Closed</span></div>
+              <div class="h-dining-row"><span>De La Guerra</span><span class="h-closed-tag">CLOSED</span></div>
+              <div class="h-dining-row"><span>Ortega</span><span class="h-closed-tag">CLOSED</span></div>
+              <div class="h-dining-row" style="border-bottom:none;"><span>Carrillo</span><span class="h-closed-tag">CLOSED</span></div>
+            </div>
           </div>
+          <div class="ptab"><span class="ptab-i on">🏠</span><span class="ptab-i">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
         </div>
       </div>
     </div>
 
-    <!-- Text -->
-    <div class="widgets-text rv d1">
-      <p class="sec-eyebrow">Widgets</p>
-      <h2 class="sec-title">Your campus,<br>right on your<br>lock screen.</h2>
-      <p class="sec-sub">Lagoon's iOS widgets surface what matters — your next class, which dining halls are open, and today's events — without ever opening the app.</p>
-
-      <div class="wgt-features">
-        <div class="wgt-feat rv d2">
-          <div class="wgt-feat-ico" style="background:rgba(79,135,232,0.1);">📅</div>
-          <div>
-            <h4>Schedule Widget</h4>
-            <p>All your classes for the day, color-coded and sorted, on your home or lock screen.</p>
+    <!-- Phone 2: Schedule Week -->
+    <div class="shot-wrap rv d1">
+      <div class="pf" style="width:240px;">
+        <div class="ps scr-schedule" style="height:490px;">
+          <div class="di"></div>
+          <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+          <div class="sch-quarter">Spring 2026 · Week 1</div>
+          <div class="sch-title">Schedule — Week 1</div>
+          <div class="sch-days">
+            <div class="sch-day">M</div>
+            <div class="sch-day on">T</div>
+            <div class="sch-day">W</div>
+            <div class="sch-day">R</div>
+            <div class="sch-day">F</div>
           </div>
-        </div>
-        <div class="wgt-feat rv d3">
-          <div class="wgt-feat-ico" style="background:rgba(90,196,122,0.1);">🍽️</div>
-          <div>
-            <h4>Dining Status</h4>
-            <p>At-a-glance open/closed status and top menu items for all four dining halls.</p>
+          <!-- Time grid -->
+          <div style="display:flex;flex-direction:column;gap:3px;font-size:7px;color:#9c7a68;">
+            <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;">
+              <div style="font-size:7px;color:#9c7a68;padding-top:2px;">8a</div>
+              <div class="sch-block empty"></div>
+              <div class="sch-block b1 sch-tall">INTR...</div>
+              <div class="sch-block empty"></div>
+              <div class="sch-block b1">INTR...</div>
+              <div class="sch-block empty"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;margin-top:4px;">
+              <div style="font-size:7px;color:#9c7a68;padding-top:2px;">10a</div>
+              <div class="sch-block empty"></div>
+              <div class="sch-block empty"></div>
+              <div class="sch-block b2 sch-tall">FINA...</div>
+              <div class="sch-block b2">FINA...</div>
+              <div class="sch-block empty"></div>
+            </div>
+            <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;margin-top:4px;">
+              <div style="font-size:7px;color:#9c7a68;padding-top:2px;">12p</div>
+              <div class="sch-block b3">MICR...</div>
+              <div class="sch-block empty"></div>
+              <div class="sch-block empty"></div>
+              <div class="sch-block b3">MICR...</div>
+              <div class="sch-block empty"></div>
+            </div>
           </div>
-        </div>
-        <div class="wgt-feat rv d4">
-          <div class="wgt-feat-ico" style="background:rgba(196,87,42,0.1);">🎉</div>
-          <div>
-            <h4>Today's Events</h4>
-            <p>What's happening on campus today — surfaced the moment you wake your phone.</p>
-          </div>
+          <div class="ptab"><span class="ptab-i">🏠</span><span class="ptab-i on">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
         </div>
       </div>
     </div>
+
+    <!-- Phone 3: Events -->
+    <div class="shot-wrap rv d2">
+      <div class="pf" style="width:240px;">
+        <div class="ps scr-events-light" style="height:490px;">
+          <div class="di"></div>
+          <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+          <div class="ev-title">Events</div>
+          <div class="ev-tabs">
+            <div class="ev-tab on">Today</div>
+            <div class="ev-tab">Tomorrow</div>
+            <div class="ev-tab">This Week</div>
+            <div class="ev-tab">Next Week</div>
+          </div>
+          <div class="ev-card-l">
+            <div class="ev-cat">Arts</div>
+            <div class="ev-name">Unyielding Voices: Global Resistance and the Black Radical Tradition</div>
+            <div class="ev-meta">12:00 PM · Library · Tonight</div>
+          </div>
+          <div class="ev-card-l">
+            <div class="ev-cat">Event</div>
+            <div class="ev-name">ASAP Supporting Our Community in Difficult Times / Apoyo a Nuestra Comunidad</div>
+            <div class="ev-meta">12:00 PM · You Don't Have to Carry This Alone</div>
+          </div>
+          <div class="ev-card-l">
+            <div class="ev-cat">Arts</div>
+            <div class="ev-name">Bright Horizons Family Webinars</div>
+            <div class="ev-meta">12:00 PM</div>
+          </div>
+          <div class="ptab"><span class="ptab-i">🏠</span><span class="ptab-i on">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone 4: Dining -->
+    <div class="shot-wrap rv d3">
+      <div class="pf" style="width:240px;">
+        <div class="ps scr-dining-light" style="height:490px;">
+          <div class="di"></div>
+          <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+          <div class="dn-title">Dining Halls</div>
+          <div class="dn-card">
+            <div class="dn-row"><span class="dn-name">Carrillo</span><span class="dn-open">Open</span></div>
+            <div class="dn-menu">Pasta · Stir Fry · Salad Bar</div>
+          </div>
+          <div class="dn-card">
+            <div class="dn-row"><span class="dn-name">De La Guerra</span><span class="dn-open">Open</span></div>
+            <div class="dn-menu">Tacos · Soup · Sandwiches</div>
+          </div>
+          <div class="dn-card">
+            <div class="dn-row"><span class="dn-name">Ortega</span><span class="dn-closed">Closed</span></div>
+            <div class="dn-menu">Opens at 5:00 PM</div>
+          </div>
+          <div class="dn-card">
+            <div class="dn-row"><span class="dn-name">Portola</span><span class="dn-closed">Closed</span></div>
+            <div class="dn-menu">Opens at 5:00 PM</div>
+          </div>
+          <div class="ptab"><span class="ptab-i">🏠</span><span class="ptab-i on">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone 5: Course Search -->
+    <div class="shot-wrap rv d4">
+      <div class="pf" style="width:240px;">
+        <div class="ps scr-courses" style="height:490px;">
+          <div class="di"></div>
+          <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+          <div class="cs-title">Search</div>
+          <div class="cs-row">
+            <div><div class="cs-name">ECON 3AH</div><div class="cs-sub">FIN ACCTG · HONORS</div></div>
+            <div><div class="cs-gpa hi">3.8</div><div class="cs-gpa-bar"><div class="cs-gpa-fill" style="width:90%;background:#3d8a50;"></div></div></div>
+          </div>
+          <div class="cs-row">
+            <div><div class="cs-name">ECON 3B</div><div class="cs-sub">FINANCIAL ACCTG</div></div>
+            <div><div class="cs-gpa mid">3.1</div><div class="cs-gpa-bar"><div class="cs-gpa-fill" style="width:65%;background:#c98b2a;"></div></div></div>
+          </div>
+          <div class="cs-row">
+            <div><div class="cs-name">ECON S</div><div class="cs-sub">STAT ECON</div></div>
+            <div><div class="cs-gpa hi">3.5</div><div class="cs-gpa-bar"><div class="cs-gpa-fill" style="width:78%;background:#3d8a50;"></div></div></div>
+          </div>
+          <div class="cs-row">
+            <div><div class="cs-name">ECON 10A</div><div class="cs-sub">MICROECON THEORY</div></div>
+            <div><div class="cs-gpa lo">2.8</div><div class="cs-gpa-bar"><div class="cs-gpa-fill" style="width:50%;background:#bf5527;"></div></div></div>
+          </div>
+          <div class="cs-row">
+            <div><div class="cs-name">Section 0100</div><div class="cs-sub">M W F · 9:00 AM – 9:50 AM</div></div>
+            <div style="background:var(--terra);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;">Add</div>
+          </div>
+          <div class="cs-row">
+            <div><div class="cs-name">Section 0101</div><div class="cs-sub">M W F · 10:00 AM – 10:50 AM</div></div>
+            <div style="background:var(--terra);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:5px;">Add</div>
+          </div>
+          <div class="ptab"><span class="ptab-i">🏠</span><span class="ptab-i on">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:40px;flex-shrink:0;"></div>
+  </div>
+
+  <div class="shots-bar-wrap">
+    <div class="shots-bar"><div class="shots-bar-fill"></div></div>
   </div>
 </section>
 
-<!-- ─── NEWS ──────────────────────────────── -->
-<section class="news-section" id="news">
-  <div class="news-inner wrap">
-    <!-- Text -->
-    <div class="news-text rv">
-      <p class="sec-eyebrow">Native Reading</p>
-      <h2 class="sec-title">Campus stories,<br>worth reading.</h2>
-      <p class="sec-sub">The Daily Nexus is no longer a web link buried in a tab. It's a beautiful native reading experience — real editorial typography, real scroll, no clutter.</p>
-
-      <div class="news-details">
-        <div class="news-detail rv d1">
-          <span class="chk">✓</span>
-          <span class="news-detail-text">10 Nexus categories: Arts, Campus, Science, Sports, Opinion, and more</span>
-        </div>
-        <div class="news-detail rv d2">
-          <span class="chk">✓</span>
-          <span class="news-detail-text">Serif-forward article view with generous spacing — built for real reading</span>
-        </div>
-        <div class="news-detail rv d3">
-          <span class="chk">✓</span>
-          <span class="news-detail-text">Personalized feed based on your sections of interest</span>
-        </div>
-        <div class="news-detail rv d4">
-          <span class="chk">✓</span>
-          <span class="news-detail-text">Share any article as a polished card with one tap</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- News phone -->
-    <div class="news-phone-wrap rv d2" style="display:flex;justify-content:center;">
-      <div class="news-phone">
-        <div class="ph-frame" style="width:260px;">
-          <div class="ph-screen scr-news" style="height:530px;">
-            <div class="di"></div>
-            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
-            <div class="scr-eyebrow">Independent since 1942</div>
-            <div class="scr-title">Daily Nexus</div>
-
-            <div class="news-feed">
-              <div class="news-featured">
-                <div class="news-cat">Arts &amp; Entertainment</div>
-                <div class="news-headline">UCSB Jazz Ensemble Brings Standing Ovation to Campbell Hall</div>
-                <div class="news-meta">By Mia Chen &nbsp;·&nbsp; 4 min read</div>
-              </div>
-              <div class="news-card">
-                <div class="news-cat">Campus</div>
-                <div class="news-headline">AS Senate Votes to Expand Mental Health Services Funding</div>
-                <div class="news-meta">By Jordan Park &nbsp;·&nbsp; 3 min read</div>
-              </div>
-              <div class="news-card">
-                <div class="news-cat">Science &amp; Tech</div>
-                <div class="news-headline">UCSB Research Team Publishes Marine Biology Breakthrough</div>
-                <div class="news-meta">By Lena Torres &nbsp;·&nbsp; 5 min read</div>
-              </div>
-            </div>
-
-            <div class="ph-tab">
-              <span class="ph-tab-i">🏠</span>
-              <span class="ph-tab-i">🍽️</span>
-              <span class="ph-tab-i">📅</span>
-              <span class="ph-tab-i">🎉</span>
-              <span class="ph-tab-i on">📰</span>
-            </div>
-          </div>
-          <div class="ph-refl"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── SOCIAL / COMPARE ─────────────────── -->
+<!-- ── SOCIAL / COMPARE ───────────────── -->
 <section class="social" id="social">
-  <div class="container" style="max-width:1080px;margin:0 auto;">
-    <div class="social-head rv">
-      <p class="sec-eyebrow">Coming soon</p>
-      <h2 class="sec-title">Find your people.<br>Compare schedules.</h2>
-      <p class="sec-sub" style="margin:0 auto;">See which Gauchos share your classes, find free-time overlap, and share your quarter as a beautiful card — straight to your story.</p>
-    </div>
+  <div style="text-align:center;margin-bottom:56px;">
+    <p style="font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--terra);margin-bottom:14px;" class="rv">Coming soon</p>
+    <h2 style="font-size:clamp(34px,5vw,56px);letter-spacing:-0.01em;margin-bottom:14px;color:var(--text);" class="rv d1">Find your people.<br>Compare schedules.</h2>
+    <p style="font-size:17px;color:var(--muted);max-width:480px;margin:0 auto;" class="rv d2">See which Gauchos share your classes, find free-time overlap, and share your quarter as a beautiful card.</p>
+  </div>
 
-    <div class="social-grid">
-      <!-- Share card -->
-      <div class="share-card-wrap rv d1">
-        <div class="share-card">
-          <div class="sc-hdr">
-            <div class="sc-avs">
-              <div class="sc-av" style="background:linear-gradient(135deg,#4f87e8,#6366f1);">AG</div>
-              <div class="sc-av" style="background:linear-gradient(135deg,var(--ochre),var(--terra));margin-left:-9px;">MR</div>
-            </div>
-            <div>
-              <div class="sc-names">Alex &amp; Maya</div>
-              <div class="sc-sub2">Winter 2026 &nbsp;·&nbsp; UC Santa Barbara</div>
-            </div>
+  <div class="social-inner">
+    <div class="rv d1">
+      <div class="sc-card">
+        <div class="scc-hdr">
+          <div class="scc-avs">
+            <div class="scc-av" style="background:#4f87e8;">AG</div>
+            <div class="scc-av" style="background:var(--terra);margin-left:-8px;">MR</div>
           </div>
-          <div class="sc-div"></div>
-          <div class="sc-tag cyan">3 classes in common</div>
-          <div class="sc-classes">
-            <div class="sc-class"><span class="sc-dot" style="background:#4f87e8;"></span>CS 130A<span class="sc-loc">GIRV 1004</span></div>
-            <div class="sc-class"><span class="sc-dot" style="background:#a855f7;"></span>MATH 4A<span class="sc-loc">SH 1431</span></div>
-            <div class="sc-class"><span class="sc-dot" style="background:#5ac47a;"></span>ENGL 10<span class="sc-loc">Phelps 1444</span></div>
+          <div>
+            <div class="scc-names">Alex &amp; Maya</div>
+            <div class="scc-sub">Winter 2026 · UC Santa Barbara</div>
           </div>
-          <div class="sc-div"></div>
-          <div class="sc-tag amber">Best study window</div>
-          <div class="sc-window">Mon &amp; Wed &nbsp;·&nbsp; 12:30–2:00 PM</div>
-          <div class="sc-foot">
-            <div class="sc-logo">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="rgba(237,220,180,0.6)" stroke-width="2.5" stroke-linecap="round"/></svg>
-              Lagoon
-            </div>
-            <span class="sc-share">Share to story ↗</span>
+        </div>
+        <div class="scc-div"></div>
+        <div class="scc-tag t">3 classes in common</div>
+        <div class="scc-classes">
+          <div class="scc-class"><span class="scc-dot" style="background:#4f87e8;"></span>CS 130A<span class="scc-loc">GIRV 1004</span></div>
+          <div class="scc-class"><span class="scc-dot" style="background:#a855f7;"></span>MATH 4A<span class="scc-loc">SH 1431</span></div>
+          <div class="scc-class"><span class="scc-dot" style="background:#3d8a50;"></span>ENGL 10<span class="scc-loc">Phelps 1444</span></div>
+        </div>
+        <div class="scc-div"></div>
+        <div class="scc-tag a">Best study window</div>
+        <div class="scc-window">Mon &amp; Wed · 12:30–2:00 PM</div>
+        <div class="scc-foot">
+          <div class="scc-logo">
+            <div class="nav-logo-tile" style="width:16px;height:16px;border-radius:4px;"><span style="font-size:10px;">L</span></div>
+            Lagoon
           </div>
+          <span class="scc-share-hint">Share to story ↗</span>
         </div>
       </div>
+    </div>
 
-      <!-- Features list -->
-      <div class="social-feats rv d2">
+    <div class="social-text rv d2">
+      <p style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--terra);margin-bottom:12px;">Friends &amp; Sharing</p>
+      <h2 style="font-size:clamp(28px,4vw,44px);letter-spacing:-0.01em;margin-bottom:16px;color:var(--text);">Campus is more fun<br>with your people.</h2>
+      <p class="social-text sec-sub-p">See who's in your lectures, find windows to study together, and share your schedule as a card — straight to your story.</p>
+      <div class="social-feats">
         <div class="sf">
-          <div class="sf-ico" style="background:rgba(79,135,232,0.1);">👥</div>
-          <div>
-            <h4>Shared Class Finder</h4>
-            <p>Instantly see which Gauchos are in your lectures this quarter — no group-chat spam required.</p>
-          </div>
+          <div class="sf-ico">👥</div>
+          <div><h4>Shared Class Finder</h4><p>See which Gauchos are in your lectures this quarter — no group chat spam.</p></div>
         </div>
         <div class="sf">
-          <div class="sf-ico" style="background:rgba(201,139,42,0.1);">🗓️</div>
-          <div>
-            <h4>Compare Schedules</h4>
-            <p>Tap any friend's profile to see overlapping free time, shared classes, and the best window to hit the library.</p>
-          </div>
+          <div class="sf-ico">🗓️</div>
+          <div><h4>Compare Schedules</h4><p>Tap any friend's profile to find overlapping free time and the best study window.</p></div>
         </div>
         <div class="sf">
-          <div class="sf-ico" style="background:rgba(196,87,42,0.1);">📤</div>
-          <div>
-            <h4>Share Cards</h4>
-            <p>Export your schedule, a class overlap, or a campus event as a polished card — designed for Stories.</p>
-          </div>
-        </div>
-        <div class="sf">
-          <div class="sf-ico" style="background:rgba(90,196,122,0.1);">🔗</div>
-          <div>
-            <h4>Deep Links</h4>
-            <p>Every comparison gets a shareable link. Tap it on any iPhone and land straight in the view.</p>
-          </div>
+          <div class="sf-ico">📤</div>
+          <div><h4>Beautiful Share Cards</h4><p>Export your schedule or a class overlap as a polished card, built for Stories.</p></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── STATS ─────────────────────────────── -->
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat rv"><div class="stat-n">37k</div><div class="stat-l">Gauchos on campus</div></div>
-    <div class="stat rv d1"><div class="stat-n">4</div><div class="stat-l">Dining halls, live</div></div>
-    <div class="stat rv d2"><div class="stat-n">200+</div><div class="stat-l">Events per month</div></div>
-    <div class="stat rv d3"><div class="stat-n">1</div><div class="stat-l">App for all of it</div></div>
-  </div>
-</section>
-
-<!-- ─── CTA ───────────────────────────────── -->
+<!-- ── CTA ────────────────────────────── -->
 <section class="cta" id="cta">
-  <div class="cta-atmo"></div>
-  <div class="cta-body">
-    <div class="cta-tag rv">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-      </svg>
-      Public beta available now
-    </div>
-
-    <h2 class="rv d1">Try Lagoon<br>on TestFlight.</h2>
-    <p class="cta-sub rv d2">The public beta is live. Install it in a tap, try it on your iPhone, and help shape the best version of Lagoon before the App Store launch.</p>
-
-    <div class="cta-btns rv d3">
-      <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-tf" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-        </svg>
-        <div class="btn-tf-lbl">
-          <span class="btn-tf-sub">Install the public beta on</span>
-          <span class="btn-tf-main">TestFlight</span>
-        </div>
-      </a>
-      <a href="#features" class="btn-secondary">Explore every feature</a>
-    </div>
-
-    <p class="cta-note rv d4">iOS 17+ &nbsp;·&nbsp; Free to join &nbsp;·&nbsp; Made for Gauchos</p>
+  <h2 class="rv">Ready to simplify<br>your UCSB life?</h2>
+  <p class="cta-sub rv d1">Download Lagoon today and discover a better way to navigate campus.</p>
+  <div class="rv d2">
+    <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-terra" target="_blank" rel="noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M6 11l6-6 6 6"/></svg>
+      Download on the App Store
+    </a>
   </div>
+  <p class="cta-note rv d3">Public beta on TestFlight · iOS 17+ · Free · Made for Gauchos</p>
 </section>
 
-<!-- ─── FOOTER ────────────────────────────── -->
+<!-- ── FOOTER ─────────────────────────── -->
 <footer>
-  <a href="#" class="footer-brand">
-    <div class="footer-brand-icon">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-        <path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M2 12c3.5-4.5 5.5-6 10-6s6.5 1.5 10 6" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+  <div class="footer-top">
+    <a href="#" class="footer-brand">
+      <div class="footer-brand-tile"><span>L</span></div>
+      <span class="footer-brand-name">Lagoon</span>
+    </a>
+    <div class="footer-links">
+      <a href="#features">Features</a>
+      <a href="#social">About</a>
+      <a href="mailto:hello@lagoon.ucsb.app">Support</a>
+      <a href="#">Privacy</a>
     </div>
-    <span class="footer-brand-name">Lagoon</span>
-  </a>
-  <p class="footer-copy">© 2026 Lagoon. All rights reserved. Not affiliated with UC Santa Barbara.</p>
-  <div class="footer-links">
-    <a href="mailto:hello@lagoon.ucsb.app">Contact</a>
-    <a href="#">Privacy</a>
   </div>
+  <div class="footer-copy">© 2026 Lagoon. Made with love for UCSB students.</div>
 </footer>
 
 <script>
   // Scroll reveal
   const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
-    });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
   document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
-  // Nav border on scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 50
-      ? 'rgba(240,220,180,0.1)'
-      : 'rgba(240,220,180,0.07)';
-  }, { passive: true });
+  // Drag-to-scroll screenshots
+  const scroll = document.getElementById('shotsScroll');
+  let isDown = false, startX, left;
+  scroll.addEventListener('mousedown', e => { isDown = true; startX = e.pageX - scroll.offsetLeft; left = scroll.scrollLeft; });
+  scroll.addEventListener('mouseleave', () => isDown = false);
+  scroll.addEventListener('mouseup', () => isDown = false);
+  scroll.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    scroll.scrollLeft = left - (e.pageX - scroll.offsetLeft - startX) * 1.5;
+  });
 </script>
 </body>
 </html>
