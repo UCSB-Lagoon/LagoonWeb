@@ -3,953 +3,647 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lagoon - UCSB Campus Life, Beautifully Simple</title>
-  <meta name="description" content="Lagoon brings schedules, dining, events, and grade data into one polished iPhone app for UCSB students. Join the public beta on TestFlight." />
-  <meta property="og:title" content="Lagoon - UCSB Campus Life, Beautifully Simple" />
-  <meta property="og:description" content="The all-in-one UCSB app is now live in public beta on TestFlight." />
+  <title>Lagoon — Campus life, beautifully simplified.</title>
+  <meta name="description" content="Lagoon is a native iPhone app for UCSB students — your schedule, dining halls, campus events, and the Daily Nexus, beautifully in one place. Join the TestFlight beta." />
+  <meta property="og:title" content="Lagoon — Campus life, beautifully simplified." />
+  <meta property="og:description" content="Native iPhone app for UC Santa Barbara. Schedule, dining, events, news — beautiful by design. Public beta on TestFlight." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #04101f;
-      --surface:  #08182d;
-      --surface2: #0b1f38;
-      --surface3: #102949;
-      --border:   rgba(255,255,255,0.06);
-      --border2:  rgba(255,255,255,0.12);
-      --navy:     #003660;
-      --gold:     #febc11;
-      --gold-dim: rgba(254,188,17,0.15);
-      --cyan:     #22d3ee;
-      --text:     #f0f4ff;
-      --muted:    rgba(240,244,255,0.55);
-      --subtle:   rgba(240,244,255,0.28);
-      --cream:    #f5efe2;
-      --shadow:   0 30px 80px rgba(0,0,0,0.38);
+      /* Warm dark palette */
+      --bg:      #0b0906;
+      --s1:      #130f09;
+      --s2:      #1c1710;
+      --s3:      #262016;
+      --b1:      rgba(240,220,180,0.07);
+      --b2:      rgba(240,220,180,0.14);
+      /* Brand accents */
+      --terra:   #c4572a;
+      --ochre:   #c98b2a;
+      --gold:    #febc11;
+      --navy:    #003660;
+      --cyan:    #22d3ee;
+      /* Text */
+      --cream:   #f0e6d0;
+      --text:    #ede3d0;
+      --muted:   rgba(237,227,208,0.56);
+      --subtle:  rgba(237,227,208,0.30);
+      /* Shadows */
+      --glow:    0 40px 100px rgba(0,0,0,0.55);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background:
-        radial-gradient(circle at top, rgba(21,68,120,0.45) 0%, rgba(4,16,31,0) 34%),
-        radial-gradient(circle at 80% 20%, rgba(34,211,238,0.08) 0%, rgba(4,16,31,0) 22%),
-        linear-gradient(180deg, #04101f 0%, #061528 28%, #04101f 100%);
+      background: var(--bg);
       color: var(--text);
       font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    h1, h2, h3, .nav-wordmark, .stat-n, .asb-main {
-      font-family: 'Sora', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    h1, h2, h3, .serif { font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif; }
+
+    /* Warm paper-like noise layer */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.6;
     }
 
-    /* ══════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        NAV
-    ══════════════════════════════════════════ */
+    ═══════════════════════════════════════════════ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 200;
-      height: 60px;
+      z-index: 300;
+      height: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 36px;
-      background: rgba(3,7,15,0.75);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      background: rgba(11,9,6,0.78);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border-bottom: 1px solid var(--b1);
       transition: border-color 0.3s;
     }
 
-    .nav-logo {
+    .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       text-decoration: none;
     }
 
     .nav-icon {
-      width: 30px; height: 30px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #004080 0%, #0066cc 100%);
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(145deg, #1a4a7a 0%, #0057b0 100%);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 0 16px rgba(0,102,204,0.4);
+      box-shadow: 0 0 14px rgba(0,87,176,0.35);
     }
 
-    .nav-wordmark {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--text);
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: var(--cream);
+      letter-spacing: 0.01em;
     }
 
-    .nav-pill {
+    .nav-cta {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 6px 14px;
-      background: var(--gold-dim);
-      border: 1px solid rgba(254,188,17,0.25);
+      padding: 7px 16px;
+      background: rgba(254,188,17,0.12);
+      border: 1px solid rgba(254,188,17,0.28);
       border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 12.5px;
+      font-weight: 700;
       color: var(--gold);
-      letter-spacing: 0.1px;
       text-decoration: none;
-      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+      letter-spacing: 0.01em;
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
     }
-    .nav-pill:hover {
-      transform: translateY(-1px);
-      background: rgba(254,188,17,0.18);
-      border-color: rgba(254,188,17,0.36);
-    }
+    .nav-cta:hover { background: rgba(254,188,17,0.2); border-color: rgba(254,188,17,0.42); transform: translateY(-1px); }
 
-    .pill-dot {
-      width: 6px; height: 6px;
+    .nav-dot {
+      width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--gold);
-      animation: blink 2s ease-in-out infinite;
+      animation: pulse 2.2s ease-in-out infinite;
     }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.25; } }
 
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.25; }
-    }
-
-    /* ══════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        HERO
-    ══════════════════════════════════════════ */
+    ═══════════════════════════════════════════════ */
     .hero {
-      position: relative;
       min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 96px 24px 64px;
-      overflow: hidden;
+      padding: 90px 24px 64px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Layered gradient atmosphere */
+    /* Warm atmosphere */
     .hero-atmo {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 110% 70% at 50% -10%, rgba(0,60,110,0.95) 0%, transparent 55%),
-        radial-gradient(ellipse 60% 50% at 15% 80%, rgba(0,90,160,0.18) 0%, transparent 50%),
-        radial-gradient(ellipse 40% 35% at 85% 60%, rgba(34,211,238,0.07) 0%, transparent 50%),
-        radial-gradient(ellipse 30% 30% at 70% 20%, rgba(254,188,17,0.05) 0%, transparent 50%);
-      pointer-events: none;
+        radial-gradient(ellipse 100% 65% at 50% -5%, rgba(0,50,100,0.85) 0%, transparent 58%),
+        radial-gradient(ellipse 50% 40% at 10% 75%, rgba(196,87,42,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 30% at 90% 55%, rgba(201,139,42,0.07) 0%, transparent 50%);
     }
 
-    /* Grid */
+    /* Warm grid */
     .hero-grid {
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, black 20%, transparent 100%);
-      -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 25%, black 20%, transparent 100%);
-      pointer-events: none;
+        linear-gradient(rgba(240,220,170,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(240,220,170,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 10%, transparent 100%);
     }
 
-    /* Floating orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      pointer-events: none;
-      animation: drift 18s ease-in-out infinite;
-    }
-    .orb1 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(0,80,180,0.5), transparent 70%); top: -280px; left: -160px; animation-delay: 0s; }
-    .orb2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(34,211,238,0.25), transparent 70%); bottom: -120px; right: -80px; animation-delay: -8s; }
-    .orb3 { width: 280px; height: 280px; background: radial-gradient(circle, rgba(254,188,17,0.15), transparent 70%); top: 45%; right: 8%; animation-delay: -14s; }
-
-    @keyframes drift {
-      0%, 100% { transform: translate(0,0) scale(1); }
-      33%       { transform: translate(24px,-18px) scale(1.04); }
-      66%       { transform: translate(-18px,26px) scale(0.96); }
-    }
+    /* Orbs */
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; animation: drift 20s ease-in-out infinite; }
+    .orb-a { width: 600px; height: 600px; background: radial-gradient(circle, rgba(0,70,160,0.45), transparent 70%); top: -220px; left: -140px; }
+    .orb-b { width: 380px; height: 380px; background: radial-gradient(circle, rgba(196,87,42,0.18), transparent 70%); bottom: -80px; right: -60px; animation-delay: -9s; }
+    .orb-c { width: 260px; height: 260px; background: radial-gradient(circle, rgba(201,139,42,0.12), transparent 70%); top: 50%; right: 10%; animation-delay: -15s; }
+    @keyframes drift { 0%,100%{ transform:translate(0,0) scale(1); } 33%{ transform:translate(20px,-16px) scale(1.03); } 66%{ transform:translate(-16px,22px) scale(0.97); } }
 
     /* Hero content */
-    .hero-body {
-      position: relative;
-      z-index: 1;
-      width: min(1200px, 100%);
-    }
+    .hero-body { position: relative; z-index: 1; width: min(1160px, 100%); }
 
-    .hero .rv {
-      opacity: 1;
-      transform: none;
-    }
-
-    .hero-tag {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border2);
+      padding: 6px 16px;
+      background: rgba(237,227,208,0.05);
+      border: 1px solid var(--b2);
       border-radius: 100px;
-      font-size: 13px;
-      font-weight: 500;
+      font-size: 12.5px;
+      font-weight: 600;
       color: var(--muted);
-      margin-bottom: 30px;
+      margin-bottom: 32px;
+      letter-spacing: 0.01em;
     }
-
-    .tag-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 8px var(--cyan);
-    }
+    .eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--terra); box-shadow: 0 0 8px var(--terra); }
 
     .hero h1 {
-      font-size: clamp(48px, 8.5vw, 92px);
-      font-weight: 900;
-      letter-spacing: -3px;
-      line-height: 0.95;
-      margin-bottom: 26px;
+      font-size: clamp(50px, 9vw, 98px);
+      line-height: 0.97;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
     }
-
-    .h1-plain   { display: block; color: var(--text); }
-    .h1-gradient {
+    .h1-warm { display: block; color: var(--cream); }
+    .h1-accent {
       display: block;
-      background: linear-gradient(95deg, #22d3ee 0%, var(--gold) 55%, #ff7a3d 100%);
+      color: transparent;
+      background: linear-gradient(100deg, #f0c060 0%, var(--terra) 55%, #e86820 100%);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
+      font-style: italic;
     }
 
     .hero-sub {
-      font-size: clamp(16px, 2.2vw, 20px);
+      font-size: clamp(16px, 2vw, 19px);
       color: var(--muted);
-      max-width: 640px;
+      max-width: 520px;
       margin: 0 auto 44px;
-      line-height: 1.65;
+      line-height: 1.7;
       font-weight: 400;
     }
 
-    .hero-cta {
+    .hero-actions {
       display: flex;
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 26px;
+      margin-bottom: 20px;
     }
 
-    .btn-gold {
+    .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 14px 28px;
       background: var(--gold);
-      color: #000;
+      color: #1a0f00;
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       border-radius: 14px;
       text-decoration: none;
-      letter-spacing: -0.2px;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      letter-spacing: -0.01em;
+      transition: transform 0.18s, box-shadow 0.18s;
     }
-    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(254,188,17,0.38); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(254,188,17,0.35); }
 
-    .btn-ghost {
+    .btn-secondary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 14px 26px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border2);
-      color: var(--text);
+      background: rgba(237,227,208,0.05);
+      border: 1px solid var(--b2);
+      color: var(--cream);
       font-size: 15px;
-      font-weight: 500;
+      font-weight: 600;
       border-radius: 14px;
       text-decoration: none;
-      transition: background 0.18s ease, transform 0.18s ease;
+      transition: background 0.18s, transform 0.18s;
     }
-    .btn-ghost:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); }
+    .btn-secondary:hover { background: rgba(237,227,208,0.09); transform: translateY(-3px); }
 
-    .hero-proof {
+    .hero-trust {
       display: flex;
+      gap: 6px;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 54px;
+      margin-bottom: 72px;
+    }
+    .trust-chip {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--subtle);
+      padding: 5px 12px;
+      background: rgba(237,227,208,0.04);
+      border: 1px solid rgba(237,227,208,0.07);
+      border-radius: 100px;
     }
 
-    .hero-proof-item {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: rgba(240,244,255,0.8);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: -0.1px;
-    }
-
-    .hero-showcase {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
-      align-items: end;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .shot-card {
-      position: relative;
-      padding: 14px;
-      border-radius: 30px;
-      background:
-        linear-gradient(180deg, rgba(245,239,226,0.09) 0%, rgba(255,255,255,0.02) 100%),
-        rgba(8,24,45,0.86);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
-      text-align: left;
-      overflow: hidden;
-      transition: transform 0.22s ease, border-color 0.22s ease;
-    }
-
-    .shot-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(34,211,238,0.09) 0%, rgba(34,211,238,0) 40%);
-      opacity: 0;
-      transition: opacity 0.22s ease;
-      pointer-events: none;
-    }
-
-    .shot-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,255,255,0.14);
-    }
-
-    .shot-card:hover::before { opacity: 1; }
-    .shot-card.center { transform: translateY(-18px); }
-    .shot-card.center:hover { transform: translateY(-24px); }
-
-    .shot-media {
-      display: block;
-      width: 100%;
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #0c2341;
-    }
-
-    .shot-media img {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .shot-copy {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 16px 4px 4px;
-    }
-
-    .shot-label {
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-      color: #fff;
-    }
-
-    .shot-note {
-      font-size: 12px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    /* ══════════════════════════════════════════
-       PHONE MOCKUPS (CSS-only)
-    ══════════════════════════════════════════ */
+    /* ═══════════════════════════════════════════════
+       PHONE MOCKUPS (CSS-only, warm-themed)
+    ═══════════════════════════════════════════════ */
     .phones {
-      position: relative;
-      z-index: 1;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      gap: 22px;
+      gap: 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    .pw { transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+    .ph-wrap { transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+    .ph-wrap.side { opacity: 0.6; transform: scale(0.8) translateY(40px); }
+    .ph-wrap.side:hover { opacity: 0.76; transform: scale(0.83) translateY(24px); }
+    .ph-wrap.center:hover { transform: translateY(-12px); }
 
-    .pw.side {
-      opacity: 0.6;
-      transform: scale(0.8) translateY(36px);
-    }
-    .pw.side:hover {
-      opacity: 0.78;
-      transform: scale(0.83) translateY(22px);
-    }
-    .pw.center:hover { transform: translateY(-12px); }
-
-    .pf {
-      background: #1c1c1e;
-      border-radius: 46px;
+    .ph-frame {
+      background: #1a1816;
       padding: 10px;
       position: relative;
+      border-radius: 46px;
       box-shadow:
-        0 0 0 1px rgba(255,255,255,0.13),
-        0 0 0 2px rgba(0,0,0,0.9),
+        0 0 0 1px rgba(255,240,200,0.12),
+        0 0 0 2px rgba(0,0,0,0.85),
         0 60px 120px rgba(0,0,0,0.85),
-        inset 0 1px 0 rgba(255,255,255,0.1);
+        inset 0 1px 0 rgba(255,240,200,0.07);
     }
+    .ph-wrap.side  .ph-frame { width: 188px; }
+    .ph-wrap.center .ph-frame { width: 228px; }
 
-    .pw.side  .pf { width: 192px; }
-    .pw.center .pf { width: 232px; }
-
-    .ps {
+    .ph-screen {
       border-radius: 36px;
       overflow: hidden;
       position: relative;
-      background: #090909;
     }
-    .pw.side   .ps { height: 390px; }
-    .pw.center .ps { height: 472px; }
+    .ph-wrap.side   .ph-screen { height: 382px; }
+    .ph-wrap.center .ph-screen { height: 464px; }
 
     /* Dynamic island */
-    .di {
-      position: absolute;
-      top: 10px; left: 50%;
-      transform: translateX(-50%);
-      width: 70px; height: 22px;
-      background: #000;
-      border-radius: 11px;
-      z-index: 20;
-    }
+    .di { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 68px; height: 21px; background: #000; border-radius: 11px; z-index: 20; }
 
-    /* Phone screen themes */
-    .scr-home     { background: linear-gradient(170deg,#040d1e 0%,#071628 60%,#050e1c 100%); padding: 44px 14px 72px; }
-    .scr-dining   { background: linear-gradient(170deg,#020e06 0%,#051810 60%,#040d07 100%); padding: 44px 14px 72px; }
-    .scr-schedule { background: linear-gradient(170deg,#04060f 0%,#070b1c 60%,#040710 100%); padding: 44px 14px 72px; }
+    /* Status bar */
+    .sb { display: flex; justify-content: space-between; align-items: center; padding: 4px 6px; margin-bottom: 10px; }
+    .sb-time { font-size: 9px; font-weight: 800; color: rgba(240,230,210,0.7); }
+    .sb-icons { font-size: 7.5px; color: rgba(240,230,210,0.55); letter-spacing: 1.5px; }
 
-    /* Screen status bar */
-    .scr-status {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 4px;
-      margin-bottom: 14px;
-    }
-    .scr-time { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.7); }
-    .scr-icons { font-size: 8px; color: rgba(255,255,255,0.6); letter-spacing: 2px; }
+    /* Warm screen labels */
+    .scr-eyebrow { font-size: 7.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--terra); margin-bottom: 2px; }
+    .scr-title { font-family: 'DM Serif Display', serif; font-size: 17px; color: var(--cream); margin-bottom: 12px; }
 
-    .scr-label { font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cyan); margin-bottom: 3px; }
-    .scr-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 12px; letter-spacing: -0.4px; }
-
-    /* Home screen elements */
-    .sh-greeting { font-size: 10px; color: rgba(255,255,255,0.45); font-weight: 500; margin-bottom: 2px; }
-    .sh-name     { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 14px; letter-spacing: -0.3px; }
+    /* ── HOME SCREEN (warm) ── */
+    .scr-home { background: linear-gradient(165deg, #0f0b06 0%, #140e08 60%, #0f0a05 100%); padding: 42px 14px 68px; }
+    .sh-greet { font-size: 9.5px; color: rgba(237,227,208,0.42); font-weight: 500; margin-bottom: 1px; }
+    .sh-name  { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--cream); margin-bottom: 14px; }
 
     .sh-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(237,220,180,0.05);
+      border: 1px solid rgba(237,220,180,0.09);
       border-radius: 13px;
       padding: 10px 12px;
       margin-bottom: 7px;
     }
-    .sh-card-tag   { font-size: 7.5px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--cyan); margin-bottom: 3px; }
-    .sh-card-title { font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 2px; }
-    .sh-card-sub   { font-size: 8.5px; color: rgba(255,255,255,0.4); }
+    .sh-card-tag   { font-size: 7px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ochre); margin-bottom: 3px; }
+    .sh-card-title { font-size: 11px; font-weight: 700; color: var(--cream); margin-bottom: 2px; }
+    .sh-card-sub   { font-size: 8px; color: rgba(237,227,208,0.38); }
 
     .sh-chips { display: flex; gap: 5px; margin-top: 8px; }
-    .sh-chip {
-      flex: 1;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      padding: 8px 4px;
-      text-align: center;
-    }
-    .sh-chip-ico { font-size: 13px; }
-    .sh-chip-lbl { font-size: 7px; color: rgba(255,255,255,0.45); font-weight: 500; margin-top: 1px; display: block; }
+    .sh-chip  { flex: 1; background: rgba(237,220,180,0.04); border: 1px solid rgba(237,220,180,0.07); border-radius: 10px; padding: 8px 4px; text-align: center; }
+    .sh-chip-ico { font-size: 12px; }
+    .sh-chip-lbl { font-size: 7px; color: rgba(237,227,208,0.42); font-weight: 500; margin-top: 1px; display: block; }
 
-    /* Dining screen */
-    .sd-hall {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 11px;
+    /* ── EVENTS SCREEN (warm) ── */
+    .scr-events { background: linear-gradient(165deg, #0d0806 0%, #120c07 60%, #0d0806 100%); padding: 42px 14px 68px; }
+    .ev-card {
+      background: rgba(237,220,180,0.05);
+      border: 1px solid rgba(237,220,180,0.09);
+      border-radius: 12px;
       padding: 9px 11px;
       margin-bottom: 6px;
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
     }
-    .sd-hall-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px; }
-    .sd-hall-name { font-size: 10.5px; font-weight: 700; color: #fff; }
-    .sd-open   { font-size: 7.5px; font-weight: 600; padding: 2px 7px; background: rgba(52,211,153,0.14); color: #34d399; border-radius: 100px; }
-    .sd-closed { font-size: 7.5px; font-weight: 600; padding: 2px 7px; background: rgba(239,68,68,0.14); color: #f87171; border-radius: 100px; }
-    .sd-menu   { font-size: 8px; color: rgba(255,255,255,0.35); }
+    .ev-icon { width: 26px; height: 26px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+    .ev-name { font-size: 10px; font-weight: 700; color: var(--cream); margin-bottom: 2px; }
+    .ev-loc  { font-size: 7.5px; color: rgba(237,227,208,0.38); }
+    .ev-time { font-size: 7.5px; font-weight: 600; color: var(--ochre); margin-top: 2px; }
 
-    /* Schedule screen */
+    /* ── SCHEDULE SCREEN (warm) ── */
+    .scr-sched { background: linear-gradient(165deg, #080609 0%, #0d0a0e 60%, #080609 100%); padding: 42px 14px 68px; }
     .ss-days { display: flex; gap: 3px; margin-bottom: 10px; }
-    .ss-day {
-      flex: 1;
-      text-align: center;
-      font-size: 7px;
-      color: rgba(255,255,255,0.3);
-      padding-bottom: 4px;
-    }
-    .ss-day.active { color: var(--gold); font-weight: 700; border-bottom: 2px solid var(--gold); }
-
-    .ss-class {
-      border-left: 3px solid;
-      border-radius: 0 9px 9px 0;
-      padding: 7px 10px;
-      margin-bottom: 6px;
-      background: rgba(255,255,255,0.04);
-    }
-    .ss-class.blue   { border-color: #3b82f6; }
-    .ss-class.purple { border-color: #a855f7; }
-    .ss-class.green  { border-color: #22c55e; }
-    .ss-class.amber  { border-color: #f59e0b; }
-    .ss-cn { font-size: 10px; font-weight: 700; color: #fff; }
-    .ss-ct { font-size: 7.5px; color: rgba(255,255,255,0.38); margin-top: 2px; }
+    .ss-day { flex: 1; text-align: center; font-size: 7px; color: rgba(237,227,208,0.28); padding-bottom: 4px; }
+    .ss-day.on { color: var(--gold); font-weight: 700; border-bottom: 2px solid var(--gold); }
+    .ss-row { border-left: 3px solid; border-radius: 0 9px 9px 0; padding: 7px 10px; margin-bottom: 6px; background: rgba(237,220,180,0.04); }
+    .ss-row.bl { border-color: #4f87e8; }
+    .ss-row.pu { border-color: #a855f7; }
+    .ss-row.gn { border-color: #5ac47a; }
+    .ss-row.am { border-color: var(--ochre); }
+    .ss-cn { font-size: 10px; font-weight: 700; color: var(--cream); }
+    .ss-ct { font-size: 7.5px; color: rgba(237,227,208,0.36); margin-top: 2px; }
 
     /* Phone tab bar */
-    .ptab {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 64px;
-      background: rgba(10,10,12,0.85);
-      backdrop-filter: blur(16px);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
+    .ph-tab {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 62px;
+      background: rgba(12,9,5,0.88);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(237,220,180,0.06);
+      display: flex; align-items: center; justify-content: space-around;
       padding: 0 8px 14px;
     }
-    .ptab-icon { font-size: 17px; opacity: 0.35; }
-    .ptab-icon.on { opacity: 1; }
+    .ph-tab-i { font-size: 17px; opacity: 0.32; }
+    .ph-tab-i.on { opacity: 1; }
 
-    /* Screen reflection */
-    .prefl {
-      position: absolute;
-      top: 10px; left: 10px; right: 10px;
-      height: 38%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.035) 0%, transparent 100%);
-      border-radius: 34px 34px 0 0;
-      pointer-events: none;
-    }
+    /* Screen glass reflection */
+    .ph-refl { position: absolute; top: 10px; left: 10px; right: 10px; height: 36%; background: linear-gradient(180deg, rgba(255,245,220,0.03) 0%, transparent 100%); border-radius: 34px 34px 0 0; pointer-events: none; }
 
-    /* ══════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        MARQUEE
-    ══════════════════════════════════════════ */
+    ═══════════════════════════════════════════════ */
     .marquee {
       overflow: hidden;
-      padding: 26px 0;
-      background: linear-gradient(90deg, #002a50 0%, #003e70 50%, #002a50 100%);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 22px 0;
+      background: linear-gradient(90deg, #1c1208 0%, #251a0e 50%, #1c1208 100%);
+      border-top: 1px solid rgba(237,220,180,0.07);
+      border-bottom: 1px solid rgba(237,220,180,0.07);
     }
-
-    .mq-track {
-      display: flex;
-      width: max-content;
-      animation: mq-slide 32s linear infinite;
-    }
+    .mq-track { display: flex; width: max-content; animation: mq 34s linear infinite; }
     .mq-track:hover { animation-play-state: paused; }
-
-    @keyframes mq-slide {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    .mq-item {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      padding: 0 32px;
-      font-size: 13.5px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.6);
-      white-space: nowrap;
-    }
+    @keyframes mq { from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+    .mq-item { display: flex; align-items: center; gap: 9px; padding: 0 30px; font-size: 13px; font-weight: 600; color: rgba(237,220,180,0.55); white-space: nowrap; }
     .mq-ico { font-size: 15px; }
-    .mq-sep { color: rgba(254,188,17,0.45); font-size: 20px; align-self: center; }
+    .mq-sep { color: rgba(201,139,42,0.45); font-size: 18px; align-self: center; }
 
-    /* ══════════════════════════════════════════
-       SHARED SECTION STYLES
-    ══════════════════════════════════════════ */
-    .container { max-width: 1080px; margin: 0 auto; }
+    /* ═══════════════════════════════════════════════
+       SHARED / CONTAINER
+    ═══════════════════════════════════════════════ */
+    .wrap { max-width: 1080px; margin: 0 auto; }
 
-    .eyebrow {
+    .sec-eyebrow {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--ochre);
       margin-bottom: 14px;
     }
-
     .sec-title {
-      font-size: clamp(34px, 5.5vw, 58px);
-      font-weight: 900;
-      letter-spacing: -2px;
+      font-size: clamp(34px, 5.5vw, 60px);
       line-height: 1.0;
+      letter-spacing: -0.01em;
       margin-bottom: 16px;
+      color: var(--cream);
     }
-
     .sec-sub {
       font-size: 17px;
       color: var(--muted);
-      line-height: 1.65;
-      max-width: 480px;
+      line-height: 1.7;
+      max-width: 500px;
     }
 
-    /* ══════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        FEATURES BENTO
-    ══════════════════════════════════════════ */
+    ═══════════════════════════════════════════════ */
     .features {
-      padding: 112px 24px;
-      background: var(--surface);
+      padding: 110px 24px;
+      background: var(--s1);
+      position: relative;
     }
 
-    .features-head {
-      text-align: center;
-      margin-bottom: 68px;
-    }
+    .features-head { text-align: center; margin-bottom: 68px; }
     .features-head .sec-sub { margin: 0 auto; }
 
     .bento {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 14px;
+      gap: 13px;
     }
 
     .bc {
-      background: var(--surface2);
-      border: 1px solid var(--border);
+      background: var(--s2);
+      border: 1px solid var(--b1);
       border-radius: 22px;
-      padding: 28px;
+      padding: 26px;
       position: relative;
       overflow: hidden;
       transition: border-color 0.22s, transform 0.22s, background 0.22s;
     }
     .bc::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 22px;
-      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,255,255,0.03), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      content: ''; position: absolute; inset: 0; border-radius: 22px;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(237,220,180,0.025), transparent);
+      opacity: 0; transition: opacity 0.3s;
     }
-    .bc:hover { border-color: var(--border2); transform: translateY(-4px); background: var(--surface3); }
+    .bc:hover { border-color: var(--b2); transform: translateY(-4px); background: var(--s3); }
     .bc:hover::after { opacity: 1; }
 
     .bc.c4 { grid-column: span 4; }
-    .bc.c3 { grid-column: span 3; }
     .bc.c2 { grid-column: span 2; }
 
-    .bc-icon {
-      width: 50px; height: 50px;
-      border-radius: 15px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-    }
-
-    .bc h3 { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; margin-bottom: 8px; }
+    .bc-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 21px; margin-bottom: 18px; }
+    .bc h3 { font-size: 17px; margin-bottom: 8px; color: var(--cream); }
     .bc.big h3 { font-size: 22px; }
-    .bc p  { font-size: 14px; color: var(--muted); line-height: 1.55; }
-    .bc.big p { font-size: 16px; }
+    .bc p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+    .bc.big p { font-size: 15px; }
 
-    /* Mini schedule visual inside big card */
-    .mini-sched { display: flex; flex-direction: column; gap: 5px; margin-top: 18px; }
-    .mc {
-      border-left: 3px solid;
-      border-radius: 0 7px 7px 0;
-      padding: 6px 10px;
-      background: rgba(255,255,255,0.04);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .mc-n { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8); }
-    .mc-t { font-size: 9.5px; color: rgba(255,255,255,0.32); }
+    /* Mini schedule inside big card */
+    .mini-sched { margin-top: 18px; display: flex; flex-direction: column; gap: 5px; }
+    .mc { border-left: 3px solid; border-radius: 0 8px 8px 0; padding: 6px 10px; background: rgba(237,220,180,0.04); display: flex; align-items: center; justify-content: space-between; }
+    .mc-n { font-size: 11px; font-weight: 600; color: rgba(237,227,208,0.8); }
+    .mc-t { font-size: 9px; color: rgba(237,227,208,0.32); }
 
-    /* ══════════════════════════════════════════
-       STATS
-    ══════════════════════════════════════════ */
-    .stats {
-      padding: 80px 24px;
+    /* ═══════════════════════════════════════════════
+       WIDGETS SECTION
+    ═══════════════════════════════════════════════ */
+    .widgets {
+      padding: 110px 24px;
       background: var(--bg);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border-radius: 22px;
+      position: relative;
       overflow: hidden;
     }
-
-    .stat {
-      background: var(--surface);
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .stat-n {
-      font-size: 50px;
-      font-weight: 900;
-      letter-spacing: -2.5px;
-      line-height: 1;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.55) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .stat-l { font-size: 13px; color: var(--muted); font-weight: 500; }
-
-    /* ══════════════════════════════════════════
-       HIGHLIGHT / HOW IT WORKS
-    ══════════════════════════════════════════ */
-    .highlight {
-      padding: 112px 24px;
-      background: var(--surface);
-    }
-
-    .hl-grid {
+    .widgets-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 56px;
+      gap: 80px;
       align-items: center;
-      margin-top: 64px;
+      max-width: 1080px;
+      margin: 0 auto;
     }
 
-    .hl-text h3 {
-      font-size: clamp(30px, 4vw, 48px);
-      font-weight: 900;
-      letter-spacing: -1.8px;
-      line-height: 1.05;
-      margin-bottom: 20px;
+    /* iPhone home screen with widget */
+    .widget-phone-wrap { display: flex; justify-content: center; }
+
+    .widget-phone .ph-frame { width: 260px; }
+    .widget-phone .ph-screen { height: 530px; background: linear-gradient(160deg, #1a1410 0%, #100d08 100%); padding: 40px 10px 10px; }
+
+    .wp-homescreen {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .hl-text p {
-      font-size: 16px;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 14px;
+    /* Lock screen time */
+    .wp-time { text-align: center; margin-bottom: 4px; }
+    .wp-time-h { font-family: 'DM Serif Display', serif; font-size: 36px; color: rgba(237,227,208,0.9); line-height: 1; }
+    .wp-time-d { font-size: 10px; color: rgba(237,227,208,0.42); font-weight: 500; margin-top: 2px; }
+
+    /* Widget card */
+    .lagoon-widget {
+      background: rgba(237,220,180,0.06);
+      border: 1px solid rgba(237,220,180,0.1);
+      border-radius: 18px;
+      padding: 14px;
+      flex-shrink: 0;
+    }
+    .wgt-header { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
+    .wgt-icon { width: 18px; height: 18px; border-radius: 5px; background: linear-gradient(135deg, #1a4a7a, #0057b0); display: flex; align-items: center; justify-content: center; }
+    .wgt-name { font-size: 10px; font-weight: 700; color: rgba(237,227,208,0.5); letter-spacing: 0.5px; }
+    .wgt-title { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--ochre); margin-bottom: 8px; }
+    .wgt-row { display: flex; align-items: center; gap: 7px; padding: 4px 0; border-bottom: 1px solid rgba(237,220,180,0.05); }
+    .wgt-row:last-child { border-bottom: none; }
+    .wgt-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .wgt-class { font-size: 10px; font-weight: 600; color: rgba(237,227,208,0.8); flex: 1; }
+    .wgt-time  { font-size: 9px; color: rgba(237,227,208,0.35); }
+
+    /* Home screen app icon grid */
+    .wp-apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; flex: 1; padding: 0 4px; }
+    .wp-app { aspect-ratio: 1; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+    /* Dock */
+    .wp-dock {
+      display: flex; justify-content: space-around; align-items: center;
+      background: rgba(237,220,180,0.04);
+      border: 1px solid rgba(237,220,180,0.07);
+      border-radius: 14px;
+      padding: 8px 12px;
+      flex-shrink: 0;
+    }
+    .wp-dock-i { font-size: 18px; }
+
+    /* Widgets text */
+    .widgets-text { }
+    .widgets-text .sec-sub { margin-bottom: 32px; }
+
+    .wgt-features { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
+    .wgt-feat { display: flex; gap: 14px; align-items: flex-start; }
+    .wgt-feat-ico {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      border: 1px solid rgba(237,220,180,0.07);
+    }
+    .wgt-feat h4 { font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+    .wgt-feat p  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ═══════════════════════════════════════════════
+       NEWS SECTION
+    ═══════════════════════════════════════════════ */
+    .news-section {
+      padding: 110px 24px;
+      background: var(--s1);
+    }
+    .news-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1080px;
+      margin: 0 auto;
     }
 
-    .hl-list { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 11px; }
-    .hl-list li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--muted); }
+    .news-phone .ph-frame { width: 260px; }
+    .news-phone .ph-screen { height: 530px; }
 
+    /* News reading screen */
+    .scr-news { background: linear-gradient(165deg, #0e0b08 0%, #130f0a 100%); padding: 42px 12px 68px; }
+
+    .news-feed { display: flex; flex-direction: column; gap: 8px; }
+
+    .news-featured {
+      background: rgba(196,87,42,0.08);
+      border: 1px solid rgba(196,87,42,0.15);
+      border-radius: 13px;
+      padding: 12px;
+      margin-bottom: 2px;
+    }
+    .news-cat { font-size: 7.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--terra); margin-bottom: 5px; }
+    .news-headline { font-family: 'DM Serif Display', serif; font-size: 12px; color: var(--cream); line-height: 1.35; margin-bottom: 5px; }
+    .news-meta { font-size: 7.5px; color: rgba(237,227,208,0.35); }
+
+    .news-card {
+      background: rgba(237,220,180,0.04);
+      border: 1px solid rgba(237,220,180,0.07);
+      border-radius: 11px;
+      padding: 10px 11px;
+    }
+    .news-card .news-cat { color: var(--ochre); }
+
+    /* News text side */
+    .news-text .sec-sub { margin-bottom: 24px; }
+    .news-details { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .news-detail { display: flex; gap: 12px; align-items: flex-start; }
     .chk {
-      width: 22px; height: 22px;
+      width: 20px; height: 20px;
       border-radius: 50%;
-      background: rgba(52,211,153,0.12);
-      border: 1px solid rgba(52,211,153,0.25);
+      background: rgba(196,87,42,0.12);
+      border: 1px solid rgba(196,87,42,0.25);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
-      font-size: 11px;
-      color: #34d399;
+      font-size: 10px;
+      color: var(--terra);
     }
+    .news-detail-text { font-size: 14px; color: var(--muted); line-height: 1.55; }
 
-    .hl-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      align-items: end;
-    }
-
-    .hl-shot {
-      padding: 14px;
-      border-radius: 28px;
-      background:
-        linear-gradient(180deg, rgba(245,239,226,0.08) 0%, rgba(255,255,255,0.02) 100%),
-        rgba(8,24,45,0.9);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
-    }
-
-    .hl-shot:first-child { transform: translateY(18px); }
-
-    .hl-shot img {
-      display: block;
-      width: 100%;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hl-shot-title {
-      display: block;
-      margin-top: 14px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.2px;
-    }
-
-    .hl-shot-sub {
-      display: block;
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    /* ══════════════════════════════════════════
-       CTA
-    ══════════════════════════════════════════ */
-    .cta {
-      padding: 140px 24px;
-      background: var(--bg);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-atmo {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 65% at 50% 100%, rgba(0,55,110,0.7) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 25% 50%, rgba(0,80,180,0.07) 0%, transparent 55%);
-      pointer-events: none;
-    }
-
-    .cta-body { position: relative; z-index: 1; }
-
-    .cta-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 18px;
-      background: var(--gold-dim);
-      border: 1px solid rgba(254,188,17,0.2);
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gold);
-      margin-bottom: 36px;
-    }
-
-    .cta h2 {
-      font-size: clamp(42px, 7vw, 76px);
-      font-weight: 900;
-      letter-spacing: -2.5px;
-      line-height: 1.0;
-      margin-bottom: 22px;
-    }
-
-    .cta-sub {
-      font-size: 18px;
-      color: var(--muted);
-      line-height: 1.65;
-      max-width: 440px;
-      margin: 0 auto 52px;
-    }
-
-    .asb {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      padding: 15px 30px;
-      background: #fff;
-      color: #000;
-      border-radius: 18px;
-      text-decoration: none;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-    .asb:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(255,255,255,0.12); }
-    .asb svg { width: 28px; height: 28px; }
-    .asb-lbl { text-align: left; }
-    .asb-sub  { font-size: 10px; font-weight: 500; opacity: 0.5; display: block; }
-    .asb-main { font-size: 17px; font-weight: 800; letter-spacing: -0.4px; display: block; }
-
-    .cta-note { margin-top: 26px; font-size: 13px; color: var(--subtle); }
-
-    .cta-links {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    /* ══════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════ */
-    footer {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 42px 36px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .footer-icon {
-      width: 30px; height: 30px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #004080 0%, #0060c0 100%);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .footer-brand span { font-size: 16px; font-weight: 800; letter-spacing: -0.4px; }
-
-    .footer-copy { font-size: 12px; color: var(--subtle); }
-
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a {
-      font-size: 12px;
-      color: var(--subtle);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .footer-links a:hover { color: var(--muted); }
-
-    /* ══════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        SOCIAL / COMPARE SCHEDULES
-    ══════════════════════════════════════════ */
+    ═══════════════════════════════════════════════ */
     .social {
-      padding: 112px 24px;
+      padding: 110px 24px;
       background: var(--bg);
       position: relative;
       overflow: hidden;
     }
-
     .social::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 20% 50%, rgba(99,102,241,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 80% 50%, rgba(34,211,238,0.05) 0%, transparent 55%);
+        radial-gradient(ellipse 60% 50% at 15% 50%, rgba(196,87,42,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 85% 50%, rgba(201,139,42,0.04) 0%, transparent 55%);
       pointer-events: none;
     }
 
-    .social-head {
-      text-align: center;
-      margin-bottom: 72px;
-    }
+    .social-head { text-align: center; margin-bottom: 68px; }
     .social-head .sec-sub { margin: 0 auto; }
 
     .social-grid {
@@ -961,131 +655,185 @@
       margin: 0 auto;
     }
 
-    /* Share card */
-    .share-card-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
+    /* Share card — warm editorial tone */
+    .share-card-wrap { display: flex; justify-content: center; }
     .share-card {
-      width: 320px;
-      background: linear-gradient(160deg, #0d1730 0%, #0a1120 100%);
-      border: 1px solid rgba(255,255,255,0.1);
+      width: 310px;
+      background: linear-gradient(160deg, #1e1710 0%, #160f09 100%);
+      border: 1px solid rgba(237,220,180,0.1);
       border-radius: 24px;
-      padding: 24px;
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,0.04),
-        0 40px 80px rgba(0,0,0,0.6),
-        0 0 60px rgba(99,102,241,0.08);
+      padding: 22px;
+      box-shadow: 0 0 0 1px rgba(237,220,180,0.04), 0 40px 80px rgba(0,0,0,0.55), 0 0 50px rgba(196,87,42,0.06);
     }
-
-    .sc-header {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .sc-avatars { display: flex; align-items: center; }
-    .sc-avatar {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 800;
-      color: #fff;
-      border: 2px solid #0a1120;
-    }
-
-    .sc-names { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
-    .sc-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-    .sc-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 16px 0; }
-
-    .sc-overlap-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
-
-    .sc-classes { display: flex; flex-direction: column; gap: 7px; margin-bottom: 4px; }
+    .sc-hdr { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .sc-avs { display: flex; }
+    .sc-av { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; border: 2px solid #140f09; }
+    .sc-names { font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--cream); }
+    .sc-sub2  { font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+    .sc-div { height: 1px; background: rgba(237,220,180,0.07); margin: 14px 0; }
+    .sc-tag { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 9px; }
+    .sc-tag.cyan  { color: #5abfd4; }
+    .sc-tag.amber { color: var(--ochre); }
+    .sc-classes { display: flex; flex-direction: column; gap: 6px; }
     .sc-class {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.85);
-      background: rgba(255,255,255,0.04);
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12.5px; font-weight: 600;
+      color: rgba(237,227,208,0.82);
+      background: rgba(237,220,180,0.04);
+      border: 1px solid rgba(237,220,180,0.07);
       border-radius: 9px;
       padding: 7px 10px;
     }
-    .sc-class.match { border: 1px solid rgba(255,255,255,0.07); }
     .sc-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .sc-loc { font-size: 11px; color: var(--muted); font-weight: 400; margin-left: auto; }
-
-    .sc-free-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .sc-free-block {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-      background: rgba(254,188,17,0.07);
-      border: 1px solid rgba(254,188,17,0.15);
+    .sc-loc { font-size: 10px; color: var(--muted); font-weight: 400; margin-left: auto; }
+    .sc-window {
+      font-size: 13.5px; font-weight: 700; color: var(--cream);
+      background: rgba(201,139,42,0.08);
+      border: 1px solid rgba(201,139,42,0.18);
       border-radius: 10px;
       padding: 9px 12px;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.01em;
+    }
+    .sc-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+    .sc-logo { display: flex; align-items: center; gap: 6px; font-family: 'DM Serif Display', serif; font-size: 12px; color: rgba(237,220,180,0.45); }
+    .sc-share { font-size: 11px; color: var(--ochre); font-weight: 600; }
+
+    /* Social features list */
+    .social-feats { display: flex; flex-direction: column; gap: 26px; }
+    .sf { display: flex; gap: 16px; align-items: flex-start; }
+    .sf-ico { width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; border: 1px solid rgba(237,220,180,0.06); }
+    .sf h4 { font-size: 15px; font-weight: 700; color: var(--cream); margin-bottom: 4px; }
+    .sf p  { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+    /* ═══════════════════════════════════════════════
+       STATS
+    ═══════════════════════════════════════════════ */
+    .stats {
+      padding: 80px 24px;
+      background: var(--s1);
+      border-top: 1px solid var(--b1);
+      border-bottom: 1px solid var(--b1);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--b1);
+      border-radius: 22px;
+      overflow: hidden;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .stat { background: var(--s2); padding: 40px 20px; text-align: center; }
+    .stat-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .stat-l { font-size: 13px; color: var(--muted); font-weight: 500; }
+
+    /* ═══════════════════════════════════════════════
+       CTA
+    ═══════════════════════════════════════════════ */
+    .cta {
+      padding: 140px 24px;
+      background: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-atmo {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(0,50,100,0.65) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 35% at 20% 50%, rgba(196,87,42,0.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .cta-body { position: relative; z-index: 1; }
+
+    .cta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 18px;
+      background: rgba(254,188,17,0.1);
+      border: 1px solid rgba(254,188,17,0.22);
+      border-radius: 100px;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 36px;
     }
 
-    .sc-footer {
+    .cta h2 {
+      font-size: clamp(44px, 7.5vw, 80px);
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      color: var(--cream);
+    }
+    .cta-sub {
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 440px;
+      margin: 0 auto 50px;
+    }
+
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-tf {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 32px;
+      background: var(--cream);
+      color: #1a0f00;
+      border-radius: 18px;
+      text-decoration: none;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .btn-tf:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(240,230,200,0.12); }
+    .btn-tf svg { width: 26px; height: 26px; }
+    .btn-tf-lbl { text-align: left; }
+    .btn-tf-sub  { font-size: 10px; font-weight: 600; opacity: 0.5; display: block; }
+    .btn-tf-main { font-family: 'DM Serif Display', serif; font-size: 17px; display: block; }
+
+    .cta-note { margin-top: 26px; font-size: 13px; color: var(--subtle); }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════ */
+    footer {
+      background: var(--s1);
+      border-top: 1px solid var(--b1);
+      padding: 40px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 18px;
+      gap: 20px;
+      flex-wrap: wrap;
     }
-    .sc-logo-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.5);
-    }
-    .sc-share-hint { font-size: 11px; color: var(--cyan); font-weight: 600; }
-
-    /* Feature list */
-    .social-features { display: flex; flex-direction: column; gap: 28px; }
-
-    .sf-item {
-      display: flex;
-      gap: 18px;
-      align-items: flex-start;
-    }
-
-    .sf-icon {
-      width: 46px; height: 46px;
-      border-radius: 14px;
+    .footer-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .footer-brand-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: linear-gradient(145deg, #1a4a7a 0%, #0057b0 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-      border: 1px solid rgba(255,255,255,0.06);
     }
+    .footer-brand-name { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--cream); }
+    .footer-copy { font-size: 12px; color: var(--subtle); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--subtle); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--muted); }
 
-    .sf-item h4 {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.3px;
-      margin-bottom: 5px;
-    }
-    .sf-item p { font-size: 14px; color: var(--muted); line-height: 1.55; }
-
-    @media (max-width: 860px) {
-      .social-grid { grid-template-columns: 1fr; gap: 56px; }
-      .share-card-wrap { order: -1; }
-    }
-
-    /* ══════════════════════════════════════════
-       SCROLL ANIMATIONS
-    ══════════════════════════════════════════ */
-    .rv {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-    }
+    /* ═══════════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════════ */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
     .rv.vis { opacity: 1; transform: translateY(0); }
     .rv.d1 { transition-delay: 0.1s; }
     .rv.d2 { transition-delay: 0.2s; }
@@ -1093,388 +841,593 @@
     .rv.d4 { transition-delay: 0.4s; }
     .rv.d5 { transition-delay: 0.5s; }
 
-    /* ══════════════════════════════════════════
+    /* ═══════════════════════════════════════════════
        RESPONSIVE
-    ══════════════════════════════════════════ */
-    @media (max-width: 900px) {
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 960px) {
       .bc.c4 { grid-column: span 6; }
-      .bc.c3 { grid-column: span 6; }
       .bc.c2 { grid-column: span 3; }
-      .hl-grid { grid-template-columns: 1fr; gap: 56px; }
-      .hl-gallery { order: -1; }
-      .hero-showcase { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .shot-card.center { transform: none; }
-      .shot-card.center:hover { transform: translateY(-6px); }
+      .widgets-inner,
+      .news-inner,
+      .social-grid { grid-template-columns: 1fr; gap: 56px; }
+      .widget-phone-wrap,
+      .news-phone-wrap,
+      .share-card-wrap { order: -1; }
     }
-
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .pw.side { display: none; }
+      .ph-wrap.side { display: none; }
       .bc.c2 { grid-column: span 6; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      footer { padding: 36px 20px; flex-direction: column; align-items: flex-start; }
-      .hero-showcase { grid-template-columns: 1fr; }
-      .shot-card:nth-child(n + 2) { display: none; }
-      .hl-gallery { grid-template-columns: 1fr; }
-      .hl-shot:first-child { transform: none; }
+      footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
     }
-
     @media (max-width: 480px) {
-      .hero h1 { letter-spacing: -2px; }
-      .bento { gap: 10px; }
-      .bc { padding: 22px; }
+      .hero h1 { letter-spacing: -0.005em; }
+      .bento { gap: 9px; }
+      .bc { padding: 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- ─── NAV ─────────────────────────────────── -->
 <nav id="nav">
-  <a href="#" class="nav-logo">
+  <a href="#" class="nav-brand">
     <div class="nav-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M2 12c3.5-4.5 5.5-6 10-6s6.5 1.5 10 6" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M2 12c3.5-4.5 5.5-6 10-6s6.5 1.5 10 6" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </div>
-    <span class="nav-wordmark">Lagoon</span>
+    <span class="nav-name">Lagoon</span>
   </a>
-  <a class="nav-pill" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer">
-    <span class="pill-dot"></span>
+  <a class="nav-cta" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer">
+    <span class="nav-dot"></span>
     Public beta on TestFlight
   </a>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ─── HERO ─────────────────────────────────── -->
 <section class="hero">
   <div class="hero-atmo"></div>
   <div class="hero-grid"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
 
   <div class="hero-body">
-    <div class="hero-tag rv">
-      <span class="tag-dot"></span>
-      Public beta now open for UCSB students
+    <div class="hero-eyebrow rv">
+      <span class="eyebrow-dot"></span>
+      Public beta · Built by Gauchos, for Gauchos
     </div>
 
     <h1 class="rv d1">
-      <span class="h1-plain">Everything UCSB.</span>
-      <span class="h1-gradient">Finally in one place.</span>
+      <span class="h1-warm">Campus life,</span>
+      <span class="h1-accent">beautifully yours.</span>
     </h1>
 
     <p class="hero-sub rv d2">
-      Lagoon brings together your GOLD schedule, dining halls, campus events, Daily Nexus news, and grade data in one polished iPhone app built by Gauchos, for Gauchos.
+      Lagoon is a native iPhone app that brings your GOLD schedule, Carrillo's menu, Storke Plaza events, and the Daily Nexus together in one calm, polished home — designed to feel like it was made with care.
     </p>
 
-    <div class="hero-cta rv d3">
-      <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-gold" target="_blank" rel="noreferrer">
+    <div class="hero-actions rv d3">
+      <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-primary" target="_blank" rel="noreferrer">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="M6 11l6-6 6 6"/></svg>
-        Join the public beta
+        Join on TestFlight
       </a>
-      <a href="#features" class="btn-ghost">See what's inside</a>
+      <a href="#features" class="btn-secondary">See what's inside</a>
     </div>
 
-    <div class="hero-proof rv d4">
-      <span class="hero-proof-item">Public TestFlight beta</span>
-      <span class="hero-proof-item">Native iPhone app</span>
-      <span class="hero-proof-item">Built for campus life at UCSB</span>
+    <div class="hero-trust rv d4">
+      <span class="trust-chip">Public beta · available now</span>
+      <span class="trust-chip">Native iPhone app</span>
+      <span class="trust-chip">iOS 17+</span>
+      <span class="trust-chip">Free to join</span>
     </div>
 
-    <div class="hero-showcase rv d5">
-      <article class="shot-card">
-        <a class="shot-media" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer" aria-label="Open Lagoon TestFlight beta">
-          <img src="output/04_dining_framed.png" alt="Lagoon dining screen screenshot" />
-        </a>
-        <div class="shot-copy">
-          <span class="shot-label">Know what's open</span>
-          <span class="shot-note">Dining halls</span>
-        </div>
-      </article>
+    <!-- CSS Phone Mockups -->
+    <div class="phones rv d5">
 
-      <article class="shot-card center">
-        <a class="shot-media" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer" aria-label="Join Lagoon public beta on TestFlight">
-          <img src="output/05_schedule_framed.png" alt="Lagoon schedule screen screenshot" />
-        </a>
-        <div class="shot-copy">
-          <span class="shot-label">Your week, beautifully organized</span>
-          <span class="shot-note">Schedule</span>
+      <!-- Left: Events -->
+      <div class="ph-wrap side">
+        <div class="ph-frame">
+          <div class="ph-screen scr-events">
+            <div class="di"></div>
+            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
+            <div class="scr-eyebrow">Today</div>
+            <div class="scr-title">Happenings</div>
+            <div class="ev-card">
+              <div class="ev-icon" style="background:rgba(196,87,42,0.15);">🎵</div>
+              <div>
+                <div class="ev-name">Jazz Night</div>
+                <div class="ev-loc">Storke Plaza</div>
+                <div class="ev-time">7:00 PM</div>
+              </div>
+            </div>
+            <div class="ev-card">
+              <div class="ev-icon" style="background:rgba(201,139,42,0.12);">🎭</div>
+              <div>
+                <div class="ev-name">Comedy Showcase</div>
+                <div class="ev-loc">Campbell Hall</div>
+                <div class="ev-time">9:00 PM</div>
+              </div>
+            </div>
+            <div class="ev-card">
+              <div class="ev-icon" style="background:rgba(90,196,122,0.12);">🎓</div>
+              <div>
+                <div class="ev-name">Grad School Panel</div>
+                <div class="ev-loc">Buchanan 1920</div>
+                <div class="ev-time">Tomorrow 11am</div>
+              </div>
+            </div>
+            <div class="ph-tab">
+              <span class="ph-tab-i">🏠</span>
+              <span class="ph-tab-i">🍽️</span>
+              <span class="ph-tab-i">📅</span>
+              <span class="ph-tab-i on">🎉</span>
+              <span class="ph-tab-i">📰</span>
+            </div>
+          </div>
+          <div class="ph-refl"></div>
         </div>
-      </article>
+      </div>
 
-      <article class="shot-card">
-        <a class="shot-media" href="https://testflight.apple.com/join/hfmrM9K7" target="_blank" rel="noreferrer" aria-label="Preview Lagoon events view">
-          <img src="output/03_events_framed.png" alt="Lagoon events screen screenshot" />
-        </a>
-        <div class="shot-copy">
-          <span class="shot-label">Never miss campus energy</span>
-          <span class="shot-note">Events</span>
+      <!-- Center: Home -->
+      <div class="ph-wrap center">
+        <div class="ph-frame">
+          <div class="ph-screen scr-home">
+            <div class="di"></div>
+            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
+            <div class="sh-greet">Good morning</div>
+            <div class="sh-name">Alex Gaucho 👋</div>
+            <div class="sh-card">
+              <div class="sh-card-tag">Up next</div>
+              <div class="sh-card-title">CS 130A — Data Structures</div>
+              <div class="sh-card-sub">GIRV 1004 &nbsp;·&nbsp; 9:00 AM &nbsp;·&nbsp; In 42 min</div>
+            </div>
+            <div class="sh-card" style="border-color:rgba(201,139,42,0.14);background:rgba(201,139,42,0.04);">
+              <div class="sh-card-tag" style="color:var(--ochre);">Tonight</div>
+              <div class="sh-card-title">Jazz Night @ Storke Plaza</div>
+              <div class="sh-card-sub">Happenings &nbsp;·&nbsp; 7:00 PM</div>
+            </div>
+            <div class="sh-chips">
+              <div class="sh-chip"><div class="sh-chip-ico">🍽️</div><span class="sh-chip-lbl">Dining</span></div>
+              <div class="sh-chip"><div class="sh-chip-ico">📅</div><span class="sh-chip-lbl">Schedule</span></div>
+              <div class="sh-chip"><div class="sh-chip-ico">📰</div><span class="sh-chip-lbl">News</span></div>
+              <div class="sh-chip"><div class="sh-chip-ico">📊</div><span class="sh-chip-lbl">Grades</span></div>
+            </div>
+            <div class="ph-tab">
+              <span class="ph-tab-i on">🏠</span>
+              <span class="ph-tab-i">🍽️</span>
+              <span class="ph-tab-i">📅</span>
+              <span class="ph-tab-i">🎉</span>
+              <span class="ph-tab-i">📰</span>
+            </div>
+          </div>
+          <div class="ph-refl"></div>
         </div>
-      </article>
-    </div>
+      </div>
+
+      <!-- Right: Schedule -->
+      <div class="ph-wrap side">
+        <div class="ph-frame">
+          <div class="ph-screen scr-sched">
+            <div class="di"></div>
+            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
+            <div class="scr-eyebrow">This week</div>
+            <div class="scr-title">Schedule</div>
+            <div class="ss-days">
+              <div class="ss-day">M</div>
+              <div class="ss-day">T</div>
+              <div class="ss-day on">W</div>
+              <div class="ss-day">Th</div>
+              <div class="ss-day">F</div>
+            </div>
+            <div class="ss-row bl"><div class="ss-cn">CS 130A</div><div class="ss-ct">9:00–10:15 AM · GIRV 1004</div></div>
+            <div class="ss-row pu"><div class="ss-cn">MATH 4A</div><div class="ss-ct">11:00 AM–12:15 PM · SH 1431</div></div>
+            <div class="ss-row gn"><div class="ss-cn">ENGL 10</div><div class="ss-ct">2:00–3:15 PM · Phelps 1444</div></div>
+            <div class="ss-row am"><div class="ss-cn">CHEM 1A Lab</div><div class="ss-ct">4:00–6:50 PM · Chem 1171</div></div>
+            <div class="ph-tab">
+              <span class="ph-tab-i">🏠</span>
+              <span class="ph-tab-i">🍽️</span>
+              <span class="ph-tab-i on">📅</span>
+              <span class="ph-tab-i">🎉</span>
+              <span class="ph-tab-i">📰</span>
+            </div>
+          </div>
+          <div class="ph-refl"></div>
+        </div>
+      </div>
+
+    </div><!-- /phones -->
   </div><!-- /hero-body -->
 </section>
 
-<!-- ── MARQUEE ── -->
+<!-- ─── MARQUEE ────────────────────────────── -->
 <div class="marquee">
   <div class="mq-track">
-    <span class="mq-item"><span class="mq-ico">📚</span> Class Schedule</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🍽️</span> Live Dining Menus</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🎉</span> Campus Events</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">👥</span> Study Groups</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📰</span> Daily Nexus News</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📅</span> Schedule</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">🍽️</span> Live Dining</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">🎉</span> Campus Happenings</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📰</span> Daily Nexus</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📊</span> Grade Data</span><span class="mq-sep">·</span>
     <span class="mq-item"><span class="mq-ico">🏛️</span> Student Gov</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📊</span> Grade Distributions</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">💬</span> Messaging</span><span class="mq-sep">·</span>
-    <!-- duplicate -->
-    <span class="mq-item"><span class="mq-ico">📚</span> Class Schedule</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🍽️</span> Live Dining Menus</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">🎉</span> Campus Events</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">👥</span> Study Groups</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📰</span> Daily Nexus News</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">👥</span> Friends &amp; Share Cards</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📲</span> Widgets</span><span class="mq-sep">·</span>
+    <!-- duplicate for seamless loop -->
+    <span class="mq-item"><span class="mq-ico">📅</span> Schedule</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">🍽️</span> Live Dining</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">🎉</span> Campus Happenings</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📰</span> Daily Nexus</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📊</span> Grade Data</span><span class="mq-sep">·</span>
     <span class="mq-item"><span class="mq-ico">🏛️</span> Student Gov</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">📊</span> Grade Distributions</span><span class="mq-sep">·</span>
-    <span class="mq-item"><span class="mq-ico">💬</span> Messaging</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">👥</span> Friends &amp; Share Cards</span><span class="mq-sep">·</span>
+    <span class="mq-item"><span class="mq-ico">📲</span> Widgets</span><span class="mq-sep">·</span>
   </div>
 </div>
 
-<!-- ── FEATURES ── -->
+<!-- ─── FEATURES ──────────────────────────── -->
 <section class="features" id="features">
-  <div class="container">
+  <div class="wrap">
     <div class="features-head">
-      <p class="eyebrow rv">Everything you need</p>
+      <p class="sec-eyebrow rv">Everything you need</p>
       <h2 class="sec-title rv d1">One app.<br>Your whole campus.</h2>
-      <p class="sec-sub rv d2">Stop switching between a dozen apps. Lagoon puts your entire UCSB experience in one beautifully designed home.</p>
+      <p class="sec-sub rv d2">Stop switching between a dozen different apps. Lagoon is the one home for your entire UCSB life — built to feel native, calm, and genuinely beautiful.</p>
     </div>
 
     <div class="bento">
       <!-- Big: Schedule -->
       <div class="bc c4 big rv">
-        <div class="bc-icon" style="background:rgba(59,130,246,0.12);">📅</div>
+        <div class="bc-icon" style="background:rgba(79,135,232,0.1);">📅</div>
         <h3>Smart Schedule</h3>
-        <p>Your GOLD classes, beautifully laid out. See what's next, when finals hit, and never make the walk to HSSB for a cancelled lecture again.</p>
+        <p>Your GOLD classes, beautifully laid out. See what's next, when finals hit, and never bike to HSSB for a cancelled lecture again. Plus gorgeous iOS widgets that surface what matters — without opening the app.</p>
         <div class="mini-sched">
-          <div class="mc" style="border-color:#3b82f6;"><span class="mc-n">CS 130A</span><span class="mc-t">9:00 AM · GIRV 1004</span></div>
+          <div class="mc" style="border-color:#4f87e8;"><span class="mc-n">CS 130A</span><span class="mc-t">9:00 AM · GIRV 1004</span></div>
           <div class="mc" style="border-color:#a855f7;"><span class="mc-n">MATH 4A</span><span class="mc-t">11:00 AM · SH 1431</span></div>
-          <div class="mc" style="border-color:#22c55e;"><span class="mc-n">ENGL 10</span><span class="mc-t">2:00 PM · Phelps 1444</span></div>
+          <div class="mc" style="border-color:#5ac47a;"><span class="mc-n">ENGL 10</span><span class="mc-t">2:00 PM · Phelps 1444</span></div>
         </div>
       </div>
 
-      <!-- Small: Dining + Events -->
+      <!-- Small cards -->
       <div class="bc c2 rv d1">
-        <div class="bc-icon" style="background:rgba(52,211,153,0.1);">🍽️</div>
+        <div class="bc-icon" style="background:rgba(90,196,122,0.1);">🍽️</div>
         <h3>Live Dining</h3>
-        <p>Real-time menus for Carrillo, De La Guerra, Ortega, and Portola. Know before you bike over.</p>
+        <p>Real-time menus for Carrillo, De La Guerra, Ortega, and Portola. Know what's open before you make the bike ride.</p>
       </div>
       <div class="bc c2 rv d2">
-        <div class="bc-icon" style="background:rgba(251,146,60,0.1);">🎉</div>
-        <h3>Campus Events</h3>
-        <p>From Storke Plaza concerts to AS-hosted workshops — everything happening on and around campus.</p>
+        <div class="bc-icon" style="background:rgba(196,87,42,0.12);">🎉</div>
+        <h3>Campus Happenings</h3>
+        <p>Concerts at Storke Plaza, AS workshops, sports, lectures — browsable, alive, and always current.</p>
       </div>
 
-      <!-- Bottom row -->
       <div class="bc c2 rv">
-        <div class="bc-icon" style="background:rgba(254,188,17,0.1);">📊</div>
+        <div class="bc-icon" style="background:rgba(201,139,42,0.1);">📊</div>
         <h3>Grade Data</h3>
-        <p>Historical grade distributions from UCSB courses before you enroll. Stop guessing, start choosing smart.</p>
+        <p>Historical grade distributions from every UCSB course — so you can enroll smart, not blindly.</p>
       </div>
       <div class="bc c2 rv d1">
-        <div class="bc-icon" style="background:rgba(0,60,120,0.22);">🏛️</div>
+        <div class="bc-icon" style="background:rgba(0,54,96,0.22);">🏛️</div>
         <h3>Student Gov</h3>
-        <p>See how Associated Students spends your lock-in fees. Finance reports, meeting minutes, and votes — transparent by design.</p>
+        <p>Track how Associated Students spends your lock-in fees. Finance reports and meeting minutes, transparent by design.</p>
       </div>
       <div class="bc c2 rv d2">
         <div class="bc-icon" style="background:rgba(167,139,250,0.1);">📰</div>
         <h3>Daily Nexus</h3>
-        <p>UCSB's independent student newspaper, 10 categories deep — delivered straight to your feed.</p>
+        <p>UCSB's independent student newspaper — 10 categories, native reading experience, beautiful typography.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── SOCIAL / COMPARE ── -->
-<section class="social" id="social">
-  <div class="container">
-    <div class="social-head rv">
-      <p class="eyebrow">Coming soon</p>
-      <h2 class="sec-title">Find your people.<br>Compare schedules.</h2>
-      <p class="sec-sub">See which Gauchos share your classes, find free-time overlap, and share your week as a beautiful card — straight to your story.</p>
+<!-- ─── WIDGETS ───────────────────────────── -->
+<section class="widgets" id="widgets">
+  <div class="widgets-inner">
+    <!-- iPhone with widget -->
+    <div class="widget-phone-wrap rv">
+      <div class="widget-phone">
+        <div class="ph-frame" style="width:260px;">
+          <div class="ph-screen" style="height:530px;background:linear-gradient(160deg,#1e1810 0%,#130e08 100%);padding:38px 12px 12px;">
+            <div class="di"></div>
+            <div class="wp-homescreen">
+              <div class="wp-time">
+                <div class="wp-time-h">9:41</div>
+                <div class="wp-time-d">Wednesday, March 5</div>
+              </div>
+
+              <!-- Lagoon schedule widget -->
+              <div class="lagoon-widget">
+                <div class="wgt-header">
+                  <div class="wgt-icon">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none">
+                      <path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <span class="wgt-name">LAGOON</span>
+                </div>
+                <div class="wgt-title">Today's Classes</div>
+                <div class="wgt-row">
+                  <span class="wgt-dot" style="background:#4f87e8;"></span>
+                  <span class="wgt-class">CS 130A</span>
+                  <span class="wgt-time">9:00 AM</span>
+                </div>
+                <div class="wgt-row">
+                  <span class="wgt-dot" style="background:#a855f7;"></span>
+                  <span class="wgt-class">MATH 4A</span>
+                  <span class="wgt-time">11:00 AM</span>
+                </div>
+                <div class="wgt-row">
+                  <span class="wgt-dot" style="background:#5ac47a;"></span>
+                  <span class="wgt-class">ENGL 10</span>
+                  <span class="wgt-time">2:00 PM</span>
+                </div>
+                <div class="wgt-row">
+                  <span class="wgt-dot" style="background:var(--ochre);"></span>
+                  <span class="wgt-class">CHEM 1A Lab</span>
+                  <span class="wgt-time">4:00 PM</span>
+                </div>
+              </div>
+
+              <!-- App icons grid -->
+              <div class="wp-apps">
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📸</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">🎵</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📧</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">🗺️</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📱</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">🛍️</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">📖</div>
+                <div class="wp-app" style="background:rgba(237,220,180,0.06);">⚙️</div>
+              </div>
+
+              <!-- Dock -->
+              <div class="wp-dock">
+                <div class="wp-dock-i">📞</div>
+                <div class="wp-dock-i">💬</div>
+                <div class="wp-dock-i">🌊</div>
+                <div class="wp-dock-i">🎵</div>
+              </div>
+            </div>
+            <div class="ph-refl"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="social-grid rv d1">
+    <!-- Text -->
+    <div class="widgets-text rv d1">
+      <p class="sec-eyebrow">Widgets</p>
+      <h2 class="sec-title">Your campus,<br>right on your<br>lock screen.</h2>
+      <p class="sec-sub">Lagoon's iOS widgets surface what matters — your next class, which dining halls are open, and today's events — without ever opening the app.</p>
 
-      <!-- Share card mockup -->
-      <div class="share-card-wrap">
+      <div class="wgt-features">
+        <div class="wgt-feat rv d2">
+          <div class="wgt-feat-ico" style="background:rgba(79,135,232,0.1);">📅</div>
+          <div>
+            <h4>Schedule Widget</h4>
+            <p>All your classes for the day, color-coded and sorted, on your home or lock screen.</p>
+          </div>
+        </div>
+        <div class="wgt-feat rv d3">
+          <div class="wgt-feat-ico" style="background:rgba(90,196,122,0.1);">🍽️</div>
+          <div>
+            <h4>Dining Status</h4>
+            <p>At-a-glance open/closed status and top menu items for all four dining halls.</p>
+          </div>
+        </div>
+        <div class="wgt-feat rv d4">
+          <div class="wgt-feat-ico" style="background:rgba(196,87,42,0.1);">🎉</div>
+          <div>
+            <h4>Today's Events</h4>
+            <p>What's happening on campus today — surfaced the moment you wake your phone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NEWS ──────────────────────────────── -->
+<section class="news-section" id="news">
+  <div class="news-inner wrap">
+    <!-- Text -->
+    <div class="news-text rv">
+      <p class="sec-eyebrow">Native Reading</p>
+      <h2 class="sec-title">Campus stories,<br>worth reading.</h2>
+      <p class="sec-sub">The Daily Nexus is no longer a web link buried in a tab. It's a beautiful native reading experience — real editorial typography, real scroll, no clutter.</p>
+
+      <div class="news-details">
+        <div class="news-detail rv d1">
+          <span class="chk">✓</span>
+          <span class="news-detail-text">10 Nexus categories: Arts, Campus, Science, Sports, Opinion, and more</span>
+        </div>
+        <div class="news-detail rv d2">
+          <span class="chk">✓</span>
+          <span class="news-detail-text">Serif-forward article view with generous spacing — built for real reading</span>
+        </div>
+        <div class="news-detail rv d3">
+          <span class="chk">✓</span>
+          <span class="news-detail-text">Personalized feed based on your sections of interest</span>
+        </div>
+        <div class="news-detail rv d4">
+          <span class="chk">✓</span>
+          <span class="news-detail-text">Share any article as a polished card with one tap</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- News phone -->
+    <div class="news-phone-wrap rv d2" style="display:flex;justify-content:center;">
+      <div class="news-phone">
+        <div class="ph-frame" style="width:260px;">
+          <div class="ph-screen scr-news" style="height:530px;">
+            <div class="di"></div>
+            <div class="sb"><span class="sb-time">9:41</span><span class="sb-icons">● ▲ ■</span></div>
+            <div class="scr-eyebrow">Independent since 1942</div>
+            <div class="scr-title">Daily Nexus</div>
+
+            <div class="news-feed">
+              <div class="news-featured">
+                <div class="news-cat">Arts &amp; Entertainment</div>
+                <div class="news-headline">UCSB Jazz Ensemble Brings Standing Ovation to Campbell Hall</div>
+                <div class="news-meta">By Mia Chen &nbsp;·&nbsp; 4 min read</div>
+              </div>
+              <div class="news-card">
+                <div class="news-cat">Campus</div>
+                <div class="news-headline">AS Senate Votes to Expand Mental Health Services Funding</div>
+                <div class="news-meta">By Jordan Park &nbsp;·&nbsp; 3 min read</div>
+              </div>
+              <div class="news-card">
+                <div class="news-cat">Science &amp; Tech</div>
+                <div class="news-headline">UCSB Research Team Publishes Marine Biology Breakthrough</div>
+                <div class="news-meta">By Lena Torres &nbsp;·&nbsp; 5 min read</div>
+              </div>
+            </div>
+
+            <div class="ph-tab">
+              <span class="ph-tab-i">🏠</span>
+              <span class="ph-tab-i">🍽️</span>
+              <span class="ph-tab-i">📅</span>
+              <span class="ph-tab-i">🎉</span>
+              <span class="ph-tab-i on">📰</span>
+            </div>
+          </div>
+          <div class="ph-refl"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOCIAL / COMPARE ─────────────────── -->
+<section class="social" id="social">
+  <div class="container" style="max-width:1080px;margin:0 auto;">
+    <div class="social-head rv">
+      <p class="sec-eyebrow">Coming soon</p>
+      <h2 class="sec-title">Find your people.<br>Compare schedules.</h2>
+      <p class="sec-sub" style="margin:0 auto;">See which Gauchos share your classes, find free-time overlap, and share your quarter as a beautiful card — straight to your story.</p>
+    </div>
+
+    <div class="social-grid">
+      <!-- Share card -->
+      <div class="share-card-wrap rv d1">
         <div class="share-card">
-          <div class="sc-header">
-            <div class="sc-avatars">
-              <div class="sc-avatar" style="background:linear-gradient(135deg,#3b82f6,#6366f1);">AG</div>
-              <div class="sc-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);margin-left:-10px;">MR</div>
+          <div class="sc-hdr">
+            <div class="sc-avs">
+              <div class="sc-av" style="background:linear-gradient(135deg,#4f87e8,#6366f1);">AG</div>
+              <div class="sc-av" style="background:linear-gradient(135deg,var(--ochre),var(--terra));margin-left:-9px;">MR</div>
             </div>
-            <div class="sc-meta">
+            <div>
               <div class="sc-names">Alex &amp; Maya</div>
-              <div class="sc-sub">Winter 2026 &nbsp;·&nbsp; UC Santa Barbara</div>
+              <div class="sc-sub2">Winter 2026 &nbsp;·&nbsp; UC Santa Barbara</div>
             </div>
           </div>
-          <div class="sc-divider"></div>
-          <div class="sc-overlap-label">3 classes in common</div>
+          <div class="sc-div"></div>
+          <div class="sc-tag cyan">3 classes in common</div>
           <div class="sc-classes">
-            <div class="sc-class match"><span class="sc-dot" style="background:#3b82f6;"></span>CS 130A &nbsp;<span class="sc-loc">GIRV 1004</span></div>
-            <div class="sc-class match"><span class="sc-dot" style="background:#a855f7;"></span>MATH 4A &nbsp;<span class="sc-loc">SH 1431</span></div>
-            <div class="sc-class match"><span class="sc-dot" style="background:#22c55e;"></span>ENGL 10 &nbsp;<span class="sc-loc">Phelps 1444</span></div>
+            <div class="sc-class"><span class="sc-dot" style="background:#4f87e8;"></span>CS 130A<span class="sc-loc">GIRV 1004</span></div>
+            <div class="sc-class"><span class="sc-dot" style="background:#a855f7;"></span>MATH 4A<span class="sc-loc">SH 1431</span></div>
+            <div class="sc-class"><span class="sc-dot" style="background:#5ac47a;"></span>ENGL 10<span class="sc-loc">Phelps 1444</span></div>
           </div>
-          <div class="sc-divider"></div>
-          <div class="sc-free-label">Best study window</div>
-          <div class="sc-free-block">Mon &amp; Wed &nbsp;·&nbsp; 12:30–2:00 PM</div>
-          <div class="sc-footer">
-            <div class="sc-logo-row">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M2 12c3.5-4.5 5.5-6 10-6s6.5 1.5 10 6" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/></svg>
-              <span>Lagoon</span>
+          <div class="sc-div"></div>
+          <div class="sc-tag amber">Best study window</div>
+          <div class="sc-window">Mon &amp; Wed &nbsp;·&nbsp; 12:30–2:00 PM</div>
+          <div class="sc-foot">
+            <div class="sc-logo">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="rgba(237,220,180,0.6)" stroke-width="2.5" stroke-linecap="round"/></svg>
+              Lagoon
             </div>
-            <span class="sc-share-hint">Share to story ↗</span>
+            <span class="sc-share">Share to story ↗</span>
           </div>
         </div>
       </div>
 
-      <!-- Feature list -->
-      <div class="social-features">
-        <div class="sf-item rv d2">
-          <div class="sf-icon" style="background:rgba(99,102,241,0.12);">👥</div>
+      <!-- Features list -->
+      <div class="social-feats rv d2">
+        <div class="sf">
+          <div class="sf-ico" style="background:rgba(79,135,232,0.1);">👥</div>
           <div>
             <h4>Shared Class Finder</h4>
-            <p>See exactly which Gauchos are in your lectures this quarter — no group chat spam required.</p>
+            <p>Instantly see which Gauchos are in your lectures this quarter — no group-chat spam required.</p>
           </div>
         </div>
-        <div class="sf-item rv d3">
-          <div class="sf-icon" style="background:rgba(34,211,238,0.1);">🗓️</div>
+        <div class="sf">
+          <div class="sf-ico" style="background:rgba(201,139,42,0.1);">🗓️</div>
           <div>
             <h4>Compare Schedules</h4>
             <p>Tap any friend's profile to see overlapping free time, shared classes, and the best window to hit the library.</p>
           </div>
         </div>
-        <div class="sf-item rv d4">
-          <div class="sf-icon" style="background:rgba(254,188,17,0.1);">📤</div>
+        <div class="sf">
+          <div class="sf-ico" style="background:rgba(196,87,42,0.1);">📤</div>
           <div>
             <h4>Share Cards</h4>
-            <p>Export your schedule, a shared class overlap, or an event as a polished card — built for Instagram Stories.</p>
+            <p>Export your schedule, a class overlap, or a campus event as a polished card — designed for Stories.</p>
           </div>
         </div>
-        <div class="sf-item rv d5">
-          <div class="sf-icon" style="background:rgba(52,211,153,0.1);">🔗</div>
+        <div class="sf">
+          <div class="sf-ico" style="background:rgba(90,196,122,0.1);">🔗</div>
           <div>
             <h4>Deep Links</h4>
-            <p>Every comparison gets a shareable link. Tap it on any iPhone and land straight in the comparison view.</p>
+            <p>Every comparison gets a shareable link. Tap it on any iPhone and land straight in the view.</p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ── STATS ── -->
+<!-- ─── STATS ─────────────────────────────── -->
 <section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat rv">
-        <div class="stat-n">37k</div>
-        <div class="stat-l">Gauchos on campus</div>
-      </div>
-      <div class="stat rv d1">
-        <div class="stat-n">4</div>
-        <div class="stat-l">Dining halls, live menus</div>
-      </div>
-      <div class="stat rv d2">
-        <div class="stat-n">200+</div>
-        <div class="stat-l">Campus events per month</div>
-      </div>
-      <div class="stat rv d3">
-        <div class="stat-n">1</div>
-        <div class="stat-l">App for all of it</div>
-      </div>
-    </div>
+  <div class="stats-grid">
+    <div class="stat rv"><div class="stat-n">37k</div><div class="stat-l">Gauchos on campus</div></div>
+    <div class="stat rv d1"><div class="stat-n">4</div><div class="stat-l">Dining halls, live</div></div>
+    <div class="stat rv d2"><div class="stat-n">200+</div><div class="stat-l">Events per month</div></div>
+    <div class="stat rv d3"><div class="stat-n">1</div><div class="stat-l">App for all of it</div></div>
   </div>
 </section>
 
-<!-- ── HIGHLIGHT ── -->
-<section class="highlight">
-  <div class="container highlight-inner">
-    <div class="eyebrow rv">See it in action</div>
-    <h2 class="sec-title rv d1">Real screens.<br>Real campus flow.</h2>
-
-    <div class="hl-grid">
-      <div class="hl-text rv d1">
-        <h3>From first sign-in to smarter course picks.</h3>
-        <p>Lagoon is designed to feel calm right away. The onboarding is simple, the visual language is consistent, and the app gets useful fast instead of making you dig.</p>
-        <p>Once you're in, course search and grade data help you make better decisions before add/drop chaos hits. It is the kind of tool you keep open all quarter.</p>
-        <ul class="hl-list">
-          <li><span class="chk">✓</span> Fast onboarding with Apple or email</li>
-          <li><span class="chk">✓</span> Historical grade context in search</li>
-          <li><span class="chk">✓</span> Schedule, events, and dining in one app</li>
-          <li><span class="chk">✓</span> Clean native iPhone experience</li>
-        </ul>
-      </div>
-
-      <div class="hl-gallery rv d2">
-        <article class="hl-shot">
-          <img src="output/01_welcome_framed.png" alt="Lagoon welcome screen screenshot" />
-          <span class="hl-shot-title">Onboarding that feels premium</span>
-          <span class="hl-shot-sub">Clear first-run experience built for students, not enterprise software.</span>
-        </article>
-        <article class="hl-shot">
-          <img src="output/02_course_search_framed.png" alt="Lagoon course search screenshot" />
-          <span class="hl-shot-title">Search with context, not guesswork</span>
-          <span class="hl-shot-sub">Browse sections, GPA data, and availability in one clean view.</span>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA ── -->
+<!-- ─── CTA ───────────────────────────────── -->
 <section class="cta" id="cta">
   <div class="cta-atmo"></div>
   <div class="cta-body">
-    <div class="cta-badge rv">
+    <div class="cta-tag rv">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
       </svg>
       Public beta available now
     </div>
 
-    <h2 class="rv d1">Install Lagoon<br>on TestFlight.</h2>
-    <p class="cta-sub rv d2">The public beta is live. Join in a tap, try the app on your iPhone, and help shape the best version of Lagoon before the App Store launch.</p>
+    <h2 class="rv d1">Try Lagoon<br>on TestFlight.</h2>
+    <p class="cta-sub rv d2">The public beta is live. Install it in a tap, try it on your iPhone, and help shape the best version of Lagoon before the App Store launch.</p>
 
-    <div class="cta-links rv d3">
-      <a href="https://testflight.apple.com/join/hfmrM9K7" class="asb" target="_blank" rel="noreferrer">
+    <div class="cta-btns rv d3">
+      <a href="https://testflight.apple.com/join/hfmrM9K7" class="btn-tf" target="_blank" rel="noreferrer">
         <svg viewBox="0 0 24 24" fill="currentColor">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
         </svg>
-        <div class="asb-lbl">
-          <span class="asb-sub">Install the public beta on</span>
-          <span class="asb-main">TestFlight</span>
+        <div class="btn-tf-lbl">
+          <span class="btn-tf-sub">Install the public beta on</span>
+          <span class="btn-tf-main">TestFlight</span>
         </div>
       </a>
-
-      <a href="#features" class="btn-ghost">Explore every feature</a>
+      <a href="#features" class="btn-secondary">Explore every feature</a>
     </div>
 
     <p class="cta-note rv d4">iOS 17+ &nbsp;·&nbsp; Free to join &nbsp;·&nbsp; Made for Gauchos</p>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ─── FOOTER ────────────────────────────── -->
 <footer>
-  <div class="footer-brand">
-    <div class="footer-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+  <a href="#" class="footer-brand">
+    <div class="footer-brand-icon">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
         <path d="M2 17c3.5-5.5 5.5-7 10-7s6.5 1.5 10 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
         <path d="M2 12c3.5-4.5 5.5-6 10-6s6.5 1.5 10 6" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-linecap="round"/>
       </svg>
     </div>
-    <span>Lagoon</span>
-  </div>
+    <span class="footer-brand-name">Lagoon</span>
+  </a>
   <p class="footer-copy">© 2026 Lagoon. All rights reserved. Not affiliated with UC Santa Barbara.</p>
   <div class="footer-links">
     <a href="mailto:hello@lagoon.ucsb.app">Contact</a>
@@ -1484,23 +1437,20 @@
 
 <script>
   // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('vis');
-        observer.unobserve(entry.target);
-      }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); }
     });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
 
   // Nav border on scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
-    nav.style.borderBottomColor = window.scrollY > 60
-      ? 'rgba(255,255,255,0.1)'
-      : 'rgba(255,255,255,0.06)';
+    nav.style.borderBottomColor = window.scrollY > 50
+      ? 'rgba(240,220,180,0.1)'
+      : 'rgba(240,220,180,0.07)';
   }, { passive: true });
 </script>
 </body>
