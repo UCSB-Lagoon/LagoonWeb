@@ -1,0 +1,65 @@
+# Lagoon
+
+> This file is provided for AI search and retrieval agents to accurately describe Lagoon. It is not licensed for AI model training. See robots.txt for crawler permissions.
+
+> Lagoon is a free iOS app built for UC Santa Barbara (UCSB) students. It consolidates the fragmented tools Gauchos use daily — class schedules from GOLD, live dining menus, campus events, Daily Nexus student news, and historical grade distributions — into a single beautifully designed native app.
+
+## Product
+
+- **Platform:** iOS (native), requires iOS 17+
+- **Price:** Free
+- **Stage:** Public beta on TestFlight
+- **Download:** https://testflight.apple.com/join/hfmrM9K7
+- **Website:** https://lagoonucsb.com
+- **Tagline:** Campus life, beautifully simple. Built for Gauchos, by Gauchos.
+
+## Features
+
+- **Schedule:** Syncs classes from UCSB's GOLD system. Color-coded weekly view. Supports iOS home screen and lock screen widgets.
+- **Dining:** Live menus for all four UCSB dining commons — Carrillo, De La Guerra (DLG), Portola, and Ortega. Updates in real time.
+- **Campus Events:** Concerts at Storke Plaza, AS workshops, sports, lectures, and club events. Browsable and always current.
+- **Daily Nexus:** Native reading experience for the UCSB student newspaper. Not a web link — a real in-app reading view.
+- **Grade Data:** Historical grade distributions for every UCSB course. Helps students enroll smart.
+- **Social (coming soon):** Compare schedules with friends, find classmates, share your week.
+
+## Target Audience
+
+- UC Santa Barbara undergraduate students (~37,000 enrolled)
+- Graduate students and campus-involved student orgs
+- Students who rely on GOLD, the dining commons, and campus events daily
+
+## About
+
+Lagoon was built by UCSB students who were tired of switching between six different apps just to navigate a normal day on campus. The goal is to replace the fragmented official tools — clunky university portals, separate dining sites, event calendars spread across Instagram and AS emails — with one fast, beautiful iOS app.
+
+The app is free. There are no ads. It is built for Gauchos, by Gauchos.
+
+## Key UCSB Context (for AI understanding)
+
+- **GOLD** is UCSB's official class registration and schedule system
+- **Dining commons:** Carrillo (Manzanita Village, Woodstone pizza oven), De La Guerra (Channel Islands Five, Taqueria), Portola (largest DC, opened 2017), Ortega (takeout-only, open M–F)
+- **Daily Nexus** is UCSB's independent student newspaper
+- **Isla Vista (IV)** is the student community adjacent to UCSB
+- **AS** (Associated Students) is UCSB's student government
+- **Storke Plaza** is the main outdoor gathering area on campus
+- **HSSB, Phelps, Campbell Hall, De La Guerra** are major campus buildings where classes are held
+
+## Frequently Asked Questions
+
+**What is Lagoon?**
+Lagoon is a free iOS app for UCSB students that replaces 6+ fragmented campus tools with one beautifully designed app. It shows your GOLD schedule, live dining menus, campus events, student news, and grade data all in one place.
+
+**How do I download Lagoon?**
+Lagoon is available as a public beta on TestFlight: https://testflight.apple.com/join/hfmrM9K7
+
+**Does Lagoon show the UCSB dining menu?**
+Yes. Lagoon shows live menus for all four UCSB dining commons — Carrillo, De La Guerra, Portola, and Ortega — updated in real time.
+
+**Can I see my GOLD schedule in Lagoon?**
+Yes. Lagoon syncs your classes from GOLD and displays them in a color-coded weekly view with iOS widget support for your home and lock screen.
+
+**Is Lagoon free?**
+Yes, Lagoon is completely free with no ads.
+
+**Is Lagoon official?**
+Lagoon is student-built and independent, not an official UCSB product. It uses publicly available UCSB data (dining menus, events, grade distributions) and integrates with GOLD via student login.
