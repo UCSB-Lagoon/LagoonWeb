@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lagoon — Your UCSB Campus Life, Simplified</title>
+  <meta name="description" content="Classes, dining, events, friends, and campus news — all in one beautiful app for UC Santa Barbara students." />
+  <meta property="og:title" content="Lagoon — Your UCSB Campus Life, Simplified" />
+  <meta property="og:description" content="Classes, dining, events, friends, and campus news — all in one beautiful app for UC Santa Barbara students." />
+  <meta property="og:image" content="Lagoon/Assets.xcassets/AppIcon.appiconset/1024.png" />
+  <link rel="icon" href="Lagoon/Assets.xcassets/AppIcon.appiconset/1024.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --deep-pacific: #003660;
+      --electric-gold: #FEBC11;
+      --terracotta: #C4572A;
+      --midnight: #000000;
+      --surface: #0d0d0d;
+      --surface-2: #141414;
+      --surface-3: #1a1a1a;
+      --border: rgba(255,255,255,0.07);
+      --text: #ffffff;
+      --text-secondary: rgba(255,255,255,0.55);
+      --text-tertiary: rgba(255,255,255,0.3);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--midnight);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+
+    .nav-logo span {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+
+    .nav-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(254,188,17,0.12);
+      border: 1px solid rgba(254,188,17,0.3);
+      color: var(--electric-gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .nav-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--electric-gold);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,54,96,0.7) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(196,87,42,0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 30% at 80% 60%, rgba(254,188,17,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.3px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--electric-gold);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-size: clamp(44px, 8vw, 88px);
+      font-weight: 800;
+      letter-spacing: -2.5px;
+      line-height: 1.0;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .hero h1 .line-1 { display: block; color: var(--text); }
+    .hero h1 .line-2 {
+      display: block;
+      background: linear-gradient(135deg, var(--electric-gold) 0%, #ff9a00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.6;
+      margin-bottom: 44px;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      margin-bottom: 72px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--electric-gold);
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 14px;
+      text-decoration: none;
+      letter-spacing: -0.2px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+      box-shadow: 0 0 0 0 rgba(254,188,17,0);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(254,188,17,0.35);
+      opacity: 0.92;
+    }
+
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* ── PHONE MOCKUP ── */
+    .hero-phone-wrap {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .phone-mockup {
+      position: relative;
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .phone-mockup:hover { transform: translateY(-8px) scale(1.02); }
+
+    .phone-mockup.center { z-index: 3; }
+    .phone-mockup.side {
+      z-index: 2;
+      opacity: 0.7;
+      transform: scale(0.88) translateY(24px);
+    }
+    .phone-mockup.side:hover {
+      transform: scale(0.91) translateY(16px);
+      opacity: 0.85;
+    }
+
+    .phone-mockup img {
+      width: 200px;
+      border-radius: 36px;
+      display: block;
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.8));
+    }
+
+    .phone-mockup.center img { width: 240px; }
+
+    /* ── WAVE ── */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      margin-top: -2px;
+    }
+
+    .wave-divider svg {
+      display: block;
+      width: 100%;
+      height: 80px;
+    }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 100px 24px; }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--electric-gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 520px;
+    }
+
+    /* ── FEATURES ── */
+    .features { background: var(--surface); }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .features-header .section-sub { margin: 0 auto; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .features-grid { grid-template-columns: 1fr; }
+    }
+
+    .feature-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.14);
+      background: var(--surface-3);
+    }
+
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── SCREENSHOTS ── */
+    .screenshots { background: var(--midnight); overflow: hidden; }
+
+    .screenshots-header { margin-bottom: 56px; }
+
+    .screenshots-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px 0 40px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+    }
+
+    .screenshots-scroll::-webkit-scrollbar { display: none; }
+    .screenshots-scroll:active { cursor: grabbing; }
+
+    .screenshot-card {
+      flex-shrink: 0;
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+
+    .screenshot-card:hover { transform: scale(1.03) translateY(-8px); }
+
+    .screenshot-card img {
+      width: 200px;
+      display: block;
+      border-radius: 28px;
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.7));
+    }
+
+    .screenshot-card .caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 40px 16px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      text-align: center;
+      letter-spacing: 0.2px;
+      border-radius: 0 0 28px 28px;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-item {
+      background: var(--surface-2);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      padding: 32px 0;
+      background: var(--deep-pacific);
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 30s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 40px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+    }
+
+    .marquee-item .icon {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .marquee-sep {
+      color: rgba(254,188,17,0.5);
+      font-size: 20px;
+      align-self: center;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--midnight);
+      text-align: center;
+      padding: 120px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-glow {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(0,54,96,0.6) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-section .app-icon {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+      margin: 0 auto 32px;
+      display: block;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .app-store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 16px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+
+    .app-store-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255,255,255,0.15);
+    }
+
+    .app-store-btn svg { width: 24px; height: 24px; }
+
+    .app-store-btn .btn-text { text-align: left; }
+    .app-store-btn .btn-text .sub { font-size: 10px; font-weight: 500; opacity: 0.6; display: block; }
+    .app-store-btn .btn-text .main { font-size: 16px; font-weight: 700; display: block; letter-spacing: -0.3px; }
+
+    .coming-soon-note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      position: relative;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-logo img {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+    }
+
+    .footer-logo span {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover { color: var(--text-secondary); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .fade-up.delay-4 { transition-delay: 0.4s; }
+    .fade-up.delay-5 { transition-delay: 0.5s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      section { padding: 72px 20px; }
+      footer { padding: 36px 20px; flex-direction: column; align-items: flex-start; }
+      .phone-mockup.side { display: none; }
+      .hero-phone-wrap { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="Lagoon/Assets.xcassets/AppIcon.appiconset/1024.png" alt="Lagoon" />
+      <span>Lagoon</span>
+    </a>
+    <span class="nav-badge">Coming to App Store</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-eyebrow fade-up">
+      <span class="dot"></span>
+      Built for UC Santa Barbara students
+    </div>
+
+    <h1 class="fade-up delay-1">
+      <span class="line-1">Campus life,</span>
+      <span class="line-2">beautifully simple.</span>
+    </h1>
+
+    <p class="hero-sub fade-up delay-2">
+      Classes, dining, events, friends, and campus news — all in one place. No more juggling seven different apps.
+    </p>
+
+    <div class="hero-cta fade-up delay-3">
+      <a href="#features" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+        Explore features
+      </a>
+      <a href="#screenshots" class="btn-secondary">See screenshots</a>
+    </div>
+
+    <div class="hero-phone-wrap fade-up delay-4">
+      <div class="phone-mockup side">
+        <img src="AppStoreMedia/output/03_events_framed.png" alt="Events" />
+      </div>
+      <div class="phone-mockup center">
+        <img src="AppStoreMedia/output/01_welcome_framed.png" alt="Welcome" />
+      </div>
+      <div class="phone-mockup side">
+        <img src="AppStoreMedia/output/05_schedule_framed.png" alt="Schedule" />
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <!-- First set -->
+      <span class="marquee-item"><span class="icon">📚</span> Class Schedule</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">🍽️</span> Dining Menus</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">🎉</span> Campus Events</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">👥</span> Study Groups</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">📰</span> Daily Nexus News</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">🏛️</span> Student Gov</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">📊</span> Grade Data</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">💬</span> Messaging</span>
+      <span class="marquee-sep">·</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee-item"><span class="icon">📚</span> Class Schedule</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">🍽️</span> Dining Menus</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">🎉</span> Campus Events</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">👥</span> Study Groups</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">📰</span> Daily Nexus News</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">🏛️</span> Student Gov</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">📊</span> Grade Data</span>
+      <span class="marquee-sep">·</span>
+      <span class="marquee-item"><span class="icon">💬</span> Messaging</span>
+      <span class="marquee-sep">·</span>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="features-header">
+        <p class="section-label fade-up">Everything you need</p>
+        <h2 class="section-title fade-up delay-1">One app.<br />Your whole campus.</h2>
+        <p class="section-sub fade-up delay-2">Stop switching between a dozen apps. Lagoon puts your entire UCSB experience in one beautifully designed home.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card fade-up">
+          <div class="feature-icon" style="background: rgba(99,102,241,0.12);">📅</div>
+          <h3>Smart Schedule</h3>
+          <p>Your weekly classes at a glance. See what's next, when finals are, and add courses directly to your schedule.</p>
+        </div>
+        <div class="feature-card fade-up delay-1">
+          <div class="feature-icon" style="background: rgba(46,77,50,0.2);">🍽️</div>
+          <h3>Live Dining</h3>
+          <p>Check Carrillo, De La Guerra, Ortega, and Portola menus in real time. Know what's open before you make the walk.</p>
+        </div>
+        <div class="feature-card fade-up delay-2">
+          <div class="feature-icon" style="background: rgba(196,87,42,0.12);">🎉</div>
+          <h3>Campus Events</h3>
+          <p>Discover talks, performances, workshops, and sports happening today, tomorrow, and all week long.</p>
+        </div>
+        <div class="feature-card fade-up delay-3">
+          <div class="feature-icon" style="background: rgba(254,188,17,0.1);">📊</div>
+          <h3>Real Grade Data</h3>
+          <p>See historical grade distributions before you enroll. Make smarter choices about your course load.</p>
+        </div>
+        <div class="feature-card fade-up delay-4">
+          <div class="feature-icon" style="background: rgba(0,54,96,0.25);">🏛️</div>
+          <h3>Student Gov</h3>
+          <p>Track how Associated Students spends your fees. Transparent finance reports, meeting minutes, and votes.</p>
+        </div>
+        <div class="feature-card fade-up delay-5">
+          <div class="feature-icon" style="background: rgba(254,188,17,0.1);">📰</div>
+          <h3>Daily Nexus News</h3>
+          <p>Campus news from 10 Daily Nexus categories — all curated, all fresh, right in your feed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item fade-up">
+          <div class="stat-value">4</div>
+          <div class="stat-label">Dining Halls</div>
+        </div>
+        <div class="stat-item fade-up delay-1">
+          <div class="stat-value">10</div>
+          <div class="stat-label">News Categories</div>
+        </div>
+        <div class="stat-item fade-up delay-2">
+          <div class="stat-value">5</div>
+          <div class="stat-label">App Tabs</div>
+        </div>
+        <div class="stat-item fade-up delay-3">
+          <div class="stat-value">1</div>
+          <div class="stat-label">App for all of it</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <section class="screenshots" id="screenshots">
+    <div class="container">
+      <div class="screenshots-header">
+        <p class="section-label fade-up">See it in action</p>
+        <h2 class="section-title fade-up delay-1">Designed to delight.</h2>
+        <p class="section-sub fade-up delay-2">Every screen crafted for clarity and speed. Native iOS. No compromises.</p>
+      </div>
+    </div>
+
+    <div class="screenshots-scroll" id="screenshotsScroll">
+      <div style="width: 40px; flex-shrink: 0;"></div>
+      <div class="screenshot-card">
+        <img src="AppStoreMedia/output/01_welcome_framed.png" alt="Welcome" />
+        <div class="caption">Welcome</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="AppStoreMedia/output/05_schedule_framed.png" alt="Schedule" />
+        <div class="caption">Smart Schedule</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="AppStoreMedia/output/02_course_search_framed.png" alt="Course Search" />
+        <div class="caption">Course Search</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="AppStoreMedia/output/04_dining_framed.png" alt="Dining" />
+        <div class="caption">Live Dining</div>
+      </div>
+      <div class="screenshot-card">
+        <img src="AppStoreMedia/output/03_events_framed.png" alt="Events" />
+        <div class="caption">Campus Events</div>
+      </div>
+      <div style="width: 40px; flex-shrink: 0;"></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+    <div class="container">
+      <img
+        src="Lagoon/Assets.xcassets/AppIcon.appiconset/1024.png"
+        alt="Lagoon"
+        class="app-icon fade-up"
+      />
+      <h2 class="fade-up delay-1">Ready for UCSB<br />to feel simple?</h2>
+      <p class="fade-up delay-2">Lagoon is coming to the App Store soon.<br />Sign up to be notified when it drops.</p>
+
+      <div class="cta-buttons fade-up delay-3">
+        <a href="https://apps.apple.com" class="app-store-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+          </svg>
+          <div class="btn-text">
+            <span class="sub">Coming soon to the</span>
+            <span class="main">App Store</span>
+          </div>
+        </a>
+      </div>
+
+      <p class="coming-soon-note fade-up delay-4">iOS 17+ · Free to download · Made for Gauchos</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="Lagoon/Assets.xcassets/AppIcon.appiconset/1024.png" alt="Lagoon" />
+      <span>Lagoon</span>
+    </div>
+    <p class="footer-copy">© 2026 Lagoon. All rights reserved. Not affiliated with UC Santa Barbara.</p>
+    <div class="footer-links">
+      <a href="mailto:hello@lagoon.ucsb.app">Contact</a>
+      <a href="#">Privacy</a>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Drag-to-scroll screenshots
+    const scroll = document.getElementById('screenshotsScroll');
+    let isDown = false, startX, scrollLeft;
+
+    scroll.addEventListener('mousedown', e => {
+      isDown = true;
+      startX = e.pageX - scroll.offsetLeft;
+      scrollLeft = scroll.scrollLeft;
+    });
+
+    scroll.addEventListener('mouseleave', () => isDown = false);
+    scroll.addEventListener('mouseup', () => isDown = false);
+
+    scroll.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - scroll.offsetLeft;
+      scroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+
+    // Smooth nav appearance on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 80) {
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.1)';
+      } else {
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.07)';
+      }
+    });
+  </script>
+</body>
+</html>
