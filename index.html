@@ -839,6 +839,256 @@
     }
 
     /* ═══════════════════════════════════════
+       STATS STRIP
+    ═══════════════════════════════════════ */
+    .stats-strip {
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-alt);
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 44px 20px;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 4.5vw, 58px);
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    .stat-div {
+      width: 1px;
+      background: var(--border2);
+      margin: 24px 0;
+    }
+
+    /* ═══════════════════════════════════════
+       FEATURE DEEP-DIVES
+    ═══════════════════════════════════════ */
+    .fdive-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 100px 48px;
+    }
+    .fdive-wrap + .fdive-wrap {
+      border-top: 1px solid var(--border);
+      padding-top: 100px;
+    }
+    .fdive-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--terra);
+      margin-bottom: 16px;
+    }
+    .fdive-wrap h2 {
+      font-size: clamp(30px, 3.2vw, 46px);
+      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .fdive-sub {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .fdive-feats {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .fdive-feat {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .fdive-feat-ico {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: rgba(191,85,39,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+    .fdive-feat-text h4 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .fdive-feat-text p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .fdive-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ═══════════════════════════════════════
+       BUILT BY GAUCHOS BAND
+    ═══════════════════════════════════════ */
+    .built-band {
+      background: var(--dark);
+      padding: 88px 48px;
+      text-align: center;
+    }
+    .built-band blockquote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 3vw, 36px);
+      color: var(--bg);
+      line-height: 1.4;
+      max-width: 680px;
+      margin: 0 auto 22px;
+      font-style: italic;
+      letter-spacing: -0.01em;
+    }
+    .built-band p {
+      font-size: 16px;
+      color: rgba(245,237,227,0.55);
+      max-width: 460px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════
+       TESTIMONIALS
+    ═══════════════════════════════════════ */
+    .testi-section {
+      padding: 96px 48px;
+      background: var(--bg-alt);
+    }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 52px auto 0;
+    }
+    .testi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+    }
+    .testi-stars {
+      color: var(--amber);
+      font-size: 15px;
+      letter-spacing: 3px;
+      margin-bottom: 16px;
+    }
+    .testi-quote {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.7;
+      font-style: italic;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .testi-by {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+    .testi-av {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .testi-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .testi-role {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ═══════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════ */
+    .faq-section {
+      padding: 96px 48px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-list {
+      margin-top: 48px;
+    }
+    .faq-item {
+      border-top: 1px solid var(--border);
+    }
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-icon {
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--terra);
+      line-height: 1;
+      flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s ease, padding-bottom 0.38s ease;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
+
+    /* ═══════════════════════════════════════
        SCROLL REVEAL
     ═══════════════════════════════════════ */
     .rv { opacity: 0; transform: translateY(22px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
@@ -858,6 +1108,10 @@
       .feat-grid .fc:nth-child(5) { grid-column: auto; }
       .social-inner { grid-template-columns: 1fr; gap: 52px; }
       .sc-card { max-width: 360px; margin: 0 auto; }
+      .fdive-wrap { grid-template-columns: 1fr; gap: 48px; padding: 64px 32px; }
+      .fdive-wrap + .fdive-wrap { padding-top: 64px; }
+      .fdive-visual { order: -1; }
+      .testi-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
     }
 
     @media (max-width: 768px) {
@@ -868,6 +1122,14 @@
       .shots-bar-wrap { padding: 0 24px; }
       footer .footer-top { padding: 32px 20px; flex-direction: column; align-items: flex-start; }
       footer .footer-copy { padding: 16px 20px 28px; }
+      .stats-strip { flex-direction: column; }
+      .stat-div { display: none; }
+      .stat-item { border-bottom: 1px solid var(--border); padding: 28px 20px; }
+      .stat-item:last-child { border-bottom: none; }
+      .fdive-wrap { padding: 56px 20px; }
+      .built-band { padding: 64px 20px; }
+      .testi-section { padding: 64px 20px; }
+      .faq-section { padding: 64px 20px; }
     }
   </style>
 </head>
@@ -971,6 +1233,29 @@
   </div>
 </section>
 
+<!-- ── STATS ──────────────────────────── -->
+<div class="stats-strip">
+  <div class="stat-item rv">
+    <div class="stat-num">37k</div>
+    <div class="stat-label">Gauchos on campus</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item rv d1">
+    <div class="stat-num">4</div>
+    <div class="stat-label">Dining halls, live menus</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item rv d2">
+    <div class="stat-num">200+</div>
+    <div class="stat-label">Events per month</div>
+  </div>
+  <div class="stat-div"></div>
+  <div class="stat-item rv d3">
+    <div class="stat-num">1</div>
+    <div class="stat-label">App for all of it</div>
+  </div>
+</div>
+
 <!-- ── FEATURES ───────────────────────── -->
 <section class="features" id="features">
   <div class="sec-head">
@@ -1006,6 +1291,154 @@
     </div>
   </div>
 </section>
+
+<!-- ── DINING DEEP-DIVE ───────────────── -->
+<div class="fdive-wrap">
+  <div class="rv">
+    <p class="fdive-eyebrow">Live Dining Menus</p>
+    <h2>Know before<br>you bike over.</h2>
+    <p class="fdive-sub">Real-time menus for all four UCSB dining commons — updated throughout the day. No more making the trek to Carrillo just to find a line around the block.</p>
+    <div class="fdive-feats">
+      <div class="fdive-feat">
+        <div class="fdive-feat-ico">🥗</div>
+        <div class="fdive-feat-text">
+          <h4>All four dining commons</h4>
+          <p>Carrillo, De La Guerra, Portola, and Ortega — menus, hours, and open/closed status in one view.</p>
+        </div>
+      </div>
+      <div class="fdive-feat">
+        <div class="fdive-feat-ico">⏰</div>
+        <div class="fdive-feat-text">
+          <h4>Open now, up next</h4>
+          <p>See exactly which halls are serving right now, and when the next meal period starts — no guessing.</p>
+        </div>
+      </div>
+      <div class="fdive-feat">
+        <div class="fdive-feat-ico">🥦</div>
+        <div class="fdive-feat-text">
+          <h4>Dietary labels included</h4>
+          <p>Vegan, vegetarian, and allergen info shown right on each item — no digging through the official site.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fdive-visual rv d1">
+    <div class="pf" style="width:280px;">
+      <div class="ps scr-dining-light" style="height:570px;">
+        <div class="di"></div>
+        <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+        <div class="dn-title">Dining Halls</div>
+        <div class="dn-card">
+          <div class="dn-row"><span class="dn-name">Carrillo</span><span class="dn-open">Open · Lunch</span></div>
+          <div class="dn-menu">Woodstone Pizza · Pasta Bar · Salad</div>
+        </div>
+        <div class="dn-card">
+          <div class="dn-row"><span class="dn-name">De La Guerra</span><span class="dn-open">Open · Lunch</span></div>
+          <div class="dn-menu">Taqueria · Greens Bar · Soups</div>
+        </div>
+        <div class="dn-card">
+          <div class="dn-row"><span class="dn-name">Portola</span><span class="dn-open">Open · Lunch</span></div>
+          <div class="dn-menu">International · Grill · Stir Fry</div>
+        </div>
+        <div class="dn-card">
+          <div class="dn-row"><span class="dn-name">Ortega</span><span class="dn-closed">Opens 5pm</span></div>
+          <div class="dn-menu">Takeout · Aligned with DLG menu</div>
+        </div>
+        <div class="ptab"><span class="ptab-i">🏠</span><span class="ptab-i on">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SCHEDULE DEEP-DIVE ─────────────── -->
+<div class="fdive-wrap">
+  <div class="fdive-visual rv">
+    <div class="pf" style="width:280px;">
+      <div class="ps scr-schedule" style="height:570px;">
+        <div class="di"></div>
+        <div class="sb"><span class="sb-t">12:34</span><span class="sb-i">● ▲ ■</span></div>
+        <div class="sch-quarter">Spring 2026 · Week 1</div>
+        <div class="sch-title">Schedule — Week 1</div>
+        <div class="sch-days">
+          <div class="sch-day">M</div>
+          <div class="sch-day on">T</div>
+          <div class="sch-day">W</div>
+          <div class="sch-day">R</div>
+          <div class="sch-day">F</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px;font-size:7px;color:#9c7a68;">
+          <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;">
+            <div style="font-size:7px;color:#9c7a68;padding-top:2px;">8a</div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block b1 sch-tall">INTR 101</div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block b1">INTR 101</div>
+            <div class="sch-block empty"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;margin-top:4px;">
+            <div style="font-size:7px;color:#9c7a68;padding-top:2px;">10a</div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block b2 sch-tall">ECON 2</div>
+            <div class="sch-block b2">ECON 2</div>
+            <div class="sch-block empty"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;margin-top:4px;">
+            <div style="font-size:7px;color:#9c7a68;padding-top:2px;">12p</div>
+            <div class="sch-block b3">CS 16</div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block b3">CS 16</div>
+            <div class="sch-block empty"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:22px repeat(5,1fr);gap:3px;align-items:start;margin-top:4px;">
+            <div style="font-size:7px;color:#9c7a68;padding-top:2px;">2p</div>
+            <div class="sch-block b1">WRIT 1</div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block b1">WRIT 1</div>
+            <div class="sch-block empty"></div>
+            <div class="sch-block empty"></div>
+          </div>
+        </div>
+        <!-- Widget preview -->
+        <div style="margin-top:14px;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:10px 12px;">
+          <div style="font-size:7px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Lock Screen Widget</div>
+          <div style="font-size:9px;font-weight:700;color:var(--text);">Next: ECON 2 · 10:00 AM</div>
+          <div style="font-size:8px;color:var(--muted);margin-top:2px;">Broida 1610 · In 47 min</div>
+        </div>
+        <div class="ptab"><span class="ptab-i">🏠</span><span class="ptab-i on">📅</span><span class="ptab-i">👥</span><span class="ptab-i">⋯</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="rv d1">
+    <p class="fdive-eyebrow">Schedule + Widgets</p>
+    <h2>GOLD, simplified.<br>Always one glance away.</h2>
+    <p class="fdive-sub">Your classes sync from GOLD into a clean, color-coded weekly view. Then stay on your home screen — no app needed — with iOS widgets for your lock screen and home screen.</p>
+    <div class="fdive-feats">
+      <div class="fdive-feat">
+        <div class="fdive-feat-ico">📅</div>
+        <div class="fdive-feat-text">
+          <h4>GOLD sync, automatically</h4>
+          <p>Your enrolled classes pull in automatically — color-coded by course, laid out by week.</p>
+        </div>
+      </div>
+      <div class="fdive-feat">
+        <div class="fdive-feat-ico">📱</div>
+        <div class="fdive-feat-text">
+          <h4>Home &amp; lock screen widgets</h4>
+          <p>See your next class before you even unlock your phone. Building, time, minutes until — all right there.</p>
+        </div>
+      </div>
+      <div class="fdive-feat">
+        <div class="fdive-feat-ico">🔔</div>
+        <div class="fdive-feat-text">
+          <h4>Finals auto-detected</h4>
+          <p>Lagoon finds your finals from the UCSB calendar and surfaces them automatically. No more hunting through syllabi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ── SCREENSHOTS ────────────────────── -->
 <section class="shots" id="screenshots">
@@ -1201,6 +1634,12 @@
   </div>
 </section>
 
+<!-- ── BUILT BY GAUCHOS ──────────────── -->
+<div class="built-band rv">
+  <blockquote>"We were tired of switching between six different apps just to get through a Tuesday."</blockquote>
+  <p>Lagoon was built by UCSB students who lived this problem every day. One app, zero friction — designed for the way Gauchos actually use their phones.</p>
+</div>
+
 <!-- ── SOCIAL / COMPARE ───────────────── -->
 <section class="social" id="social">
   <div style="text-align:center;margin-bottom:56px;">
@@ -1264,6 +1703,83 @@
   </div>
 </section>
 
+<!-- ── TESTIMONIALS ─────────────────── -->
+<section class="testi-section">
+  <div class="sec-head">
+    <h2 class="rv">What Gauchos are saying</h2>
+    <p class="rv d1">Real students, real campus life</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card rv">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"I always used to forget to eat before long class stretches. Now I check Carrillo's menu while I'm still in lecture — without leaving the app where my schedule lives."</p>
+      <div class="testi-by">
+        <div class="testi-av" style="background:#4f87e8;">JO</div>
+        <div>
+          <div class="testi-name">Jess O.</div>
+          <div class="testi-role">3rd year · Sociology</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card rv d1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Grade distributions completely changed how I pick classes during pass time. I actually feel like I'm making smart choices now instead of just guessing."</p>
+      <div class="testi-by">
+        <div class="testi-av" style="background:#3d8a50;">DT</div>
+        <div>
+          <div class="testi-name">Daniel T.</div>
+          <div class="testi-role">2nd year · Computer Science</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card rv d2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"The lock screen widget is genuinely the most useful thing on my phone right now. Next class and dining status — right there before I even unlock."</p>
+      <div class="testi-by">
+        <div class="testi-av" style="background:var(--terra);">AK</div>
+        <div>
+          <div class="testi-name">Amara K.</div>
+          <div class="testi-role">4th year · Biology</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ───────────────────────────── -->
+<section class="faq-section">
+  <div class="sec-head">
+    <h2 class="rv">Common questions</h2>
+    <p class="rv d1">Everything you need to know about Lagoon</p>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item rv">
+      <div class="faq-q">What is Lagoon? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Lagoon is a free iOS app built exclusively for UCSB students. It brings together your GOLD class schedule, live dining menus for all four dining commons, campus events, Daily Nexus news, and historical grade distributions — all in one beautifully designed native app.</div>
+    </div>
+    <div class="faq-item rv">
+      <div class="faq-q">How do I get it? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Lagoon is available as a public beta on TestFlight for iOS 17 and later. Tap the Download button at the top of this page, or go directly to the TestFlight link. It's free to join — no waitlist, no invite needed.</div>
+    </div>
+    <div class="faq-item rv">
+      <div class="faq-q">Does Lagoon show live UCSB dining menus? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes. Lagoon shows live menus for all four UCSB dining commons — Carrillo, De La Guerra, Portola, and Ortega — updated in real time throughout the day. You can see what's being served, dietary labels, and whether each hall is currently open or closed.</div>
+    </div>
+    <div class="faq-item rv">
+      <div class="faq-q">Can it sync my GOLD schedule? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Yes. Lagoon pulls in your enrolled classes from GOLD and displays them in a clean, color-coded weekly view. It also supports iOS home screen and lock screen widgets so your next class is always one glance away.</div>
+    </div>
+    <div class="faq-item rv">
+      <div class="faq-q">Is it official? Is it safe? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Lagoon is student-built and independent — not an official UCSB product. It uses publicly available UCSB data (dining menus, events, grade distributions) and your GOLD credentials only to sync your personal schedule. Your data is never sold or shared.</div>
+    </div>
+    <div class="faq-item rv">
+      <div class="faq-q">What about the social features? <span class="faq-icon">+</span></div>
+      <div class="faq-a">Social features — including Compare Schedules, Shared Class Finder, and Share Cards — are actively in development and coming soon. They'll let you find Gauchos in your classes, compare free time, and share your quarter as a polished card to your story.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ── CTA ────────────────────────────── -->
 <section class="cta" id="cta">
   <h2 class="rv">Ready to simplify<br>your UCSB life?</h2>
@@ -1300,6 +1816,16 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 
   // Drag-to-scroll screenshots
   const scroll = document.getElementById('shotsScroll');
