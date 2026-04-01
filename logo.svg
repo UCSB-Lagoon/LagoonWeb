@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <!-- Warm terracotta to amber gradient -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c85a2b"/>
+      <stop offset="100%" stop-color="#b84e22"/>
+    </linearGradient>
+    <!-- Subtle inner glow at top -->
+    <radialGradient id="shine" cx="40%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#e8713f" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#b84e22" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="icon-clip">
+      <rect width="1024" height="1024" rx="230" ry="230"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="230" ry="230" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="230" ry="230" fill="url(#shine)"/>
+
+  <!-- Wave band at bottom — references Lagoon / UCSB ocean -->
+  <g clip-path="url(#icon-clip)">
+    <path d="M0 820 Q128 780 256 810 Q384 840 512 800 Q640 760 768 795 Q896 830 1024 790 L1024 1024 L0 1024 Z" fill="#a84220" opacity="0.45"/>
+    <path d="M0 870 Q160 830 320 860 Q480 890 640 848 Q800 806 1024 845 L1024 1024 L0 1024 Z" fill="#963b1c" opacity="0.35"/>
+  </g>
+
+  <!-- L lettermark — bold, slightly condensed serif style -->
+  <!-- Vertical stroke -->
+  <rect x="310" y="228" width="108" height="508" rx="18" fill="#fff"/>
+  <!-- Horizontal foot -->
+  <rect x="310" y="664" width="380" height="108" rx="18" fill="#fff"/>
+
+  <!-- Subtle dot / water drop accent above the L -->
+  <circle cx="364" cy="168" r="28" fill="rgba(255,255,255,0.3)"/>
+</svg>
