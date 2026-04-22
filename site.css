@@ -1,20 +1,21 @@
 :root {
-  --bg: #050913;
-  --bg-alt: #091121;
-  --panel: rgba(11, 20, 37, 0.92);
-  --panel-elevated: rgba(15, 26, 47, 0.96);
-  --panel-soft: rgba(9, 17, 31, 0.88);
-  --ink: #f2f7ff;
-  --ink-soft: #becadc;
-  --ink-muted: #8394ad;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.16);
-  --pacific: #73b8ff;
-  --pacific-deep: #0d4f84;
-  --gold: #febc11;
-  --terracotta: #f2a57c;
-  --kelp: #7dbf9a;
-  --shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+  --bg: #07131d;
+  --bg-alt: #0d1e2f;
+  --panel: rgba(11, 27, 43, 0.9);
+  --panel-elevated: rgba(16, 34, 54, 0.96);
+  --panel-soft: rgba(12, 24, 39, 0.84);
+  --ink: #f3f8fd;
+  --ink-soft: #c5d4e2;
+  --ink-muted: #8ea2b7;
+  --line: rgba(227, 241, 255, 0.1);
+  --line-strong: rgba(227, 241, 255, 0.18);
+  --pacific: #7cc8ff;
+  --pacific-deep: #0b5e8e;
+  --gold: #f5c34d;
+  --terracotta: #ff9e78;
+  --kelp: #87c8b1;
+  --seafoam: #8de0d3;
+  --shadow: 0 28px 72px rgba(2, 9, 18, 0.34);
 }
 
 *,
@@ -34,9 +35,10 @@ body {
   line-height: 1.6;
   color: var(--ink);
   background:
-    radial-gradient(circle at top left, rgba(115, 184, 255, 0.15), transparent 28%),
-    radial-gradient(circle at 85% 8%, rgba(254, 188, 17, 0.14), transparent 18%),
-    linear-gradient(180deg, #060b14 0%, #050913 56%, #070d18 100%);
+    radial-gradient(circle at top left, rgba(124, 200, 255, 0.16), transparent 26%),
+    radial-gradient(circle at 82% 10%, rgba(245, 195, 77, 0.18), transparent 17%),
+    radial-gradient(circle at 50% 100%, rgba(141, 224, 211, 0.08), transparent 24%),
+    linear-gradient(180deg, #0b1722 0%, #07131d 45%, #0a1723 100%);
 }
 
 body::before {
@@ -87,7 +89,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(5, 9, 19, 0.78);
+  background: rgba(7, 19, 29, 0.74);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
 }
@@ -112,7 +114,7 @@ h3 {
   border-radius: 14px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, #ffd36b, var(--gold));
+  background: linear-gradient(135deg, #ffe291, var(--gold));
   color: #09101d;
   font-size: 20px;
   font-weight: 900;
@@ -158,7 +160,7 @@ h3 {
 .nav-cta {
   padding: 12px 18px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #ffd45d, var(--gold));
+  background: linear-gradient(135deg, #ffe291, var(--gold));
   color: #09101d !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
@@ -228,7 +230,7 @@ h3 {
 }
 
 .button-primary {
-  background: linear-gradient(135deg, #ffd45d, var(--gold));
+  background: linear-gradient(135deg, #ffe291, var(--gold));
   color: #09101d;
 }
 
@@ -282,7 +284,8 @@ h3 {
 .cta-panel {
   border-radius: 28px;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(15, 26, 47, 0.96), rgba(10, 18, 33, 0.96));
+  background:
+    linear-gradient(180deg, rgba(20, 39, 60, 0.96), rgba(10, 21, 35, 0.98));
   box-shadow: var(--shadow);
 }
 
@@ -292,7 +295,8 @@ h3 {
   padding: 28px;
   border-radius: 28px;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(15, 26, 47, 0.96), rgba(10, 18, 33, 0.96));
+  background:
+    linear-gradient(180deg, rgba(20, 39, 60, 0.96), rgba(10, 21, 35, 0.98));
   box-shadow: var(--shadow);
 }
 
@@ -304,7 +308,18 @@ h3 {
   right: -70px;
   top: -80px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(254, 188, 17, 0.22), transparent 70%);
+  background: radial-gradient(circle, rgba(245, 195, 77, 0.24), transparent 70%);
+}
+
+.signal-panel::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  left: -60px;
+  bottom: -90px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(124, 200, 255, 0.18), transparent 70%);
 }
 
 .signal-kicker,
@@ -366,7 +381,7 @@ h3 {
   padding: 18px;
   border-radius: 22px;
   border: 1px solid var(--line);
-  background: linear-gradient(180deg, rgba(13, 22, 39, 0.96), rgba(8, 14, 26, 0.96));
+  background: linear-gradient(180deg, rgba(18, 34, 54, 0.96), rgba(10, 18, 30, 0.98));
 }
 
 .query-card span {
@@ -425,7 +440,7 @@ h3 {
 .content-card:hover,
 .resource-row:hover {
   transform: translateY(-4px);
-  border-color: rgba(115, 184, 255, 0.32);
+  border-color: rgba(124, 200, 255, 0.4);
 }
 
 .feature-card h3,
@@ -467,8 +482,9 @@ h3 {
 
 .section-dark {
   background:
-    radial-gradient(circle at 18% 20%, rgba(115, 184, 255, 0.12), transparent 22%),
-    linear-gradient(180deg, rgba(8, 13, 24, 0.86), rgba(5, 9, 19, 0.2));
+    radial-gradient(circle at 18% 20%, rgba(124, 200, 255, 0.14), transparent 22%),
+    radial-gradient(circle at 88% 80%, rgba(135, 200, 177, 0.08), transparent 18%),
+    linear-gradient(180deg, rgba(10, 19, 31, 0.94), rgba(7, 19, 29, 0.2));
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -619,8 +635,8 @@ h3 {
 .callout {
   padding: 20px 22px;
   background:
-    linear-gradient(135deg, rgba(115, 184, 255, 0.08), rgba(254, 188, 17, 0.08)),
-    rgba(9, 17, 31, 0.92);
+    linear-gradient(135deg, rgba(124, 200, 255, 0.1), rgba(245, 195, 77, 0.1)),
+    rgba(11, 23, 37, 0.92);
 }
 
 .callout strong {
@@ -705,6 +721,64 @@ h3 {
   text-transform: uppercase;
 }
 
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.topic-card {
+  padding: 22px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(18, 34, 54, 0.96), rgba(10, 18, 30, 0.98));
+  box-shadow: var(--shadow);
+}
+
+.topic-card span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--seafoam);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.topic-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.topic-card p {
+  margin: 0;
+}
+
+.mini-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.mini-guide {
+  padding: 20px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.mini-guide h3 {
+  margin-bottom: 8px;
+  font-size: 1.22rem;
+}
+
+.mini-guide p {
+  margin: 0;
+}
+
 .guide-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
@@ -772,6 +846,8 @@ h3 {
   .guide-hero-grid,
   .card-grid-three,
   .card-grid-two,
+  .topic-grid,
+  .mini-guide-grid,
   .feature-card-wide,
   .cta-panel {
     grid-template-columns: 1fr;
