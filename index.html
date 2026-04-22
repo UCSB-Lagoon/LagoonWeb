@@ -18,18 +18,18 @@
     content="A search-first resource hub for UCSB students with dorm FAQs, dining guides, GOLD explainers, and walkthroughs for Lagoon's schedule and dining features."
   >
   <meta property="og:url" content="https://lagoonucsb.com/">
-  <meta property="og:image" content="https://lagoonucsb.com/og-image.png">
+  <meta property="og:image" content="https://lagoonucsb.com/og-card.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="UCSB Freshman Guides, Dining Help, Dorm FAQs | Lagoon">
   <meta
     name="twitter:description"
     content="UCSB guides for freshmen, admitted students, and Gauchos who want clear answers about dorms, dining, GOLD, campus events, and Lagoon."
   >
-  <meta name="twitter:image" content="https://lagoonucsb.com/og-image.png">
+  <meta name="twitter:image" content="https://lagoonucsb.com/og-card.svg">
   <link rel="icon" href="/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/site.css">
   <script type="application/ld+json">
   {
@@ -118,26 +118,41 @@
         </div>
 
         <div class="hero-visual">
-          <div class="glass-panel spotlight-card">
-            <p class="spotlight-label">What this site can rank for</p>
-            <div class="spotlight-grid">
+          <div class="signal-panel">
+            <p class="signal-kicker">Search surface</p>
+            <h2 class="signal-headline">Build pages around the questions students type before they know Lagoon exists.</h2>
+            <div class="signal-stats">
               <article>
-                <span>Freshman Life</span>
-                <h2>Housing, move-in, meal plans, and week-one survival.</h2>
+                <strong>10</strong>
+                <span>launch pages</span>
               </article>
               <article>
-                <span>Campus Utility</span>
-                <h2>Dining menus, GOLD, grade data, events, and practical UCSB help.</h2>
+                <strong>4</strong>
+                <span>core app hooks</span>
               </article>
               <article>
-                <span>Product Discovery</span>
-                <h2>Explain Lagoon through the problems students already need solved.</h2>
+                <strong>1</strong>
+                <span>student-native brand</span>
               </article>
             </div>
           </div>
-          <div class="phone-stack">
-            <img src="/assets/home-screen.png" alt="Lagoon home screen showing classes and UCSB dining halls">
-            <img src="/assets/events-screen.png" alt="Lagoon events screen for UCSB campus events">
+          <div class="query-stack" aria-label="Example student searches">
+            <article class="query-card">
+              <span>01</span>
+              <p>What should I pack for UCSB dorms?</p>
+            </article>
+            <article class="query-card">
+              <span>02</span>
+              <p>How do I use GOLD at UCSB without getting lost?</p>
+            </article>
+            <article class="query-card">
+              <span>03</span>
+              <p>What is the fastest way to check the UCSB dining menu?</p>
+            </article>
+            <article class="query-card">
+              <span>04</span>
+              <p>What apps do UCSB freshmen actually keep using?</p>
+            </article>
           </div>
         </div>
       </div>
@@ -242,7 +257,12 @@
               <h3>How Lagoon schedule works</h3>
               <p>Explain GOLD sync, widgets, finals context, and why students keep the app on their home screen.</p>
             </div>
-            <img src="/assets/schedule-screen.png" alt="Lagoon schedule screen">
+            <div class="feature-map" aria-hidden="true">
+              <span class="feature-code">Schedule sync</span>
+              <span class="feature-code">Next class widget</span>
+              <span class="feature-code">Finals context</span>
+              <span class="feature-code">Weekly planning</span>
+            </div>
           </a>
           <a class="feature-card feature-card-wide" href="/how-lagoon-dining-works">
             <div>
@@ -250,7 +270,12 @@
               <h3>How Lagoon dining works</h3>
               <p>Show how students check dining commons, stations, and meal context without hopping through tabs.</p>
             </div>
-            <img src="/assets/dining-screen.png" alt="Lagoon dining screen">
+            <div class="feature-map" aria-hidden="true">
+              <span class="feature-code">All dining commons</span>
+              <span class="feature-code">Fast menu scan</span>
+              <span class="feature-code">Meal-period context</span>
+              <span class="feature-code">Less tab switching</span>
+            </div>
           </a>
         </div>
       </div>

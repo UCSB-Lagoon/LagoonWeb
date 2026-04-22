@@ -1,0 +1,32 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="40" x2="1040" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1220"/>
+      <stop offset="1" stop-color="#050913"/>
+    </linearGradient>
+    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(942 130) rotate(136.494) scale(418.434 312.486)">
+      <stop stop-color="#73B8FF" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#73B8FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGold" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(211 128) rotate(46.8046) scale(289.434 247.241)">
+      <stop stop-color="#FEBC11" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#FEBC11" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowBlue)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#glowGold)"/>
+  <rect x="69" y="71" width="1062" height="488" rx="30" fill="#FFFFFF" fill-opacity="0.02" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="102" y="104" width="74" height="74" rx="22" fill="#FEBC11"/>
+  <text x="126" y="154" fill="#09101D" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">L</text>
+  <text x="204" y="152" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="56" font-weight="800">Lagoon</text>
+  <text x="104" y="232" fill="#FEBC11" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="3">UCSB SEARCH HUB + CAMPUS APP</text>
+  <text x="102" y="318" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">Guides for dorms, dining,</text>
+  <text x="102" y="392" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">GOLD, and day-to-day</text>
+  <text x="102" y="466" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">life at UCSB.</text>
+  <rect x="776" y="314" width="281" height="72" rx="18" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <rect x="776" y="402" width="281" height="72" rx="18" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.08"/>
+  <text x="806" y="359" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Freshman FAQ</text>
+  <text x="806" y="447" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Dining + Schedule</text>
+  <text x="104" y="527" fill="#8394AD" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="600">Built for Gauchos. Search-first content that leads into Lagoon.</text>
+</svg>
