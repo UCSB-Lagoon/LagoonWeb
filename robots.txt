@@ -17,9 +17,6 @@ Disallow: /
 User-agent: omgilibot
 Disallow: /
 
-User-agent: FacebookBot
-Disallow: /
-
 User-agent: Bytespider
 Disallow: /
 
@@ -41,6 +38,12 @@ User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
 Allow: /
 
 Sitemap: https://lagoonucsb.com/sitemap.xml

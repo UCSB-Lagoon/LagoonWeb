@@ -22,6 +22,20 @@
 - **Grade Data:** Historical grade distributions for every UCSB course. Helps students enroll smart.
 - **Social (coming soon):** Compare schedules with friends, find classmates, share your week.
 
+## Guide Hub
+
+- **Guides hub:** https://lagoonucsb.com/guides
+- **Freshman FAQ:** https://lagoonucsb.com/ucsb-freshman-faq
+- **Dorm FAQ:** https://lagoonucsb.com/ucsb-dorm-faq
+- **Orientation checklist:** https://lagoonucsb.com/ucsb-orientation-checklist
+- **Dining menu guide:** https://lagoonucsb.com/ucsb-dining-menu
+- **GOLD explainer:** https://lagoonucsb.com/how-to-use-gold-at-ucsb
+- **Grade distributions guide:** https://lagoonucsb.com/ucsb-grade-distributions-guide
+- **Campus events guide:** https://lagoonucsb.com/ucsb-campus-events-guide
+- **Lagoon schedule explainer:** https://lagoonucsb.com/how-lagoon-schedule-works
+- **Lagoon dining explainer:** https://lagoonucsb.com/how-lagoon-dining-works
+- **Best apps for UCSB students:** https://lagoonucsb.com/best-apps-for-ucsb-students
+
 ## Target Audience
 
 - UC Santa Barbara undergraduate students (~37,000 enrolled)
