@@ -11,6 +11,7 @@
 - **Stage:** Public beta on TestFlight
 - **Download:** https://testflight.apple.com/join/hfmrM9K7
 - **Website:** https://lagoonucsb.com
+- **Company:** https://lagoonucsb.com/company
 - **Tagline:** Campus life, beautifully simple. Built for Gauchos, by Gauchos.
 
 ## Features

@@ -1,32 +1,32 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="100" y1="40" x2="1040" y2="630" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0B1220"/>
-      <stop offset="1" stop-color="#050913"/>
+    <linearGradient id="bg" x1="116" y1="64" x2="1086" y2="612" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBF7F0"/>
+      <stop offset="1" stop-color="#F4ECDF"/>
     </linearGradient>
-    <radialGradient id="glowBlue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(942 130) rotate(136.494) scale(418.434 312.486)">
-      <stop stop-color="#73B8FF" stop-opacity="0.26"/>
-      <stop offset="1" stop-color="#73B8FF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glowGold" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(211 128) rotate(46.8046) scale(289.434 247.241)">
-      <stop stop-color="#FEBC11" stop-opacity="0.24"/>
+    <radialGradient id="goldGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(957 122) rotate(147.825) scale(337.543 240.624)">
+      <stop stop-color="#FEBC11" stop-opacity="0.26"/>
       <stop offset="1" stop-color="#FEBC11" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="terraGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197 92) rotate(51.5722) scale(295.492 213.533)">
+      <stop stop-color="#C8754C" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#C8754C" stop-opacity="0"/>
     </radialGradient>
   </defs>
   <rect width="1200" height="630" rx="36" fill="url(#bg)"/>
-  <rect width="1200" height="630" rx="36" fill="url(#glowBlue)"/>
-  <rect width="1200" height="630" rx="36" fill="url(#glowGold)"/>
-  <rect x="69" y="71" width="1062" height="488" rx="30" fill="#FFFFFF" fill-opacity="0.02" stroke="#FFFFFF" stroke-opacity="0.08"/>
-  <rect x="102" y="104" width="74" height="74" rx="22" fill="#FEBC11"/>
-  <text x="126" y="154" fill="#09101D" font-family="Manrope, Arial, sans-serif" font-size="42" font-weight="800">L</text>
-  <text x="204" y="152" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="56" font-weight="800">Lagoon</text>
-  <text x="104" y="232" fill="#FEBC11" font-family="Manrope, Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="3">UCSB SEARCH HUB + CAMPUS APP</text>
-  <text x="102" y="318" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">Guides for dorms, dining,</text>
-  <text x="102" y="392" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">GOLD, and day-to-day</text>
-  <text x="102" y="466" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="68" font-weight="800">life at UCSB.</text>
-  <rect x="776" y="314" width="281" height="72" rx="18" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.08"/>
-  <rect x="776" y="402" width="281" height="72" rx="18" fill="#FFFFFF" fill-opacity="0.04" stroke="#FFFFFF" stroke-opacity="0.08"/>
-  <text x="806" y="359" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Freshman FAQ</text>
-  <text x="806" y="447" fill="#F2F7FF" font-family="Manrope, Arial, sans-serif" font-size="26" font-weight="700">Dining + Schedule</text>
-  <text x="104" y="527" fill="#8394AD" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="600">Built for Gauchos. Search-first content that leads into Lagoon.</text>
+  <rect width="1200" height="630" rx="36" fill="url(#goldGlow)"/>
+  <rect width="1200" height="630" rx="36" fill="url(#terraGlow)"/>
+  <rect x="68" y="70" width="1064" height="490" rx="30" fill="#FFFCF7" fill-opacity="0.78" stroke="#E2D2BF"/>
+  <rect x="104" y="106" width="76" height="76" rx="22" fill="#FEBC11"/>
+  <text x="129" y="158" fill="#0C1B2A" font-family="'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-size="42" font-weight="800">L</text>
+  <text x="210" y="156" fill="#1B2430" font-family="'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-size="58" font-weight="800">Lagoon</text>
+  <text x="106" y="232" fill="#C8754C" font-family="'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-size="18" font-weight="800" letter-spacing="3">THE UCSB CAMPUS APP</text>
+  <text x="104" y="318" fill="#1B2430" font-family="'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-size="68" font-weight="800">Schedules, dining, events,</text>
+  <text x="104" y="392" fill="#1B2430" font-family="'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-size="68" font-weight="800">news, and grade data</text>
+  <text x="104" y="466" fill="#1B2430" font-family="'SF Pro Rounded', 'Arial Rounded MT Bold', system-ui, sans-serif" font-size="68" font-weight="800">for Gauchos.</text>
+  <rect x="775" y="316" width="290" height="74" rx="18" fill="#003660" fill-opacity="0.06" stroke="#E2D2BF"/>
+  <rect x="775" y="406" width="290" height="74" rx="18" fill="#003660" fill-opacity="0.06" stroke="#E2D2BF"/>
+  <text x="806" y="362" fill="#003660" font-family="system-ui, sans-serif" font-size="26" font-weight="700">Built for Gauchos</text>
+  <text x="806" y="452" fill="#003660" font-family="system-ui, sans-serif" font-size="26" font-weight="700">Student guides included</text>
+  <text x="104" y="527" fill="#62594F" font-family="system-ui, sans-serif" font-size="24" font-weight="600">Campus life, beautifully simple.</text>
 </svg>
