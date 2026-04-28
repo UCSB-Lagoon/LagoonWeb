@@ -125,8 +125,8 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
   min-height: 60px;
+  padding: 0 40px;
 }
 
 .brand {
@@ -150,14 +150,13 @@ h3 {
 
 .brand-copy span { display: none; }
 
-.nav-links {
+.nav-mid {
   display: flex;
   align-items: center;
   gap: 32px;
-  flex-wrap: wrap;
 }
 
-.nav-links a {
+.nav-mid a {
   font-size: 13.5px;
   font-weight: 500;
   color: var(--ink-soft);
@@ -166,7 +165,7 @@ h3 {
   transition: color 0.2s;
 }
 
-.nav-links a:hover {
+.nav-mid a:hover {
   color: var(--gold);
   background: transparent;
 }
@@ -1255,6 +1254,12 @@ h3 {
   }
 }
 
+@media (max-width: 960px) {
+  .nav-mid {
+    display: none;
+  }
+}
+
 @media (max-width: 760px) {
   .shell,
   .article-shell {
@@ -1263,17 +1268,8 @@ h3 {
 
   .nav-shell {
     align-items: center;
-    padding: 10px 0;
+    padding: 10px 20px;
     min-height: 60px;
-  }
-
-  .nav-links {
-    gap: 2px;
-  }
-
-  .nav-links a {
-    padding: 6px 9px;
-    font-size: 13px;
   }
 
   .hero-section {
