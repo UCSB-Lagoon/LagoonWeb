@@ -1,47 +1,47 @@
 :root {
   /* Surfaces */
-  --bg: #f4f7fb;
-  --bg-alt: #eaeff6;
-  --panel: #ffffff;
+  --bg: #fbf6ed;
+  --bg-alt: #f4ecdb;
+  --panel: #fffcf4;
   --panel-elevated: #ffffff;
-  --panel-soft: rgba(255, 255, 255, 0.75);
+  --panel-soft: rgba(255, 252, 244, 0.75);
 
   /* Dark surfaces */
-  --night: #060e1c;
-  --night-mid: #0c1d32;
-  --night-surface: #112039;
-  --night-border: rgba(255, 255, 255, 0.09);
-  --night-border-bright: rgba(255, 255, 255, 0.17);
+  --night: #2a1a0f;
+  --night-mid: #3a2417;
+  --night-surface: #4a2e1e;
+  --night-border: rgba(240, 138, 60, 0.18);
+  --night-border-bright: rgba(240, 138, 60, 0.30);
 
   /* Text — light bg */
-  --ink: #07101d;
-  --ink-soft: #384f68;
-  --ink-muted: #7d93ab;
+  --ink: #1f140c;
+  --ink-soft: #5a463a;
+  --ink-muted: #8a7560;
 
   /* Text — dark bg */
-  --ink-light: #e6f0ff;
-  --ink-light-soft: rgba(185, 210, 245, 0.76);
-  --ink-light-muted: rgba(140, 170, 210, 0.52);
+  --ink-light: #fbf6ed;
+  --ink-light-soft: rgba(251, 246, 237, 0.76);
+  --ink-light-muted: rgba(232, 220, 196, 0.55);
 
   /* Borders */
-  --line: rgba(7, 16, 29, 0.07);
-  --line-strong: rgba(7, 16, 29, 0.13);
+  --line: rgba(31, 20, 12, 0.08);
+  --line-strong: rgba(31, 20, 12, 0.15);
 
   /* Brand */
-  --gold: #f0ba38;
-  --gold-bright: #ffd24a;
-  --gold-dim: rgba(240, 186, 56, 0.13);
-  --pacific: #003660;
-  --pacific-bright: #0550a0;
-  --terracotta: #de6f4a;
-  --kelp: #35966a;
-  --seafoam: #2596ae;
+  --gold: #f08a3c;
+  --gold-bright: #ff9f5c;
+  --gold-dim: rgba(240, 138, 60, 0.14);
+  --pacific: #2a1a0f;
+  --pacific-bright: #d9701f;
+  --terracotta: #c44e2d;
+  --kelp: #b26a2c;
+  --seafoam: #e8a04a;
 
   /* Shadows */
-  --shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --shadow: 0 4px 24px rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(0, 0, 0, 0.045);
-  --shadow-lg: 0 16px 56px rgba(0, 0, 0, 0.2);
-  --shadow-gold: 0 0 0 1px rgba(240, 186, 56, 0.28), 0 4px 28px rgba(240, 186, 56, 0.24);
+  --shadow-xs: 0 1px 4px rgba(42, 26, 15, 0.06), 0 0 0 1px rgba(42, 26, 15, 0.05);
+  --shadow: 0 4px 24px rgba(42, 26, 15, 0.10), 0 0 0 1px rgba(42, 26, 15, 0.05);
+  --shadow-lg: 0 16px 56px rgba(42, 26, 15, 0.22);
+  --shadow-gold: 0 0 0 1px rgba(240, 138, 60, 0.30), 0 4px 28px rgba(240, 138, 60, 0.26);
 
   /* Typography */
   --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
@@ -112,7 +112,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(244, 247, 251, 0.88);
+  background: rgba(251, 246, 237, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--line);
