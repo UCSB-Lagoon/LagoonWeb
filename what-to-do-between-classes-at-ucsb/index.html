@@ -32,6 +32,11 @@
   </script>
 </head>
 <body>
+  <div class="announce-bar" id="announce-bar">
+    <span>🌯 We just raised $10 to buy one burrito</span>
+    <button class="announce-close" id="announce-close" aria-label="Dismiss">×</button>
+  </div>
+
   <header class="site-header">
     <div class="nav-shell">
       <a class="brand" href="/"><span class="brand-mark">L</span><span class="brand-copy"><strong>Lagoon</strong><span>Built for Gauchos</span></span></a>
@@ -41,7 +46,8 @@
         <a href="/guides">Guides</a>
         <a href="/company">Company</a>
       </div>
-      <a class="nav-cta" href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M6 10l6 6 6-6"/><path d="M3 20h18"/></svg>Get the App</a>
+      <div class="nav-right"><a class="nav-explore" href="/guides">Explore</a>
+      <a class="nav-cta" href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M6 10l6 6 6-6"/><path d="M3 20h18"/></svg>Get the App</a></div>
 
     </div>
   </header>
@@ -88,5 +94,8 @@
     </section>
   </main>
   <footer class="site-footer"><div class="shell footer-grid"><div><a class="brand brand-footer" href="/"><span class="brand-mark">L</span><span class="brand-copy"><strong>Lagoon</strong><span>Campus life, beautifully simple.</span></span></a><p class="footer-copy">The space between classes can make the whole day feel better.</p></div><div class="footer-links"><a href="/guides">All Guides</a><a href="/ucsb-dining-menu">Dining Guide</a><a href="/best-study-spots-at-ucsb">Study Spots</a></div></div></footer>
+  <script>
+    (function(){var ac=document.getElementById('announce-close');if(ac)ac.addEventListener('click',function(){document.getElementById('announce-bar').remove();});})();
+  </script>
 </body>
 </html>

@@ -2,11 +2,11 @@
 
 :root {
   /* Surfaces */
-  --bg: #fbf6ed;
-  --bg-alt: #f4ecdb;
-  --panel: #fffcf4;
+  --bg: #F2F1EF;
+  --bg-alt: #E9E8E5;
+  --panel: #ffffff;
   --panel-elevated: #ffffff;
-  --panel-soft: rgba(255, 252, 244, 0.75);
+  --panel-soft: rgba(255, 255, 255, 0.80);
 
   /* Dark surfaces */
   --night: #2a1a0f;
@@ -108,6 +108,46 @@ h3 {
 }
 
 /* =====================
+   ANNOUNCE BAR
+   ===================== */
+
+.announce-bar {
+  background: #F08A3C;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 48px;
+  font-size: 13.5px;
+  font-weight: 600;
+  position: relative;
+  z-index: 500;
+}
+
+.announce-close {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.announce-close:hover {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .announce-bar { font-size: 12px; padding: 10px 40px; }
+}
+
+/* =====================
    NAVIGATION
    ===================== */
 
@@ -170,23 +210,46 @@ h3 {
   background: transparent;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-explore {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 18px;
+  border-radius: 100px;
+  border: 1px solid rgba(26, 20, 16, 0.18);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.nav-explore:hover {
+  border-color: rgba(26, 20, 16, 0.32);
+  background: rgba(26, 20, 16, 0.04);
+}
+
 .nav-cta {
   display: inline-flex !important;
   align-items: center;
   gap: 8px;
   padding: 9px 20px !important;
   border-radius: 100px !important;
-  background: var(--gold) !important;
-  color: #fff8ee !important;
+  background: #1E1410 !important;
+  color: #F8F4EE !important;
   font-weight: 700 !important;
   font-size: 13.5px !important;
   box-shadow: none !important;
-  transition: background 0.2s, transform 0.15s !important;
+  transition: background 0.2s !important;
 }
 
 .nav-cta:hover {
-  transform: translateY(-1px);
-  background: var(--gold-bright) !important;
+  background: #2e1e16 !important;
+  transform: none !important;
   box-shadow: none !important;
 }
 
