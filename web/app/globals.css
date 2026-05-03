@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lagoon-50:  #ecfeff;
+  --color-lagoon-100: #cffafe;
+  --color-lagoon-200: #a5f3fc;
+  --color-lagoon-300: #67e8f9;
+  --color-lagoon-400: #22d3ee;
+  --color-lagoon-500: #06b6d4;
+  --color-lagoon-600: #0891b2;
+  --color-lagoon-700: #0e7490;
+  --color-lagoon-800: #155e75;
+  --color-lagoon-900: #164e63;
+  --color-lagoon-950: #083344;
+
+  --color-kelp-400:   #4ade80;
+  --color-kelp-600:   #16a34a;
+  --color-kelp-800:   #166534;
+
+  --color-sand-50:    #fdf8f0;
+  --color-sand-100:   #faf0dc;
+  --color-sand-200:   #f5e2b8;
+
+  --color-coral-400:  #fb7185;
+  --color-coral-500:  #f43f5e;
+  --color-coral-600:  #e11d48;
+
+  --color-deep:       #04212c;
+  --color-surface:    #0a2f3d;
+  --color-mist:       #e8f6fa;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cal Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-float:   float 6s ease-in-out infinite;
+  --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.65; }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html, body {
+  background: radial-gradient(ellipse at top, #0a3a4d 0%, #04212c 55%, #021820 100%);
+  color: var(--color-mist);
+  min-height: 100%;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  border: 1px solid rgba(165, 243, 252, 0.10);
+  backdrop-filter: blur(12px);
+}
+
+.glow-lagoon {
+  box-shadow: 0 0 40px -10px rgba(34, 211, 238, 0.45);
+}
+
+.text-gradient-lagoon {
+  background: linear-gradient(110deg, #67e8f9 10%, #4ade80 50%, #fb7185 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* subtle animated wave background for hero */
+.wave-bg {
+  background:
+    radial-gradient(1200px 600px at 20% 0%,  rgba(34,211,238,0.18), transparent 60%),
+    radial-gradient(900px 500px  at 80% 20%, rgba(74,222,128,0.12), transparent 60%),
+    radial-gradient(700px 500px  at 50% 100%, rgba(251,113,133,0.10), transparent 60%);
+}
+
+::selection { background: rgba(34, 211, 238, 0.35); color: white; }
