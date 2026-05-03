@@ -16,6 +16,12 @@ type ActivityRow = {
   avatar_url: string | null;
 };
 
+type DiscoverableProfile = {
+  display_name: string | null;
+  avatar_url: string | null;
+  is_discoverable: boolean | null;
+};
+
 const ICON: Record<string, string> = {
   daily_check_in:   "🌅",
   planner_progress: "📅",
@@ -42,13 +48,13 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
   const [rows, setRows] = useState<ActivityRow[]>(initial);
 
   useEffect(() => {
-    const sb = createClient();
+    const sb = createClient() as any;
     const channel = sb
       .channel("activity-feed")
       .on(
         "postgres_changes",
         { event: "INSERT", schema: "public", table: "user_xp_events" },
-        async (payload) => {
+        async (payload: { new: unknown }) => {
           const ev = payload.new as {
             id: string; user_id: string; source: string;
             xp_awarded: number; context: string | null; created_at: string;
@@ -58,7 +64,8 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
             .select("display_name, avatar_url, is_discoverable")
             .eq("id", ev.user_id)
             .single();
-          if (profile?.is_discoverable === false) return;
+          const discoverableProfile = profile as DiscoverableProfile | null;
+          if (discoverableProfile?.is_discoverable === false) return;
           const next: ActivityRow = {
             id: ev.id,
             user_id: ev.user_id,
@@ -66,8 +73,8 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
             points: ev.xp_awarded,
             context: ev.context,
             created_at: ev.created_at,
-            display_name: profile?.display_name ?? "Someone",
-            avatar_url: profile?.avatar_url ?? null,
+            display_name: discoverableProfile?.display_name ?? "Someone",
+            avatar_url: discoverableProfile?.avatar_url ?? null,
           };
           setRows((r) => [next, ...r].slice(0, 30));
         },
@@ -87,9 +94,11 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="glass rounded-xl px-3 py-2.5 flex items-center gap-3"
+            className="glass rounded-2xl px-3 py-2.5 flex items-center gap-3 hover:bg-amber/10 transition-colors"
           >
-            <span className="text-xl select-none">{ICON[r.source] ?? "✨"}</span>
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber/10 text-xl select-none ring-1 ring-amber/10">
+              {ICON[r.source] ?? "✨"}
+            </span>
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">
                 <span className="font-medium text-mist">{r.display_name}</span>
@@ -97,7 +106,7 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
               </p>
               <p className="text-xs text-mist/40">{formatRelative(r.created_at)}</p>
             </div>
-            <span className="text-xs font-semibold text-lagoon-300 tabular-nums">
+            <span className="text-xs font-bold text-amber tabular-nums">
               +{r.points}
             </span>
           </motion.li>

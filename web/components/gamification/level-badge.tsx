@@ -7,13 +7,13 @@ export function LevelBadge({ level, size = "md" }: { level: number; size?: "sm" 
   return (
     <div
       className={cn(
-        "rounded-full flex items-center justify-center ring-2 ring-offset-2 ring-offset-deep",
+        "rounded-2xl flex items-center justify-center ring-2 ring-offset-2 ring-offset-deep",
         dim,
       )}
       style={{
-        background: `radial-gradient(circle at 30% 30%, ${lvl.color}40, transparent 70%), rgba(255,255,255,0.04)`,
-        boxShadow: `0 0 30px -5px ${lvl.color}80`,
-        ['--tw-ring-color' as string]: `${lvl.color}99`,
+        background: `radial-gradient(circle at 30% 30%, ${lvl.color}55, transparent 70%), linear-gradient(145deg, rgba(254,188,17,0.15), rgba(255,255,255,0.04))`,
+        boxShadow: `0 0 34px -10px ${lvl.color}99`,
+        ["--tw-ring-color" as string]: `${lvl.color}99`,
       }}
       title={`Level ${lvl.rank} · ${lvl.name}`}
     >

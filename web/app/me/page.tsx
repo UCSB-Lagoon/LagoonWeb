@@ -41,7 +41,7 @@ export default async function MePage() {
       <header className="flex items-center gap-5">
         <LevelBadge level={level} size="lg" />
         <div>
-          <h1 className="font-display text-3xl">
+          <h1 className="font-display text-4xl font-extrabold tracking-[-0.05em]">
             {me.profile?.display_name ?? me.profile?.full_name ?? "Welcome, Gaucho"}
           </h1>
           <p className="text-mist/60">
@@ -56,10 +56,10 @@ export default async function MePage() {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="Total XP"        value={xp}            icon={Sparkles} accent="#22d3ee" />
-        <StatCard label="XP this week"    value={xpThisWeek}    icon={Star}     accent="#4ade80" />
-        <StatCard label="Current streak"  value={`${streak}d`}  icon={Flame}    accent="#fb7185" />
-        <StatCard label="Badges earned"   value={me.badges.length} icon={Trophy} accent="#fde68a" />
+        <StatCard label="Total XP"        value={xp}            icon={Sparkles} accent="#febc11" />
+        <StatCard label="XP this week"    value={xpThisWeek}    icon={Star}     accent="#ff9f5c" />
+        <StatCard label="Current streak"  value={`${streak}d`}  icon={Flame}    accent="#c44e2d" />
+        <StatCard label="Badges earned"   value={me.badges.length} icon={Trophy} accent="#f0f4ff" />
       </div>
 
       <XpTrend data={trend} />

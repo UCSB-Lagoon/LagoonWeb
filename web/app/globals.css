@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -13,24 +14,27 @@
   --color-lagoon-900: #164e63;
   --color-lagoon-950: #083344;
 
-  --color-kelp-400:   #4ade80;
-  --color-kelp-600:   #16a34a;
-  --color-kelp-800:   #166534;
+  --color-kelp-400:   #e8a04a;
+  --color-kelp-600:   #b26a2c;
+  --color-kelp-800:   #6f431f;
 
   --color-sand-50:    #fdf8f0;
   --color-sand-100:   #faf0dc;
   --color-sand-200:   #f5e2b8;
 
-  --color-coral-400:  #fb7185;
-  --color-coral-500:  #f43f5e;
-  --color-coral-600:  #e11d48;
+  --color-coral-400:  #ff9f5c;
+  --color-coral-500:  #f08a3c;
+  --color-coral-600:  #c44e2d;
 
-  --color-deep:       #04212c;
-  --color-surface:    #0a2f3d;
-  --color-mist:       #e8f6fa;
+  --color-deep:       #03070f;
+  --color-surface:    #0c1528;
+  --color-mist:       #f0f4ff;
+  --color-amber:      #febc11;
+  --color-night:      #2a1a0f;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cal Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 
   --animate-shimmer: shimmer 2.5s linear infinite;
   --animate-float:   float 6s ease-in-out infinite;
@@ -55,25 +59,42 @@
 }
 
 html, body {
-  background: radial-gradient(ellipse at top, #0a3a4d 0%, #04212c 55%, #021820 100%);
+  background:
+    radial-gradient(900px 540px at 78% -10%, rgba(254, 188, 17, 0.13), transparent 62%),
+    radial-gradient(820px 520px at 14% 8%, rgba(240, 138, 60, 0.15), transparent 60%),
+    linear-gradient(180deg, #120d0b 0%, #03070f 48%, #03070f 100%);
   color: var(--color-mist);
   min-height: 100%;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
 .glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-  border: 1px solid rgba(165, 243, 252, 0.10);
-  backdrop-filter: blur(12px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(12, 21, 40, 0.62);
+  border: 1px solid rgba(254, 188, 17, 0.13);
+  backdrop-filter: blur(18px) saturate(1.25);
 }
 
 .glow-lagoon {
-  box-shadow: 0 0 40px -10px rgba(34, 211, 238, 0.45);
+  box-shadow: 0 0 0 1px rgba(254, 188, 17, 0.18), 0 18px 55px -24px rgba(240, 138, 60, 0.75);
 }
 
 .text-gradient-lagoon {
-  background: linear-gradient(110deg, #67e8f9 10%, #4ade80 50%, #fb7185 90%);
+  background: linear-gradient(110deg, #f0f4ff 0%, #febc11 42%, #ff9f5c 76%, #f0f4ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -82,9 +103,30 @@ html, body {
 /* subtle animated wave background for hero */
 .wave-bg {
   background:
-    radial-gradient(1200px 600px at 20% 0%,  rgba(34,211,238,0.18), transparent 60%),
-    radial-gradient(900px 500px  at 80% 20%, rgba(74,222,128,0.12), transparent 60%),
-    radial-gradient(700px 500px  at 50% 100%, rgba(251,113,133,0.10), transparent 60%);
+    linear-gradient(135deg, rgba(42, 26, 15, 0.92), rgba(12, 21, 40, 0.74)),
+    radial-gradient(1000px 620px at 15% 0%, rgba(254,188,17,0.24), transparent 58%),
+    radial-gradient(900px 500px at 86% 20%, rgba(240,138,60,0.22), transparent 60%),
+    radial-gradient(700px 500px at 52% 110%, rgba(196,78,45,0.18), transparent 60%);
 }
 
-::selection { background: rgba(34, 211, 238, 0.35); color: white; }
+.wave-bg::before {
+  content: "";
+  position: absolute;
+  inset: -45% -20% auto;
+  height: 92%;
+  background:
+    repeating-linear-gradient(
+      115deg,
+      rgba(254, 188, 17, 0.12) 0 1px,
+      transparent 1px 18px
+    );
+  opacity: 0.55;
+  transform: rotate(-4deg);
+  animation: float 8s ease-in-out infinite;
+}
+
+.brand-ring {
+  box-shadow: inset 0 0 0 1px rgba(254, 188, 17, 0.18);
+}
+
+::selection { background: rgba(254, 188, 17, 0.35); color: white; }

@@ -13,22 +13,23 @@ export function VibeMeter({ score }: { score: number }) {
     pct > 0.65 ? "Buzzing"    :
     pct > 0.40 ? "Steady"     :
     pct > 0.20 ? "Mellow"     : "Quiet";
-  const color = pct > 0.65 ? "#fb7185" : pct > 0.4 ? "#22d3ee" : "#4ade80";
+  const color = pct > 0.65 ? "#ff9f5c" : pct > 0.4 ? "#febc11" : "#e8a04a";
 
   return (
-    <div className="glass rounded-2xl p-5">
+    <div className="glass rounded-[1.35rem] p-5 relative overflow-hidden">
+      <div className="absolute -right-14 -bottom-16 h-40 w-40 rounded-full bg-amber/10 blur-2xl" />
       <div className="flex items-baseline justify-between mb-3">
-        <h3 className="font-display text-lg">Campus vibe</h3>
+        <h3 className="font-display text-lg font-bold tracking-[-0.03em]">Campus vibe</h3>
         <span className="text-sm font-semibold" style={{ color }}>{label}</span>
       </div>
-      <div className="relative h-4 rounded-full bg-lagoon-950/60 overflow-hidden">
+      <div className="relative h-4 rounded-full bg-deep/70 overflow-hidden ring-1 ring-amber/10">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct * 100}%` }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="h-full rounded-full"
           style={{
-            background: `linear-gradient(90deg, #4ade80, #22d3ee, #fb7185)`,
+            background: `linear-gradient(90deg, #b26a2c, #febc11, #ff9f5c)`,
             boxShadow: `0 0 24px ${color}66`,
           }}
         />

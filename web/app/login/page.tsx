@@ -27,8 +27,10 @@ export default function LoginPage() {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="glass rounded-3xl p-8 w-full max-w-md">
-        <div className="flex items-center gap-2 font-display text-xl mb-6">
-          <Waves className="w-5 h-5 text-lagoon-400" />
+        <div className="flex items-center gap-3 font-display text-xl font-bold tracking-[-0.03em] mb-6">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber text-deep">
+            <Waves className="w-5 h-5" />
+          </span>
           <span>Sign in to Lagoon</span>
         </div>
         {sent ? (
@@ -45,14 +47,14 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@ucsb.edu"
-                className="mt-1 w-full bg-lagoon-950/60 border border-lagoon-200/10 rounded-xl px-3 py-2.5 outline-none focus:border-lagoon-400"
+                className="mt-1 w-full bg-deep/70 border border-amber/15 rounded-xl px-3 py-2.5 outline-none focus:border-amber"
               />
             </label>
             {error && <p className="text-sm text-coral-400">{error}</p>}
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-xl bg-lagoon-400 text-deep px-4 py-2.5 font-semibold hover:bg-lagoon-300 disabled:opacity-50 transition glow-lagoon"
+              className="w-full rounded-xl bg-amber text-deep px-4 py-2.5 font-bold hover:bg-coral-400 disabled:opacity-50 transition glow-lagoon"
             >
               {loading ? "Sending…" : "Send magic link"}
             </button>

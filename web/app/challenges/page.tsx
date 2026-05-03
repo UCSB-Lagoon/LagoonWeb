@@ -9,8 +9,10 @@ export default async function ChallengesPage() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
       <header className="mb-6 flex items-center gap-3">
-        <Target className="w-7 h-7 text-coral-400" />
-        <h1 className="font-display text-3xl">This week's challenges</h1>
+        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-coral-400/10 text-coral-400 ring-1 ring-coral-400/15">
+          <Target className="w-6 h-6" />
+        </span>
+        <h1 className="font-display text-4xl font-extrabold tracking-[-0.05em]">This week's challenges</h1>
       </header>
       {challenges.length === 0 ? (
         <div className="glass rounded-2xl p-8 text-center text-mist/50">
@@ -22,7 +24,7 @@ export default async function ChallengesPage() {
             <li key={c.id} className="glass rounded-2xl p-5">
               <div className="flex items-baseline justify-between gap-3">
                 <h2 className="font-display text-xl">{c.title}</h2>
-                <span className="text-sm font-semibold text-lagoon-300 tabular-nums">
+                <span className="text-sm font-bold text-amber tabular-nums">
                   +{c.xp_reward} XP
                 </span>
               </div>

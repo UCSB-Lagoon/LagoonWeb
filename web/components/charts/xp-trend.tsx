@@ -15,21 +15,21 @@ export function XpTrend({ data }: { data: TrendPoint[] }) {
           <AreaChart data={data} margin={{ left: 0, right: 0, top: 8, bottom: 0 }}>
             <defs>
               <linearGradient id="lagoonGrad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%"   stopColor="#22d3ee" stopOpacity={0.8} />
-                <stop offset="100%" stopColor="#22d3ee" stopOpacity={0}   />
+                <stop offset="0%"   stopColor="#febc11" stopOpacity={0.8} />
+                <stop offset="100%" stopColor="#febc11" stopOpacity={0}   />
               </linearGradient>
             </defs>
             <XAxis dataKey="day" tickLine={false} axisLine={false}
-                   tick={{ fill: "#cffafe88", fontSize: 11 }} />
+                   tick={{ fill: "#f5e2b899", fontSize: 11 }} />
             <YAxis hide />
             <Tooltip
               contentStyle={{
-                background: "#04212c", border: "1px solid #22d3ee44",
+                background: "#0c1528", border: "1px solid #febc1144",
                 borderRadius: 8, fontSize: 12,
               }}
-              labelStyle={{ color: "#cffafe" }}
+              labelStyle={{ color: "#f5e2b8" }}
             />
-            <Area type="monotone" dataKey="xp" stroke="#22d3ee" strokeWidth={2}
+            <Area type="monotone" dataKey="xp" stroke="#febc11" strokeWidth={2}
                   fill="url(#lagoonGrad)" />
           </AreaChart>
         </ResponsiveContainer>

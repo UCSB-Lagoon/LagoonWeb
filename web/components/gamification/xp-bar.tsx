@@ -17,12 +17,12 @@ export function XpBar({ xp, level }: { xp: number; level: number }) {
         </span>
         <span className="text-mist/60 tabular-nums">{xp.toLocaleString()} XP</span>
       </div>
-      <div className="h-2.5 rounded-full bg-lagoon-950/60 overflow-hidden ring-1 ring-lagoon-200/10">
+      <div className="h-3 rounded-full bg-deep/70 overflow-hidden ring-1 ring-amber/10">
         <div
           className="h-full rounded-full transition-[width] duration-700"
           style={{
             width: `${Math.min(100, pct * 100)}%`,
-            background: `linear-gradient(90deg, ${lvl.color}, #fb7185)`,
+            background: `linear-gradient(90deg, ${lvl.color}, #febc11, #ff9f5c)`,
             boxShadow: `0 0 16px -2px ${lvl.color}`,
           }}
         />

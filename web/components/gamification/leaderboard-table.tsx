@@ -11,7 +11,7 @@ export type LeaderRow = {
   tagline: string | null;
 };
 
-const MEDAL = ["🥇", "🥈", "🥉"];
+const MEDAL = ["1", "2", "3"];
 
 export function LeaderboardTable({ rows }: { rows: LeaderRow[] }) {
   if (rows.length === 0) {
@@ -26,9 +26,9 @@ export function LeaderboardTable({ rows }: { rows: LeaderRow[] }) {
       {rows.map((r) => (
         <li
           key={r.user_id}
-          className="glass rounded-xl flex items-center gap-3 px-4 py-2.5 hover:bg-lagoon-200/5 transition"
+          className="glass rounded-2xl flex items-center gap-3 px-4 py-3 hover:bg-amber/10 transition"
         >
-          <span className="w-7 text-center font-bold text-mist/70 tabular-nums">
+          <span className="grid h-8 w-8 place-items-center rounded-xl bg-amber/10 text-center font-mono text-xs font-bold text-amber ring-1 ring-amber/15 tabular-nums">
             {MEDAL[r.rank - 1] ?? r.rank}
           </span>
           <LevelBadge level={r.level} size="sm" />
@@ -36,7 +36,7 @@ export function LeaderboardTable({ rows }: { rows: LeaderRow[] }) {
             <p className="font-medium truncate">{r.display_name ?? "Anonymous Gaucho"}</p>
             {r.tagline && <p className="text-xs text-mist/50 truncate">{r.tagline}</p>}
           </div>
-          <span className="font-semibold text-lagoon-300 tabular-nums">
+          <span className="font-bold text-amber tabular-nums">
             {r.xp.toLocaleString()} XP
           </span>
         </li>
