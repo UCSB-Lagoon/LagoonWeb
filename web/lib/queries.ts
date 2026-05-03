@@ -233,6 +233,38 @@ export async function getTrendingClasses(limit = 5): Promise<TrendingClass[]> {
     }));
 }
 
+export type StatsOverview = {
+  total_users: number; active_users_14d: number;
+  lifetime_xp: number; lifetime_events: number;
+  badges_earned: number; top_streak: number;
+  friendships: number; class_vibes: number; election_votes: number;
+};
+
+export async function getStatsBundle() {
+  const sb = (await createClient()) as any;
+  const [overview, sources, daily, majors, classLevels, badgeRarity, topBadges, election] =
+    await Promise.all([
+      sb.from("stats_overview").select("*").single(),
+      sb.from("stats_xp_by_source").select("*"),
+      sb.from("stats_xp_daily").select("*"),
+      sb.from("stats_majors").select("*"),
+      sb.from("stats_class_levels").select("*"),
+      sb.from("stats_badges_by_rarity").select("*"),
+      sb.from("stats_top_badges").select("*").limit(8),
+      sb.from("stats_election_turnout").select("*").single(),
+    ]);
+  return {
+    overview: (overview.data ?? null) as StatsOverview | null,
+    sources: (sources.data ?? []) as Array<{ source: string; event_count: number; total_xp: number; avg_xp: number }>,
+    daily:   (daily.data ?? []) as Array<{ day: string; event_count: number; active_users: number; total_xp: number }>,
+    majors:  (majors.data ?? []) as Array<{ major_code: string; users: number }>,
+    classLevels: (classLevels.data ?? []) as Array<{ class_level: string; users: number }>,
+    badgeRarity: (badgeRarity.data ?? []) as Array<{ rarity: string; available: number; earned: number }>,
+    topBadges:   (topBadges.data ?? []) as Array<{ badge_id: string; title: string; icon: string; rarity: string; earned_count: number }>,
+    election:    (election.data ?? null) as { distinct_voters: number; total_votes: number; race_count: number } | null,
+  };
+}
+
 export async function getTopStreak() {
   const sb = (await createClient()) as any;
   const { data } = await sb

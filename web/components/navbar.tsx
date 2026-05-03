@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { Trophy, Target, Map, User, Vote } from "lucide-react";
+import { Trophy, Target, Map, User, Vote, BarChart3 } from "lucide-react";
 
 const links = [
   { href: "/leaderboard",   label: "Leaderboard", icon: Trophy },
   { href: "/challenges",    label: "Challenges",  icon: Target },
   { href: "/election-pulse",label: "Election",    icon: Vote },
+  { href: "/stats",         label: "Stats",       icon: BarChart3 },
   { href: "/map",           label: "Map",         icon: Map },
   { href: "/me",            label: "You",         icon: User },
 ];
