@@ -1,12 +1,15 @@
 export function Footer() {
   return (
-    <footer className="border-t border-amber/10 mt-20">
-      <div className="max-w-7xl mx-auto px-4 py-8 text-sm text-mist/50 flex flex-wrap items-center justify-between gap-3">
-        <p>© {new Date().getFullYear()} Lagoon · Built by Gauchos, for Gauchos.</p>
+    <footer className="border-t border-cream-200 mt-20">
+      <div className="max-w-7xl mx-auto px-5 py-10 text-sm text-ink-500 flex flex-wrap items-center justify-between gap-3">
         <p>
-          <a href="https://lagoonucsb.com" className="hover:text-mist">lagoonucsb.com</a>
-          <span className="mx-2">·</span>
-          <a href="https://github.com" className="hover:text-mist">GitHub</a>
+          <span className="font-display font-bold text-orange-500">Lagoon</span>
+          <span className="ml-2">© {new Date().getFullYear()} · Built by Gauchos, for Gauchos.</span>
+        </p>
+        <p className="flex items-center gap-4">
+          <a href="https://lagoonucsb.com" className="hover:text-ink-900 transition">lagoonucsb.com</a>
+          <a href="/leaderboard" className="hover:text-ink-900 transition">Leaderboard</a>
+          <a href="/election-pulse" className="hover:text-ink-900 transition">Election Pulse</a>
         </p>
       </div>
     </footer>

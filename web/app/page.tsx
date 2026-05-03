@@ -1,108 +1,169 @@
 import Link from "next/link";
-import { Trophy, Sparkles, Users, Flame, ArrowRight, Star, Waves } from "lucide-react";
+import { Trophy, Sparkles, Users, Flame, ArrowRight, Vote, Activity } from "lucide-react";
 import { ActivityFeed } from "@/components/gamification/activity-feed";
 import { LeaderboardTable } from "@/components/gamification/leaderboard-table";
 import { VibeMeter } from "@/components/gamification/vibe-meter";
 import { StatCard } from "@/components/ui/stat-card";
+import { ElectionPulseCard } from "@/components/widgets/election-pulse";
+import { TrendingClassesCard } from "@/components/widgets/trending-classes";
 import {
   getActivityFeed,
   getVibeScore,
   getWeeklyLeaderboard,
   getXpStats,
   getTopStreak,
+  getTopElectionRace,
+  getTotalElectionVotes,
+  getTrendingClasses,
 } from "@/lib/queries";
 
 export const revalidate = 30;
 
 export default async function HomePage() {
-  const [feed, top, vibe, stats, topStreak] = await Promise.all([
+  const [feed, top, vibe, stats, topStreak, race, totalVotes, classes] = await Promise.all([
     getActivityFeed(20),
     getWeeklyLeaderboard(5),
     getVibeScore(),
     getXpStats(),
     getTopStreak(),
+    getTopElectionRace(),
+    getTotalElectionVotes(),
+    getTrendingClasses(5),
   ]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      {/* hero */}
-      <section className="wave-bg rounded-[2rem] px-6 sm:px-12 py-16 sm:py-20 mt-6 relative overflow-hidden brand-ring">
-        <div className="absolute right-6 top-6 hidden md:grid w-48 h-48 place-items-center rounded-full border border-amber/20 bg-deep/20">
-          <div className="absolute inset-5 rounded-full border border-coral-400/25" />
-          <div className="absolute inset-12 rounded-full bg-amber/15 blur-xl" />
-          <Waves className="relative w-16 h-16 text-amber" />
-        </div>
-        <div className="relative z-10 max-w-3xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-amber/20 bg-deep/25 px-3 py-1 text-xs uppercase tracking-[0.22em] text-sand-100/80 mb-5">
-            <Sparkles className="w-3.5 h-3.5 text-amber" /> Live around UCSB
-          </span>
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl leading-[0.96] font-extrabold tracking-[-0.055em]">
-            Everything happening at <span className="text-gradient-lagoon">UCSB</span>,
-            in one lagoon.
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl leading-8 text-sand-50/75 max-w-2xl">
-            Live ratings, weekly leaderboards, campus vibe checks, and badges for the
-            things you already do. Compete with your dorm. Crown a dining hall.
-            Become a Lagoon Legend.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 rounded-2xl bg-amber text-deep px-5 py-3 font-bold hover:bg-coral-400 glow-lagoon transition"
-            >
-              Join the lagoon <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/leaderboard"
-              className="inline-flex items-center gap-2 rounded-2xl glass px-5 py-3 font-semibold hover:bg-amber/10 transition"
-            >
-              <Trophy className="w-4 h-4" /> See the leaderboard
-            </Link>
+    <div className="max-w-7xl mx-auto px-5">
+      {/* Hero */}
+      <section className="pt-12 pb-10 sm:pt-20 sm:pb-14">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7">
+            <span className="pill mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+              Live across UCSB
+            </span>
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[0.98] text-ink-900">
+              The student hub<br />
+              UCSB <span className="italic-accent">deserves.</span>
+            </h1>
+            <p className="mt-6 text-lg text-ink-500 max-w-xl leading-relaxed">
+              Real-time leaderboards, campus elections, class vibes, and gamified daily
+              life — built on the same data powering the Lagoon mobile app.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/login" className="btn-primary">
+                Join the Lagoon <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/leaderboard" className="btn-secondary">
+                <Trophy className="w-4 h-4 text-orange-500" /> See the leaderboard
+              </Link>
+            </div>
+            <div className="mt-7 flex flex-wrap gap-2 text-xs">
+              {["Grades", "Classmates", "Schedules", "Dining", "Events", "Elections"].map((t) => (
+                <span key={t} className="rounded-full border border-cream-200 bg-white px-3 py-1.5 text-ink-500 font-medium">
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-2 text-xs text-sand-100/60">
-            {["Dining", "Classes", "Friends", "Challenges"].map((label) => (
-              <span key={label} className="rounded-full border border-amber/15 bg-deep/20 px-3 py-1">
-                {label}
-              </span>
-            ))}
+
+          {/* Hero side card — live vibe + top race */}
+          <div className="lg:col-span-5">
+            <div className="card p-6 relative overflow-hidden">
+              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-orange-200/50 blur-3xl" />
+              <div className="relative">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs uppercase tracking-[0.18em] text-ink-400 font-semibold">Right now</span>
+                  <span className="flex items-center gap-1.5 text-xs text-orange-600 font-semibold">
+                    <span className="w-2 h-2 rounded-full bg-orange-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
+                    live
+                  </span>
+                </div>
+                <p className="font-serif italic text-3xl text-ink-900 leading-tight">
+                  {stats.activeUsers} Gauchos<br />
+                  <span className="text-orange-500">in the lagoon</span>
+                </p>
+                <p className="mt-3 text-sm text-ink-500">
+                  {stats.xpThisWeek.toLocaleString()} XP earned this week · top streak {topStreak} days
+                </p>
+                <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
+                  <div className="rounded-xl bg-cream-100 border border-cream-200 px-3 py-2.5">
+                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Vibe</p>
+                    <p className="font-bold text-ink-900">
+                      {vibe > 0.65 ? "Buzzing" : vibe > 0.4 ? "Steady" : vibe > 0.2 ? "Mellow" : "Quiet"}
+                    </p>
+                  </div>
+                  <div className="rounded-xl bg-cream-100 border border-cream-200 px-3 py-2.5">
+                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Election votes</p>
+                    <p className="font-bold text-ink-900 tabular-nums">{totalVotes.toLocaleString()}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* stat strip */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-6">
-        <StatCard label="Active Gauchos" value={stats.activeUsers}  icon={Users}    accent="#febc11" />
-        <StatCard label="XP this week"   value={stats.xpThisWeek}   icon={Sparkles} accent="#ff9f5c" />
-        <StatCard label="Actions today"  value={stats.weekEvents}   icon={Star}     accent="#c44e2d" />
-        <StatCard label="Top streak"     value={`${topStreak}d`}    icon={Flame}    accent="#f0f4ff" />
+      {/* Stat strip */}
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <StatCard label="Active Gauchos" value={stats.activeUsers}  icon={Users} />
+        <StatCard label="XP this week"   value={stats.xpThisWeek}   icon={Sparkles} />
+        <StatCard label="Actions today"  value={stats.weekEvents}   icon={Activity} />
+        <StatCard label="Top streak"     value={`${topStreak}d`}    icon={Flame} />
       </section>
 
-      {/* main grid */}
+      {/* Two-column main grid */}
       <section className="grid lg:grid-cols-3 gap-4 mt-6">
         <div className="lg:col-span-2 space-y-4">
           <VibeMeter score={vibe} />
 
-          <div className="glass rounded-2xl p-5">
+          <div className="card p-5">
             <div className="flex items-baseline justify-between mb-3">
-              <h2 className="font-display text-lg">This week's leaderboard</h2>
-              <Link href="/leaderboard" className="text-sm font-semibold text-amber hover:text-coral-400">
+              <h2 className="font-display text-lg font-bold text-ink-900">This week's leaderboard</h2>
+              <Link href="/leaderboard" className="text-sm font-semibold text-orange-600 hover:text-orange-700">
                 Full board →
               </Link>
             </div>
             <LeaderboardTable rows={top} />
           </div>
+
+          <ElectionPulseCard race={race} totalVotes={totalVotes} />
         </div>
 
-        <div>
-          <div className="glass rounded-2xl p-5 sticky top-20">
+        <div className="space-y-4">
+          <div className="card p-5">
             <div className="flex items-center justify-between mb-3">
-              <h2 className="font-display text-lg">Live activity</h2>
-              <span className="flex items-center gap-1.5 text-xs text-amber">
-                <span className="w-2 h-2 rounded-full bg-kelp-400 animate-pulse-soft" />
+              <h2 className="font-display text-lg font-bold text-ink-900">Live activity</h2>
+              <span className="flex items-center gap-1.5 text-xs text-orange-600 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-orange-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
                 live
               </span>
             </div>
             <ActivityFeed initial={feed} />
+          </div>
+
+          <TrendingClassesCard rows={classes} />
+        </div>
+      </section>
+
+      {/* Closing band */}
+      <section className="card-tinted mt-10 mb-12 px-6 sm:px-10 py-10 sm:py-14 text-center relative overflow-hidden">
+        <div className="absolute -left-12 -top-12 h-44 w-44 rounded-full bg-orange-300/50 blur-3xl" />
+        <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-amber-400/40 blur-3xl" />
+        <div className="relative">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
+            Everything Gaucho. <span className="italic-accent">In one tide.</span>
+          </h2>
+          <p className="mt-3 text-ink-500 max-w-xl mx-auto">
+            Same account as the mobile app. Sign in to see your XP, badges, friends,
+            and your spot on the weekly board.
+          </p>
+          <div className="mt-6 flex justify-center gap-3">
+            <Link href="/login" className="btn-primary">
+              Sign in <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link href="/election-pulse" className="btn-secondary">
+              <Vote className="w-4 h-4 text-orange-500" /> Explore Election Pulse
+            </Link>
           </div>
         </div>
       </section>

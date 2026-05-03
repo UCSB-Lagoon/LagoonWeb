@@ -19,7 +19,6 @@ export default async function MePage() {
   const level  = me.stats?.level ?? 1;
   const streak = me.stats?.streak_days ?? 0;
 
-  // bucket the last 7 days of XP into a sparkline
   const buckets = new Map<string, number>();
   for (let i = 6; i >= 0; i--) {
     const d = new Date(); d.setDate(d.getDate() - i); d.setHours(0,0,0,0);
@@ -37,46 +36,48 @@ export default async function MePage() {
   const xpThisWeek = trend.reduce((s, p) => s + p.xp, 0);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 space-y-6">
+    <div className="max-w-5xl mx-auto px-5 py-12 space-y-6">
       <header className="flex items-center gap-5">
         <LevelBadge level={level} size="lg" />
         <div>
-          <h1 className="font-display text-4xl font-extrabold tracking-[-0.05em]">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">
             {me.profile?.display_name ?? me.profile?.full_name ?? "Welcome, Gaucho"}
           </h1>
-          <p className="text-mist/60">
+          <p className="text-ink-500 text-sm mt-1">
             {me.profile?.major_code ? `${me.profile.major_code} · ` : ""}
             {me.user.email}
           </p>
         </div>
       </header>
 
-      <div className="glass rounded-2xl p-5">
+      <div className="card p-5">
         <XpBar xp={xp} level={level} />
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="Total XP"        value={xp}            icon={Sparkles} accent="#febc11" />
-        <StatCard label="XP this week"    value={xpThisWeek}    icon={Star}     accent="#ff9f5c" />
-        <StatCard label="Current streak"  value={`${streak}d`}  icon={Flame}    accent="#c44e2d" />
-        <StatCard label="Badges earned"   value={me.badges.length} icon={Trophy} accent="#f0f4ff" />
+        <StatCard label="Total XP"        value={xp}              icon={Sparkles} />
+        <StatCard label="XP this week"    value={xpThisWeek}      icon={Star} />
+        <StatCard label="Current streak"  value={`${streak}d`}    icon={Flame} />
+        <StatCard label="Badges earned"   value={me.badges.length} icon={Trophy} />
       </div>
 
       <XpTrend data={trend} />
 
-      <section className="glass rounded-2xl p-5">
-        <h2 className="font-display text-lg mb-4">Badges</h2>
+      <section className="card p-5">
+        <h2 className="font-display text-lg font-bold text-ink-900 mb-4">Badges</h2>
         {me.badges.length === 0 ? (
-          <p className="text-mist/50 text-sm">No badges yet — earn one in the mobile app.</p>
+          <p className="text-ink-400 text-sm">No badges yet — earn one in the mobile app.</p>
         ) : (
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {me.badges.map((b: any) => {
               const cat = b.badge_catalog;
               return (
-                <li key={b.badge_id} className="rounded-xl p-3 bg-lagoon-200/5 text-center">
+                <li key={b.badge_id} className="rounded-xl p-4 bg-cream-100 border border-cream-200 text-center">
                   <div className="text-3xl">{cat?.icon ?? "🏅"}</div>
-                  <div className="text-sm font-medium mt-1">{cat?.title ?? b.badge_id}</div>
-                  <div className="text-xs text-mist/50 capitalize">{cat?.rarity}</div>
+                  <div className="text-sm font-bold text-ink-900 mt-1.5">{cat?.title ?? b.badge_id}</div>
+                  <div className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold mt-0.5">
+                    {cat?.rarity}
+                  </div>
                 </li>
               );
             })}

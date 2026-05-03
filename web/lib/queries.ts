@@ -163,6 +163,76 @@ export async function getXpStats() {
   };
 }
 
+export type ElectionPulseRace = {
+  race_title: string;
+  total_votes: number;
+  candidates: Array<{ candidate_name: string; vote_count: number; pct: number }>;
+};
+
+export async function getTopElectionRace(): Promise<ElectionPulseRace | null> {
+  const sb = (await createClient()) as any;
+  const { data: races } = await sb
+    .from("election_pulse_race_totals")
+    .select("race_key, election_slug, race_title, total_votes")
+    .order("total_votes", { ascending: false })
+    .limit(1);
+  const top = races?.[0];
+  if (!top) return null;
+  const { data: cands } = await sb
+    .from("election_pulse_candidate_totals")
+    .select("candidate_name, vote_count")
+    .eq("race_key", top.race_key)
+    .eq("election_slug", top.election_slug)
+    .order("vote_count", { ascending: false })
+    .limit(6);
+  const list = (cands ?? []) as Array<{ candidate_name: string; vote_count: number }>;
+  const total = top.total_votes || list.reduce((s, c) => s + (c.vote_count ?? 0), 0) || 1;
+  return {
+    race_title: top.race_title,
+    total_votes: top.total_votes,
+    candidates: list.map((c) => ({
+      candidate_name: c.candidate_name,
+      vote_count: c.vote_count,
+      pct: c.vote_count / total,
+    })),
+  };
+}
+
+export async function getTotalElectionVotes(): Promise<number> {
+  const sb = (await createClient()) as any;
+  const { data } = await sb.from("election_pulse_race_totals").select("total_votes");
+  return ((data ?? []) as Array<{ total_votes: number }>).reduce(
+    (s, r) => s + (r.total_votes ?? 0), 0,
+  );
+}
+
+export type TrendingClass = { course_key: string; vibes: number; mood: string };
+
+const MOOD_TO_SCORE: Record<string, number> = { great: 5, good: 4, okay: 3, meh: 2, bad: 1 };
+const SCORE_TO_LABEL = ["", "Brutal", "Heavy", "Steady", "Solid", "Loved"];
+
+export async function getTrendingClasses(limit = 5): Promise<TrendingClass[]> {
+  const sb = (await createClient()) as any;
+  const { data } = await sb
+    .from("class_vibes")
+    .select("course_key, rating");
+  const rows = (data ?? []) as Array<{ course_key: string; rating: string }>;
+  const agg = new Map<string, { n: number; sum: number }>();
+  for (const r of rows) {
+    const score = MOOD_TO_SCORE[r.rating] ?? 3;
+    const cur = agg.get(r.course_key) ?? { n: 0, sum: 0 };
+    agg.set(r.course_key, { n: cur.n + 1, sum: cur.sum + score });
+  }
+  return Array.from(agg.entries())
+    .sort((a, b) => b[1].n - a[1].n)
+    .slice(0, limit)
+    .map(([course_key, v]) => ({
+      course_key,
+      vibes: v.n,
+      mood: SCORE_TO_LABEL[Math.round(v.sum / v.n)] ?? "Steady",
+    }));
+}
+
 export async function getTopStreak() {
   const sb = (await createClient()) as any;
   const { data } = await sb

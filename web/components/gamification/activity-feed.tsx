@@ -16,12 +16,6 @@ type ActivityRow = {
   avatar_url: string | null;
 };
 
-type DiscoverableProfile = {
-  display_name: string | null;
-  avatar_url: string | null;
-  is_discoverable: boolean | null;
-};
-
 const ICON: Record<string, string> = {
   daily_check_in:   "🌅",
   planner_progress: "📅",
@@ -64,19 +58,15 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
             .select("display_name, avatar_url, is_discoverable")
             .eq("id", ev.user_id)
             .single();
-          const discoverableProfile = profile as DiscoverableProfile | null;
-          if (discoverableProfile?.is_discoverable === false) return;
-          const next: ActivityRow = {
-            id: ev.id,
-            user_id: ev.user_id,
-            source: ev.source,
-            points: ev.xp_awarded,
-            context: ev.context,
-            created_at: ev.created_at,
-            display_name: discoverableProfile?.display_name ?? "Someone",
-            avatar_url: discoverableProfile?.avatar_url ?? null,
-          };
-          setRows((r) => [next, ...r].slice(0, 30));
+          if (profile?.is_discoverable === false) return;
+          setRows((r) =>
+            [{
+              id: ev.id, user_id: ev.user_id, source: ev.source,
+              points: ev.xp_awarded, context: ev.context, created_at: ev.created_at,
+              display_name: profile?.display_name ?? "Someone",
+              avatar_url: profile?.avatar_url ?? null,
+            }, ...r].slice(0, 30),
+          );
         },
       )
       .subscribe();
@@ -84,36 +74,34 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
   }, []);
 
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-1.5">
       <AnimatePresence initial={false}>
         {rows.map((r) => (
           <motion.li
             key={r.id}
             layout
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="glass rounded-2xl px-3 py-2.5 flex items-center gap-3 hover:bg-amber/10 transition-colors"
+            transition={{ type: "spring", stiffness: 320, damping: 28 }}
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-cream-100/70 transition"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber/10 text-xl select-none ring-1 ring-amber/10">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-orange-100 border border-orange-200 text-base">
               {ICON[r.source] ?? "✨"}
             </span>
             <div className="flex-1 min-w-0">
               <p className="text-sm truncate">
-                <span className="font-medium text-mist">{r.display_name}</span>
-                <span className="text-mist/60"> {VERB[r.source] ?? r.source}</span>
+                <span className="font-semibold text-ink-900">{r.display_name}</span>
+                <span className="text-ink-500"> {VERB[r.source] ?? r.source}</span>
               </p>
-              <p className="text-xs text-mist/40">{formatRelative(r.created_at)}</p>
+              <p className="text-xs text-ink-400">{formatRelative(r.created_at)}</p>
             </div>
-            <span className="text-xs font-bold text-amber tabular-nums">
-              +{r.points}
-            </span>
+            <span className="text-xs font-bold text-orange-600 tabular-nums">+{r.points}</span>
           </motion.li>
         ))}
       </AnimatePresence>
       {rows.length === 0 && (
-        <li className="glass rounded-xl px-4 py-6 text-center text-sm text-mist/50">
+        <li className="rounded-xl px-4 py-6 text-center text-sm text-ink-400 border border-dashed border-cream-200">
           The lagoon is quiet… be the first to make a wave.
         </li>
       )}

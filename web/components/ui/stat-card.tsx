@@ -7,29 +7,23 @@ export function StatCard({
   hint,
   icon: Icon,
   className,
-  accent = "#22d3ee",
 }: {
   label: string;
   value: string | number;
   hint?: string;
   icon?: LucideIcon;
   className?: string;
-  accent?: string;
 }) {
   return (
-    <div className={cn("glass rounded-[1.35rem] p-5 relative overflow-hidden group", className)}>
-      <div
-        className="absolute -right-10 -top-10 w-36 h-36 rounded-full opacity-30 blur-2xl transition group-hover:opacity-45"
-        style={{ background: accent }}
-      />
-      <div className="relative flex items-center gap-2 text-mist/60 text-sm">
-        {Icon && <Icon className="w-4 h-4" style={{ color: accent }} />}
+    <div className={cn("card p-5", className)}>
+      <div className="flex items-center gap-2 text-ink-500 text-xs uppercase tracking-[0.18em] font-semibold">
+        {Icon && <Icon className="w-3.5 h-3.5 text-orange-500" />}
         {label}
       </div>
-      <div className="relative mt-2 text-4xl font-display font-extrabold tracking-[-0.04em] tabular-nums">
+      <div className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight text-ink-900">
         {typeof value === "number" ? value.toLocaleString() : value}
       </div>
-      {hint && <div className="relative mt-1 text-xs text-mist/50">{hint}</div>}
+      {hint && <div className="mt-1 text-xs text-ink-400">{hint}</div>}
     </div>
   );
 }

@@ -11,33 +11,33 @@ export type LeaderRow = {
   tagline: string | null;
 };
 
-const MEDAL = ["1", "2", "3"];
+const MEDAL = ["🥇", "🥈", "🥉"];
 
 export function LeaderboardTable({ rows }: { rows: LeaderRow[] }) {
   if (rows.length === 0) {
     return (
-      <div className="glass rounded-2xl p-8 text-center text-mist/50">
+      <div className="rounded-2xl border border-dashed border-cream-200 p-8 text-center text-ink-400 text-sm">
         No XP earned this week yet — the leaderboard will fill up fast.
       </div>
     );
   }
   return (
-    <ol className="space-y-1.5">
+    <ol className="divide-y divide-cream-200">
       {rows.map((r) => (
         <li
           key={r.user_id}
-          className="glass rounded-2xl flex items-center gap-3 px-4 py-3 hover:bg-amber/10 transition"
+          className="flex items-center gap-3 px-1 py-3 hover:bg-cream-100/60 rounded-xl transition"
         >
-          <span className="grid h-8 w-8 place-items-center rounded-xl bg-amber/10 text-center font-mono text-xs font-bold text-amber ring-1 ring-amber/15 tabular-nums">
-            {MEDAL[r.rank - 1] ?? r.rank}
+          <span className="w-7 text-center text-lg">
+            {MEDAL[r.rank - 1] ?? <span className="text-sm font-bold text-ink-400 tabular-nums">{r.rank}</span>}
           </span>
           <LevelBadge level={r.level} size="sm" />
           <div className="flex-1 min-w-0">
-            <p className="font-medium truncate">{r.display_name ?? "Anonymous Gaucho"}</p>
-            {r.tagline && <p className="text-xs text-mist/50 truncate">{r.tagline}</p>}
+            <p className="font-semibold text-ink-900 truncate">{r.display_name ?? "Anonymous Gaucho"}</p>
+            {r.tagline && <p className="text-xs text-ink-400 truncate uppercase tracking-wide">{r.tagline}</p>}
           </div>
-          <span className="font-bold text-amber tabular-nums">
-            {r.xp.toLocaleString()} XP
+          <span className="font-bold text-orange-600 tabular-nums">
+            {r.xp.toLocaleString()} <span className="text-xs text-ink-400 font-medium">XP</span>
           </span>
         </li>
       ))}

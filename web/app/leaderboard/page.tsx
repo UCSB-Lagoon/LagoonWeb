@@ -8,18 +8,19 @@ export const metadata = { title: "Leaderboard" };
 export default async function LeaderboardPage() {
   const rows = await getWeeklyLeaderboard(50);
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
-      <header className="mb-6 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-amber/10 text-amber ring-1 ring-amber/15">
-          <Trophy className="w-6 h-6" />
+    <div className="max-w-3xl mx-auto px-5 py-12">
+      <header className="mb-8 flex items-center gap-3">
+        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-100 border border-orange-200 text-orange-600">
+          <Trophy className="w-5 h-5" />
         </span>
-        <h1 className="font-display text-4xl font-extrabold tracking-[-0.05em]">Weekly leaderboard</h1>
+        <div>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">Weekly leaderboard</h1>
+          <p className="text-sm text-ink-500 mt-0.5">Resets every Monday · Earn XP across the Lagoon mobile app</p>
+        </div>
       </header>
-      <p className="text-mist/60 mb-6">
-        Resets every Monday. Earn XP by checking in, rating, and completing
-        challenges across UCSB.
-      </p>
-      <LeaderboardTable rows={rows} />
+      <div className="card p-4 sm:p-5">
+        <LeaderboardTable rows={rows} />
+      </div>
     </div>
   );
 }
