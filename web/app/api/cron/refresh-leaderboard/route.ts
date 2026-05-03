@@ -1,0 +1,20 @@
+import { NextResponse } from "next/server";
+import { createServerClient } from "@supabase/ssr";
+
+/**
+ * Hit by Vercel Cron every 5 min to refresh the materialized leaderboard.
+ * Configure the schedule in vercel.json. Auth via CRON_SECRET header.
+ */
+export async function GET(req: Request) {
+  if (req.headers.get("authorization") !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new NextResponse("unauthorized", { status: 401 });
+  }
+  const sb = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { cookies: { getAll: () => [], setAll: () => {} } },
+  );
+  const { error } = await sb.rpc("refresh_leaderboard_weekly");
+  if (error) return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  return NextResponse.json({ ok: true, refreshed_at: new Date().toISOString() });
+}

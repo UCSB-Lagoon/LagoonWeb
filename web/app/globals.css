@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600;1,9..144,700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-orange-50:  #fff5ec;
+  --color-orange-100: #ffe6d1;
+  --color-orange-200: #ffc9a3;
+  --color-orange-300: #ffa86d;
+  --color-orange-400: #ff924a;
+  --color-orange-500: #f08a3c;     /* primary CTA */
+  --color-orange-600: #e07530;
+  --color-orange-700: #b95b22;
+
+  --color-amber-400: #febc11;
+  --color-amber-500: #f0a800;
+
+  /* Page surfaces */
+  --color-cream-50:  #fffaf3;      /* page bg */
+  --color-cream-100: #fbf3e7;      /* secondary surface */
+  --color-cream-200: #f5e8d3;      /* divider */
+
+  /* Ink */
+  --color-ink-900: #18120b;        /* headings */
+  --color-ink-700: #2f2419;
+  --color-ink-500: #6b5b4a;
+  --color-ink-400: #8c7a66;
+  --color-ink-300: #b6a48d;
+
+  /* Accents (kept for charts) */
+  --color-kelp-400:   #4ade80;
+  --color-coral-400:  #ff7a59;
+
+  --font-sans:    "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif:   "Fraunces", ui-serif, Georgia, serif;
+}
+
+@keyframes float       { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+@keyframes pulse-soft  { 0%,100% { opacity:1 } 50% { opacity:.55 } }
+
+:root { color-scheme: light; }
+
+html, body {
+  background: var(--color-cream-50);
+  color: var(--color-ink-900);
+  min-height: 100%;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+/* dotted background, like marketing site */
+body::before {
+  content: "";
+  position: fixed; inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(24, 18, 11, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
+/* Card surface — clean white with very subtle shadow + warm border */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--color-cream-200);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 0 rgba(24, 18, 11, 0.02), 0 18px 38px -28px rgba(176, 110, 60, 0.18);
+}
+
+.card-tinted {
+  background: linear-gradient(180deg, #fff8ed, #fdf1de);
+  border: 1px solid #f3dfbe;
+  border-radius: 1.25rem;
+}
+
+/* Pill tag, like "BUILT EXCLUSIVELY FOR UCSB" */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: var(--color-orange-100);
+  color: var(--color-orange-700);
+  border: 1px solid #ffd9b3;
+}
+
+/* Italic display accent */
+.italic-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-orange-500);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Primary CTA */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 9999px;
+  background: var(--color-orange-500);
+  color: white;
+  font-weight: 600;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.18) inset,
+    0 12px 28px -10px rgba(240, 138, 60, 0.55);
+  transition: transform 120ms ease, background 160ms ease;
+}
+.btn-primary:hover { background: var(--color-orange-600); transform: translateY(-1px); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.8rem 1.3rem;
+  border-radius: 9999px;
+  background: white;
+  color: var(--color-ink-900);
+  border: 1px solid var(--color-cream-200);
+  font-weight: 600;
+  transition: background 160ms ease;
+}
+.btn-secondary:hover { background: var(--color-cream-100); }
+
+::selection { background: var(--color-orange-200); color: var(--color-ink-900); }
