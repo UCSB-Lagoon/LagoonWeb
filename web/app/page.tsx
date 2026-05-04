@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { Trophy, Sparkles, Users, Flame, ArrowRight, Vote, Activity } from "lucide-react";
+import { Trophy, Sparkles, Users, Flame, ArrowRight, Activity } from "lucide-react";
 import { ActivityFeed } from "@/components/gamification/activity-feed";
 import { LeaderboardTable } from "@/components/gamification/leaderboard-table";
 import { VibeMeter } from "@/components/gamification/vibe-meter";
 import { StatCard } from "@/components/ui/stat-card";
-import { ElectionPulseCard } from "@/components/widgets/election-pulse";
 import { TrendingClassesCard } from "@/components/widgets/trending-classes";
 import {
   getActivityFeed,
@@ -12,22 +11,18 @@ import {
   getWeeklyLeaderboard,
   getXpStats,
   getTopStreak,
-  getTopElectionRace,
-  getTotalElectionVotes,
   getTrendingClasses,
 } from "@/lib/queries";
 
 export const revalidate = 30;
 
 export default async function HomePage() {
-  const [feed, top, vibe, stats, topStreak, race, totalVotes, classes] = await Promise.all([
+  const [feed, top, vibe, stats, topStreak, classes] = await Promise.all([
     getActivityFeed(20),
     getWeeklyLeaderboard(5),
     getVibeScore(),
     getXpStats(),
     getTopStreak(),
-    getTopElectionRace(),
-    getTotalElectionVotes(),
     getTrendingClasses(5),
   ]);
 
@@ -58,7 +53,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="mt-7 flex flex-wrap gap-2 text-xs">
-              {["Grades", "Classmates", "Schedules", "Dining", "Events", "Elections"].map((t) => (
+              {["Grades", "Classmates", "Schedules", "Dining", "Events"].map((t) => (
                 <span key={t} className="rounded-full border border-cream-200 bg-white px-3 py-1.5 text-ink-500 font-medium">
                   {t}
                 </span>
@@ -93,8 +88,8 @@ export default async function HomePage() {
                     </p>
                   </div>
                   <div className="rounded-xl bg-cream-100 border border-cream-200 px-3 py-2.5">
-                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Election votes</p>
-                    <p className="font-bold text-ink-900 tabular-nums">{totalVotes.toLocaleString()}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Total XP</p>
+                    <p className="font-bold text-ink-900 tabular-nums">{stats.totalXp?.toLocaleString() ?? "—"}</p>
                   </div>
                 </div>
               </div>
@@ -126,7 +121,6 @@ export default async function HomePage() {
             <LeaderboardTable rows={top} />
           </div>
 
-          <ElectionPulseCard race={race} totalVotes={totalVotes} />
         </div>
 
         <div className="space-y-4">
@@ -160,9 +154,6 @@ export default async function HomePage() {
           <div className="mt-6 flex justify-center gap-3">
             <Link href="/login" className="btn-primary">
               Sign in <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/election-pulse" className="btn-secondary">
-              <Vote className="w-4 h-4 text-orange-500" /> Explore Election Pulse
             </Link>
           </div>
         </div>

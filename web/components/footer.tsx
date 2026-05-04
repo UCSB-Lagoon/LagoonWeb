@@ -9,7 +9,6 @@ export function Footer() {
         <p className="flex items-center gap-4">
           <a href="https://lagoonucsb.com" className="hover:text-ink-900 transition">lagoonucsb.com</a>
           <a href="/leaderboard" className="hover:text-ink-900 transition">Leaderboard</a>
-          <a href="/election-pulse" className="hover:text-ink-900 transition">Election Pulse</a>
         </p>
       </div>
     </footer>
