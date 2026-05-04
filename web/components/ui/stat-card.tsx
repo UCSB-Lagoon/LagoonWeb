@@ -15,15 +15,19 @@ export function StatCard({
   className?: string;
 }) {
   return (
-    <div className={cn("card p-5", className)}>
-      <div className="flex items-center gap-2 text-ink-500 text-xs uppercase tracking-[0.18em] font-semibold">
-        {Icon && <Icon className="w-3.5 h-3.5 text-orange-500" />}
-        {label}
+    <div className={cn("card p-5 group", className)}>
+      <div className="flex items-center gap-2 text-ink-500 text-[11px] uppercase tracking-[0.18em] font-semibold">
+        {Icon && (
+          <span className="grid h-6 w-6 place-items-center rounded-lg bg-orange-100/70 border border-orange-200/70 text-orange-600 transition-colors group-hover:bg-orange-100 group-hover:border-orange-200">
+            <Icon className="w-3 h-3" />
+          </span>
+        )}
+        <span className="leading-none">{label}</span>
       </div>
-      <div className="mt-3 font-display text-4xl font-bold tabular-nums tracking-tight text-ink-900">
+      <div className="mt-3 font-display text-[2.4rem] leading-none font-bold tabular-nums tracking-[-0.03em] text-ink-900">
         {typeof value === "number" ? value.toLocaleString() : value}
       </div>
-      {hint && <div className="mt-1 text-xs text-ink-400">{hint}</div>}
+      {hint && <div className="mt-2 text-xs text-ink-400 leading-snug">{hint}</div>}
     </div>
   );
 }

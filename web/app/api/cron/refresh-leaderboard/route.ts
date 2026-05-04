@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
 /**
- * Hit by Vercel Cron every 5 min to refresh the materialized leaderboard.
- * Configure the schedule in vercel.json. Auth via CRON_SECRET header.
+ * Backup refresher hit once a day by Vercel Cron (Hobby plan caps at daily).
+ * The primary, hourly refresh runs inside Supabase via pg_cron — see
+ * supabase/migrations/0003_pg_cron_leaderboard.sql. This route stays as a
+ * safety net + manual-trigger endpoint. Auth via CRON_SECRET header.
  */
 export async function GET(req: Request) {
   if (req.headers.get("authorization") !== `Bearer ${process.env.CRON_SECRET}`) {
