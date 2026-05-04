@@ -1,9 +1,15 @@
-import { Activity, Award, BarChart3, Flame, GraduationCap, Sparkles, TrendingUp, Users, Vote } from "lucide-react";
+import { Activity, Award, BarChart3, Flame, GraduationCap, Heart, MessageSquare, Sparkles, TrendingUp, Users, Vote } from "lucide-react";
 import { StatCard } from "@/components/ui/stat-card";
 import { BarRow } from "@/components/charts/bar-row";
 import { Donut, DonutLegend } from "@/components/charts/donut";
 import { ActivityArea } from "@/components/charts/activity-area";
-import { getStatsBundle } from "@/lib/queries";
+import {
+  getStatsBundle,
+  getStreakDistribution,
+  getTopStreaks,
+  getTrendingClasses,
+} from "@/lib/queries";
+import { badgeIconToEmoji } from "@/lib/sf-symbol-emoji";
 import {
   UCSB_UNDERGRAD_ENROLLMENT,
   prettifySource,
@@ -23,7 +29,12 @@ const RARITY_COLORS: Record<string, string> = {
 };
 
 export default async function StatsPage() {
-  const s = await getStatsBundle();
+  const [s, streakDist, topStreaks, trending] = await Promise.all([
+    getStatsBundle(),
+    getStreakDistribution(),
+    getTopStreaks(5),
+    getTrendingClasses(6),
+  ]);
 
   /* ---------- Class-level normalize + collapse ---------- */
   const classCounts = new Map<string, number>();
@@ -49,6 +60,33 @@ export default async function StatsPage() {
     label: prettifySource(src.source),
     value: src.total_xp,
     sub: `${pct(src.total_xp, totalSourceXp).toFixed(0)}% of XP`,
+  }));
+
+  /* ---------- Day-of-week activity (derived from daily) ---------- */
+  const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const dowTotals = new Array(7).fill(0) as number[];
+  const dowCounts = new Array(7).fill(0) as number[];
+  for (const d of s.daily) {
+    const dt = new Date(d.day);
+    if (isNaN(dt.getTime())) continue;
+    const w = dt.getUTCDay();
+    dowTotals[w] += d.total_xp ?? 0;
+    dowCounts[w] += 1;
+  }
+  const dowBars = DOW.map((label, i) => ({
+    label,
+    value: dowCounts[i] ? Math.round(dowTotals[i] / dowCounts[i]) : 0,
+    sub: "avg XP",
+  }));
+  const peakDow = dowBars.reduce((p, c) => (c.value > p.value ? c : p), dowBars[0]);
+
+  /* ---------- Streak buckets ---------- */
+  const streakDistTotal = streakDist.reduce((s, x) => s + x.users, 0);
+  const streakBars = streakDist.map((b, i) => ({
+    label: `${b.bucket} days`,
+    value: b.users,
+    sub: streakDistTotal ? `${pct(b.users, streakDistTotal).toFixed(0)}%` : "",
+    tone: (i === streakDist.length - 1 ? "primary" : "muted") as "primary" | "muted",
   }));
 
   /* ---------- Smart insights ---------- */
@@ -241,7 +279,7 @@ export default async function StatsPage() {
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-cream-100/70 transition"
               >
                 <span className="grid h-9 w-9 place-items-center rounded-xl bg-orange-100 border border-orange-200 text-base">
-                  {b.icon || "🏅"}
+                  {badgeIconToEmoji(b.icon)}
                 </span>
                 <div className="flex-1 min-w-0">
                   <p className="font-bold text-ink-900 truncate">{b.title}</p>
@@ -257,6 +295,138 @@ export default async function StatsPage() {
             )}
           </ul>
         </div>
+      </section>
+
+      {/* Streaks */}
+      <section className="grid lg:grid-cols-2 gap-4 mt-4">
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-1">
+            <h2 className="font-display text-lg font-bold text-ink-900">Streak distribution</h2>
+            <span className="text-xs text-ink-400">all sign-ups</span>
+          </div>
+          <p className="text-xs text-ink-400 mb-4">
+            How many consecutive days Gauchos are checking into the app.
+          </p>
+          {streakBars.every((b) => b.value === 0) ? (
+            <p className="text-sm text-ink-400">No streak data yet.</p>
+          ) : (
+            <BarRow items={streakBars} />
+          )}
+        </div>
+
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-1">
+            <h2 className="font-display text-lg font-bold text-ink-900">Top streaks</h2>
+            <span className="text-xs text-ink-400">live</span>
+          </div>
+          <p className="text-xs text-ink-400 mb-4">Longest current consecutive-day streaks.</p>
+          {topStreaks.length === 0 ? (
+            <p className="text-sm text-ink-400">No streaks yet.</p>
+          ) : (
+            <ol className="space-y-2">
+              {topStreaks.map((u, i) => (
+                <li
+                  key={u.user_id}
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-cream-100/70 transition"
+                >
+                  <span className="w-6 text-center text-base">
+                    {["🥇","🥈","🥉"][i] ?? <span className="text-sm font-bold text-ink-400 tabular-nums">{i + 1}</span>}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-ink-900 truncate">
+                      {u.display_name ?? "Anonymous Gaucho"}
+                    </p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">
+                      Lvl {u.level}{u.major ? ` · ${prettifyMajor(u.major)}` : ""}
+                    </p>
+                  </div>
+                  <span className="text-sm font-bold text-orange-600 tabular-nums">
+                    {u.streak_days}d
+                  </span>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </section>
+
+      {/* Day-of-week + Trending classes */}
+      <section className="grid lg:grid-cols-2 gap-4 mt-4">
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-1">
+            <h2 className="font-display text-lg font-bold text-ink-900">When Gauchos show up</h2>
+            <span className="text-xs text-ink-400">avg XP / day-of-week</span>
+          </div>
+          <p className="text-xs text-ink-400 mb-4">
+            Average XP earned by day of week across the last 30 days. Peak: <span className="font-semibold text-ink-700">{peakDow.label}</span>.
+          </p>
+          {s.daily.length === 0 ? (
+            <p className="text-sm text-ink-400">No activity yet.</p>
+          ) : (
+            <BarRow items={dowBars} unit=" XP" />
+          )}
+        </div>
+
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-1">
+            <h2 className="font-display text-lg font-bold text-ink-900">Trending classes</h2>
+            <span className="text-xs text-ink-400">vibes logged</span>
+          </div>
+          <p className="text-xs text-ink-400 mb-4">
+            Courses with the most class-vibe ratings from Lagoon students.
+          </p>
+          {trending.length === 0 ? (
+            <p className="text-sm text-ink-400">No vibes logged yet.</p>
+          ) : (
+            <ul className="space-y-2">
+              {trending.map((t, i) => (
+                <li
+                  key={t.course_key}
+                  className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-cream-100/70 transition"
+                >
+                  <span className="w-6 text-center text-sm font-bold text-ink-400 tabular-nums">{i + 1}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-ink-900 truncate font-mono text-sm">{t.course_key}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">
+                      {t.mood}
+                    </p>
+                  </div>
+                  <span className="text-xs font-bold text-orange-600 tabular-nums">
+                    {t.vibes} <span className="font-medium text-ink-400">vibe{t.vibes === 1 ? "" : "s"}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
+
+      {/* Community engagement totals (already collected in overview) */}
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+        <StatCard
+          label="Friendships"
+          value={ov?.friendships ?? 0}
+          icon={Heart}
+          hint="connections formed"
+        />
+        <StatCard
+          label="Class vibes"
+          value={ov?.class_vibes ?? 0}
+          icon={MessageSquare}
+          hint="ratings logged"
+        />
+        <StatCard
+          label="Election votes"
+          value={ov?.election_votes ?? 0}
+          icon={Vote}
+          hint="across all races"
+        />
+        <StatCard
+          label="Badges earned"
+          value={ov?.badges_earned ?? 0}
+          icon={Award}
+          hint="lifetime"
+        />
       </section>
 
       {/* Smart insights */}

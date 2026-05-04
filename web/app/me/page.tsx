@@ -5,6 +5,7 @@ import { XpBar } from "@/components/gamification/xp-bar";
 import { StatCard } from "@/components/ui/stat-card";
 import { XpTrend } from "@/components/charts/xp-trend";
 import { getMe } from "@/lib/queries";
+import { badgeIconToEmoji } from "@/lib/sf-symbol-emoji";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Your lagoon" };
@@ -73,7 +74,7 @@ export default async function MePage() {
               const cat = b.badge_catalog;
               return (
                 <li key={b.badge_id} className="rounded-xl p-4 bg-cream-100 border border-cream-200 text-center">
-                  <div className="text-3xl">{cat?.icon ?? "🏅"}</div>
+                  <div className="text-3xl">{badgeIconToEmoji(cat?.icon)}</div>
                   <div className="text-sm font-bold text-ink-900 mt-1.5">{cat?.title ?? b.badge_id}</div>
                   <div className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold mt-0.5">
                     {cat?.rarity}

@@ -3,32 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lagoon | The UCSB Campus App</title>
+  <title>Lagoon — UCSB Campus App for Grades, Schedule & Dining</title>
   <meta
     name="description"
-    content="Lagoon is the all-in-one UCSB campus app for schedules, dining menus, campus events, Daily Nexus news, and grade data. Built for Gauchos, by Gauchos."
+    content="Lagoon is the free UCSB student app. Real grade distributions, GOLD schedule sync, live dining menus, campus events, Daily Nexus news, and study groups — all in one place. Made by Gauchos."
   >
+  <meta name="keywords" content="UCSB, UCSB app, Lagoon UCSB, UCSB schedule, UCSB grades, UCSB dining, GOLD sync, Daily Nexus, Isla Vista, Gaucho, UCSB student app, UCSB grade distribution">
+  <meta name="author" content="Lagoon">
+  <meta name="theme-color" content="#F08A3C">
   <link rel="canonical" href="https://lagoonucsb.com/">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Lagoon">
-  <meta property="og:title" content="Lagoon | The UCSB Campus App">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Lagoon — The UCSB Campus App">
   <meta
     property="og:description"
-    content="The all-in-one app for UCSB students. Check your schedule, dining menus, campus events, Daily Nexus news, and grade data in one place."
+    content="Real grade data, GOLD schedule sync, live dining menus, campus events, Daily Nexus, and study groups — the free UCSB student app."
   >
   <meta property="og:url" content="https://lagoonucsb.com/">
   <meta property="og:image" content="https://lagoonucsb.com/og-card.svg">
+  <meta property="og:image:type" content="image/svg+xml">
+  <meta property="og:image:alt" content="Lagoon — the UCSB campus app">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Lagoon | The UCSB Campus App">
+  <meta name="twitter:title" content="Lagoon — The UCSB Campus App">
   <meta
     name="twitter:description"
-    content="The all-in-one app for UCSB students. Schedule, dining, events, campus news, and grade data in one place."
+    content="Free UCSB student app. Grades, schedule, dining, events, news, and study groups — in one place."
   >
   <meta name="twitter:image" content="https://lagoonucsb.com/og-card.svg">
+  <meta name="twitter:image:alt" content="Lagoon — the UCSB campus app">
   <link rel="icon" href="/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/logo.svg">
+  <link rel="alternate" hreflang="en" href="https://lagoonucsb.com/">
+  <link rel="alternate" hreflang="x-default" href="https://lagoonucsb.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://app.lagoonucsb.com">
+  <link rel="dns-prefetch" href="https://app.lagoonucsb.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
@@ -43,21 +56,89 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "MobileApplication",
+    "name": "Lagoon — UCSB Campus App",
+    "alternateName": "UCSB Lagoon",
+    "url": "https://lagoonucsb.com/",
+    "image": "https://lagoonucsb.com/og-card.svg",
+    "downloadUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
+    "installUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
+    "applicationCategory": "EducationApplication",
+    "applicationSubCategory": "Campus Life",
+    "operatingSystem": "iOS 16.0+",
+    "softwareVersion": "1.0",
+    "inLanguage": "en-US",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student",
+      "geographicArea": {
+        "@type": "Place",
+        "name": "University of California, Santa Barbara",
+        "address": { "@type": "PostalAddress", "addressLocality": "Santa Barbara", "addressRegion": "CA", "postalCode": "93106", "addressCountry": "US" }
+      }
+    },
+    "featureList": [
+      "Real UCSB grade distributions and A-rate data",
+      "GOLD schedule sync and quarter view",
+      "Live UCSB dining commons menus",
+      "Campus events and Daily Nexus headlines",
+      "Classmate discovery and study groups",
+      "GE requirement tracker",
+      "Class vibes and course reviews",
+      "XP, streaks, and gamification"
+    ],
+    "screenshot": "https://lagoonucsb.com/og-card.svg",
+    "publisher": { "@type": "Organization", "name": "Lagoon", "url": "https://lagoonucsb.com/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
     "name": "Lagoon",
     "url": "https://lagoonucsb.com/",
-    "applicationCategory": "LifestyleApplication",
-    "applicationSubCategory": "Education",
-    "operatingSystem": "iOS",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
-    "featureList": [
-      "GOLD schedule sync",
-      "UCSB dining menus",
-      "Campus events",
-      "Daily Nexus news",
-      "Grade distributions",
-      "Widgets and planner tools"
+    "logo": "https://lagoonucsb.com/logo.svg",
+    "sameAs": [
+      "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "University of California, Santa Barbara"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Lagoon?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Lagoon is the free all-in-one campus app for UCSB students. It combines GOLD schedule sync, real grade distribution data, live dining commons menus, campus events, Daily Nexus headlines, classmate discovery, and study groups in one app." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Lagoon free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Lagoon is free to download on the App Store and there are no paid tiers." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Lagoon sync with UCSB GOLD?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Lagoon imports your registered courses from UCSB GOLD so your schedule, attendance, and finals countdown stay accurate." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does Lagoon's grade data come from?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Grade distributions are aggregated from UCSB's publicly released grade reports — including average GPA, A-rate, and D/F-rate for over 500 courses." }
+      },
+      {
+        "@type": "Question",
+        "name": "Who can use Lagoon?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Lagoon is built exclusively for UCSB undergraduates and graduate students. Sign-in requires a valid UCSB account." }
+      }
     ]
   }
   </script>
@@ -124,6 +205,24 @@
     .nav-mid { display: flex; align-items: center; gap: 32px; }
     .nav-mid a { font-size: 13.5px; font-weight: 500; color: var(--text-dark-2); transition: color 0.2s; }
     .nav-mid a:hover { color: var(--text-dark); }
+    .nav-mid a.nav-live {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--orange-deep); font-weight: 600;
+      padding: 5px 11px; border-radius: 100px;
+      background: rgba(240,138,60,0.10);
+      border: 1px solid rgba(240,138,60,0.22);
+    }
+    .nav-mid a.nav-live:hover { background: rgba(240,138,60,0.16); color: var(--orange-deep); }
+    .nav-live-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #2ecc71;
+      box-shadow: 0 0 0 0 rgba(46,204,113,0.55);
+      animation: nav-live-pulse 1.8s ease-out infinite;
+    }
+    @keyframes nav-live-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(46,204,113,0.55); }
+      70%  { box-shadow: 0 0 0 8px rgba(46,204,113,0); }
+      100% { box-shadow: 0 0 0 0 rgba(46,204,113,0); }
+    }
     .nav-right { display: flex; align-items: center; gap: 8px; }
     .nav-explore {
       padding: 9px 18px; border-radius: 100px;
@@ -363,6 +462,86 @@
       text-transform: uppercase; color: var(--text-dark-3); margin-bottom: 10px;
     }
     .fc-dark .fc-lbl { color: rgba(248,244,238,0.32); }
+    /* ── LIVE DATA STRIP ── */
+    .live-strip {
+      max-width: 1160px; margin: 0 auto; padding: 56px 40px 0;
+    }
+    .live-card {
+      background: var(--warm-dark); color: var(--text-light);
+      border-radius: 24px; padding: 36px 40px;
+      display: grid; grid-template-columns: 1.05fr 2fr; gap: 36px; align-items: center;
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(240,138,60,0.14);
+    }
+    .live-card::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(60% 80% at 100% 0%, rgba(240,138,60,0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .live-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--orange-2); margin-bottom: 14px;
+    }
+    .live-eyebrow .ld-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #2ecc71;
+      box-shadow: 0 0 0 0 rgba(46,204,113,0.6);
+      animation: nav-live-pulse 1.8s ease-out infinite;
+    }
+    .live-h {
+      font-size: clamp(28px, 3.2vw, 40px); font-weight: 700;
+      letter-spacing: -1.2px; line-height: 1.05; color: var(--text-light);
+    }
+    .live-h em { color: var(--orange-2); font-style: italic; }
+    .live-sub {
+      font-size: 14px; color: var(--text-light-2);
+      margin: 14px 0 22px; line-height: 1.55; max-width: 420px;
+    }
+    .live-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--orange); color: #fff;
+      padding: 13px 22px; border-radius: 12px;
+      font-size: 14px; font-weight: 700;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .live-cta:hover { background: var(--orange-2); transform: translateY(-1px); }
+    .live-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
+      position: relative; z-index: 1;
+    }
+    .live-stat {
+      background: rgba(248,244,238,0.04);
+      border: 1px solid rgba(248,244,238,0.08);
+      border-radius: 16px; padding: 18px 20px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .live-stat:hover { background: rgba(240,138,60,0.07); border-color: rgba(240,138,60,0.22); }
+    .live-stat-val {
+      font-family: var(--mono);
+      font-size: 32px; font-weight: 700; color: var(--orange-2);
+      letter-spacing: -1px; line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .live-stat-lbl {
+      font-size: 11.5px; font-weight: 600; color: var(--text-light-2);
+      margin-top: 8px; letter-spacing: 0.02em;
+    }
+    .live-stat-sub {
+      font-size: 10.5px; color: var(--text-light-3);
+      margin-top: 3px; letter-spacing: 0;
+    }
+    .live-foot {
+      grid-column: 1 / -1;
+      font-size: 11px; color: var(--text-light-3);
+      margin-top: 4px; letter-spacing: 0.04em;
+      display: flex; gap: 8px; align-items: center;
+    }
+    .live-foot .ld-dot { width: 6px; height: 6px; border-radius: 50%; background: #2ecc71; }
+    @media (max-width: 880px) {
+      .live-strip { padding: 40px 20px 0; }
+      .live-card { grid-template-columns: 1fr; padding: 28px; gap: 24px; }
+    }
+
     .fc-pills { display: flex; flex-wrap: wrap; gap: 6px; }
     .fc-pill {
       font-size: 12px; font-weight: 600;
@@ -389,6 +568,54 @@
     .fc-btn-orange:hover { background: var(--orange-2); }
     .fc-btn-cream { background: #F2F1EF; color: var(--text-dark); }
     .fc-btn-cream:hover { background: #fff; }
+
+    /* Card body footer text — replaces the per-card CTA */
+    .fc-foot-text {
+      padding: 0 24px 24px;
+      font-size: 11.5px; font-weight: 600;
+      letter-spacing: 0.04em; color: var(--text-dark-3);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .fc-dark .fc-foot-text { color: rgba(248,244,238,0.42); }
+    .fc-foot-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--orange); flex-shrink: 0;
+    }
+    .fc { transition: transform 0.18s ease, box-shadow 0.18s ease; }
+    .fc:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px -22px rgba(26,20,16,0.22);
+    }
+
+    /* Single section-level CTA strip */
+    .feat-cta {
+      max-width: 1160px; margin: 40px auto 0;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 18px;
+      padding: 22px 28px; border-radius: 18px;
+      background: var(--warm-dark); color: var(--text-light);
+    }
+    .feat-cta-copy { font-size: 15.5px; font-weight: 600; letter-spacing: -0.2px; }
+    .feat-cta-sub { font-size: 12.5px; color: var(--text-light-3); margin-top: 2px; font-weight: 500; letter-spacing: 0; }
+    .feat-cta-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+    .feat-cta-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 12px 20px; border-radius: 11px;
+      font-size: 13.5px; font-weight: 700;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .feat-cta-btn-primary { background: var(--orange); color: #fff; }
+    .feat-cta-btn-primary:hover { background: var(--orange-2); transform: translateY(-1px); }
+    .feat-cta-btn-ghost {
+      background: transparent; color: var(--text-light);
+      border: 1px solid rgba(248,244,238,0.22);
+    }
+    .feat-cta-btn-ghost:hover { background: rgba(248,244,238,0.08); }
+    @media (max-width: 720px) {
+      .feat-cta { padding: 20px; }
+      .feat-cta-actions { width: 100%; }
+      .feat-cta-btn { flex: 1; justify-content: center; }
+    }
 
     /* ── SPLIT SECTIONS ── */
     .split-section { padding: 96px 40px; }
@@ -660,12 +887,12 @@
 </div>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="nav" aria-label="Primary">
   <a href="/" class="nav-logo">Lagoon</a>
   <div class="nav-mid">
     <a href="#features">Features</a>
     <a href="#classmates">Community</a>
-    <a href="https://app.lagoonucsb.com" rel="noopener">Live</a>
+    <a href="https://app.lagoonucsb.com/stats" rel="noopener" class="nav-live"><span class="nav-live-dot"></span>Live data</a>
     <a href="/guides">Guides</a>
     <a href="/company">Company</a>
   </div>
@@ -772,6 +999,44 @@
   </div>
 </div>
 
+<!-- LIVE DATA STRIP -->
+<section class="live-strip" id="live" aria-labelledby="live-h">
+  <div class="live-card r">
+    <div>
+      <div class="live-eyebrow"><span class="ld-dot"></span>Lagoon · Live</div>
+      <h2 class="live-h" id="live-h">Real Gauchos.<br/><em>Real numbers.</em></h2>
+      <p class="live-sub">Lagoon publishes anonymized, aggregate stats from the live database — no fluff, no marketing math. See how UCSB is using the app right now.</p>
+      <a href="https://app.lagoonucsb.com/stats" rel="noopener" class="live-cta">
+        Open the live dashboard
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="live-grid">
+      <div class="live-stat">
+        <div class="live-stat-val" data-live="users">—</div>
+        <div class="live-stat-lbl">Lagoon Gauchos</div>
+        <div class="live-stat-sub">signed up so far</div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-val" data-live="active">—</div>
+        <div class="live-stat-lbl">Active in last 14 days</div>
+        <div class="live-stat-sub">earned XP or checked in</div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-val" data-live="xp">—</div>
+        <div class="live-stat-lbl">Lifetime XP earned</div>
+        <div class="live-stat-sub">across all Gauchos</div>
+      </div>
+      <div class="live-stat">
+        <div class="live-stat-val" data-live="streak">—</div>
+        <div class="live-stat-lbl">Top streak</div>
+        <div class="live-stat-sub">consecutive days · current record</div>
+      </div>
+      <div class="live-foot"><span class="ld-dot"></span><span data-live-updated>Auto-refreshes from app.lagoonucsb.com</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- VALUE CARD -->
 <div class="value-wrap">
   <div class="value-card r">
@@ -828,9 +1093,7 @@
           <span class="fc-pill">500+ Courses</span>
         </div>
       </div>
-      <div class="fc-foot">
-        <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="fc-btn fc-btn-orange">Get Lagoon Free →</a>
-      </div>
+      <div class="fc-foot-text"><span class="fc-foot-dot"></span>500+ courses · updated each quarter</div>
     </div>
 
     <!-- Card 2: Smart Schedule -->
@@ -849,9 +1112,7 @@
           <span class="fc-pill">Quarter View</span>
         </div>
       </div>
-      <div class="fc-foot">
-        <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="fc-btn fc-btn-orange">Get Lagoon Free →</a>
-      </div>
+      <div class="fc-foot-text"><span class="fc-foot-dot"></span>Syncs straight from UCSB GOLD</div>
     </div>
 
     <!-- Card 3: Campus Life -->
@@ -870,9 +1131,7 @@
           <span class="fc-pill">GE Tracker</span>
         </div>
       </div>
-      <div class="fc-foot">
-        <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="fc-btn fc-btn-orange">Get Lagoon Free →</a>
-      </div>
+      <div class="fc-foot-text"><span class="fc-foot-dot"></span>Live from dining commons & Daily Nexus</div>
     </div>
 
     <!-- Card 4: Your People (dark) -->
@@ -891,9 +1150,19 @@
           <span class="fc-pill">Class Vibes</span>
         </div>
       </div>
-      <div class="fc-foot">
-        <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="fc-btn fc-btn-cream">Get Lagoon Free →</a>
-      </div>
+      <div class="fc-foot-text"><span class="fc-foot-dot"></span>XP, badges, and study groups built in</div>
+    </div>
+  </div>
+
+  <!-- Section-level CTA — replaces the four repeated card buttons -->
+  <div class="feat-cta r d2">
+    <div>
+      <div class="feat-cta-copy">Everything above. One free download.</div>
+      <div class="feat-cta-sub">Free on iPhone · No account required to browse</div>
+    </div>
+    <div class="feat-cta-actions">
+      <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="feat-cta-btn feat-cta-btn-primary">↓ Get Lagoon Free</a>
+      <a href="https://app.lagoonucsb.com/stats" rel="noopener" class="feat-cta-btn feat-cta-btn-ghost">See live data →</a>
     </div>
   </div>
 </section>
@@ -1119,6 +1388,38 @@
   }, { threshold: 0.07, rootMargin: '0px 0px -24px 0px' });
   document.querySelectorAll('.r,.rl,.rr').forEach(el => io.observe(el));
   document.querySelectorAll('#hero .r, #hero .rl, #hero .rr').forEach(el => el.classList.add('on'));
+
+  // Live data — fetch anonymized aggregate stats from app.lagoonucsb.com.
+  // Falls back silently to em-dashes if the API is unreachable.
+  (function () {
+    const targets = document.querySelectorAll('[data-live]');
+    if (!targets.length) return;
+    const fmt = (n) => {
+      if (n == null || isNaN(n)) return '—';
+      if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+      if (n >= 10_000)    return (n / 1_000).toFixed(0) + 'k';
+      if (n >= 1_000)     return (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
+      return Number(n).toLocaleString();
+    };
+    fetch('https://app.lagoonucsb.com/api/public/stats', { cache: 'no-store' })
+      .then((r) => r.ok ? r.json() : null)
+      .then((d) => {
+        if (!d) return;
+        const map = {
+          users:  fmt(d.total_users),
+          active: fmt(d.active_users_14d),
+          xp:     fmt(d.lifetime_xp),
+          streak: d.top_streak != null ? d.top_streak + 'd' : '—',
+        };
+        targets.forEach((el) => {
+          const k = el.getAttribute('data-live');
+          if (map[k]) el.textContent = map[k];
+        });
+        const updated = document.querySelector('[data-live-updated]');
+        if (updated) updated.textContent = 'Live · refreshed just now';
+      })
+      .catch(() => {});
+  })();
 </script>
 </body>
 </html>

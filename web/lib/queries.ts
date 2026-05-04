@@ -96,6 +96,39 @@ export async function getWeeklyLeaderboard(limit = 10): Promise<LeaderRow[]> {
   });
 }
 
+export async function getAllTimeLeaderboard(limit = 50): Promise<LeaderRow[]> {
+  const sb = (await createClient()) as any;
+  const { data: stats } = await sb
+    .from("user_gamification_profiles")
+    .select("user_id, xp_total, level")
+    .order("xp_total", { ascending: false })
+    .limit(limit);
+
+  const rows = (stats ?? []) as Array<{ user_id: string; xp_total: number; level: number }>;
+  if (rows.length === 0) return [];
+
+  const ids = rows.map((r) => r.user_id);
+  const { data: profiles } = await sb
+    .from("user_profiles")
+    .select("id, display_name, full_name, avatar_url, major_code")
+    .in("id", ids);
+  const pMap = new Map((profiles as ProfileRow[] | null)?.map((p) => [p.id, p]));
+
+  return rows.map((r, i) => {
+    const p = pMap.get(r.user_id);
+    return {
+      user_id: r.user_id,
+      rank: i + 1,
+      xp: r.xp_total,
+      total_xp: r.xp_total,
+      level: r.level ?? 1,
+      display_name: p?.display_name ?? p?.full_name ?? null,
+      avatar_url: p?.avatar_url ?? null,
+      tagline: p?.major_code ?? null,
+    };
+  });
+}
+
 export async function getVibeScore(): Promise<number> {
   const sb = (await createClient()) as any;
   const since1h  = new Date(Date.now() - 3600_000).toISOString();
@@ -263,6 +296,56 @@ export async function getStatsBundle() {
     topBadges:   (topBadges.data ?? []) as Array<{ badge_id: string; title: string; icon: string; rarity: string; earned_count: number }>,
     election:    (election.data ?? null) as { distinct_voters: number; total_votes: number; race_count: number } | null,
   };
+}
+
+export async function getStreakDistribution(): Promise<Array<{ bucket: string; users: number }>> {
+  const sb = (await createClient()) as any;
+  const { data } = await sb
+    .from("user_gamification_profiles")
+    .select("streak_days");
+  const rows = (data ?? []) as Array<{ streak_days: number | null }>;
+  const buckets = [
+    { label: "0",       min: 0,  max: 0   },
+    { label: "1–2",     min: 1,  max: 2   },
+    { label: "3–6",     min: 3,  max: 6   },
+    { label: "7–13",    min: 7,  max: 13  },
+    { label: "14–29",   min: 14, max: 29  },
+    { label: "30+",     min: 30, max: 1e9 },
+  ];
+  return buckets.map((b) => ({
+    bucket: b.label,
+    users: rows.filter((r) => {
+      const s = r.streak_days ?? 0;
+      return s >= b.min && s <= b.max;
+    }).length,
+  }));
+}
+
+export async function getTopStreaks(limit = 5): Promise<Array<{ user_id: string; streak_days: number; display_name: string | null; level: number; major: string | null; }>> {
+  const sb = (await createClient()) as any;
+  const { data: tops } = await sb
+    .from("user_gamification_profiles")
+    .select("user_id, streak_days, level")
+    .order("streak_days", { ascending: false })
+    .limit(limit);
+  const rows = (tops ?? []) as Array<{ user_id: string; streak_days: number; level: number }>;
+  if (rows.length === 0) return [];
+  const ids = rows.map((r) => r.user_id);
+  const { data: profiles } = await sb
+    .from("user_profiles")
+    .select("id, display_name, full_name, major_code")
+    .in("id", ids);
+  const pMap = new Map((profiles as ProfileRow[] | null)?.map((p) => [p.id, p]));
+  return rows.map((r) => {
+    const p = pMap.get(r.user_id);
+    return {
+      user_id: r.user_id,
+      streak_days: r.streak_days,
+      display_name: p?.display_name ?? p?.full_name ?? null,
+      level: r.level ?? 1,
+      major: p?.major_code ?? null,
+    };
+  });
 }
 
 export async function getTopStreak() {

@@ -80,10 +80,10 @@ export default async function HomePage() {
                 </div>
                 <p className="font-serif italic text-3xl text-ink-900 leading-tight">
                   {stats.activeUsers} Gauchos<br />
-                  <span className="text-orange-500">in the lagoon</span>
+                  <span className="text-orange-500">earning XP</span>
                 </p>
                 <p className="mt-3 text-sm text-ink-500">
-                  {stats.xpThisWeek.toLocaleString()} XP earned this week · top streak {topStreak} days
+                  {stats.weekEvents.toLocaleString()} actions in the last 24h · top streak {topStreak} days
                 </p>
                 <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
                   <div className="rounded-xl bg-cream-100 border border-cream-200 px-3 py-2.5">
@@ -105,10 +105,10 @@ export default async function HomePage() {
 
       {/* Stat strip */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="Active Gauchos" value={stats.activeUsers}  icon={Users} />
-        <StatCard label="XP this week"   value={stats.xpThisWeek}   icon={Sparkles} />
-        <StatCard label="Actions today"  value={stats.weekEvents}   icon={Activity} />
-        <StatCard label="Top streak"     value={`${topStreak}d`}    icon={Flame} />
+        <StatCard label="XP earners"     value={stats.activeUsers}  icon={Users}    hint="Gauchos with any XP" />
+        <StatCard label="XP this week"   value={stats.xpThisWeek}   icon={Sparkles} hint="resets every Monday" />
+        <StatCard label="Actions (24h)"  value={stats.weekEvents}   icon={Activity} hint="across the whole app" />
+        <StatCard label="Top streak"     value={`${topStreak}d`}    icon={Flame}    hint="current record" />
       </section>
 
       {/* Two-column main grid */}
