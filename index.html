@@ -876,6 +876,71 @@
       .split-section { padding: 72px 20px; }
       #features { padding: 72px 20px; }
     }
+
+    /* ── DARK MODE ── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:          #120d07;
+        --bg-2:        #1a1209;
+        --warm-dark:   #221709;
+        --warm-dark-2: #2c200d;
+        --text-dark:   #ede2ce;
+        --text-dark-2: rgba(237,226,206,0.68);
+        --text-dark-3: rgba(237,226,206,0.36);
+        --orange-mist: rgba(240,138,60,0.13);
+      }
+
+      #nav {
+        background: rgba(18,13,7,0.90);
+        border-bottom-color: rgba(237,226,206,0.07);
+      }
+      .nav-explore {
+        border-color: rgba(237,226,206,0.16);
+        color: var(--text-dark);
+      }
+      .nav-explore:hover { background: rgba(237,226,206,0.06); border-color: rgba(237,226,206,0.28); }
+
+      #hero::before {
+        background-image: radial-gradient(circle, rgba(237,226,206,0.045) 1px, transparent 1px);
+      }
+      .btn-outline {
+        border-color: rgba(237,226,206,0.18);
+        color: var(--text-dark);
+      }
+      .btn-outline:hover { border-color: rgba(237,226,206,0.32); background: rgba(237,226,206,0.05); }
+
+      .hero-stats { border-top-color: rgba(237,226,206,0.09); }
+
+      .logo-strip {
+        border-top-color: rgba(237,226,206,0.07);
+        border-bottom-color: rgba(237,226,206,0.07);
+      }
+      .ls-item { color: rgba(237,226,206,0.28); }
+      .ls-dot { background: rgba(237,226,206,0.14); }
+
+      /* Feature cards — white → dark surface */
+      .fc {
+        background: #1c1409;
+        border-color: rgba(237,226,206,0.08);
+      }
+      .fc:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
+      .fc-blurb { color: var(--text-dark-2); }
+      .fc-lbl { color: var(--text-dark-3); }
+      .fc-foot-text { color: var(--text-dark-3); }
+      .fc-btn-cream { background: #261b0e; color: var(--text-dark); }
+      .fc-btn-cream:hover { background: #2e2010; }
+
+      /* Split sections */
+      .split-section.light, .split-section.light-2 { background: var(--bg); }
+      .split-vis { background: #1c1409; border-color: rgba(237,226,206,0.07); }
+      .split-section.light .av,
+      .split-section.light-2 .av { border-color: #1c1409; }
+      .split-section.light .av-n,
+      .split-section.light-2 .av-n { border-color: #1c1409; background: var(--bg-2); color: var(--text-dark-3); }
+
+      /* Guides */
+      .guide-item { border-bottom-color: rgba(237,226,206,0.07); }
+    }
   </style>
 </head>
 <body>

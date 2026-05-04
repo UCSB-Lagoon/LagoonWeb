@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Trophy, Target, Map, User, BarChart3 } from "lucide-react";
+import { ThemeToggle } from "./theme-toggle";
 
 const links = [
   { href: "/leaderboard",   label: "Leaderboard", icon: Trophy },
@@ -43,7 +44,10 @@ export function Navbar() {
               </Link>
             </li>
           ))}
-          <li className="ml-2">
+          <li>
+            <ThemeToggle />
+          </li>
+          <li className="ml-1">
             <Link href="/login" className="btn-primary !py-2 !px-4 text-sm">Get the App</Link>
           </li>
         </ul>

@@ -181,3 +181,61 @@ body::before {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* ── Dark mode ── */
+/* Enable class-based dark: variants in Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  color-scheme: dark;
+
+  --color-cream-50:  #141009;
+  --color-cream-100: #1e160b;
+  --color-cream-200: #302011;
+
+  --color-ink-900: #ede2ce;
+  --color-ink-700: #d0bfa0;
+  --color-ink-500: #9a8268;
+  --color-ink-400: #7a6450;
+  --color-ink-300: #5a4c3c;
+}
+
+.dark html,
+.dark body {
+  background: var(--color-cream-50);
+  color: var(--color-ink-900);
+}
+
+.dark .card {
+  background: #1c1409;
+  border-color: #2e2011;
+  box-shadow:
+    0 1px 0 rgba(255, 220, 160, 0.03),
+    0 22px 40px -28px rgba(0, 0, 0, 0.5);
+}
+.dark .card:hover {
+  border-color: rgba(240, 138, 60, 0.28);
+  box-shadow:
+    0 1px 0 rgba(255, 220, 160, 0.04),
+    0 28px 50px -28px rgba(0, 0, 0, 0.65);
+}
+
+.dark .card-tinted {
+  background: linear-gradient(180deg, #231808, #1c1307);
+  border-color: #3a2510;
+}
+
+.dark .btn-secondary {
+  background: #241a0c;
+  border-color: #3a2813;
+  color: var(--color-ink-900);
+}
+.dark .btn-secondary:hover {
+  background: #2d2010;
+  border-color: rgba(240, 138, 60, 0.35);
+}
+
+/* Dotted background — lighter in dark mode */
+.dark body::before {
+  background-image: radial-gradient(rgba(240, 210, 160, 0.045) 1px, transparent 1px);
+}
