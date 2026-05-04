@@ -1,43 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600;1,9..144,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600;1,9..144,700&display=swap");
 @import "tailwindcss";
 
 @theme {
-  /* Brand */
+  /* ── Brand orange — unified with the marketing site (lagoonucsb.com) ── */
   --color-orange-50:  #fff5ec;
   --color-orange-100: #ffe6d1;
   --color-orange-200: #ffc9a3;
-  --color-orange-300: #ffa86d;
+  --color-orange-300: #ff9f5c;     /* light accent (was #ffa86d) */
   --color-orange-400: #ff924a;
-  --color-orange-500: #f08a3c;     /* primary CTA */
-  --color-orange-600: #e07530;
+  --color-orange-500: #f08a3c;     /* primary CTA — same hex as marketing */
+  --color-orange-600: #d9701f;     /* deeper, matches marketing --orange-deep */
   --color-orange-700: #b95b22;
 
   --color-amber-400: #febc11;
   --color-amber-500: #f0a800;
 
-  /* Page surfaces */
-  --color-cream-50:  #fffaf3;      /* page bg */
-  --color-cream-100: #fbf3e7;      /* secondary surface */
-  --color-cream-200: #f5e8d3;      /* divider */
+  /* ── Page surfaces — warmer, matched to marketing palette ── */
+  --color-cream-50:  #faf6ee;      /* page bg — warmer than the prior #fffaf3 */
+  --color-cream-100: #f4ecdb;      /* secondary surface */
+  --color-cream-200: #ead9bf;      /* divider */
 
-  /* Ink */
-  --color-ink-900: #18120b;        /* headings */
-  --color-ink-700: #2f2419;
+  /* ── Ink / text ── */
+  --color-ink-900: #1e1410;        /* headings — matches marketing --warm-dark */
+  --color-ink-700: #2a1a0f;
   --color-ink-500: #6b5b4a;
   --color-ink-400: #8c7a66;
   --color-ink-300: #b6a48d;
 
-  /* Accents (kept for charts) */
+  /* ── Chart accents ── */
   --color-kelp-400:   #4ade80;
   --color-coral-400:  #ff7a59;
 
-  --font-sans:    "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  /* ── Type stack ── */
+  --font-sans:    "Space Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:    "Space Mono", ui-monospace, SFMono-Regular, "Menlo", monospace;
   --font-serif:   "Fraunces", ui-serif, Georgia, serif;
 }
 
 @keyframes float       { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
 @keyframes pulse-soft  { 0%,100% { opacity:1 } 50% { opacity:.55 } }
+@keyframes live-pulse  {
+  0%   { box-shadow: 0 0 0 0 rgba(46,204,113,0.55); }
+  70%  { box-shadow: 0 0 0 8px rgba(46,204,113,0); }
+  100% { box-shadow: 0 0 0 0 rgba(46,204,113,0); }
+}
 
 :root { color-scheme: light; }
 
@@ -47,25 +54,43 @@ html, body {
   min-height: 100%;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   letter-spacing: -0.01em;
+  font-feature-settings: "ss01", "ss02", "cv11";
 }
 
-/* dotted background, like marketing site */
+/* Always use proportional-numeric tabular figures where we apply `tabular-nums` */
+.tabular-nums { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+/* Dotted background, like marketing site */
 body::before {
   content: "";
   position: fixed; inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(24, 18, 11, 0.06) 1px, transparent 1px);
-  background-size: 22px 22px;
+  pointer-events: none; z-index: -1;
+  background-image: radial-gradient(rgba(30, 20, 16, 0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
   mask-image: linear-gradient(to bottom, black, transparent 92%);
 }
 
-/* Card surface — clean white with very subtle shadow + warm border */
+/* ── Card surface ── */
 .card {
   background: #ffffff;
   border: 1px solid var(--color-cream-200);
   border-radius: 1.25rem;
-  box-shadow: 0 1px 0 rgba(24, 18, 11, 0.02), 0 18px 38px -28px rgba(176, 110, 60, 0.18);
+  box-shadow:
+    0 1px 0 rgba(30, 20, 16, 0.02),
+    0 22px 40px -28px rgba(176, 110, 60, 0.18);
+  transition: transform 200ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 200ms cubic-bezier(.2,.7,.2,1),
+              border-color 160ms ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(240, 138, 60, 0.28);
+  box-shadow:
+    0 1px 0 rgba(30, 20, 16, 0.03),
+    0 28px 50px -28px rgba(176, 110, 60, 0.28);
 }
 
 .card-tinted {
@@ -99,20 +124,36 @@ body::before {
   letter-spacing: -0.02em;
 }
 
-/* Primary CTA */
+/* Live status pulse, used in nav + hero "Right now" cards */
+.live-dot {
+  width: 8px; height: 8px; border-radius: 9999px; background: #2ecc71;
+  box-shadow: 0 0 0 0 rgba(46,204,113,0.55);
+  animation: live-pulse 1.8s ease-out infinite;
+  display: inline-block; flex-shrink: 0;
+}
+
+/* ── Buttons ── */
 .btn-primary {
   display: inline-flex; align-items: center; gap: 0.55rem;
   padding: 0.85rem 1.4rem;
   border-radius: 9999px;
   background: var(--color-orange-500);
   color: white;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.005em;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.18) inset,
     0 12px 28px -10px rgba(240, 138, 60, 0.55);
-  transition: transform 120ms ease, background 160ms ease;
+  transition: transform 140ms cubic-bezier(.2,.7,.2,1), background 160ms ease, box-shadow 200ms ease;
 }
-.btn-primary:hover { background: var(--color-orange-600); transform: translateY(-1px); }
+.btn-primary:hover {
+  background: var(--color-orange-600);
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.22) inset,
+    0 16px 32px -10px rgba(217, 112, 31, 0.55);
+}
+.btn-primary:active { transform: translateY(0); }
 
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 0.55rem;
@@ -122,8 +163,21 @@ body::before {
   color: var(--color-ink-900);
   border: 1px solid var(--color-cream-200);
   font-weight: 600;
-  transition: background 160ms ease;
+  transition: background 160ms ease, border-color 160ms ease;
 }
-.btn-secondary:hover { background: var(--color-cream-100); }
+.btn-secondary:hover {
+  background: var(--color-cream-100);
+  border-color: rgba(240, 138, 60, 0.32);
+}
 
 ::selection { background: var(--color-orange-200); color: var(--color-ink-900); }
+
+/* Default tabular numbers in headings (most stat values are headings) */
+.font-display { font-feature-settings: "tnum" 1, "ss01", "ss02"; }
+
+/* Focus visible — use orange ring instead of browser default */
+:focus-visible {
+  outline: 2px solid var(--color-orange-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
