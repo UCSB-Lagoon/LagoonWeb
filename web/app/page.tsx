@@ -41,7 +41,7 @@ export default async function HomePage() {
               UCSB <span className="italic-accent">deserves.</span>
             </h1>
             <p className="mt-6 text-lg text-ink-500 max-w-xl leading-relaxed">
-              Real-time leaderboards, campus elections, class vibes, and gamified daily
+              Real-time leaderboards, class vibes, and gamified daily
               life — built on the same data powering the Lagoon mobile app.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">

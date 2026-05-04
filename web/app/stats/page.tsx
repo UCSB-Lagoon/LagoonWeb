@@ -1,4 +1,4 @@
-import { Activity, Award, BarChart3, Flame, GraduationCap, Heart, MessageSquare, Sparkles, TrendingUp, Users, Vote } from "lucide-react";
+import { Activity, Award, BarChart3, Flame, GraduationCap, Heart, MessageSquare, Sparkles, TrendingUp, Users } from "lucide-react";
 import { StatCard } from "@/components/ui/stat-card";
 import { BarRow } from "@/components/charts/bar-row";
 import { Donut, DonutLegend } from "@/components/charts/donut";
@@ -137,11 +137,6 @@ export default async function StatsPage() {
         ? `${topMajor.users} of ${declaredCount} declared users are in ${prettifyMajor(topMajor.major_code)}. ${(s.majors.find(m=>m.major_code==="Undeclared")?.users ?? 0)} more haven't picked one yet.`
         : `${(s.majors.find(m=>m.major_code==="Undeclared")?.users ?? 0)} users are still undeclared.`,
       icon: Award,
-    },
-    {
-      title: `Election Pulse has logged ${s.election?.total_votes.toLocaleString() ?? 0} votes`,
-      body: `Across ${s.election?.race_count ?? 0} races. Anonymous votes — students vote in many races each, so distinct voters are lower than total.`,
-      icon: Vote,
     },
   ];
 
@@ -414,12 +409,6 @@ export default async function StatsPage() {
           value={ov?.class_vibes ?? 0}
           icon={MessageSquare}
           hint="ratings logged"
-        />
-        <StatCard
-          label="Election votes"
-          value={ov?.election_votes ?? 0}
-          icon={Vote}
-          hint="across all races"
         />
         <StatCard
           label="Badges earned"
