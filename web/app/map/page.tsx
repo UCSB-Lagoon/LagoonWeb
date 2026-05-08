@@ -1,5 +1,5 @@
 import { Map as MapIcon } from "lucide-react";
-import { CampusMap } from "@/components/map/campus-map";
+import { CampusMap } from "@/components/map/campus-map-loader";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata = { title: "Campus map" };
