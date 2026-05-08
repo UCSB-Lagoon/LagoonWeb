@@ -13,8 +13,10 @@
   "dependencies": {
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.46.1",
+    "@types/leaflet": "^1.9.21",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.460.0",
     "next": "^15.5.0",
     "react": "^19.0.0",

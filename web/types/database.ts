@@ -135,6 +135,20 @@ export type Database = {
     };
     Functions: {
       refresh_leaderboard_weekly: { Args: Record<string, never>; Returns: void };
+      get_visible_user_locations: {
+        Args: { within_minutes?: number };
+        Returns: {
+          user_id: string | null;
+          is_friend: boolean;
+          is_self: boolean;
+          latitude: number;
+          longitude: number;
+          horizontal_accuracy_m: number | null;
+          status_emoji: string | null;
+          status_text: string | null;
+          updated_at: string;
+        }[];
+      };
     };
     Enums: Record<string, never>;
   };

@@ -53,7 +53,7 @@ export default async function HomePage() {
               </Link>
             </div>
             <div className="mt-7 flex flex-wrap gap-2 text-xs">
-              {["Grades", "Classmates", "Schedules", "Dining", "Events"].map((t) => (
+              {["Grades", "Schedules", "Live map", "Classmates", "Dining", "Events"].map((t) => (
                 <span key={t} className="rounded-full border border-cream-200 bg-white px-3 py-1.5 text-ink-500 font-medium">
                   {t}
                 </span>

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lagoon — UCSB Campus App for Grades, Schedule & Dining</title>
+  <title>Lagoon — UCSB Campus App for Grades, Schedule, Dining & Live Map</title>
   <meta
     name="description"
-    content="Lagoon is the free UCSB student app. Real grade distributions, GOLD schedule sync, live dining menus, campus events, Daily Nexus news, and study groups — all in one place. Made by Gauchos."
+    content="Lagoon is the free UCSB student app. Real grade distributions, GOLD schedule sync, live dining menus, a live campus map showing friends nearby, campus events, Daily Nexus news, and study groups — all in one place. Made by Gauchos."
   >
   <meta name="keywords" content="UCSB, UCSB app, Lagoon UCSB, UCSB schedule, UCSB grades, UCSB dining, GOLD sync, Daily Nexus, Isla Vista, Gaucho, UCSB student app, UCSB grade distribution">
   <meta name="author" content="Lagoon">
@@ -83,6 +83,7 @@
       "Real UCSB grade distributions and A-rate data",
       "GOLD schedule sync and quarter view",
       "Live UCSB dining commons menus",
+      "Live campus map with friends and anonymous pins",
       "Campus events and Daily Nexus headlines",
       "Classmate discovery and study groups",
       "GE requirement tracker",
@@ -980,7 +981,7 @@
         app UCSB<br/>
         <em>deserves.</em>
       </h1>
-      <p class="hero-desc r d2">Grades, classmates, schedules, dining, events — everything that makes Gaucho life easier, together in one beautifully crafted app.</p>
+      <p class="hero-desc r d2">Grades, schedules, classmates, dining, events, and a live campus map — everything that makes Gaucho life easier, in one beautifully crafted app.</p>
       <div class="hero-btns r d3">
         <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="btn-primary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6 6 6-6"/><path d="M3 20h18"/></svg>
@@ -1036,6 +1037,7 @@
   <div class="ls-track">
     <div class="ls-inner">
       <span class="ls-item">GOLD Sync</span><span class="ls-dot"></span>
+      <span class="ls-item">Live Campus Map</span><span class="ls-dot"></span>
       <span class="ls-item">Grade Data</span><span class="ls-dot"></span>
       <span class="ls-item">Dining Menus</span><span class="ls-dot"></span>
       <span class="ls-item">Campus Events</span><span class="ls-dot"></span>
@@ -1049,6 +1051,7 @@
       <span class="ls-item">Attendance Tracking</span><span class="ls-dot"></span>
       <!-- duplicate for infinite loop -->
       <span class="ls-item">GOLD Sync</span><span class="ls-dot"></span>
+      <span class="ls-item">Live Campus Map</span><span class="ls-dot"></span>
       <span class="ls-item">Grade Data</span><span class="ls-dot"></span>
       <span class="ls-item">Dining Menus</span><span class="ls-dot"></span>
       <span class="ls-item">Campus Events</span><span class="ls-dot"></span>
@@ -1183,20 +1186,20 @@
     <!-- Card 3: Campus Life -->
     <div class="fc r d2">
       <div class="fc-top">
-        <span class="fc-illus">🍽️</span>
+        <span class="fc-illus">🗺️</span>
         <div class="fc-name">Campus Life</div>
-        <div class="fc-blurb">Real-time dining menus, campus events, and Daily Nexus news — all in one place.</div>
+        <div class="fc-blurb">Live campus map, real-time dining menus, events, and Daily Nexus news — all in one place.</div>
       </div>
       <div class="fc-body">
         <div class="fc-lbl">Includes:</div>
         <div class="fc-pills">
+          <span class="fc-pill">Live Map</span>
           <span class="fc-pill">Dining Menus</span>
           <span class="fc-pill">Campus Events</span>
           <span class="fc-pill">Daily Nexus</span>
-          <span class="fc-pill">GE Tracker</span>
         </div>
       </div>
-      <div class="fc-foot-text"><span class="fc-foot-dot"></span>Live from dining commons & Daily Nexus</div>
+      <div class="fc-foot-text"><span class="fc-foot-dot"></span>30 buildings · live friends · live menus</div>
     </div>
 
     <!-- Card 4: Your People (dark) -->
@@ -1336,6 +1339,45 @@
         <li><div class="chk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Major-specific badges — Chem, CS, Econ, Physics</li>
         <li><div class="chk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Quarter Wrapped — your personal year in review</li>
       </ul>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE MAP SPLIT -->
+<div class="split-section dark" id="live-map">
+  <div class="split-inner rev">
+    <div class="rl d1">
+      <span class="s-eyebrow">New · Live campus map</span>
+      <h2>See who's <br/><strong>on campus.</strong></h2>
+      <p class="s-lead">Friends show up as named pins. Everyone else stays anonymous. The map updates every 30 seconds, with privacy you can actually trust — your location is opt-in and never visible to strangers by name.</p>
+      <ul class="s-checks">
+        <li><div class="chk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--orange-2)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>30 UCSB buildings — academic, dining, rec, housing</li>
+        <li><div class="chk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--orange-2)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Friends named, strangers anonymized server-side</li>
+        <li><div class="chk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--orange-2)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Walking directions to any building, one tap</li>
+      </ul>
+      <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="https://app.lagoonucsb.com/map" rel="noopener" class="btn-outline">Open the web map →</a>
+      </div>
+    </div>
+    <div class="split-vis rr">
+      <div class="cm-vis" style="position:relative;overflow:hidden;">
+        <div class="cm-head">UCSB · Live</div>
+        <div class="cm-sub">12 friends nearby · 84 on campus</div>
+        <div style="position:relative;margin-top:14px;height:220px;border-radius:13px;background:linear-gradient(135deg,#3f5d3a 0%,#5a7a52 50%,#8aa07c 100%);overflow:hidden;">
+          <div style="position:absolute;top:38%;left:22%;width:14px;height:14px;border-radius:50%;background:#F08A3C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+          <div style="position:absolute;top:55%;left:48%;width:14px;height:14px;border-radius:50%;background:#F08A3C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+          <div style="position:absolute;top:30%;left:70%;width:14px;height:14px;border-radius:50%;background:#F08A3C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+          <div style="position:absolute;top:62%;left:32%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
+          <div style="position:absolute;top:42%;left:58%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
+          <div style="position:absolute;top:72%;left:62%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
+          <div style="position:absolute;top:24%;left:42%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
+          <div style="position:absolute;top:50%;left:78%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
+          <div style="position:absolute;top:18%;left:60%;width:18px;height:18px;border-radius:50%;background:#1F4E79;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">📘</div>
+          <div style="position:absolute;top:48%;left:28%;width:18px;height:18px;border-radius:50%;background:#3A8C5A;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">🍽</div>
+          <div style="position:absolute;top:65%;left:75%;width:18px;height:18px;border-radius:50%;background:#E0A50C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">🏃</div>
+          <div style="position:absolute;bottom:8px;right:8px;font-size:9px;color:rgba(255,255,255,.6);font-family:var(--mono);letter-spacing:.05em;">UCSB · 34.41°N</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
