@@ -129,13 +129,16 @@ export function CampusMap({ signedIn }: Props) {
       try {
         const { createClient } = await import("@/lib/supabase/client");
         const sb = createClient();
-        const { data, error } = await sb.rpc("get_visible_user_locations", { within_minutes: 30 });
+        // RPC defined in iOS app's Supabase migration 067; cast to bypass narrow generated types.
+        const { data, error } = await (sb as unknown as {
+          rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: LiveLocation[] | null; error: { message: string } | null }>;
+        }).rpc("get_visible_user_locations", { within_minutes: 30 });
         if (cancelled) return;
         if (error) {
           setPeopleErr(error.message);
           return;
         }
-        setPeople((data ?? []) as LiveLocation[]);
+        setPeople(data ?? []);
         setPeopleErr(null);
       } catch (e) {
         if (!cancelled) setPeopleErr(e instanceof Error ? e.message : "Failed to load");
