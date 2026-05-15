@@ -15,4 +15,5 @@ web/supabase/.temp/
 
 # OS / editor
 .DS_Store
+**/.DS_Store
 *.swp

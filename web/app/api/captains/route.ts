@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 import { cookies, headers } from "next/headers";
+import type { Database } from "@/types/database";
+
+type CaptainInsert = Database["public"]["Tables"]["captain_applications"]["Insert"];
 
 /**
  * POST /api/captains — captain-program application submissions.
@@ -40,7 +43,7 @@ export async function POST(req: Request) {
   const ua = hdrs.get("user-agent") || null;
   const ip = hdrs.get("x-forwarded-for")?.split(",")[0].trim() || null;
 
-  const record = {
+  const record: CaptainInsert = {
     name: String(body.name).slice(0, 120),
     email: email.slice(0, 200),
     year: String(body.year).slice(0, 40),
@@ -62,11 +65,12 @@ export async function POST(req: Request) {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       const { createClient } = await import("@/lib/supabase/server");
       const supa = await createClient();
-      // Cast away the generated `Database` typing — the captain_applications
-      // table is added by supabase/migrations/20260514220000 and won't appear
-      // in generated types until `npm run db:types` is re-run after deploy.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const { error } = await (supa as any).from("captain_applications").insert(record);
+      // Generated Database type loses Insert typing because the shared server
+      // client doesn't pass the PostgrestVersion type param. Cast scoped to
+      // just this call site.
+      const { error } = await supa
+        .from("captain_applications")
+        .insert(record as unknown as never);
       if (error) throw error;
     }
   } catch (e) {
