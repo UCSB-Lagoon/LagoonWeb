@@ -49,7 +49,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/stats",       priority: 0.8,  change: "daily"   },
     { path: "/map",         priority: 0.85, change: "weekly"  },
     { path: "/captains",    priority: 0.7,  change: "monthly" },
-    { path: "/login",       priority: 0.3,  change: "yearly"  },
+    // /login and /me are intentionally excluded — robots.ts disallows them,
+    // so listing them here would be a contradictory crawl signal.
   ];
 
   const marketing: Array<{
