@@ -13,6 +13,14 @@
     {
       "source": "/r/:code",
       "destination": "https://app.lagoonucsb.com/r/:code"
+    },
+    {
+      "source": "/api/captains",
+      "destination": "https://app.lagoonucsb.com/api/captains"
+    },
+    {
+      "source": "/api/captains/:path*",
+      "destination": "https://app.lagoonucsb.com/api/captains/:path*"
     }
   ]
 }
