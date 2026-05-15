@@ -78,9 +78,9 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://app.lagoonucsb.com/captains" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <Link href="/captains" className="hover:text-orange-600 transition inline-flex items-center gap-1">
                 Captain program <ArrowUpRight className="w-3 h-3" />
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
