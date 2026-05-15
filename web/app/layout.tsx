@@ -42,7 +42,18 @@ export const metadata: Metadata = {
     images: ["/og.png"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/logo.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Lagoon",
+  },
+  other: {
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://app.lagoonucsb.com/",
   },
 };
 
@@ -68,6 +79,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_ID}');`}
+        </Script>
+        <Script id="lagoon-events" strategy="afterInteractive">
+          {`(function(){
+  // App Store outbound click → GA4 conversion
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href*="apps.apple.com"]');
+    if (!a) return;
+    var src = a.getAttribute('data-lagoon-cta') || 'inline';
+    if (window.gtag) {
+      gtag('event','app_store_click',{cta_source:src, page_path:location.pathname, link_url:a.href});
+      gtag('event','conversion',{send_to:'${GA_ID}', cta_source:src});
+    }
+  }, true);
+  // Scroll-depth milestones
+  var hit={}, ms=[25,50,75,100];
+  window.addEventListener('scroll', function(){
+    var h=document.documentElement;
+    var p=Math.round(((h.scrollTop||document.body.scrollTop)+window.innerHeight)/h.scrollHeight*100);
+    ms.forEach(function(m){ if(!hit[m]&&p>=m){hit[m]=true; window.gtag&&gtag('event','scroll_depth',{percent:m,page_path:location.pathname});} });
+  }, {passive:true});
+  // Referral cookie persistence
+  try {
+    var m = location.pathname.match(/^\\/r\\/([a-zA-Z0-9_-]{2,32})/);
+    if (m) document.cookie = 'lagoon_ref=' + m[1] + '; path=/; max-age=' + (60*60*24*60) + '; SameSite=Lax';
+  } catch (e) {}
+})();`}
         </Script>
       </body>
     </html>

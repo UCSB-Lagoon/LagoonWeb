@@ -45,13 +45,22 @@ export default async function HomePage() {
               life — built on the same data powering the Lagoon mobile app.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/login" className="btn-primary">
-                Join the Lagoon <ArrowRight className="w-4 h-4" />
-              </Link>
+              <a
+                href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+                rel="noreferrer"
+                data-lagoon-cta="home-hero"
+                className="btn-primary"
+              >
+                Download Lagoon free <ArrowRight className="w-4 h-4" />
+              </a>
               <Link href="/leaderboard" className="btn-secondary">
                 <Trophy className="w-4 h-4 text-orange-500" /> See the leaderboard
               </Link>
             </div>
+            <p className="mt-5 flex items-center gap-2 text-sm text-ink-400">
+              <span className="live-dot" aria-hidden="true" />
+              Free · Made by Gauchos · iOS 16+
+            </p>
             <div className="mt-7 flex flex-wrap gap-2 text-xs">
               {["Grades", "Schedules", "Live map", "Classmates", "Dining", "Events"].map((t) => (
                 <span key={t} className="rounded-full border border-cream-200 bg-white px-3 py-1.5 text-ink-500 font-medium">
@@ -151,9 +160,17 @@ export default async function HomePage() {
             Same account as the mobile app. Sign in to see your XP, badges, friends,
             and your spot on the weekly board.
           </p>
-          <div className="mt-6 flex justify-center gap-3">
-            <Link href="/login" className="btn-primary">
-              Sign in <ArrowRight className="w-4 h-4" />
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <a
+              href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+              rel="noreferrer"
+              data-lagoon-cta="home-closing"
+              className="btn-primary"
+            >
+              Download Lagoon <ArrowRight className="w-4 h-4" />
+            </a>
+            <Link href="/captains" className="btn-secondary">
+              <Sparkles className="w-4 h-4 text-orange-500" /> Become a captain
             </Link>
           </div>
         </div>

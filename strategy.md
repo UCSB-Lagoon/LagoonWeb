@@ -84,10 +84,13 @@ Lagoon is in early-access launch mode targeting 37k UCSB students. The strategy 
 ---
 
 ## Priority Actions (Next 30 Days)
-1. Fix missing OG image and favicon on the website
-2. Post first TikTok/Reel app demo video
-3. Seed r/UCSB authentically — announce early access
-4. Write + publish "Best Apps for UCSB Students" blog post targeting SEO
-5. Set up Meta pixel on the website for future ad retargeting
-6. Launch Meta ad campaign targeting UCSB students ($10/day, app install objective)
-7. Build an email/waitlist nurture sequence for early access sign-ups
+1. ~~Fix missing OG image and favicon on the website~~ ✅ shipped 2026-05-14 (PNG OG card, Apple Smart Banner, favicons across marketing site + web app)
+2. Post first TikTok/Reel app demo video — 10 hooks ready in `outreach-templates.md` §5
+3. Seed r/UCSB authentically — announce early access (post copy in `outreach-templates.md` §3)
+4. ~~Write + publish "Best Apps for UCSB Students" blog post targeting SEO~~ ✅ live at `/best-apps-for-ucsb-students` (now cross-linked across 25 guides)
+5. Set up Meta pixel on the website for future ad retargeting *(GA4 conversion tracking with per-CTA attribution shipped as the prerequisite)*
+6. Launch Meta ad campaign targeting UCSB students — 4 creative briefs ready in `outreach-templates.md` §6
+7. ~~Build an email/waitlist nurture sequence for early access sign-ups~~ ✅ 4-email sequence in `outreach-templates.md` §4 (needs sending infra: Loops / Resend)
+8. ~~Launch captain (ambassador) program~~ ✅ `/captains` landing page + `/r/[code]` referral redirect + `/admin/captains` triage dashboard shipped
+9. Recruit 20 captains using IG DM template in `outreach-templates.md` §2
+10. Pitch Daily Nexus a "built by Gauchos" feature using `outreach-templates.md` §1

@@ -86,6 +86,32 @@ select public.grant_xp('checkin', 'spots', 'davidson-library');
 This is the single source of truth. Web and mobile never duplicate
 point-granting logic.
 
+## Growth surfaces
+
+| Route                | Purpose                                                                  |
+|----------------------|--------------------------------------------------------------------------|
+| `/captains`          | Public landing page recruiting Fall captains (ambassador program).       |
+| `/r/[code]`          | Referral redirect — sets `lagoon_ref` cookie, 302s to App Store. `?noredirect=1` renders a SEO-indexable credit page. |
+| `/admin/captains`    | Gated dashboard for triaging applications. Requires `ADMIN_EMAILS` env.  |
+| `POST /api/captains` | Form intake (validation + honeypot + audit log + best-effort DB insert). |
+| `PATCH /api/admin/captains/[id]` | Admin-only status mutation.                                   |
+
+Schema lives in `supabase/migrations/0004_captain_applications.sql`.
+
+## Required env vars
+
+```bash
+# Supabase (existing)
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+# Admin operations (new — service role bypasses RLS for /admin/* writes)
+SUPABASE_SERVICE_ROLE_KEY=
+
+# Comma-separated whitelist for /admin/captains access
+ADMIN_EMAILS=dev@soapboxsuperapp.com,founder@lagoonucsb.com
+```
+
 ## Documentation
 
 - [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md) — request flow, realtime, caching

@@ -1,5 +1,68 @@
 # Lagoon Web — Changelog
 
+## [2026-05-14] — Growth funnel + captain program
+
+### Marketing site (lagoonucsb.com)
+- **OG previews fixed** — `og-card.png` (1200×630) replaces the SVG that was breaking
+  iMessage/Slack/Discord/Twitter previews across the homepage and 25 guide pages.
+  Added `og:image:width/height` and refreshed the JSON-LD image references.
+- **Apple Smart Banner** (`<meta name="apple-itunes-app">`) on every page —
+  iOS Safari shows the native INSTALL/OPEN bar over the site.
+- **Sticky CTA + GA4 conversion tracking** (`lagoon-cta.js`) auto-loads on every
+  page. Tracks `app_store_click` with a `cta_source` attribution dimension
+  (nav, hero, features, dl-badge, footer, sticky-guide, related-guides…),
+  plus `scroll_depth`, `form_submit`, `sticky_cta_shown/dismiss`, and a `conversion`
+  event for GA4 key-event configuration.
+- **Internal-linking pass** — "Related guides" block injected into all 25 UCSB
+  guide pages, picking 5 contextual siblings via topic clusters
+  (`scripts/add-related-guides.py`, idempotent).
+- **Freshness signal** — visible "Updated: May 2026" stamp + `dateModified` JSON-LD
+  Article schema on every guide (`scripts/add-updated-date.py`, idempotent).
+- **Outreach playbook** — `outreach-templates.md` adds ready-to-send copy for
+  Daily Nexus pitch, IG captain DM (short/long), r/UCSB seeding post, 4-email
+  waitlist nurture sequence, 10 TikTok hooks, 4 Meta ad creative briefs.
+
+### Web app (app.lagoonucsb.com)
+- **Design polish**:
+  - Navbar: real gradient logo mark + stacked wordmark; scroll-aware shadow;
+    proper mobile hamburger drawer; "Get the App" now drives to the App Store.
+  - Footer: tinted CTA strip + 4-column link grid w/ cross-links to marketing
+    guides; live-status row in the legal bar.
+  - Homepage hero CTA → App Store with attribution; closing band adds a
+    "Become a captain" secondary CTA.
+- **Captain (ambassador) program** — new `/captains` landing page:
+  hero + 6-perk grid + 3-step "how it works" + "you're probably a captain if…"
+  section + 60-second application form + 5-question FAQ.
+- **Referral attribution** — new `/r/[code]` route sets a 60-day `lagoon_ref`
+  cookie and 302s to the App Store. `?noredirect=1` renders a SEO-indexable
+  landing page that credits the captain by name.
+- **Admin** — new gated `/admin/captains` dashboard:
+  filterable list, status mutation buttons (Review / Accept / Reject / Archive),
+  attribution chips, Instagram & email shortcuts. Gated by `ADMIN_EMAILS`
+  env var + Supabase magic-link auth.
+- **API** — `POST /api/captains` (form intake, validation, honeypot, cookie
+  attribution, audit logging) and `PATCH /api/admin/captains/[id]` (admin-only
+  status updates).
+- **Parity** — Apple Smart Banner, GA4 conversion events, scroll-depth tracking,
+  and referral cookie persistence now match the marketing site.
+- **Assets** — `public/og.png`, `public/icon.png`, `public/apple-icon.png`,
+  `public/logo.svg` filled in (the directory was empty before).
+
+### Database
+- New migration `web/supabase/migrations/0004_captain_applications.sql`:
+  `captain_applications` table with RLS (anon INSERT only), email regex check,
+  status enum check, unique `lower(email)` index, status+timestamp index for
+  the admin list, and a partial index on `referral_code` for measuring captain
+  attribution. Trigger auto-stamps `reviewed_at` on first status change.
+
+### Required follow-up
+- Run `cd web && supabase link --project-ref <ref> && supabase db push` to apply
+  migration 0004 to the production Supabase project, then `npm run db:types`.
+- Set `ADMIN_EMAILS` env var in Vercel (comma-separated) to access `/admin/captains`.
+- In GA4 → Admin → Events, mark `app_store_click` as a Key event.
+
+---
+
 ## [2026-03-31] — Warm Editorial Redesign
 
 ### Summary

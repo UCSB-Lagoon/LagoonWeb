@@ -1,0 +1,18 @@
+# Sessions / agent sandboxes
+.claude/
+.claude/worktrees/
+
+# Dependencies
+node_modules/
+
+# Supabase CLI cache
+web/supabase/.temp/
+
+# Local env
+.env
+.env.local
+.env*.local
+
+# OS / editor
+.DS_Store
+*.swp
