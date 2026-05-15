@@ -1,4 +1,18 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/captains",
+      "destination": "https://app.lagoonucsb.com/captains"
+    },
+    {
+      "source": "/captains/:path*",
+      "destination": "https://app.lagoonucsb.com/captains/:path*"
+    },
+    {
+      "source": "/r/:code",
+      "destination": "https://app.lagoonucsb.com/r/:code"
+    }
+  ]
 }
