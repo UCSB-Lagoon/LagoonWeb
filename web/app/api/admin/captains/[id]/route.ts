@@ -74,6 +74,7 @@ export async function PATCH(
   // ── Accept workflow ─────────────────────────────────────────────────────
   let issuedCode: string | null = null;
   let emailResult: { ok: boolean; skipped?: boolean; error?: string } | null = null;
+  let mailtoUrl: string | null = null;
 
   if (nextStatus === "accepted") {
     // 1) Mint a code if one isn't already set
@@ -90,24 +91,38 @@ export async function PATCH(
       issuedCode = code;
     }
 
-    // 2) Send acceptance email if we haven't yet
+    // 2) Send acceptance email if we haven't yet — try Resend first, else
+    //    build a mailto: link so the admin can send from their own client.
     if (!row.accepted_email_sent_at) {
       const tpl = captainAcceptedEmail({ name: row.name, code });
-      const result = await sendEmail({
-        to: row.email,
-        subject: tpl.subject,
-        html: tpl.html,
-        text: tpl.text,
-        replyTo: "team@lagoonucsb.com",
-        tags: { workflow: "captain_accept", captain_code: code },
-      });
-      emailResult = result.ok
-        ? { ok: true }
-        : "skipped" in result
-          ? { ok: false, skipped: true, error: result.reason }
-          : { ok: false, error: result.error };
-      if (result.ok) {
-        patch.accepted_email_sent_at = new Date().toISOString();
+
+      if (process.env.RESEND_API_KEY) {
+        // Auto-send via Resend (optional path; zero setup if skipped)
+        const result = await sendEmail({
+          to: row.email,
+          subject: tpl.subject,
+          html: tpl.html,
+          text: tpl.text,
+          replyTo: "team@lagoonucsb.com",
+          tags: { workflow: "captain_accept", captain_code: code },
+        });
+        emailResult = result.ok
+          ? { ok: true }
+          : "skipped" in result
+            ? { ok: false, skipped: true, error: result.reason }
+            : { ok: false, error: result.error };
+        if (result.ok) {
+          patch.accepted_email_sent_at = new Date().toISOString();
+        }
+      } else {
+        // Default zero-setup path: hand back a mailto link the UI opens.
+        // The admin sends from their own mail client; clicks "Mark sent" after.
+        emailResult = { ok: false, skipped: true, error: "Click-to-send (Resend not configured)" };
+        const params = new URLSearchParams({
+          subject: tpl.subject,
+          body: tpl.text,
+        });
+        mailtoUrl = `mailto:${encodeURIComponent(row.email)}?${params.toString()}`;
       }
     }
   }
@@ -126,5 +141,33 @@ export async function PATCH(
     ok: true,
     issued_code: issuedCode,
     email: emailResult,
+    mailto_url: mailtoUrl,
   });
+}
+
+// POST /api/admin/captains/[id]?action=mark-emailed — manually record that
+// the click-to-send email was actually sent. No body needed.
+export async function POST(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> },
+) {
+  const { id } = await params;
+  const url = new URL(req.url);
+  const action = url.searchParams.get("action");
+  if (action !== "mark-emailed") {
+    return NextResponse.json({ error: "Unknown action" }, { status: 400 });
+  }
+  const supa = await createClient();
+  const { data: { user } } = await supa.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminEmail(user.email)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+  const admin = createAdminClient();
+  const { error } = await admin
+    .from("captain_applications")
+    .update({ accepted_email_sent_at: new Date().toISOString() } as never)
+    .eq("id", id);
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  return NextResponse.json({ ok: true });
 }

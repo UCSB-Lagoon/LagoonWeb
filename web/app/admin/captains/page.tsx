@@ -180,7 +180,7 @@ export default async function AdminCaptainsPage(
                     )}
                   </div>
                 </div>
-                <StatusButtons id={a.id} current={a.status} />
+                <StatusButtons id={a.id} current={a.status} captainCode={a.captain_code} emailedAt={a.accepted_email_sent_at} />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4 mt-3">

@@ -8,7 +8,6 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
 import { CaptainFunnelChart } from "@/components/admin/funnel-chart";
 import { InstallsChart } from "@/components/admin/installs-chart";
-import { getDailyEventCounts, isGA4Configured } from "@/lib/ga4";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -91,16 +90,44 @@ export default async function AdminHomePage() {
     } catch { return 0; }
   }
 
-  const [statusBreakdown, totalApps, withRef, recentApps, topReferrals, totalClicks, installs] = await Promise.all([
+  async function getDailyClicks(): Promise<Array<{ day: string; count: number }>> {
+    try {
+      // Last 14 days, humans only
+      const since = new Date();
+      since.setUTCHours(0, 0, 0, 0);
+      since.setUTCDate(since.getUTCDate() - 13);
+      const res = await admin
+        .from("referral_clicks")
+        .select("clicked_at")
+        .eq("is_bot", false)
+        .gte("clicked_at", since.toISOString())
+        .order("clicked_at", { ascending: true });
+      const rows = (res.data as { clicked_at: string }[] | null) || [];
+
+      // Bucket into 14 day slots so the chart always shows the full window
+      const buckets: Record<string, number> = {};
+      for (let i = 0; i < 14; i++) {
+        const d = new Date(since);
+        d.setUTCDate(since.getUTCDate() + i);
+        buckets[ymd(d)] = 0;
+      }
+      for (const r of rows) {
+        const key = ymd(new Date(r.clicked_at));
+        if (key in buckets) buckets[key]++;
+      }
+      return Object.entries(buckets).map(([day, count]) => ({ day, count }));
+    } catch { return []; }
+  }
+
+  const [statusBreakdown, totalApps, withRef, recentApps, topReferrals, totalClicks, dailyClicks] = await Promise.all([
     getStatusBreakdown(),
     safeCount(),
     safeCount({ kind: "withRef" }),
     getRecent(),
     getTopReferrals(),
     safeClickCount(),
-    getDailyEventCounts("app_store_click", 14),
+    getDailyClicks(),
   ]);
-  const ga4State = isGA4Configured();
 
   const newCount = statusBreakdown.new || 0;
   const acceptedCount = statusBreakdown.accepted || 0;
@@ -189,25 +216,10 @@ export default async function AdminHomePage() {
 
         <div className="card p-5">
           <div className="flex items-baseline justify-between mb-4">
-            <h2 className="font-display text-lg font-bold text-ink-900">App Store clicks · 14d</h2>
-            <span className="text-xs text-ink-400 font-mono">GA4 · app_store_click</span>
+            <h2 className="font-display text-lg font-bold text-ink-900">Referral clicks · 14d</h2>
+            <span className="text-xs text-ink-400">humans only · /r/ landings</span>
           </div>
-          {ga4State.configured ? (
-            <InstallsChart data={(installs || []).map(d => ({ day: d.day, count: d.count }))} totalLabel="from GA4" />
-          ) : (
-            <div className="rounded-2xl border border-dashed border-cream-200 bg-cream-100/40 p-5 text-sm">
-              <p className="font-bold text-ink-900 mb-1">Connect GA4 to see installs</p>
-              <p className="text-ink-500 mb-3">
-                Reason: <span className="font-mono">{ga4State.reason}</span>
-              </p>
-              <ol className="list-decimal pl-5 text-ink-700 space-y-1">
-                <li>In Google Cloud, create a service account; grant it <em>Viewer</em> on the GA4 property.</li>
-                <li>Download the JSON key, base64-encode it, set <span className="font-mono">GA4_SERVICE_ACCOUNT_JSON_B64</span> in Vercel.</li>
-                <li>Set <span className="font-mono">GA4_PROPERTY_ID</span> (numeric, no <span className="font-mono">G-</span> prefix).</li>
-                <li>Redeploy. This card switches to the live chart automatically.</li>
-              </ol>
-            </div>
-          )}
+          <InstallsChart data={dailyClicks.map(d => ({ day: d.day.replaceAll("-", ""), count: d.count }))} totalLabel="from Lagoon" />
         </div>
       </section>
 
@@ -301,34 +313,31 @@ export default async function AdminHomePage() {
             </p>
           </div>
 
-          {/* Setup hints */}
+          {/* Quick workflow card */}
           <div className="card-tinted p-5">
             <h3 className="font-display font-bold text-ink-900 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-orange-500" /> Setup checklist
+              <Sparkles className="w-4 h-4 text-orange-500" /> How accept works
             </h3>
-            <ul className="mt-3 text-sm text-ink-700 space-y-2">
-              <li className="flex items-start gap-2">
-                <span className="text-orange-500 mt-0.5">✓</span>
-                <span><code className="font-mono text-xs">SUPABASE_SERVICE_ROLE_KEY</code> set (you&apos;re reading this page).</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-orange-500 mt-0.5">✓</span>
-                <span><code className="font-mono text-xs">ADMIN_EMAILS</code> includes <span className="font-mono">{user.email}</span>.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-ink-400 mt-0.5">○</span>
-                <span>Mark <code className="font-mono text-xs">app_store_click</code> as a GA4 Key event.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-ink-400 mt-0.5">○</span>
-                <span>Send first 5 captain DMs (see <code className="font-mono text-xs">outreach-templates.md</code> §2).</span>
-              </li>
-            </ul>
+            <ol className="mt-3 text-sm text-ink-700 space-y-2 list-decimal pl-5">
+              <li>Click <strong>Accept</strong> on a row in the inbox.</li>
+              <li>Your default mail app opens, fully composed with their /r/CODE link.</li>
+              <li>Hit Send in your mail app.</li>
+              <li>Back in the inbox, click <strong>✓ Mark sent</strong>.</li>
+            </ol>
+            <p className="mt-3 text-xs text-ink-500">
+              No setup needed. To auto-send (skip steps 2-4), add a <span className="font-mono">RESEND_API_KEY</span> env var later.
+            </p>
           </div>
         </div>
       </section>
     </div>
   );
+}
+
+function ymd(d: Date): string {
+  const m = String(d.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(d.getUTCDate()).padStart(2, "0");
+  return `${d.getUTCFullYear()}-${m}-${day}`;
 }
 
 function StatCard({
