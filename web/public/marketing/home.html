@@ -155,15 +155,15 @@
   </script>
   <style>
     :root {
-      --bg:           #F2F1EF;
-      --bg-2:         #E9E8E5;
+      --bg:           #faf6ee;
+      --bg-2:         #f4ecdb;
       --orange:       #F08A3C;
       --orange-2:     #FF9F5C;
       --orange-deep:  #D9701F;
       --orange-mist:  rgba(240,138,60,0.11);
       --warm-dark:    #1E1410;
       --warm-dark-2:  #2A1A0F;
-      --text-dark:    #1A1410;
+      --text-dark:    #1e1410;
       --text-dark-2:  rgba(26,20,16,0.64);
       --text-dark-3:  rgba(26,20,16,0.38);
       --text-light:   #F8F4EE;
@@ -207,7 +207,7 @@
       height: 64px;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 40px;
-      background: rgba(242,241,239,0.90);
+      background: rgba(250,246,238,0.85);
       backdrop-filter: blur(28px) saturate(1.5);
       -webkit-backdrop-filter: blur(28px) saturate(1.5);
       border-bottom: 1px solid rgba(26,20,16,0.08);
@@ -260,8 +260,8 @@
     #hero::before {
       content: '';
       position: absolute; inset: 0; z-index: 0;
-      background-image: radial-gradient(circle, rgba(26,20,16,0.065) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background-image: radial-gradient(circle, rgba(30,20,16,0.055) 1px, transparent 1px);
+      background-size: 24px 24px;
       mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, black 10%, transparent 72%);
     }
     .hero-inner {
@@ -965,18 +965,18 @@
     /* ── DARK MODE ── */
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg:          #120d07;
-        --bg-2:        #1a1209;
-        --warm-dark:   #221709;
-        --warm-dark-2: #2c200d;
-        --text-dark:   #ede2ce;
-        --text-dark-2: rgba(237,226,206,0.68);
-        --text-dark-3: rgba(237,226,206,0.36);
+        --bg:          #141009;   /* app .dark --color-cream-50 */
+        --bg-2:        #1e160b;   /* app .dark --color-cream-100 */
+        --warm-dark:   #1c1409;   /* app .dark .card surface */
+        --warm-dark-2: #2e2011;   /* app .dark --color-cream-200 */
+        --text-dark:   #ede2ce;   /* app .dark --color-ink-900 */
+        --text-dark-2: rgba(237,226,206,0.70);
+        --text-dark-3: rgba(237,226,206,0.38);
         --orange-mist: rgba(240,138,60,0.13);
       }
 
       #nav {
-        background: rgba(18,13,7,0.90);
+        background: rgba(20,16,9,0.85);
         border-bottom-color: rgba(237,226,206,0.07);
       }
       .nav-explore {

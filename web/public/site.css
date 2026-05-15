@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  /* Surfaces */
-  --bg: #F2F1EF;
-  --bg-alt: #E9E8E5;
+  /* Surfaces — unified cream palette (see docs/brand-guidelines.md) */
+  --bg: #faf6ee;          /* cream-50  — page background */
+  --bg-alt: #f4ecdb;      /* cream-100 — secondary surface */
   --panel: #ffffff;
   --panel-elevated: #ffffff;
   --panel-soft: rgba(255, 255, 255, 0.80);
 
   /* Dark surfaces */
-  --night: #2a1a0f;
-  --night-mid: #3a2417;
-  --night-surface: #4a2e1e;
+  --night: #1e1410;       /* ink-900 — matches app dark surfaces */
+  --night-mid: #2a1a0f;
+  --night-surface: #3a2417;
   --night-border: rgba(240, 138, 60, 0.18);
   --night-border-bright: rgba(240, 138, 60, 0.30);
 
   /* Text — light bg */
-  --ink: #1f140c;
+  --ink: #1e1410;         /* ink-900 — matches app --color-ink-900 */
   --ink-soft: #5a463a;
   --ink-muted: #8a7560;
 
@@ -26,8 +26,8 @@
   --ink-light-muted: rgba(232, 220, 196, 0.55);
 
   /* Borders */
-  --line: rgba(31, 20, 12, 0.08);
-  --line-strong: rgba(31, 20, 12, 0.15);
+  --line: rgba(31, 20, 12, 0.10);
+  --line-strong: rgba(31, 20, 12, 0.16);
 
   /* Brand */
   --gold: #f08a3c;
@@ -71,6 +71,20 @@ body {
   background: var(--bg);
 }
 
+/* Shared dotted body texture — identical to the Next.js app (globals.css) so
+   marketing and app feel like one surface. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image: radial-gradient(rgba(30, 20, 16, 0.055) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 92%);
+  mask-image: linear-gradient(to bottom, black, transparent 92%);
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -79,6 +93,18 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Shared focus + selection — identical to the Next.js app (globals.css) */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(240, 138, 60, 0.30);
+  color: var(--ink);
 }
 
 p,
@@ -1382,5 +1408,51 @@ h3 {
   .stats-bar-item:nth-child(3),
   .stats-bar-item:nth-child(4) {
     border-top: none;
+  }
+}
+
+/* =====================
+   DARK MODE
+   Token-level override so the guide pages match home.html's dark variant
+   and the Next.js app's `.dark` palette (see docs/brand-guidelines.md).
+   site.css is fully tokenized, so overriding :root cascades automatically.
+   ===================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141009;              /* app .dark --color-cream-50 */
+    --bg-alt: #1e160b;          /* app .dark --color-cream-100 */
+    --panel: #1c1409;           /* app .dark .card surface */
+    --panel-elevated: #211910;
+    --panel-soft: rgba(28, 20, 9, 0.80);
+
+    --ink: #ede2ce;             /* app .dark --color-ink-900 */
+    --ink-soft: rgba(237, 226, 206, 0.72);
+    --ink-muted: rgba(237, 226, 206, 0.46);
+
+    --line: rgba(237, 226, 206, 0.09);
+    --line-strong: rgba(237, 226, 206, 0.15);
+  }
+
+  body::after {
+    background-image: radial-gradient(rgba(240, 210, 160, 0.045) 1px, transparent 1px);
+  }
+
+  .site-header {
+    background: rgba(20, 16, 9, 0.85);
+    border-bottom-color: rgba(237, 226, 206, 0.09);
+  }
+
+  /* Translucent-white fills only legible on a light card → tint for dark */
+  .article-card table {
+    background: rgba(237, 226, 206, 0.04);
+  }
+
+  .article-card th {
+    background: rgba(240, 138, 60, 0.07);
+  }
+
+  .feature-code {
+    background: rgba(237, 226, 206, 0.05);
   }
 }
