@@ -116,6 +116,37 @@ so apply new web migrations via the dashboard:
 3. Run
 4. `cd web && npm run db:types` to regenerate `types/database.ts`, commit it
 
+**Pending migrations to apply (one-time, in order):**
+
+| File | Powers | Symptom if missing |
+|---|---|---|
+| `20260514220000_captain_applications.sql` | `/captains` + `/admin/captains` | captain apply 500s |
+| `20260514230000_captain_program_v2.sql` | captain codes, referral clicks, funnel | funnel/clicks read 0 |
+| `20260515120000_feedback.sql` | feedback widget + `/admin/feedback` | "feedback isn't set up" card |
+
+Pages degrade gracefully (friendly setup cards, never a crash) until these
+run — submissions are still captured in Vercel logs in the meantime.
+
+## 6b. Supabase Auth URL configuration (one-time) ⚠️
+
+If magic-link sign-in always bounces to `app.lagoonucsb.com` regardless of
+where you started, the Supabase Auth allowlist is wrong. The code is correct
+(`window.location.origin`); Supabase silently falls back to **Site URL** when
+the requested redirect isn't allowlisted.
+
+Fix at **Auth → URL Configuration**
+(`https://supabase.com/dashboard/project/qecthmyzcicllttplhjq/auth/url-configuration`):
+
+- **Site URL**: `https://lagoonucsb.com`
+- **Redirect URLs** (add all):
+  ```
+  https://lagoonucsb.com/**
+  https://app.lagoonucsb.com/**
+  http://localhost:3000/**
+  ```
+
+After saving, new magic links return to the domain the user started on.
+
 ## 7. Growth model (how we actually grow)
 
 UCSB is a closed 37k-student community in a 4-square-mile bubble. Paid ads lose
