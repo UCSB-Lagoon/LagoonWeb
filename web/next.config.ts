@@ -37,6 +37,10 @@ const MARKETING_SLUGS = [
 
 const config: NextConfig = {
   reactStrictMode: true,
+  // Ensure the handbook markdown is bundled into the /admin/handbook lambda.
+  outputFileTracingIncludes: {
+    "/admin/handbook": ["./content/onboarding.md"],
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "*.supabase.co" },

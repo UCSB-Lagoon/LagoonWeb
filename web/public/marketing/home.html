@@ -52,8 +52,6 @@
   <link rel="alternate" hreflang="x-default" href="https://lagoonucsb.com/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://app.lagoonucsb.com">
-  <link rel="dns-prefetch" href="https://app.lagoonucsb.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
@@ -1044,7 +1042,7 @@
   <div class="nav-mid">
     <a href="#features">Features</a>
     <a href="#classmates">Community</a>
-    <a href="https://app.lagoonucsb.com/stats" rel="noopener" class="nav-live"><span class="nav-live-dot"></span>Live data</a>
+    <a href="/stats" rel="noopener" class="nav-live"><span class="nav-live-dot"></span>Live data</a>
     <a href="/guides">Guides</a>
     <a href="/company">Company</a>
   </div>
@@ -1160,7 +1158,7 @@
       <div class="live-eyebrow"><span class="ld-dot"></span>Lagoon · Live</div>
       <h2 class="live-h" id="live-h">Real Gauchos.<br/><em>Real numbers.</em></h2>
       <p class="live-sub">Lagoon publishes anonymized, aggregate stats from the live database — no fluff, no marketing math. See how UCSB is using the app right now.</p>
-      <a href="https://app.lagoonucsb.com/stats" rel="noopener" class="live-cta">
+      <a href="/stats" rel="noopener" class="live-cta">
         Open the live dashboard
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -1186,7 +1184,7 @@
         <div class="live-stat-lbl">Top streak</div>
         <div class="live-stat-sub">consecutive days · current record</div>
       </div>
-      <div class="live-foot"><span class="ld-dot"></span><span data-live-updated>Auto-refreshes from app.lagoonucsb.com</span></div>
+      <div class="live-foot"><span class="ld-dot"></span><span data-live-updated>Auto-refreshes live</span></div>
     </div>
   </div>
 </section>
@@ -1316,7 +1314,7 @@
     </div>
     <div class="feat-cta-actions">
       <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer" class="feat-cta-btn feat-cta-btn-primary" data-lagoon-cta="features">↓ Get Lagoon Free</a>
-      <a href="https://app.lagoonucsb.com/stats" rel="noopener" class="feat-cta-btn feat-cta-btn-ghost">See live data →</a>
+      <a href="/stats" rel="noopener" class="feat-cta-btn feat-cta-btn-ghost">See live data →</a>
     </div>
   </div>
 </section>
@@ -1442,7 +1440,7 @@
         <li><div class="chk"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--orange-2)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Walking directions to any building, one tap</li>
       </ul>
       <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="https://app.lagoonucsb.com/map" rel="noopener" class="btn-outline">Open the web map →</a>
+        <a href="/map" rel="noopener" class="btn-outline">Open the web map →</a>
       </div>
     </div>
     <div class="split-vis rr">
@@ -1630,7 +1628,7 @@
       if (n >= 1_000)     return (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
       return Number(n).toLocaleString();
     };
-    fetch('https://app.lagoonucsb.com/api/public/stats', { cache: 'no-store' })
+    fetch('/api/public/stats', { cache: 'no-store' })
       .then((r) => r.ok ? r.json() : null)
       .then((d) => {
         if (!d) return;

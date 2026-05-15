@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Shield, Inbox, Trophy, BarChart3, ExternalLink, Sparkles } from "lucide-react";
+import { Shield, Inbox, Trophy, BarChart3, ExternalLink, Sparkles, MessageSquare } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
 
@@ -43,10 +43,20 @@ export async function AdminBar() {
       return sorted[0] ?? null;
     } catch { return null; }
   }
-  const [newApps, totalApps, topRef] = await Promise.all([
+  async function openFeedback(): Promise<number> {
+    try {
+      const res = await admin
+        .from("feedback")
+        .select("id", { count: "exact", head: true })
+        .eq("status", "new");
+      return res.count ?? 0;
+    } catch { return 0; }
+  }
+  const [newApps, totalApps, topRef, newFeedback] = await Promise.all([
     safeCount({ status: "new" }),
     safeCount(),
     topReferral(),
+    openFeedback(),
   ]);
 
   return (
@@ -72,6 +82,13 @@ export async function AdminBar() {
             label="Total apps"
             value={totalApps}
           />
+          <Stat
+            href="/admin/feedback?status=new"
+            icon={MessageSquare}
+            label="New feedback"
+            value={newFeedback}
+            hot={newFeedback > 0}
+          />
           {topRef && (
             <Stat
               href={`/admin/captains?status=accepted`}
@@ -86,7 +103,8 @@ export async function AdminBar() {
         <div className="hidden sm:flex items-center gap-2">
           <QuickLink href="/admin">Dashboard</QuickLink>
           <QuickLink href="/admin/captains">Captains</QuickLink>
-          <QuickLink href="/stats">Live stats</QuickLink>
+          <QuickLink href="/admin/feedback">Feedback</QuickLink>
+          <QuickLink href="/admin/handbook">Handbook</QuickLink>
           <a
             href="https://analytics.google.com/analytics/web/"
             target="_blank"

@@ -1,5 +1,45 @@
 # Lagoon Web — Changelog
 
+## [2026-05-15] — Mission Control: feedback, growth analytics, handbook
+
+Turned `/admin` into a real internal ops portal, modeled on how Linear /
+Vercel / Raycast run their internal dashboards.
+
+### Feedback system (new)
+- `feedback` table (migration `20260515120000_feedback.sql`) — kind/status
+  workflow, pin, admin notes, RLS anon-insert only.
+- Floating **"Feedback"** widget on every Next.js route (`FeedbackWidget`):
+  kind picker (idea/bug/praise/question), message, optional email, honeypot,
+  success state. The pattern every leading app ships.
+- `POST /api/feedback` intake (validation, honeypot, audit log, best-effort
+  insert, never 500s on the user).
+- `/admin/feedback` triage inbox: status filter chips, kind badges, pin to
+  top, mailto reply, `PATCH /api/admin/feedback/[id]`.
+
+### Growth analytics (new, real data)
+- `/admin` now leads with a **Growth** section sourced from `user_profiles`:
+  total users, new in 7d/30d, onboarding-completion %, referred-signup %,
+  and a 14-day new-signup chart.
+- Feedback summary card (open count, by-kind, recent 4) in the sidebar.
+
+### Team onboarding (new)
+- `ONBOARDING.md` at repo root — zero-to-shipping doc (architecture, env
+  vars, deploy, migration process, growth model, first-week checklist).
+- `/admin/handbook` renders it in-app via a dependency-free Markdown
+  renderer (`lib/mini-markdown.tsx`). Bundled into the lambda via
+  `outputFileTracingIncludes`.
+
+### Admin bar + nav
+- Admin bar gains a live **New feedback** counter (pulses when > 0) and
+  Feedback / Handbook quick links.
+- `/admin` header gains Feedback (with unread badge) + Handbook buttons.
+
+### Fixes
+- Marketing homepage links (Live data / map / stats / brand) were still
+  hardcoded to `app.lagoonucsb.com`, breaking now that it's one project.
+  Rewritten to relative paths (`/stats`, `/map`, `/hub`, `/api/public/stats`).
+  Removed now-dead cross-origin preconnect hints.
+
 ## [2026-05-15] — Site consolidation: one project, one domain
 
 Merged the previously-separate marketing site (lagoonucsb.com — static HTML

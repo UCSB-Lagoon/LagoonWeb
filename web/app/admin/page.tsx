@@ -119,7 +119,68 @@ export default async function AdminHomePage() {
     } catch { return []; }
   }
 
-  const [statusBreakdown, totalApps, withRef, recentApps, topReferrals, totalClicks, dailyClicks] = await Promise.all([
+  // ── Growth (real signup data from user_profiles) ──────────────────────
+  type Growth = {
+    total: number;
+    new7: number;
+    new30: number;
+    onboardedPct: number;
+    referredPct: number;
+    daily: Array<{ day: string; count: number }>;
+  };
+  async function getGrowth(): Promise<Growth> {
+    const empty: Growth = { total: 0, new7: 0, new30: 0, onboardedPct: 0, referredPct: 0, daily: [] };
+    try {
+      const now = new Date();
+      const d7 = new Date(now); d7.setUTCDate(now.getUTCDate() - 7);
+      const d30 = new Date(now); d30.setUTCDate(now.getUTCDate() - 30);
+      const since = new Date(now); since.setUTCHours(0, 0, 0, 0); since.setUTCDate(now.getUTCDate() - 13);
+
+      const [total, new7, new30, onboarded, referred, recent] = await Promise.all([
+        admin.from("user_profiles").select("id", { count: "exact", head: true }).then(r => r.count ?? 0),
+        admin.from("user_profiles").select("id", { count: "exact", head: true }).gte("created_at", d7.toISOString()).then(r => r.count ?? 0),
+        admin.from("user_profiles").select("id", { count: "exact", head: true }).gte("created_at", d30.toISOString()).then(r => r.count ?? 0),
+        admin.from("user_profiles").select("id", { count: "exact", head: true }).not("onboarding_completed_at", "is", null).then(r => r.count ?? 0),
+        admin.from("user_profiles").select("id", { count: "exact", head: true }).not("referred_by_user_id", "is", null).then(r => r.count ?? 0),
+        admin.from("user_profiles").select("created_at").gte("created_at", since.toISOString()).then(r => (r.data as { created_at: string | null }[] | null) || []),
+      ]);
+
+      const buckets: Record<string, number> = {};
+      for (let i = 0; i < 14; i++) {
+        const d = new Date(since); d.setUTCDate(since.getUTCDate() + i);
+        buckets[ymd(d)] = 0;
+      }
+      for (const r of recent) {
+        if (!r.created_at) continue;
+        const k = ymd(new Date(r.created_at));
+        if (k in buckets) buckets[k]++;
+      }
+      return {
+        total, new7, new30,
+        onboardedPct: total > 0 ? Math.round((onboarded / total) * 100) : 0,
+        referredPct: total > 0 ? Math.round((referred / total) * 100) : 0,
+        daily: Object.entries(buckets).map(([day, count]) => ({ day, count })),
+      };
+    } catch { return empty; }
+  }
+
+  type FeedbackSummary = { open: number; total: number; byKind: Record<string, number>; recent: Array<{ id: string; kind: string; message: string; submitted_at: string }> };
+  async function getFeedbackSummary(): Promise<FeedbackSummary> {
+    const empty: FeedbackSummary = { open: 0, total: 0, byKind: {}, recent: [] };
+    try {
+      const [open, total, all, recent] = await Promise.all([
+        admin.from("feedback").select("id", { count: "exact", head: true }).eq("status", "new").then(r => r.count ?? 0),
+        admin.from("feedback").select("id", { count: "exact", head: true }).then(r => r.count ?? 0),
+        admin.from("feedback").select("kind").then(r => (r.data as { kind: string }[] | null) || []),
+        admin.from("feedback").select("id, kind, message, submitted_at").order("submitted_at", { ascending: false }).limit(4).then(r => (r.data as FeedbackSummary["recent"] | null) || []),
+      ]);
+      const byKind: Record<string, number> = {};
+      for (const f of all) byKind[f.kind] = (byKind[f.kind] || 0) + 1;
+      return { open, total, byKind, recent };
+    } catch { return empty; }
+  }
+
+  const [statusBreakdown, totalApps, withRef, recentApps, topReferrals, totalClicks, dailyClicks, growth, feedback] = await Promise.all([
     getStatusBreakdown(),
     safeCount(),
     safeCount({ kind: "withRef" }),
@@ -127,6 +188,8 @@ export default async function AdminHomePage() {
     getTopReferrals(),
     safeClickCount(),
     getDailyClicks(),
+    getGrowth(),
+    getFeedbackSummary(),
   ]);
 
   const newCount = statusBreakdown.new || 0;
@@ -152,7 +215,18 @@ export default async function AdminHomePage() {
         </div>
         <div className="flex gap-2 flex-wrap">
           <Link href="/admin/captains" className="btn-primary !py-2 !px-4 text-sm">
-            <Inbox className="w-4 h-4" /> Captain inbox
+            <Inbox className="w-4 h-4" /> Captains
+          </Link>
+          <Link href="/admin/feedback" className="btn-secondary !py-2 !px-4 text-sm">
+            <Inbox className="w-4 h-4 text-orange-500" /> Feedback
+            {feedback.open > 0 && (
+              <span className="ml-1 inline-grid place-items-center min-w-5 h-5 px-1.5 rounded-full bg-orange-500 text-white text-[10px] font-bold tabular-nums">
+                {feedback.open}
+              </span>
+            )}
+          </Link>
+          <Link href="/admin/handbook" className="btn-secondary !py-2 !px-4 text-sm">
+            <Sparkles className="w-4 h-4 text-orange-500" /> Handbook
           </Link>
           <a
             href="https://analytics.google.com/analytics/web/"
@@ -163,6 +237,23 @@ export default async function AdminHomePage() {
           </a>
         </div>
       </div>
+
+      {/* ── GROWTH ─────────────────────────────────────────────────────── */}
+      <section className="mb-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+          <StatCard label="Total users" value={growth.total} icon={Users} hint="all-time signups" href="/admin" />
+          <StatCard label="New · 7d" value={growth.new7} icon={Sparkles} hint={`${growth.new30} in last 30d`} href="/admin" hot={growth.new7 > 0} />
+          <StatCard label="Onboarding done" value={`${growth.onboardedPct}%`} icon={Activity} hint="completed setup" href="/admin" />
+          <StatCard label="Referred signups" value={`${growth.referredPct}%`} icon={Trophy} hint="via referral_by" href="/admin" />
+        </div>
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-4">
+            <h2 className="font-display text-lg font-bold text-ink-900">New signups · 14d</h2>
+            <span className="text-xs text-ink-400">from user_profiles</span>
+          </div>
+          <InstallsChart data={growth.daily.map(d => ({ day: d.day.replaceAll("-", ""), count: d.count }))} totalLabel="new accounts" />
+        </div>
+      </section>
 
       {/* Top stat row */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
@@ -279,6 +370,41 @@ export default async function AdminHomePage() {
 
         {/* Top referrers */}
         <div className="space-y-4">
+          {/* Feedback summary */}
+          <div className="card p-5">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-display text-lg font-bold text-ink-900">Feedback</h2>
+              <Link href="/admin/feedback" className="text-sm font-semibold text-orange-600 hover:text-orange-700">
+                Open inbox →
+              </Link>
+            </div>
+            <div className="flex items-center gap-4 mb-3">
+              <div>
+                <p className="font-display text-3xl font-extrabold text-ink-900 tabular-nums">{feedback.open}</p>
+                <p className="text-xs text-ink-400">new / untriaged</p>
+              </div>
+              <div className="h-10 w-px bg-cream-200" />
+              <div className="flex flex-wrap gap-1.5">
+                {Object.entries(feedback.byKind).map(([k, n]) => (
+                  <span key={k} className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full bg-cream-100 text-ink-700 border border-cream-200">
+                    {k} · {n}
+                  </span>
+                ))}
+                {feedback.total === 0 && <span className="text-sm text-ink-400">No feedback yet.</span>}
+              </div>
+            </div>
+            {feedback.recent.length > 0 && (
+              <ul className="divide-y divide-cream-200 border-t border-cream-200">
+                {feedback.recent.map((f) => (
+                  <li key={f.id} className="py-2.5">
+                    <p className="text-sm text-ink-700 line-clamp-2">{f.message}</p>
+                    <p className="text-[10px] uppercase tracking-wider text-ink-400 mt-1">{f.kind} · {new Date(f.submitted_at).toLocaleDateString()}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
           <div className="card p-5">
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-display text-lg font-bold text-ink-900">Top captains by apps driven</h2>

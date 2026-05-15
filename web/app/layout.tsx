@@ -5,6 +5,7 @@ import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { AdminBar } from "@/components/admin-bar";
+import { FeedbackWidget } from "@/components/feedback-widget";
 
 const GA_ID = "G-5HY7LBXP8G";
 
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <FeedbackWidget />
         <Analytics />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
