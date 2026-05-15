@@ -63,8 +63,8 @@ export async function POST(req: Request) {
       const { createClient } = await import("@/lib/supabase/server");
       const supa = await createClient();
       // Cast away the generated `Database` typing — the captain_applications
-      // table is added by supabase/migrations/0004 and won't appear in the
-      // generated types until `npm run db:types` is re-run after deploy.
+      // table is added by supabase/migrations/20260514220000 and won't appear
+      // in generated types until `npm run db:types` is re-run after deploy.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { error } = await (supa as any).from("captain_applications").insert(record);
       if (error) throw error;

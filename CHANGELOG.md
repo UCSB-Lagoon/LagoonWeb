@@ -49,7 +49,7 @@
   `public/logo.svg` filled in (the directory was empty before).
 
 ### Database
-- New migration `web/supabase/migrations/0004_captain_applications.sql`:
+- New migration `web/supabase/migrations/20260514220000_captain_applications.sql`:
   `captain_applications` table with RLS (anon INSERT only), email regex check,
   status enum check, unique `lower(email)` index, status+timestamp index for
   the admin list, and a partial index on `referral_code` for measuring captain
