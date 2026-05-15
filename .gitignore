@@ -5,6 +5,12 @@
 # Dependencies
 node_modules/
 
+# Next.js / TypeScript build artifacts
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
 # Supabase CLI cache
 web/supabase/.temp/
 

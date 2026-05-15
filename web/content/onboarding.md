@@ -132,7 +132,7 @@ funnel (clicks → applications → accepted), referral attribution, and the
 feedback inbox. If a number is flat, that's the week's problem to solve.
 
 Outreach copy (Daily Nexus pitch, captain DMs, r/UCSB post, email sequence,
-TikTok hooks, Meta ad briefs) lives in `outreach-templates.md`.
+TikTok hooks, Meta ad briefs) lives in `docs/outreach-templates.md`.
 
 ## 8. Where to look when…
 
@@ -141,7 +141,7 @@ TikTok hooks, Meta ad briefs) lives in `outreach-templates.md`.
 | See growth + what needs work | `/admin` |
 | Triage a captain application | `/admin/captains` |
 | Read user feedback | `/admin/feedback` |
-| Understand the growth plan | `strategy.md`, `outreach-templates.md` |
+| Understand the growth plan | `docs/strategy.md`, `docs/outreach-templates.md` |
 | Change SEO copy on a guide | `web/public/marketing/<slug>.html` |
 | Add an admin metric | `web/app/admin/page.tsx` |
 | Change the captain email | `web/lib/email.ts` |
@@ -150,7 +150,7 @@ TikTok hooks, Meta ad briefs) lives in `outreach-templates.md`.
 
 - [ ] Local dev running, can sign in via magic link
 - [ ] Added to `ADMIN_EMAILS`, can load `/admin`
-- [ ] Read `strategy.md` + `outreach-templates.md`
+- [ ] Read `docs/strategy.md` + `docs/outreach-templates.md`
 - [ ] Submitted a test feedback via the floating widget, found it in `/admin/feedback`
 - [ ] Walked the captain loop: visit `/r/test`, apply at `/captains`, accept it in `/admin/captains`
 - [ ] Shipped one small PR to `main`
