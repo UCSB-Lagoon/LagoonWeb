@@ -1,6 +1,7 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 const COOKIE_NAME = "lagoon_ref";
@@ -41,6 +42,27 @@ export default async function ReferralRedirect(
     });
   } catch {
     /* cookies() not always available — client fallback handles it */
+  }
+
+  // Log the click (best-effort, never blocks the redirect)
+  try {
+    const h = await headers();
+    const ua = h.get("user-agent") || null;
+    const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
+    const country = h.get("x-vercel-ip-country") || null;
+    const isBot = !!ua && /bot|crawler|spider|preview|facebookexternalhit|slackbot|discordbot|twitterbot|whatsapp|linkedin|pinterest/i.test(ua);
+    const supa = await createClient();
+    // Cast: Insert typing requires the shared client to carry the PostgrestVersion type param.
+    await supa.from("referral_clicks").insert({
+      referral_code: code,
+      user_agent: ua,
+      ip,
+      country,
+      is_bot: isBot,
+      page_path: `/r/${code}`,
+    } as unknown as never);
+  } catch (e) {
+    console.warn("[r/code] click log failed", e);
   }
 
   // SEO / preview surface — only renders when explicitly requested

@@ -1,9 +1,20 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
+import { uniqueCaptainCode } from "@/lib/captain-code";
+import { sendEmail, captainAcceptedEmail } from "@/lib/email";
 
 const ALLOWED = ["new", "reviewing", "accepted", "rejected", "withdrawn"] as const;
 type Status = (typeof ALLOWED)[number];
+
+type ApplicationRow = {
+  id: string;
+  name: string;
+  email: string;
+  status: Status;
+  captain_code: string | null;
+  accepted_email_sent_at: string | null;
+};
 
 /**
  * PATCH /api/admin/captains/[id]
@@ -11,6 +22,10 @@ type Status = (typeof ALLOWED)[number];
  *
  * Auth: must be signed in via Supabase magic link AND email must be in
  * ADMIN_EMAILS (see web/lib/supabase/admin.ts).
+ *
+ * Side effects when status transitions to "accepted":
+ *   1. Generate a unique captain_code if one isn't already set
+ *   2. Send the captain their /r/{code} email (idempotent via accepted_email_sent_at)
  */
 export async function PATCH(
   req: Request,
@@ -36,16 +51,70 @@ export async function PATCH(
   if (!ALLOWED.includes(body.status as Status)) {
     return NextResponse.json({ error: "Invalid status" }, { status: 400 });
   }
+  const nextStatus = body.status as Status;
 
-  const patch: Record<string, unknown> = { status: body.status };
+  const admin = createAdminClient();
+
+  // Load current row so we can decide whether to issue code + send email
+  const { data: existing, error: loadErr } = await admin
+    .from("captain_applications")
+    .select("id, name, email, status, captain_code, accepted_email_sent_at")
+    .eq("id", id)
+    .single();
+  if (loadErr || !existing) {
+    return NextResponse.json({ error: loadErr?.message || "Not found" }, { status: 404 });
+  }
+  const row = existing as unknown as ApplicationRow;
+
+  const patch: Record<string, unknown> = { status: nextStatus };
   if (typeof body.reviewer_notes === "string") {
     patch.reviewer_notes = body.reviewer_notes.slice(0, 4000);
   }
 
-  const admin = createAdminClient();
+  // ── Accept workflow ─────────────────────────────────────────────────────
+  let issuedCode: string | null = null;
+  let emailResult: { ok: boolean; skipped?: boolean; error?: string } | null = null;
+
+  if (nextStatus === "accepted") {
+    // 1) Mint a code if one isn't already set
+    let code = row.captain_code;
+    if (!code) {
+      code = await uniqueCaptainCode(async (candidate) => {
+        const { count } = await admin
+          .from("captain_applications")
+          .select("id", { count: "exact", head: true })
+          .ilike("captain_code", candidate);
+        return (count ?? 0) > 0;
+      });
+      patch.captain_code = code;
+      issuedCode = code;
+    }
+
+    // 2) Send acceptance email if we haven't yet
+    if (!row.accepted_email_sent_at) {
+      const tpl = captainAcceptedEmail({ name: row.name, code });
+      const result = await sendEmail({
+        to: row.email,
+        subject: tpl.subject,
+        html: tpl.html,
+        text: tpl.text,
+        replyTo: "team@lagoonucsb.com",
+        tags: { workflow: "captain_accept", captain_code: code },
+      });
+      emailResult = result.ok
+        ? { ok: true }
+        : "skipped" in result
+          ? { ok: false, skipped: true, error: result.reason }
+          : { ok: false, error: result.error };
+      if (result.ok) {
+        patch.accepted_email_sent_at = new Date().toISOString();
+      }
+    }
+  }
+
   const { error } = await admin
     .from("captain_applications")
-    .update(patch)
+    .update(patch as never)
     .eq("id", id);
 
   if (error) {
@@ -53,5 +122,9 @@ export async function PATCH(
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({
+    ok: true,
+    issued_code: issuedCode,
+    email: emailResult,
+  });
 }

@@ -23,6 +23,8 @@ type Application = {
   reviewer_notes: string | null;
   submitted_at: string;
   reviewed_at: string | null;
+  captain_code: string | null;
+  accepted_email_sent_at: string | null;
 };
 
 const STATUSES = ["new", "reviewing", "accepted", "rejected", "withdrawn"] as const;
@@ -135,6 +137,23 @@ export default async function AdminCaptainsPage(
                     {a.referral_code && (
                       <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-cream-100 text-ink-700 border-cream-200">
                         ref: {a.referral_code}
+                      </span>
+                    )}
+                    {a.captain_code && (
+                      <a
+                        href={`https://lagoonucsb.com/r/${a.captain_code}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={`Captain link · /r/${a.captain_code}`}
+                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-orange-500 text-white border-orange-500 hover:bg-orange-600 transition"
+                      >
+                        /r/{a.captain_code}
+                      </a>
+                    )}
+                    {a.status === "accepted" && a.accepted_email_sent_at && (
+                      <span title={`Acceptance email sent ${new Date(a.accepted_email_sent_at).toLocaleString()}`}
+                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-emerald-100 text-emerald-700 border-emerald-200">
+                        ✓ emailed
                       </span>
                     )}
                   </div>

@@ -6,6 +6,9 @@ import {
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
+import { CaptainFunnelChart } from "@/components/admin/funnel-chart";
+import { InstallsChart } from "@/components/admin/installs-chart";
+import { getDailyEventCounts, isGA4Configured } from "@/lib/ga4";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -78,13 +81,26 @@ export default async function AdminHomePage() {
     } catch { return []; }
   }
 
-  const [statusBreakdown, totalApps, withRef, recentApps, topReferrals] = await Promise.all([
+  async function safeClickCount(): Promise<number> {
+    try {
+      const res = await admin
+        .from("referral_clicks")
+        .select("id", { count: "exact", head: true })
+        .eq("is_bot", false);
+      return res.count ?? 0;
+    } catch { return 0; }
+  }
+
+  const [statusBreakdown, totalApps, withRef, recentApps, topReferrals, totalClicks, installs] = await Promise.all([
     getStatusBreakdown(),
     safeCount(),
     safeCount({ kind: "withRef" }),
     getRecent(),
     getTopReferrals(),
+    safeClickCount(),
+    getDailyEventCounts("app_store_click", 14),
   ]);
+  const ga4State = isGA4Configured();
 
   const newCount = statusBreakdown.new || 0;
   const acceptedCount = statusBreakdown.accepted || 0;
@@ -152,6 +168,47 @@ export default async function AdminHomePage() {
           hint={`${withRef}/${totalApps} apps via /r/`}
           href="/admin/captains"
         />
+      </section>
+
+      {/* Charts row: funnel + installs */}
+      <section className="grid lg:grid-cols-2 gap-4 mb-6">
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-4">
+            <h2 className="font-display text-lg font-bold text-ink-900">Captain funnel</h2>
+            <span className="text-xs text-ink-400">Last 30 days</span>
+          </div>
+          <CaptainFunnelChart
+            stages={[
+              { stage: "Referral clicks", value: totalClicks, hint: "humans only" },
+              { stage: "Applications", value: statusBreakdown.new + (statusBreakdown.reviewing || 0) + (statusBreakdown.accepted || 0) + (statusBreakdown.rejected || 0), hint: "non-withdrawn" },
+              { stage: "In review", value: (statusBreakdown.reviewing || 0) + (statusBreakdown.accepted || 0), hint: "opened" },
+              { stage: "Accepted", value: statusBreakdown.accepted || 0, hint: "active captains" },
+            ]}
+          />
+        </div>
+
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-4">
+            <h2 className="font-display text-lg font-bold text-ink-900">App Store clicks · 14d</h2>
+            <span className="text-xs text-ink-400 font-mono">GA4 · app_store_click</span>
+          </div>
+          {ga4State.configured ? (
+            <InstallsChart data={(installs || []).map(d => ({ day: d.day, count: d.count }))} totalLabel="from GA4" />
+          ) : (
+            <div className="rounded-2xl border border-dashed border-cream-200 bg-cream-100/40 p-5 text-sm">
+              <p className="font-bold text-ink-900 mb-1">Connect GA4 to see installs</p>
+              <p className="text-ink-500 mb-3">
+                Reason: <span className="font-mono">{ga4State.reason}</span>
+              </p>
+              <ol className="list-decimal pl-5 text-ink-700 space-y-1">
+                <li>In Google Cloud, create a service account; grant it <em>Viewer</em> on the GA4 property.</li>
+                <li>Download the JSON key, base64-encode it, set <span className="font-mono">GA4_SERVICE_ACCOUNT_JSON_B64</span> in Vercel.</li>
+                <li>Set <span className="font-mono">GA4_PROPERTY_ID</span> (numeric, no <span className="font-mono">G-</span> prefix).</li>
+                <li>Redeploy. This card switches to the live chart automatically.</li>
+              </ol>
+            </div>
+          )}
+        </div>
       </section>
 
       {/* Two-column main */}

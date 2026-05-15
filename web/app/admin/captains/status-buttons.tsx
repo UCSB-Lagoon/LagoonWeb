@@ -18,6 +18,7 @@ export function StatusButtons({ id, current }: { id: string; current: Status }) 
   const [pending, startTransition] = useTransition();
   const [busyValue, setBusyValue] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   async function setStatus(next: Status) {
     setBusyValue(next);
@@ -31,6 +32,21 @@ export function StatusButtons({ id, current }: { id: string; current: Status }) 
       if (!res.ok) {
         const j = await res.json().catch(() => ({}));
         throw new Error((j as { error?: string }).error || `HTTP ${res.status}`);
+      }
+      const j = (await res.json().catch(() => ({}))) as {
+        issued_code?: string | null;
+        email?: { ok: boolean; skipped?: boolean; error?: string } | null;
+      };
+      if (j.issued_code) {
+        const emailMsg = j.email?.ok
+          ? "email sent"
+          : j.email?.skipped
+            ? "email skipped (Resend not configured)"
+            : j.email?.error
+              ? `email failed: ${j.email.error}`
+              : "email status unknown";
+        setNotice(`Captain link /r/${j.issued_code} issued · ${emailMsg}`);
+        setTimeout(() => setNotice(null), 8000);
       }
       startTransition(() => router.refresh());
     } catch (e) {
@@ -66,6 +82,11 @@ export function StatusButtons({ id, current }: { id: string; current: Status }) 
         })}
       </div>
       {error && <p className="text-xs text-rose-600">{error}</p>}
+      {notice && (
+        <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-2 py-1">
+          {notice}
+        </p>
+      )}
     </div>
   );
 }
