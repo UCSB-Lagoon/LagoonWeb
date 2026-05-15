@@ -141,7 +141,7 @@ export default async function AdminCaptainsPage(
                     )}
                     {a.captain_code && (
                       <a
-                        href={`https://lagoonucsb.com/r/${a.captain_code}`}
+                        href={`https://app.lagoonucsb.com/r/${a.captain_code}`}
                         target="_blank"
                         rel="noreferrer"
                         title={`Captain link · /r/${a.captain_code}`}

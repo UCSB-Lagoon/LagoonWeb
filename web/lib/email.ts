@@ -77,7 +77,7 @@ export function captainAcceptedEmail(args: {
   code: string;
 }): { subject: string; html: string; text: string } {
   const firstName = args.name.split(/\s+/)[0] || "Captain";
-  const link = `https://lagoonucsb.com/r/${args.code}`;
+  const link = `https://app.lagoonucsb.com/r/${args.code}`;
   const subject = `${firstName} — you're in. Here's your Lagoon captain link.`;
   const text = `Welcome to the Lagoon captain crew, ${firstName}.
 
