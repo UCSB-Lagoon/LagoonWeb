@@ -78,6 +78,33 @@ Push to `main` → Vercel auto-deploys. That's it. There is one Vercel project;
    live in `web/supabase/migrations/` with timestamped filenames.
 5. **Marketing pages are hand-crafted HTML.** Don't JSX-ify them. Edit the HTML
    in `public/marketing/` directly; keep the inlined structured data.
+6. **The web reads iOS-owned tables — keep them in sync.** See §5b.
+
+## 5b. Cross-repo schema dependency ⚠️
+
+The growth analytics on `/admin` read directly from **`user_profiles`**, which
+is owned and migrated by the **iOS app repo** (`~/Documents/GitHub/Lagoon`),
+not this one. Specifically we depend on these columns:
+
+| Column | Used for |
+|---|---|
+| `created_at` | total users, new 7d/30d, signup chart |
+| `onboarding_completed_at` | onboarding-completion % |
+| `referred_by_user_id` | referred-signup % |
+
+These reads are **best-effort by design**: if a column is renamed or removed
+on the iOS side, the affected growth card silently shows **0** instead of
+throwing. That keeps `/admin` from crashing — but it also means a schema
+change can quietly zero out a metric with no error anywhere.
+
+**If you work on the iOS repo:** before renaming/removing any of the columns
+above on `user_profiles`, grep this repo for the old name
+(`web/app/admin/page.tsx`, `web/components/admin-bar.tsx`) and update the
+queries in the same release. Add this to the iOS-side migration checklist.
+
+**If a growth card reads 0 unexpectedly:** first suspect a `user_profiles`
+schema change upstream, not a bug here. Confirm with:
+`select column_name from information_schema.columns where table_name='user_profiles';`
 
 ## 6. Applying a database migration
 
