@@ -17,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/auth/", "/me", "/login"],
       },
     ],
-    sitemap: "https://app.lagoonucsb.com/sitemap.xml",
-    host: "https://app.lagoonucsb.com",
+    sitemap: "https://lagoonucsb.com/sitemap.xml",
+    host: "https://lagoonucsb.com",
   };
 }

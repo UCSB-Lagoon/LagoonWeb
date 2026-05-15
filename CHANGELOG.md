@@ -1,5 +1,44 @@
 # Lagoon Web — Changelog
 
+## [2026-05-15] — Site consolidation: one project, one domain
+
+Merged the previously-separate marketing site (lagoonucsb.com — static HTML
+in repo root) and the Next.js web app (app.lagoonucsb.com — `web/`) into a
+single deployable.
+
+### What changed
+- Moved all 27 hand-crafted marketing pages into `web/public/marketing/` as
+  flat `<slug>.html` files. Hand-crafted CSS/structured-data preserved
+  verbatim — no JSX port. Served via Next.js rewrites in `web/next.config.ts`.
+- Moved `site.css`, `lagoon-cta.js`, `og-card.png`, `og-card.svg`,
+  `logo-amber.svg`, `llms.txt` into `web/public/` so root-relative asset
+  paths resolve unchanged.
+- Moved the live dashboard (formerly `/`) to `/hub`. Root path now serves
+  the marketing homepage via a rewrite.
+- Added `Hub` link to the navbar so signed-in users can reach the dashboard.
+- Sitemap + robots updated: canonical host is now `lagoonucsb.com` (not
+  the subdomain). Sitemap includes all 27 marketing slugs + interactive
+  routes.
+- `metadataBase`, OG URLs, Apple Smart Banner `app-argument` all point at
+  `lagoonucsb.com`.
+
+### Deleted
+- 27 directory-style marketing pages from repo root.
+- Root-level `site.css`, `og-card.*`, `lagoon-cta.js`, `robots.txt`,
+  `sitemap.xml`, `llms.txt`, `logo.svg`, `logo-amber.svg`.
+- Root `vercel.json` (was for the old marketing-only Vercel project).
+- Root `package.json` / `package-lock.json` (were empty stubs).
+
+### Required follow-up
+- In Vercel: add `lagoonucsb.com` (and `www.lagoonucsb.com`) as production
+  domain aliases on the **app** project. Remove them from the old marketing
+  project, then delete that project.
+- Once the alias swap propagates (~minutes), the old marketing-project
+  redirects to `app.lagoonucsb.com` are no longer needed (they'd be
+  unreachable anyway since the marketing project is gone).
+- `app.lagoonucsb.com` can either stay as a permanent alias (recommended
+  for backward compatibility with already-shared links) or be retired.
+
 ## [2026-05-14] — Growth funnel + captain program
 
 ### Marketing site (lagoonucsb.com)

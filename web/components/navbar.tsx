@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Trophy, Target, Map, User, BarChart3, Menu, X, Download } from "lucide-react";
+import { Trophy, Target, Map, User, BarChart3, Menu, X, Download, Home } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
+  { href: "/hub",           label: "Hub",         icon: Home },
   { href: "/leaderboard",   label: "Leaderboard", icon: Trophy },
   { href: "/challenges",    label: "Challenges",  icon: Target },
   { href: "/stats",         label: "Stats",       icon: BarChart3, live: true },

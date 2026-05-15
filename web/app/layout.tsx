@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "The live web hub for UCSB Lagoon. Interactive campus map with friends nearby, weekly leaderboards, challenges, and aggregate stats from the Lagoon iOS app.",
   applicationName: "UCSB Lagoon",
   keywords: ["UCSB", "Lagoon", "Gaucho", "campus map", "leaderboard", "UCSB students", "Isla Vista"],
-  metadataBase: new URL("https://app.lagoonucsb.com"),
+  metadataBase: new URL("https://lagoonucsb.com"),
   alternates: {
     canonical: "/",
   },
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "UCSB Lagoon — Live campus map, leaderboards & stats",
     description:
       "Interactive UCSB campus map with friends nearby, weekly leaderboards, and live stats from the Lagoon iOS app.",
-    url: "https://app.lagoonucsb.com",
+    url: "https://lagoonucsb.com",
     images: ["/og.png"],
   },
   twitter: {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     title: "Lagoon",
   },
   other: {
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://app.lagoonucsb.com/",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
   },
 };
 
