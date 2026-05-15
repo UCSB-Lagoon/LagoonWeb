@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { AdminBar } from "@/components/admin-bar";
 
 const GA_ID = "G-5HY7LBXP8G";
 
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className="min-h-screen flex flex-col">
+        <AdminBar />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
