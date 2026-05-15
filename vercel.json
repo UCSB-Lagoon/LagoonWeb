@@ -1,19 +1,24 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     {
       "source": "/captains",
-      "destination": "https://app.lagoonucsb.com/captains"
+      "destination": "https://app.lagoonucsb.com/captains",
+      "permanent": false
     },
     {
       "source": "/captains/:path*",
-      "destination": "https://app.lagoonucsb.com/captains/:path*"
+      "destination": "https://app.lagoonucsb.com/captains/:path*",
+      "permanent": false
     },
     {
       "source": "/r/:code",
-      "destination": "https://app.lagoonucsb.com/r/:code"
-    },
+      "destination": "https://app.lagoonucsb.com/r/:code",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
     {
       "source": "/api/captains",
       "destination": "https://app.lagoonucsb.com/api/captains"
