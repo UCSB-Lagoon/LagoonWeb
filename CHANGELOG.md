@@ -1,5 +1,46 @@
 # Lagoon Web — Changelog
 
+## [2026-05-15] — One design language across marketing + app
+
+Closed the visible seam between the hand-crafted marketing pages and
+the Next.js app now that they share `lagoonucsb.com`. Three separately
+maintained visual systems (home.html's bespoke inline CSS, site.css for
+the 25 guide pages, globals.css for the app) reconciled onto one
+source-of-truth token set, documented in `docs/brand-guidelines.md`.
+
+### Design tokens (Phase 1)
+- site.css + home.html aligned to the app's cream/orange palette
+  (page bg `#F2F1EF`→`#faf6ee`, ink, borders), shared dotted body
+  texture, focus + selection styles.
+- Gave the 25 light-only guide pages a `prefers-color-scheme: dark`
+  variant matching home.html + the app's `.dark` palette — a dark-OS
+  user no longer gets dark home/app but light guides.
+
+### Shared chrome (Phase 2)
+- Marketing header now matches the app navbar: gradient amber→orange
+  "L" tile, ink wordmark + uppercase overline, orange "Get the App"
+  pill, 64px height, cream-50/85 backdrop (site.css + home.html).
+- Marketing footer moved off the near-black strip onto the unified
+  cream surface with matching brand tile + orange CTA; tokenized for
+  dark mode.
+- Recolored the injected related-guides / updated-date blocks in all
+  25 guides from the old UCSB-navy palette to shared CSS vars.
+- footer.tsx: fixed the dead `app.lagoonucsb.com/captains` link.
+
+### Professionalism (Phase 3)
+- Unified button language onto the app's solid-orange pill; card
+  radius normalized to 1.25rem; every leftover cold-blue gradient in
+  site.css recolored warm; nav CTA no longer wraps on mobile.
+
+### SEO (Phase 4)
+- Added Twitter cards + BreadcrumbList JSON-LD to the 9 pages built
+  from an older template (og:image dims too); all JSON-LD validated.
+- sitemap.ts: dropped `/login` (robots.ts disallows it) so the
+  sitemap and robots no longer disagree.
+
+Verified: `tsc --noEmit` clean, `next build` passes (16/16), and the
+marketing ⟷ app surfaces spot-checked in light and dark.
+
 ## [2026-05-15] — Mission Control: feedback, growth analytics, handbook
 
 Turned `/admin` into a real internal ops portal, modeled on how Linear /
