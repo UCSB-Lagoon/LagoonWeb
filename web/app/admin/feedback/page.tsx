@@ -68,6 +68,13 @@ export default async function AdminFeedbackPage(
 
   const { data, error } = await q;
   const rows = (data as Row[] | null) || [];
+  // The feedback table is created by a migration that's applied manually.
+  // Until then, show a friendly setup notice instead of a raw Postgres error.
+  const tableMissing =
+    !!error &&
+    /relation .*feedback.* does not exist|Could not find the table .*feedback|schema cache/i.test(
+      error.message,
+    );
 
   const totals = STATUSES.reduce<Record<string, number>>((m, s) => { m[s] = 0; return m; }, {});
   for (const r of rows) totals[r.status] = (totals[r.status] || 0) + 1;
@@ -91,11 +98,30 @@ export default async function AdminFeedbackPage(
         </div>
       </div>
 
-      {error && (
+      {tableMissing ? (
+        <div className="card p-8 sm:p-10 text-center">
+          <h2 className="font-display text-xl font-bold text-ink-900">Feedback isn&apos;t set up yet</h2>
+          <p className="mt-2 text-ink-500 max-w-md mx-auto">
+            The <code className="font-mono text-sm">feedback</code> table hasn&apos;t been created in the
+            database yet. Submissions are still being captured in the server logs in the
+            meantime — nothing is lost.
+          </p>
+          <ol className="mt-5 text-sm text-ink-700 text-left max-w-md mx-auto space-y-1.5 list-decimal pl-5">
+            <li>Open the Supabase SQL editor (project <span className="font-mono">qecthmyzcicllttplhjq</span>).</li>
+            <li>Paste &amp; run <span className="font-mono">web/supabase/migrations/20260515120000_feedback.sql</span>.</li>
+            <li>Reload this page.</li>
+          </ol>
+          <a
+            href="https://supabase.com/dashboard/project/qecthmyzcicllttplhjq/sql/new"
+            target="_blank" rel="noreferrer"
+            className="btn-primary mt-6 inline-flex"
+          >
+            Open Supabase SQL editor
+          </a>
+        </div>
+      ) : error ? (
         <div className="card p-4 mb-6 border-rose-200 bg-rose-50 text-rose-700 text-sm">{error.message}</div>
-      )}
-
-      {rows.length === 0 ? (
+      ) : rows.length === 0 ? (
         <div className="card p-12 text-center text-ink-500">No feedback {statusFilter ? `with status "${statusFilter}"` : "yet"}.</div>
       ) : (
         <ul className="space-y-3">

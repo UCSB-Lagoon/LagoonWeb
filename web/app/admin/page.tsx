@@ -298,9 +298,9 @@ export default async function AdminHomePage() {
           <CaptainFunnelChart
             stages={[
               { stage: "Referral clicks", value: totalClicks, hint: "humans only" },
-              { stage: "Applications", value: statusBreakdown.new + (statusBreakdown.reviewing || 0) + (statusBreakdown.accepted || 0) + (statusBreakdown.rejected || 0), hint: "non-withdrawn" },
-              { stage: "In review", value: (statusBreakdown.reviewing || 0) + (statusBreakdown.accepted || 0), hint: "opened" },
-              { stage: "Accepted", value: statusBreakdown.accepted || 0, hint: "active captains" },
+              { stage: "Applications", value: newCount + reviewingCount + acceptedCount + (statusBreakdown.rejected || 0), hint: "non-withdrawn" },
+              { stage: "In review", value: reviewingCount + acceptedCount, hint: "opened" },
+              { stage: "Accepted", value: acceptedCount, hint: "active captains" },
             ]}
           />
         </div>
