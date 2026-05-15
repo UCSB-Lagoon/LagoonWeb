@@ -381,6 +381,8 @@ export type Database = {
       }
       captain_applications: {
         Row: {
+          accepted_email_sent_at: string | null
+          captain_code: string | null
           email: string
           id: string
           instagram: string | null
@@ -398,6 +400,8 @@ export type Database = {
           year: string | null
         }
         Insert: {
+          accepted_email_sent_at?: string | null
+          captain_code?: string | null
           email: string
           id?: string
           instagram?: string | null
@@ -415,6 +419,8 @@ export type Database = {
           year?: string | null
         }
         Update: {
+          accepted_email_sent_at?: string | null
+          captain_code?: string | null
           email?: string
           id?: string
           instagram?: string | null
@@ -1639,6 +1645,39 @@ export type Database = {
           },
         ]
       }
+      referral_clicks: {
+        Row: {
+          clicked_at: string
+          country: string | null
+          id: string
+          ip: string | null
+          is_bot: boolean
+          page_path: string | null
+          referral_code: string
+          user_agent: string | null
+        }
+        Insert: {
+          clicked_at?: string
+          country?: string | null
+          id?: string
+          ip?: string | null
+          is_bot?: boolean
+          page_path?: string | null
+          referral_code: string
+          user_agent?: string | null
+        }
+        Update: {
+          clicked_at?: string
+          country?: string | null
+          id?: string
+          ip?: string | null
+          is_bot?: boolean
+          page_path?: string | null
+          referral_code?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       referrals: {
         Row: {
           amount_cents: number
@@ -2421,6 +2460,17 @@ export type Database = {
           points: number | null
           source: string | null
           user_id: string | null
+        }
+        Relationships: []
+      }
+      captain_funnel_daily: {
+        Row: {
+          accepted: number | null
+          applications: number | null
+          clicks: number | null
+          day: string | null
+          reviewing_or_accepted: number | null
+          unique_codes: number | null
         }
         Relationships: []
       }
