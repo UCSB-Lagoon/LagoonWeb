@@ -85,7 +85,13 @@ export const MIGRATED_GUIDE_SLUGS = [
 /** Has the bespoke homepage ("/") been ported yet? (Phase 3) */
 export const HOME_MIGRATED = true;
 
-const migrated = new Set<string>(MIGRATED_GUIDE_SLUGS);
+/** Structure pages with their own RSC route (not the [slug] guide route). */
+export const MIGRATED_PAGE_SLUGS = ["guides", "company"] as const;
+
+const migrated = new Set<string>([
+  ...MIGRATED_GUIDE_SLUGS,
+  ...MIGRATED_PAGE_SLUGS,
+]);
 
 /** Slugs still served as static HTML — these get a next.config rewrite. */
 export const PENDING_SLUGS: string[] = MARKETING_SLUGS.filter(

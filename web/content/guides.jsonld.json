@@ -1,0 +1,32 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lagoonucsb.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://lagoonucsb.com/guides"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Lagoon UCSB Guides",
+    "url": "https://lagoonucsb.com/guides",
+    "description": "A collection of UCSB guides, FAQs, and Lagoon feature explainers.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Lagoon",
+      "url": "https://lagoonucsb.com/"
+    }
+  }
+]

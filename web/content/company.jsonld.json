@@ -1,0 +1,27 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lagoonucsb.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Company",
+        "item": "https://lagoonucsb.com/company"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": "About Lagoon",
+    "url": "https://lagoonucsb.com/company",
+    "description": "The story behind Lagoon, the student-built UCSB campus app."
+  }
+]

@@ -13,6 +13,8 @@ const config: NextConfig = {
     // Guide MDX is read from disk at build time — keep it in the trace.
     "/[slug]": ["./content/guides/**/*"],
     "/": ["./content/home-body.html", "./content/home.jsonld.json"],
+    "/guides": ["./content/guides-body.html", "./content/guides.jsonld.json"],
+    "/company": ["./content/company-body.html", "./content/company.jsonld.json"],
   },
   images: {
     remotePatterns: [
