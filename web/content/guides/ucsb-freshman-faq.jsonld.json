@@ -1,0 +1,94 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lagoonucsb.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://lagoonucsb.com/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "UCSB Freshman FAQ",
+        "item": "https://lagoonucsb.com/ucsb-freshman-faq"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "UCSB Freshman FAQ: What New Students Actually Need to Know",
+    "description": "A practical UCSB freshman FAQ covering classes, dining, dorm routines, meeting people, GOLD, and useful apps.",
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-28",
+    "inLanguage": "en-US",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://lagoonucsb.com/og-card.png",
+      "width": 1200,
+      "height": 630
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon",
+      "url": "https://lagoonucsb.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lagoonucsb.com/logo.svg"
+      }
+    },
+    "mainEntityOfPage": "https://lagoonucsb.com/ucsb-freshman-faq"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What should UCSB freshmen set up before classes start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Set up your UCSB accounts, learn GOLD, map your class locations, understand dining basics, and download the tools you will actually use every day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is UCSB hard for freshmen at first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The first quarter can feel overwhelming mostly because everything is new at once, but the learning curve gets much easier once your daily routine locks in."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What app is useful for UCSB freshmen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Freshmen usually need help with schedules, dining menus, campus events, and grade information. Lagoon bundles those workflows in one app."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "dateModified": "2026-05-14",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    }
+  }
+]

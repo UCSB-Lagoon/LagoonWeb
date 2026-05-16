@@ -55,6 +55,31 @@ export const ALL_MARKETING_PATHS: string[] = [
  */
 export const MIGRATED_GUIDE_SLUGS = [
   "ucsb-dining-menu", // Phase 1 pilot
+  // Phase 2 — bulk-migrated standard guides
+  "best-apps-for-ucsb-students",
+  "best-dorms-at-ucsb",
+  "best-study-spots-at-ucsb",
+  "how-lagoon-dining-works",
+  "how-lagoon-schedule-works",
+  "how-to-choose-classes-at-ucsb",
+  "how-to-meet-people-at-ucsb",
+  "how-to-plan-your-ucsb-schedule",
+  "how-to-use-gold-at-ucsb",
+  "isla-vista-guide-for-students",
+  "ucsb-campus-events-guide",
+  "ucsb-dorm-faq",
+  "ucsb-finals-week-guide",
+  "ucsb-first-week-guide",
+  "ucsb-freshman-faq",
+  "ucsb-ge-requirements-guide",
+  "ucsb-grade-distributions-guide",
+  "ucsb-meal-plan-guide",
+  "ucsb-move-in-checklist",
+  "ucsb-orientation-checklist",
+  "ucsb-registration-guide",
+  "ucsb-transfer-student-guide",
+  "what-to-bring-to-ucsb-dorm",
+  "what-to-do-between-classes-at-ucsb",
 ] as const;
 
 /** Has the bespoke homepage ("/") been ported yet? (Phase 3) */

@@ -40,16 +40,30 @@ export async function generateMetadata(
   const { slug } = await params;
   const { frontmatter: fm } = await loadGuide(slug);
   const url = `https://lagoonucsb.com${fm.canonicalPath}`;
+  // Faithful to the original: some pages had og:image dimensions, some
+  // only og:image.
+  const ogImages = fm.ogImageWidth
+    ? [
+        {
+          url: fm.image,
+          type: fm.ogImageType || undefined,
+          width: Number(fm.ogImageWidth),
+          height: Number(fm.ogImageHeight),
+          alt: fm.ogImageAlt || undefined,
+        },
+      ]
+    : [fm.image];
   return {
     title: { absolute: fm.title },
     description: fm.description,
+    ...(fm.author ? { authors: [{ name: fm.author }] } : {}),
     alternates: { canonical: url },
     openGraph: {
       type: "article",
       title: fm.ogTitle,
       description: fm.ogDescription,
       url,
-      images: [fm.image],
+      images: ogImages,
     },
     twitter: {
       card: "summary_large_image",
@@ -65,9 +79,15 @@ export default async function GuidePage(
 ) {
   const { slug } = await params;
   const { content, frontmatter: fm } = await loadGuide(slug);
+  const blocks = JSON.parse(
+    await readFile(
+      join(process.cwd(), "content", "guides", `${slug}.jsonld.json`),
+      "utf8"
+    )
+  ) as unknown[];
   return (
     <>
-      <GuideJsonLd fm={fm} />
+      <GuideJsonLd blocks={blocks} />
       <GuideShell fm={fm}>{content}</GuideShell>
     </>
   );

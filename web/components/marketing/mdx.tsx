@@ -21,5 +21,27 @@ export function ArticleLinks({ children }: { children: ReactNode }) {
   return <div className="article-links">{children}</div>;
 }
 
+/** FAQ accordion (matches the old static .faq-list markup). */
+export function FaqList({ children }: { children: ReactNode }) {
+  return <div className="faq-list">{children}</div>;
+}
+
+export function FaqItem({
+  q,
+  open,
+  children,
+}: {
+  q: string;
+  open?: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <details open={open}>
+      <summary>{q}</summary>
+      {children}
+    </details>
+  );
+}
+
 /** Components made available to every guide MDX file. */
-export const mdxComponents = { Callout, ArticleLinks };
+export const mdxComponents = { Callout, ArticleLinks, FaqList, FaqItem };

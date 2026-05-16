@@ -11,7 +11,7 @@ const config: NextConfig = {
   outputFileTracingIncludes: {
     "/admin/handbook": ["./content/onboarding.md"],
     // Guide MDX is read from disk at build time — keep it in the trace.
-    "/[slug]": ["./content/guides/**/*.mdx"],
+    "/[slug]": ["./content/guides/**/*"],
   },
   images: {
     remotePatterns: [

@@ -1,0 +1,52 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lagoonucsb.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://lagoonucsb.com/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "UCSB Meal Plan Guide",
+        "item": "https://lagoonucsb.com/ucsb-meal-plan-guide"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "UCSB Meal Plan Guide for Freshmen",
+    "description": "A practical UCSB meal plan guide for freshmen: how dining swipes fit into real routines, what to consider, and how to make campus dining easier.",
+    "datePublished": "2026-04-21",
+    "dateModified": "2026-04-21",
+    "author": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    },
+    "mainEntityOfPage": "https://lagoonucsb.com/ucsb-meal-plan-guide"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "dateModified": "2026-05-14",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    }
+  }
+]

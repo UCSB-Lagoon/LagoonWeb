@@ -18,7 +18,8 @@ import { AnnounceBar } from "@/components/marketing/announce-bar";
  * keeping them off avoids SEO drift vs. the goldens.
  */
 export const metadata: Metadata = {
-  authors: [{ name: "Lagoon" }],
+  // `author` meta is per-page (some originals had it, some didn't) — set
+  // in (marketing)/[slug] from frontmatter, not globally here.
   robots: { index: true, follow: true },
   icons: { icon: [{ url: "/logo.svg", type: "image/svg+xml" }] },
   other: {
