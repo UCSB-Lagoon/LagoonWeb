@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
 import { SiteAnalytics } from "@/components/site-analytics";
 import { AnnounceBar } from "@/components/marketing/announce-bar";
+import { MarketingHeader } from "@/components/marketing/marketing-header";
+import { MarketingFooter } from "@/components/marketing/marketing-footer";
 
 /**
- * Marketing + guides shell — the 25 SEO guides, /guides, /company, and
- * (Phase 3) the homepage. Reports to the MARKETING GA4 stream
- * (G-2F8CTN4DNP) to preserve that stream's history. Same shared
- * Navbar/Footer as the app — post-migration this is one product.
+ * Marketing + guides shell — the 25 SEO guides, /guides, /company, the
+ * homepage. Reports to the MARKETING GA4 stream (G-2F8CTN4DNP). Uses a
+ * MARKETING-specific header/footer (its own nav + no theme toggle); the
+ * app's Navbar/Footer are not used here. Dark mode follows the OS via
+ * site.css's prefers-color-scheme, like the original static site.
  *
  * Default metadata mirrors what every static guide carried (author,
  * robots, Apple smart-banner). Per-page title/description/canonical/
@@ -35,9 +36,9 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
           <link> into <head>. */}
       <link rel="stylesheet" href="/site.css" precedence="default" />
       <AnnounceBar />
-      <Navbar />
+      <MarketingHeader />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <MarketingFooter />
       <SiteAnalytics gaId="G-2F8CTN4DNP" />
       <Script src="/lagoon-cta.js" strategy="afterInteractive" />
     </>
