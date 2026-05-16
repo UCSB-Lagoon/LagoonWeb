@@ -39,8 +39,8 @@ export function Navbar() {
         "sticky top-0 z-40 transition-all duration-200",
         "backdrop-blur-xl",
         scrolled
-          ? "bg-cream-50/85 border-b border-cream-200/80 shadow-[0_1px_0_rgba(30,20,16,0.02),0_8px_24px_-18px_rgba(176,110,60,0.18)]"
-          : "bg-cream-50/60 border-b border-transparent",
+          ? "bg-cream-50/90 border-b border-cream-200/80 shadow-[0_1px_0_rgba(30,20,16,0.02),0_8px_24px_-18px_rgba(176,110,60,0.18)]"
+          : "bg-cream-50/80 border-b border-cream-200/50",
       ].join(" ")}
     >
       <nav
