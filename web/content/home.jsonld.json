@@ -1,0 +1,127 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Lagoon",
+    "url": "https://lagoonucsb.com/",
+    "description": "The UCSB campus app for schedules, dining, events, student news, and grade data.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Lagoon — UCSB Campus App",
+    "alternateName": "UCSB Lagoon",
+    "url": "https://lagoonucsb.com/",
+    "image": "https://lagoonucsb.com/og-card.png",
+    "downloadUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
+    "installUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
+    "applicationCategory": "EducationApplication",
+    "applicationSubCategory": "Campus Life",
+    "operatingSystem": "iOS 16.0+",
+    "softwareVersion": "1.0",
+    "inLanguage": "en-US",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "audience": {
+      "@type": "EducationalAudience",
+      "educationalRole": "student",
+      "geographicArea": {
+        "@type": "Place",
+        "name": "University of California, Santa Barbara",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santa Barbara",
+          "addressRegion": "CA",
+          "postalCode": "93106",
+          "addressCountry": "US"
+        }
+      }
+    },
+    "featureList": [
+      "Real UCSB grade distributions and A-rate data",
+      "GOLD schedule sync and quarter view",
+      "Live UCSB dining commons menus",
+      "Live campus map with friends and anonymous pins",
+      "Campus events and Daily Nexus headlines",
+      "Classmate discovery and study groups",
+      "GE requirement tracker",
+      "Class vibes and course reviews",
+      "XP, streaks, and gamification"
+    ],
+    "screenshot": "https://lagoonucsb.com/og-card.png",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon",
+      "url": "https://lagoonucsb.com/"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Lagoon",
+    "url": "https://lagoonucsb.com/",
+    "logo": "https://lagoonucsb.com/logo.svg",
+    "sameAs": [
+      "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+    ],
+    "areaServed": {
+      "@type": "Place",
+      "name": "University of California, Santa Barbara"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Lagoon?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Lagoon is the free all-in-one campus app for UCSB students. It combines GOLD schedule sync, real grade distribution data, live dining commons menus, campus events, Daily Nexus headlines, classmate discovery, and study groups in one app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Lagoon free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Lagoon is free to download on the App Store and there are no paid tiers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Lagoon sync with UCSB GOLD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Lagoon imports your registered courses from UCSB GOLD so your schedule, attendance, and finals countdown stay accurate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does Lagoon's grade data come from?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Grade distributions are aggregated from UCSB's publicly released grade reports — including average GPA, A-rate, and D/F-rate for over 500 courses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who can use Lagoon?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Lagoon is built exclusively for UCSB undergraduates and graduate students. Sign-in requires a valid UCSB account."
+        }
+      }
+    ]
+  }
+]

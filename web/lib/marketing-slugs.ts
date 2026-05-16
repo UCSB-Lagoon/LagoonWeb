@@ -83,7 +83,7 @@ export const MIGRATED_GUIDE_SLUGS = [
 ] as const;
 
 /** Has the bespoke homepage ("/") been ported yet? (Phase 3) */
-export const HOME_MIGRATED = false;
+export const HOME_MIGRATED = true;
 
 const migrated = new Set<string>(MIGRATED_GUIDE_SLUGS);
 

@@ -52,6 +52,13 @@ function decode(s) {
     .replace(/&amp;/gi, "&");
 }
 
+// Root with/without trailing slash is the same resource to crawlers
+// (https://host vs https://host/). Normalize only the bare-root case so
+// non-root paths are still compared exactly.
+function rootSlash(u) {
+  return u == null ? u : u.replace(/^(https?:\/\/[^/]+)\/$/, "$1");
+}
+
 function attr(tag, name) {
   const m = tag.match(new RegExp(`${name}\\s*=\\s*"([^"]*)"`, "i")) ||
             tag.match(new RegExp(`${name}\\s*=\\s*'([^']*)'`, "i"));
@@ -90,14 +97,15 @@ function extract(html) {
   for (const m of head.matchAll(/<link\b[^>]*>/gi)) {
     const tag = m[0];
     const rel = (attr(tag, "rel") || "").toLowerCase();
-    if (rel === "canonical") links.canonical = attr(tag, "href");
+    if (rel === "canonical") links.canonical = rootSlash(attr(tag, "href"));
     if (rel === "alternate") {
       (links.alternate ||= []).push({
         hreflang: attr(tag, "hreflang"),
-        href: attr(tag, "href"),
+        href: rootSlash(attr(tag, "href")),
       });
     }
   }
+  if (metas["og:url"]) metas["og:url"] = rootSlash(metas["og:url"]);
 
   // JSON-LD is valid (and Google-supported) anywhere in the document —
   // migrated pages emit it in <body>. Scan the whole HTML, not just head.
@@ -163,6 +171,16 @@ if (mode === "snapshot") {
     const golden = JSON.parse(await readFile(goldenPath, "utf8"));
     // Goldens captured before IGNORE_METAS existed may still carry them.
     if (golden.metas) for (const k of IGNORE_METAS) delete golden.metas[k];
+    // Normalize bare-root trailing slash on the golden side too.
+    if (golden.metas?.["og:url"])
+      golden.metas["og:url"] = rootSlash(golden.metas["og:url"]);
+    if (golden.links?.canonical)
+      golden.links.canonical = rootSlash(golden.links.canonical);
+    if (Array.isArray(golden.links?.alternate))
+      golden.links.alternate = golden.links.alternate.map((a) => ({
+        ...a,
+        href: rootSlash(a.href),
+      }));
     let actual;
     try { actual = await fetchPage(base, p); }
     catch (e) { console.log(`✗ ${p}  (${e.message})`); failed++; continue; }
