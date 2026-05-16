@@ -1,0 +1,169 @@
+{
+  "title": "Lagoon — UCSB Campus App for Grades, Schedule, Dining & Live Map",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "description": "Lagoon is the free UCSB student app. Real grade distributions, GOLD schedule sync, live dining menus, a live campus map showing friends nearby, campus events, Daily Nexus news, and study groups — all in one place. Made by Gauchos.",
+    "keywords": "UCSB, UCSB app, Lagoon UCSB, UCSB schedule, UCSB grades, UCSB dining, GOLD sync, Daily Nexus, Isla Vista, Gaucho, UCSB student app, UCSB grade distribution",
+    "author": "Lagoon",
+    "theme-color": "#F08A3C",
+    "robots": "index, follow, max-image-preview:large, max-snippet:-1",
+    "googlebot": "index, follow, max-image-preview:large, max-snippet:-1",
+    "og:type": "website",
+    "og:site_name": "Lagoon",
+    "og:locale": "en_US",
+    "og:title": "Lagoon — The UCSB Campus App",
+    "og:description": "Real grade data, GOLD schedule sync, live dining menus, campus events, Daily Nexus, and study groups — the free UCSB student app.",
+    "og:url": "https://lagoonucsb.com/",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "Lagoon — the UCSB campus app",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Lagoon — The UCSB Campus App",
+    "twitter:description": "Free UCSB student app. Grades, schedule, dining, events, news, and study groups — in one place.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "twitter:image:alt": "Lagoon — the UCSB campus app"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/",
+    "alternate": [
+      {
+        "hreflang": "en",
+        "href": "https://lagoonucsb.com/"
+      },
+      {
+        "hreflang": "x-default",
+        "href": "https://lagoonucsb.com/"
+      }
+    ]
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lagoon is the free all-in-one campus app for UCSB students. It combines GOLD schedule sync, real grade distribution data, live dining commons menus, campus events, Daily Nexus headlines, classmate discovery, and study groups in one app."
+          },
+          "name": "What is Lagoon?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Lagoon is free to download on the App Store and there are no paid tiers."
+          },
+          "name": "Is Lagoon free?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Lagoon imports your registered courses from UCSB GOLD so your schedule, attendance, and finals countdown stay accurate."
+          },
+          "name": "Does Lagoon sync with UCSB GOLD?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Grade distributions are aggregated from UCSB's publicly released grade reports — including average GPA, A-rate, and D/F-rate for over 500 courses."
+          },
+          "name": "Where does Lagoon's grade data come from?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lagoon is built exclusively for UCSB undergraduates and graduate students. Sign-in requires a valid UCSB account."
+          },
+          "name": "Who can use Lagoon?"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "alternateName": "UCSB Lagoon",
+      "applicationCategory": "EducationApplication",
+      "applicationSubCategory": "Campus Life",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student",
+        "geographicArea": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US",
+            "addressLocality": "Santa Barbara",
+            "addressRegion": "CA",
+            "postalCode": "93106"
+          },
+          "name": "University of California, Santa Barbara"
+        }
+      },
+      "downloadUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
+      "featureList": [
+        "Real UCSB grade distributions and A-rate data",
+        "GOLD schedule sync and quarter view",
+        "Live UCSB dining commons menus",
+        "Live campus map with friends and anonymous pins",
+        "Campus events and Daily Nexus headlines",
+        "Classmate discovery and study groups",
+        "GE requirement tracker",
+        "Class vibes and course reviews",
+        "XP, streaks, and gamification"
+      ],
+      "image": "https://lagoonucsb.com/og-card.png",
+      "inLanguage": "en-US",
+      "installUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
+      "isAccessibleForFree": true,
+      "name": "Lagoon — UCSB Campus App",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "iOS 16.0+",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com/"
+      },
+      "screenshot": "https://lagoonucsb.com/og-card.png",
+      "softwareVersion": "1.0",
+      "url": "https://lagoonucsb.com/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "areaServed": {
+        "@type": "Place",
+        "name": "University of California, Santa Barbara"
+      },
+      "logo": "https://lagoonucsb.com/logo.svg",
+      "name": "Lagoon",
+      "sameAs": [
+        "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+      ],
+      "url": "https://lagoonucsb.com/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "description": "The UCSB campus app for schedules, dining, events, student news, and grade data.",
+      "name": "Lagoon",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "url": "https://lagoonucsb.com/"
+    }
+  ]
+}

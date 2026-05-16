@@ -1,0 +1,87 @@
+{
+  "title": "How to Choose Classes at UCSB",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical guide to choosing classes at UCSB using workload, interest, timing, and grade data without building a quarter you regret.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "How to Choose Classes at UCSB",
+    "og:description": "How to choose UCSB classes based on workload, timing, and what your quarter will actually feel like.",
+    "og:url": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "How to Choose Classes at UCSB",
+    "twitter:description": "How to choose UCSB classes based on workload, timing, and what your quarter will actually feel like.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "How to Choose Classes at UCSB",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical guide to choosing classes at UCSB using workload, interest, timing, and grade data without building a quarter you regret.",
+      "headline": "How to Choose Classes at UCSB",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb",
+          "name": "How to Choose Classes at UCSB",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

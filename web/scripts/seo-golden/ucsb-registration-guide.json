@@ -1,0 +1,78 @@
+{
+  "title": "UCSB Registration Guide",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical UCSB registration guide covering how students think through passes, schedule prep, backups, and what to do before registration opens.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB Registration Guide",
+    "og:description": "How to prepare for UCSB registration with backups, schedule planning, and less panic.",
+    "og:url": "https://lagoonucsb.com/ucsb-registration-guide",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "UCSB Registration Guide",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Registration Guide",
+    "twitter:description": "How to prepare for UCSB registration with backups, schedule planning, and less panic.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Registration Guide"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-registration-guide"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-21",
+      "datePublished": "2026-04-21",
+      "description": "A practical UCSB registration guide covering how students think through passes, schedule prep, backups, and what to do before registration opens.",
+      "headline": "UCSB Registration Guide",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-registration-guide",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-registration-guide",
+          "name": "UCSB Registration Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

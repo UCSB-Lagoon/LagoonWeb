@@ -1,0 +1,87 @@
+{
+  "title": "Best Dorms at UCSB: How to Actually Choose | Lagoon",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical guide to thinking about the best dorms at UCSB based on routine, location, social life, and what kind of first-year experience you want.",
+    "robots": "index, follow",
+    "author": "Lagoon",
+    "og:type": "article",
+    "og:title": "Best Dorms at UCSB: How to Actually Choose | Lagoon",
+    "og:description": "How to think about the best dorms at UCSB based on location, routine, and the kind of experience you want.",
+    "og:url": "https://lagoonucsb.com/best-dorms-at-ucsb",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Best Dorms at UCSB: How to Actually Choose | Lagoon",
+    "twitter:description": "How to think about the best dorms at UCSB based on location, routine, and the kind of experience you want.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "Best Dorms at UCSB: How to Actually Choose | Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/best-dorms-at-ucsb"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical guide to thinking about the best dorms at UCSB based on routine, location, social life, and what kind of first-year experience you want.",
+      "headline": "Best Dorms at UCSB: How to Actually Choose",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/best-dorms-at-ucsb",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/best-dorms-at-ucsb",
+          "name": "Best Dorms at UCSB: How to Actually Choose",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

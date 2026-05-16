@@ -1,0 +1,78 @@
+{
+  "title": "What to Do Between Classes at UCSB",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical guide to what to do between classes at UCSB so long gaps do not turn into wasted time, bad food decisions, or random stress.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "What to Do Between Classes at UCSB",
+    "og:description": "How to use gaps between UCSB classes for food, studying, errands, and getting your day back under control.",
+    "og:url": "https://lagoonucsb.com/what-to-do-between-classes-at-ucsb",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "What to Do Between Classes at UCSB",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "What to Do Between Classes at UCSB",
+    "twitter:description": "How to use gaps between UCSB classes for food, studying, errands, and getting your day back under control.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "What to Do Between Classes at UCSB"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/what-to-do-between-classes-at-ucsb"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-21",
+      "datePublished": "2026-04-21",
+      "description": "A practical guide to what to do between classes at UCSB so long gaps do not turn into wasted time, bad food decisions, or random stress.",
+      "headline": "What to Do Between Classes at UCSB",
+      "mainEntityOfPage": "https://lagoonucsb.com/what-to-do-between-classes-at-ucsb",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/what-to-do-between-classes-at-ucsb",
+          "name": "What to Do Between Classes at UCSB",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

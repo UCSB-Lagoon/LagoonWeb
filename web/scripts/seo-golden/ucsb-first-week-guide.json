@@ -1,0 +1,87 @@
+{
+  "title": "UCSB First Week Guide",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical UCSB first week guide covering class routes, dining, meeting people, managing nerves, and making campus feel normal faster.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB First Week Guide",
+    "og:description": "What to focus on during your first week at UCSB so campus feels less overwhelming, faster.",
+    "og:url": "https://lagoonucsb.com/ucsb-first-week-guide",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB First Week Guide",
+    "twitter:description": "What to focus on during your first week at UCSB so campus feels less overwhelming, faster.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB First Week Guide",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-first-week-guide"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical UCSB first week guide covering class routes, dining, meeting people, managing nerves, and making campus feel normal faster.",
+      "headline": "UCSB First Week Guide",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-first-week-guide",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-first-week-guide",
+          "name": "UCSB First Week Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

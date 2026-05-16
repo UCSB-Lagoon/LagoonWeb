@@ -1,0 +1,58 @@
+{
+  "title": "UCSB Student Guides | Lagoon",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "Browse Lagoon's UCSB student guides for freshmen, dorm life, move-in, meal plans, GOLD, class planning, study spots, and everyday campus questions.",
+    "robots": "index, follow",
+    "og:type": "website",
+    "og:title": "UCSB Student Guides | Lagoon",
+    "og:description": "Student-first UCSB guides from Lagoon for freshmen, transfer students, newly admitted students, and current Gauchos.",
+    "og:url": "https://lagoonucsb.com/guides",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "UCSB Student Guides | Lagoon",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Student Guides | Lagoon",
+    "twitter:description": "Student-first UCSB guides from Lagoon for freshmen, transfer students, newly admitted students, and current Gauchos.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Student Guides | Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/guides"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "description": "A collection of UCSB guides, FAQs, and Lagoon feature explainers.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com/"
+      },
+      "name": "Lagoon UCSB Guides",
+      "url": "https://lagoonucsb.com/guides"
+    }
+  ]
+}

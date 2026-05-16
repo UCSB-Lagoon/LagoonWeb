@@ -1,0 +1,87 @@
+{
+  "title": "Best Apps for UCSB Students in 2026",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical list of the best apps for UCSB students, organized by what students actually need: schedules, dining, maps, events, and staying on top of campus life.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "Best Apps for UCSB Students in 2026",
+    "og:description": "A practical app stack for UCSB students, with Lagoon positioned as the all-in-one layer.",
+    "og:url": "https://lagoonucsb.com/best-apps-for-ucsb-students",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Best Apps for UCSB Students in 2026",
+    "twitter:description": "A practical app stack for UCSB students, with Lagoon positioned as the all-in-one layer.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "Best Apps for UCSB Students in 2026",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/best-apps-for-ucsb-students"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical list of the best apps for UCSB students, organized around schedules, dining, maps, events, and everyday campus utility.",
+      "headline": "Best Apps for UCSB Students in 2026",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/best-apps-for-ucsb-students",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/best-apps-for-ucsb-students",
+          "name": "Best Apps for UCSB Students in 2026",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

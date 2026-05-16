@@ -1,0 +1,87 @@
+{
+  "title": "How to Use GOLD at UCSB Without Hating It",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical guide to using GOLD at UCSB for schedules and registration, plus how Lagoon makes your day-to-day class routine cleaner after GOLD does its job.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "How to Use GOLD at UCSB Without Hating It",
+    "og:description": "Learn what GOLD is for, what it is not great at, and how Lagoon complements it.",
+    "og:url": "https://lagoonucsb.com/how-to-use-gold-at-ucsb",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "How to Use GOLD at UCSB Without Hating It",
+    "twitter:description": "Learn what GOLD is for, what it is not great at, and how Lagoon complements it.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "How to Use GOLD at UCSB Without Hating It",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/how-to-use-gold-at-ucsb"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical guide to using GOLD at UCSB for schedules and registration, plus how Lagoon improves day-to-day schedule use.",
+      "headline": "How to Use GOLD at UCSB Without Hating It",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/how-to-use-gold-at-ucsb",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/how-to-use-gold-at-ucsb",
+          "name": "How to Use GOLD at UCSB Without Hating It",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

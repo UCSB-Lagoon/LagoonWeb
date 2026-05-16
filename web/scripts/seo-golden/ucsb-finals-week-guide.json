@@ -1,0 +1,87 @@
+{
+  "title": "UCSB Finals Week Guide",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical UCSB finals week guide covering scheduling, pacing, study strategy, and how to make finals feel less chaotic.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB Finals Week Guide",
+    "og:description": "How to handle finals week at UCSB with better pacing, planning, and less chaos.",
+    "og:url": "https://lagoonucsb.com/ucsb-finals-week-guide",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Finals Week Guide",
+    "twitter:description": "How to handle finals week at UCSB with better pacing, planning, and less chaos.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Finals Week Guide",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-finals-week-guide"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical UCSB finals week guide covering scheduling, pacing, study strategy, and how to make finals feel less chaotic.",
+      "headline": "UCSB Finals Week Guide",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-finals-week-guide",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-finals-week-guide",
+          "name": "UCSB Finals Week Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical guide to the UCSB dining menu: how students check today's food, compare dining commons, and use Lagoon to see menus faster.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
+    "og:description": "How Gauchos actually check dining menus, compare halls, and decide where to eat without wasting a walk.",
+    "og:url": "https://lagoonucsb.com/ucsb-dining-menu",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
+    "twitter:description": "How Gauchos actually check dining menus, compare halls, and decide where to eat without wasting a walk.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-dining-menu"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical guide to the UCSB dining menu: how students check today's food, compare dining commons, and use Lagoon to see menus faster.",
+      "headline": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-dining-menu",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-dining-menu",
+          "name": "UCSB Dining Menu Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

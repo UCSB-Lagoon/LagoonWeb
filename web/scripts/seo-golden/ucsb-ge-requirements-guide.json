@@ -1,0 +1,87 @@
+{
+  "title": "UCSB GE Requirements Guide",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical UCSB GE requirements guide for students who want to understand general education planning without turning it into a confusing mess.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB GE Requirements Guide",
+    "og:description": "How to think about UCSB GE requirements in a way that helps you make progress without overcomplicating your plan.",
+    "og:url": "https://lagoonucsb.com/ucsb-ge-requirements-guide",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB GE Requirements Guide",
+    "twitter:description": "How to think about UCSB GE requirements in a way that helps you make progress without overcomplicating your plan.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB GE Requirements Guide",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-ge-requirements-guide"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical UCSB GE requirements guide for students who want to understand general education planning without turning it into a confusing mess.",
+      "headline": "UCSB GE Requirements Guide",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-ge-requirements-guide",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-ge-requirements-guide",
+          "name": "UCSB GE Requirements Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

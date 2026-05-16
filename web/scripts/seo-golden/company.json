@@ -1,0 +1,53 @@
+{
+  "title": "About Lagoon | Built for Gauchos, by Gauchos",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "Learn about Lagoon, the student-built UCSB campus app for schedules, dining menus, campus events, student news, and grade data.",
+    "robots": "index, follow",
+    "og:type": "website",
+    "og:title": "About Lagoon | Built for Gauchos, by Gauchos",
+    "og:description": "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
+    "og:url": "https://lagoonucsb.com/company",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "About Lagoon | Built for Gauchos, by Gauchos",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "About Lagoon | Built for Gauchos, by Gauchos",
+    "twitter:description": "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "About Lagoon | Built for Gauchos, by Gauchos"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/company"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "description": "The story behind Lagoon, the student-built UCSB campus app.",
+      "name": "About Lagoon",
+      "url": "https://lagoonucsb.com/company"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/company",
+          "name": "Company",
+          "position": 2
+        }
+      ]
+    }
+  ]
+}

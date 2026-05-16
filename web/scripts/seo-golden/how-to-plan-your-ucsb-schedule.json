@@ -1,0 +1,87 @@
+{
+  "title": "How to Plan Your UCSB Schedule",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "Learn how to plan your UCSB schedule around timing, workload, walking distance, and energy so your week feels manageable, not just technically possible.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "How to Plan Your UCSB Schedule",
+    "og:description": "Build a UCSB schedule that works in real life, not just one that fits on paper.",
+    "og:url": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "How to Plan Your UCSB Schedule",
+    "twitter:description": "Build a UCSB schedule that works in real life, not just one that fits on paper.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "How to Plan Your UCSB Schedule",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "Learn how to plan your UCSB schedule around timing, workload, walking distance, and energy so your week feels manageable, not just technically possible.",
+      "headline": "How to Plan Your UCSB Schedule",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule",
+          "name": "How to Plan Your UCSB Schedule",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

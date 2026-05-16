@@ -1,0 +1,87 @@
+{
+  "title": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical guide to using UCSB grade distributions without making bad schedule decisions. Learn what grade data is good for and how Lagoon surfaces it.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
+    "og:description": "Use UCSB grade distributions to balance workload, compare sections, and make smarter schedule choices.",
+    "og:url": "https://lagoonucsb.com/ucsb-grade-distributions-guide",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
+    "twitter:description": "Use UCSB grade distributions to balance workload, compare sections, and make smarter schedule choices.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-grade-distributions-guide"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A practical guide to using UCSB grade distributions for schedule planning and section comparison without over-relying on them.",
+      "headline": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-grade-distributions-guide",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-grade-distributions-guide",
+          "name": "UCSB Grade Distributions Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

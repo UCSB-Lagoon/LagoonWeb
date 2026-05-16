@@ -1,0 +1,87 @@
+{
+  "title": "How Lagoon Schedule Works for UCSB Students",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "Learn how Lagoon's schedule feature helps UCSB students with class sync, widgets, weekly planning, finals context, and a cleaner daily view than official systems.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "How Lagoon Schedule Works for UCSB Students",
+    "og:description": "A feature explainer for Lagoon's UCSB schedule tools, widgets, and weekly planning flow.",
+    "og:url": "https://lagoonucsb.com/how-lagoon-schedule-works",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "How Lagoon Schedule Works for UCSB Students",
+    "twitter:description": "A feature explainer for Lagoon's UCSB schedule tools, widgets, and weekly planning flow.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "How Lagoon Schedule Works for UCSB Students",
+    "author": "Lagoon"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/how-lagoon-schedule-works"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-28",
+      "datePublished": "2026-04-21",
+      "description": "A feature explainer for Lagoon's schedule tools, widgets, weekly planning flow, and daily class context for UCSB students.",
+      "headline": "How Lagoon Schedule Works for UCSB Students",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/how-lagoon-schedule-works",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/how-lagoon-schedule-works",
+          "name": "How Lagoon Schedule Works for UCSB Students",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}

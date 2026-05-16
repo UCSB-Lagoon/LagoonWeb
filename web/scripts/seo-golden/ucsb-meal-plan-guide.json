@@ -1,0 +1,78 @@
+{
+  "title": "UCSB Meal Plan Guide for Freshmen",
+  "metas": {
+    "viewport": "width=device-width, initial-scale=1.0",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "description": "A practical UCSB meal plan guide for freshmen: how dining swipes fit into real routines, what to consider, and how to make campus dining easier.",
+    "robots": "index, follow",
+    "og:type": "article",
+    "og:title": "UCSB Meal Plan Guide for Freshmen",
+    "og:description": "How UCSB meal plans fit into dorm life, class schedules, and the way students actually eat on campus.",
+    "og:url": "https://lagoonucsb.com/ucsb-meal-plan-guide",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image:type": "image/png",
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "UCSB Meal Plan Guide for Freshmen",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Meal Plan Guide for Freshmen",
+    "twitter:description": "How UCSB meal plans fit into dorm life, class schedules, and the way students actually eat on campus.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Meal Plan Guide for Freshmen"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-meal-plan-guide"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-04-21",
+      "datePublished": "2026-04-21",
+      "description": "A practical UCSB meal plan guide for freshmen: how dining swipes fit into real routines, what to consider, and how to make campus dining easier.",
+      "headline": "UCSB Meal Plan Guide for Freshmen",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-meal-plan-guide",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-05-14",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-meal-plan-guide",
+          "name": "UCSB Meal Plan Guide",
+          "position": 3
+        }
+      ]
+    }
+  ]
+}
