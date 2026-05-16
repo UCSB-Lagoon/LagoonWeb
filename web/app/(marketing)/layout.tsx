@@ -30,6 +30,10 @@ export const metadata: Metadata = {
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      {/* The marketing design system. Still a public/ asset because the
+          not-yet-ported static pages also link it; React 19 hoists this
+          <link> into <head>. */}
+      <link rel="stylesheet" href="/site.css" precedence="default" />
       <AnnounceBar />
       <Navbar />
       <main className="flex-1">{children}</main>
