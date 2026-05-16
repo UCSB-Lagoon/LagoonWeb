@@ -46,3 +46,23 @@ export const ALL_MARKETING_PATHS: string[] = [
   MARKETING_HOME_PATH,
   ...MARKETING_SLUGS.map((s) => `/${s}`),
 ];
+
+/**
+ * Slugs already ported to the React/MDX system (served by the
+ * (marketing)/[slug] route). Grows phase by phase. Anything NOT here is
+ * still served as static HTML via the next.config rewrite, so every URL
+ * works at every step of the migration.
+ */
+export const MIGRATED_GUIDE_SLUGS = [
+  "ucsb-dining-menu", // Phase 1 pilot
+] as const;
+
+/** Has the bespoke homepage ("/") been ported yet? (Phase 3) */
+export const HOME_MIGRATED = false;
+
+const migrated = new Set<string>(MIGRATED_GUIDE_SLUGS);
+
+/** Slugs still served as static HTML — these get a next.config rewrite. */
+export const PENDING_SLUGS: string[] = MARKETING_SLUGS.filter(
+  (s) => !migrated.has(s)
+);

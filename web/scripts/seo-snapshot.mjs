@@ -39,6 +39,19 @@ const SLUGS = [
 const PATHS = [HOME, ...SLUGS.map((s) => `/${s}`)];
 const nameFor = (p) => (p === "/" ? "home" : p.replace(/^\//, ""));
 
+// Decode HTML entities so "&#x27;" === "'" — entity encoding is not an
+// SEO difference (crawlers decode it), and React/Next will encode where
+// hand-written HTML used a literal char.
+function decode(s) {
+  if (s == null) return s;
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+    .replace(/&quot;/gi, '"').replace(/&apos;/gi, "'")
+    .replace(/&lt;/gi, "<").replace(/&gt;/gi, ">")
+    .replace(/&amp;/gi, "&");
+}
+
 function attr(tag, name) {
   const m = tag.match(new RegExp(`${name}\\s*=\\s*"([^"]*)"`, "i")) ||
             tag.match(new RegExp(`${name}\\s*=\\s*'([^']*)'`, "i"));
@@ -53,17 +66,24 @@ function sortKeys(v) {
   return v;
 }
 
+// Non-SEO metas that legitimately differ between hand-written HTML and
+// Next's generated head (e.g. "initial-scale=1.0" vs "1"). Dropped from
+// BOTH golden and actual before diffing — not SEO-load-bearing.
+const IGNORE_METAS = new Set(["viewport"]);
+
 function extract(html) {
   const head = (html.match(/<head[\s\S]*?<\/head>/i) || [html])[0];
 
-  const title = (head.match(/<title>([\s\S]*?)<\/title>/i) || [, null])[1];
+  const title = decode((head.match(/<title>([\s\S]*?)<\/title>/i) || [, null])[1]);
 
   const metas = {};
   for (const m of head.matchAll(/<meta\b[^>]*>/gi)) {
     const tag = m[0];
     const key = attr(tag, "name") || attr(tag, "property");
-    const val = attr(tag, "content");
-    if (key) metas[key.toLowerCase()] = val;
+    const val = decode(attr(tag, "content"));
+    if (key && !IGNORE_METAS.has(key.toLowerCase())) {
+      metas[key.toLowerCase()] = val;
+    }
   }
 
   const links = {};
@@ -79,8 +99,10 @@ function extract(html) {
     }
   }
 
+  // JSON-LD is valid (and Google-supported) anywhere in the document —
+  // migrated pages emit it in <body>. Scan the whole HTML, not just head.
   const jsonld = [];
-  for (const m of head.matchAll(
+  for (const m of html.matchAll(
     /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi
   )) {
     try {
@@ -139,6 +161,8 @@ if (mode === "snapshot") {
     const goldenPath = join(GOLDEN_DIR, `${nameFor(p)}.json`);
     if (!existsSync(goldenPath)) { console.log("∅ no golden", p); continue; }
     const golden = JSON.parse(await readFile(goldenPath, "utf8"));
+    // Goldens captured before IGNORE_METAS existed may still carry them.
+    if (golden.metas) for (const k of IGNORE_METAS) delete golden.metas[k];
     let actual;
     try { actual = await fetchPage(base, p); }
     catch (e) { console.log(`✗ ${p}  (${e.message})`); failed++; continue; }

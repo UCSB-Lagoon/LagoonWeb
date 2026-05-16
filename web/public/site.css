@@ -371,6 +371,15 @@ h3 {
   color: var(--gold);
 }
 
+/* Was an inline style on every guide's "Updated: …" stamp; classed so
+   guide bodies are valid MDX (no style="" string attributes). */
+.updated-stamp {
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+}
+
 .hero-lede,
 .section-head p,
 .section-copy,
@@ -1089,6 +1098,21 @@ h3 {
   margin: 14px 0;
 }
 
+/* Markdown-authored lists inside guide bodies (MDX) — same rhythm as
+   the old hand-written .article-list. */
+.article-card ul,
+.article-card ol {
+  margin: 20px 0 0;
+  padding-left: 22px;
+}
+
+.article-card li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  line-height: 1.66;
+  color: var(--ink-soft);
+}
+
 .article-card a,
 .quote-card a,
 .faq-list a {
@@ -1476,6 +1500,65 @@ h3 {
   .stats-bar-item:nth-child(4) {
     border-top: none;
   }
+}
+
+/* =====================
+   RELATED GUIDES
+   Was an inline <style> injected into every static guide; lives here now
+   that guides are MDX. Token-based so it adapts in dark mode.
+   ===================== */
+
+.related-guides {
+  max-width: 900px;
+  margin: 48px auto 24px;
+  padding: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.related-guides h2 {
+  font-size: 22px;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+
+.related-guides-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px 20px;
+}
+
+.related-guides-list a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  border-bottom: 1px dotted transparent;
+  padding: 6px 0;
+  display: inline-block;
+}
+
+.related-guides-list a:hover {
+  border-bottom-color: var(--gold);
+}
+
+.related-guides-cta {
+  margin-top: 18px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
+.related-guides-cta a {
+  color: var(--gold);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.related-guides-cta a:hover {
+  text-decoration: underline;
 }
 
 /* =====================

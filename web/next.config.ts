@@ -1,11 +1,17 @@
 import type { NextConfig } from "next";
-import { MARKETING_SLUGS } from "./lib/marketing-slugs";
+import { PENDING_SLUGS, HOME_MIGRATED } from "./lib/marketing-slugs";
 
+/**
+ * Guides are MDX compiled at build time via next-mdx-remote/rsc (no
+ * webpack/turbopack loader — the dev script uses --turbopack and the
+ * @next/mdx loader isn't turbopack-serializable), so no MDX config here.
+ */
 const config: NextConfig = {
   reactStrictMode: true,
-  // Ensure the handbook markdown is bundled into the /admin/handbook lambda.
   outputFileTracingIncludes: {
     "/admin/handbook": ["./content/onboarding.md"],
+    // Guide MDX is read from disk at build time — keep it in the trace.
+    "/[slug]": ["./content/guides/**/*.mdx"],
   },
   images: {
     remotePatterns: [
@@ -15,11 +21,10 @@ const config: NextConfig = {
   },
   async rewrites() {
     return [
-      // Root → marketing homepage (hand-crafted HTML). The Next.js dashboard
-      // moved to /hub.
-      { source: "/", destination: "/marketing/home.html" },
-      // Each marketing slug → its static HTML in public/marketing/.
-      ...MARKETING_SLUGS.map((slug) => ({
+      ...(HOME_MIGRATED
+        ? []
+        : [{ source: "/", destination: "/marketing/home.html" }]),
+      ...PENDING_SLUGS.map((slug) => ({
         source: `/${slug}`,
         destination: `/marketing/${slug}.html`,
       })),
