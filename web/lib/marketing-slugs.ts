@@ -1,14 +1,15 @@
 /**
- * Single source of truth for the hand-crafted marketing pages.
+ * Marketing route slugs.
  *
- * Historically this list was copy-pasted in next.config.ts AND sitemap.ts.
- * It now lives here; both import it. Used by the SEO snapshot harness and
- * (after the JSX migration) by the (marketing) route's generateStaticParams.
+ * - MARKETING_SLUGS: every marketing path (drives sitemap.ts). "/" (the
+ *   homepage) is its own route and tracked separately by the sitemap.
+ * - MIGRATED_GUIDE_SLUGS: the 25 MDX guide bodies under content/guides/;
+ *   used by app/(marketing)/[slug] generateStaticParams. (/guides and
+ *   /company are NOT here — they have their own dedicated routes.)
  *
- * "/" (the homepage) is tracked separately as `MARKETING_HOME_PATH`.
+ * The migration is complete: there is no static-HTML fallback anymore,
+ * so the old PENDING/HOME_MIGRATED gating is gone.
  */
-export const MARKETING_HOME_PATH = "/";
-
 export const MARKETING_SLUGS = [
   "best-apps-for-ucsb-students",
   "best-dorms-at-ucsb",
@@ -41,21 +42,9 @@ export const MARKETING_SLUGS = [
 
 export type MarketingSlug = (typeof MARKETING_SLUGS)[number];
 
-/** Every marketing URL path, including the homepage. */
-export const ALL_MARKETING_PATHS: string[] = [
-  MARKETING_HOME_PATH,
-  ...MARKETING_SLUGS.map((s) => `/${s}`),
-];
-
-/**
- * Slugs already ported to the React/MDX system (served by the
- * (marketing)/[slug] route). Grows phase by phase. Anything NOT here is
- * still served as static HTML via the next.config rewrite, so every URL
- * works at every step of the migration.
- */
+/** The MDX guide slugs served by app/(marketing)/[slug]. */
 export const MIGRATED_GUIDE_SLUGS = [
-  "ucsb-dining-menu", // Phase 1 pilot
-  // Phase 2 — bulk-migrated standard guides
+  "ucsb-dining-menu",
   "best-apps-for-ucsb-students",
   "best-dorms-at-ucsb",
   "best-study-spots-at-ucsb",
@@ -81,19 +70,3 @@ export const MIGRATED_GUIDE_SLUGS = [
   "what-to-bring-to-ucsb-dorm",
   "what-to-do-between-classes-at-ucsb",
 ] as const;
-
-/** Has the bespoke homepage ("/") been ported yet? (Phase 3) */
-export const HOME_MIGRATED = true;
-
-/** Structure pages with their own RSC route (not the [slug] guide route). */
-export const MIGRATED_PAGE_SLUGS = ["guides", "company"] as const;
-
-const migrated = new Set<string>([
-  ...MIGRATED_GUIDE_SLUGS,
-  ...MIGRATED_PAGE_SLUGS,
-]);
-
-/** Slugs still served as static HTML — these get a next.config rewrite. */
-export const PENDING_SLUGS: string[] = MARKETING_SLUGS.filter(
-  (s) => !migrated.has(s)
-);

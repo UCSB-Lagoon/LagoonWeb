@@ -19,14 +19,16 @@ gamified XP. Pre-launch → early growth. ~37k students is the whole market.
 
 ## 2. The web repo at a glance
 
-Everything is one Next.js 15 app in `web/`. There is no separate marketing site
-anymore — static marketing pages are served from `web/public/marketing/` via
-rewrites in `web/next.config.ts`.
+Everything is one Next.js 15 app in `web/`. There is no separate marketing site,
+and no static-HTML marketing anymore — every marketing URL is a React route under
+`web/app/(marketing)/`, statically prerendered. Guides are MDX in
+`web/content/guides/`.
 
 | Path | What it is |
 |---|---|
-| `/` | Marketing homepage (hand-crafted HTML in `public/marketing/home.html`) |
-| `/ucsb-dining-menu`, +24 guides | Static SEO pages (`public/marketing/<slug>.html`) |
+| `/` | Marketing homepage (`app/(marketing)/page.tsx`; body `content/home-body.html`) |
+| `/guides` `/company` | Marketing structure pages (`app/(marketing)/{guides,company}/`) |
+| `/ucsb-dining-menu`, +24 guides | SEO guides — MDX `content/guides/<slug>.mdx`, served by `app/(marketing)/[slug]` |
 | `/hub` | Live dashboard (XP, leaderboard, activity) — was `/` before the merge |
 | `/leaderboard` `/stats` `/map` `/me` `/challenges` | Next.js app routes |
 | `/captains` | Captain (ambassador) program landing + application form |
@@ -76,8 +78,14 @@ Push to `main` → Vercel auto-deploys. That's it. There is one Vercel project;
    payload before the DB insert and return `ok` even if the insert fails.
 4. **The iOS app owns the core schema.** Web migrations are additive only and
    live in `web/supabase/migrations/` with timestamped filenames.
-5. **Marketing pages are hand-crafted HTML.** Don't JSX-ify them. Edit the HTML
-   in `public/marketing/` directly; keep the inlined structured data.
+5. **Marketing is React/MDX, statically prerendered, on its own GA stream.**
+   Guides: `content/guides/<slug>.mdx` (frontmatter) + a `<slug>.jsonld.json`
+   sidecar holding the structured data verbatim. Home/guides/company bodies:
+   `content/*-body.html`. Marketing reports to GA `G-2F8CTN4DNP` (the
+   `(marketing)` layout) — the app uses `G-5HY7LBXP8G`; don't merge them.
+   Before shipping any marketing change run `cd web && node
+   scripts/seo-snapshot.mjs check <url>` — it diffs title/meta/canonical/
+   JSON-LD against captured goldens and must stay green.
 6. **The web reads iOS-owned tables — keep them in sync.** See §5b.
 
 ## 5b. Cross-repo schema dependency ⚠️
@@ -173,7 +181,7 @@ TikTok hooks, Meta ad briefs) lives in `docs/outreach-templates.md`.
 | Triage a captain application | `/admin/captains` |
 | Read user feedback | `/admin/feedback` |
 | Understand the growth plan | `docs/strategy.md`, `docs/outreach-templates.md` |
-| Change SEO copy on a guide | `web/public/marketing/<slug>.html` |
+| Change SEO copy on a guide | `web/content/guides/<slug>.mdx` (frontmatter) |
 | Add an admin metric | `web/app/admin/page.tsx` |
 | Change the captain email | `web/lib/email.ts` |
 

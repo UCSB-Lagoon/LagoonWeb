@@ -1,5 +1,50 @@
 # Lagoon Web — Changelog
 
+## [2026-05-15] — Marketing → one React/MDX system
+
+Retired the hand-crafted static-HTML marketing system. Every marketing
+URL is now a statically-prerendered React route in one Next app, so the
+nav/footer/design live in one place instead of 28 copied files.
+Architecture Rule 5 ("don't JSX-ify marketing") is intentionally
+retired (ONBOARDING updated).
+
+### Structure
+- Route groups: `app/(app)/` (live app, GA `G-5HY7LBXP8G`) and
+  `app/(marketing)/` (marketing, GA **`G-2F8CTN4DNP`** — kept on its own
+  stream deliberately). Root layout slimmed; default metadata split per
+  group so the app's keywords/appleWebApp/OG no longer leak onto
+  marketing pages.
+- Guides: MDX in `content/guides/<slug>.mdx` (frontmatter-driven
+  `GuideShell` + markdown body + `Callout`/`ArticleLinks`/`Faq`
+  components) with a `<slug>.jsonld.json` sidecar emitted verbatim, so
+  structured data is byte-identical regardless of shape (full/lean
+  Article, FAQPage). Served by `app/(marketing)/[slug]`.
+- Home (`/`), `/guides`, `/company`: RSC routes; bodies kept as trusted
+  first-party markup for pixel parity, CSS folded into a HOMEPAGE band
+  in `site.css`, the scroll-reveal + live-stats ported to a small
+  client component.
+
+### Tooling / safety
+- `scripts/seo-snapshot.mjs` — captures title/meta/canonical/JSON-LD
+  goldens and diffs live pages (entity- and root-slash-normalized,
+  scans whole doc for JSON-LD). `scripts/content-check.mjs` — body-prose
+  fidelity guard. `scripts/migrate-*.mjs` — the one-shot converters.
+- Verified end to end: all 28 pages SEO-identical to the pre-migration
+  goldens, all 25 guides content-faithful, `tsc` + `next build` green
+  (44/44 static; `/`, `/guides`, `/company` prerendered, guides SSG).
+  Lighthouse not run in this environment, but every marketing page is
+  static with no added client JS beyond a tiny reveal/stats hook, so
+  the zero-JS profile is preserved.
+
+### Deleted
+- All 28 `web/public/marketing/*.html` and the `next.config.ts`
+  static-rewrite machinery. `site.css` / `lagoon-cta.js` / OG images
+  stay (now the marketing stylesheet/scripts/assets).
+
+### Fixed
+- The `(marketing)` layout now loads `site.css` (React-19 precedence
+  hoist) — without it the migrated guides rendered unstyled.
+
 ## [2026-05-15] — One design language across marketing + app
 
 Closed the visible seam between the hand-crafted marketing pages and

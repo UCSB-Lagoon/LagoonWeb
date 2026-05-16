@@ -1,11 +1,12 @@
 # Lagoon Brand Guidelines
 
 > **Single source of truth for the unified design language.**
-> Both the hand-crafted marketing pages (`web/public/site.css`, `web/public/marketing/home.html`)
-> and the Next.js app (`web/app/globals.css`) implement these exact tokens. A
-> user moving from a guide page → `/captains` → `/hub` should feel one product.
-> If you change a token, change it in **all three** places (site.css `:root`,
-> home.html inline `:root`, globals.css `@theme`) in the same commit.
+> Two stylesheets implement these exact tokens: the marketing system
+> (`web/public/site.css` — `:root`, plus the folded HOMEPAGE band) and the
+> Next.js app (`web/app/globals.css` — `@theme`). A user moving from a guide
+> page → `/captains` → `/hub` should feel one product. If you change a token,
+> change it in **both** places in the same commit. (The marketing pages are
+> now React/MDX served from `app/(marketing)/`; there is no more `home.html`.)
 
 ## Brand Identity
 **Name:** Lagoon
