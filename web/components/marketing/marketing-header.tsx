@@ -1,3 +1,6 @@
+import { ThemeToggle } from "@/components/theme-toggle";
+import { MarketingMobileNav } from "@/components/marketing/marketing-mobile-nav";
+
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
 /**
@@ -26,6 +29,7 @@ export function MarketingHeader() {
           <a href="/company">Company</a>
         </div>
         <div className="nav-right">
+          <ThemeToggle />
           <a className="nav-explore" href="/guides">Explore</a>
           <a
             className="nav-cta"
@@ -49,6 +53,7 @@ export function MarketingHeader() {
             </svg>
             Get the App
           </a>
+          <MarketingMobileNav />
         </div>
       </div>
     </header>

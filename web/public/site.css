@@ -1435,6 +1435,64 @@ h3 {
   }
 }
 
+/* ── Marketing mobile nav (static site had none below 960px) ── */
+.mnav { display: none; }
+
+.mnav-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  border: 1px solid var(--line-strong);
+  background: var(--panel);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.mnav-btn:hover { border-color: rgba(240, 138, 60, 0.4); }
+
+.mnav-drawer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  padding: 8px 20px 20px;
+  z-index: 60;
+  box-shadow: 0 20px 40px -28px rgba(30, 20, 16, 0.45);
+}
+
+.mnav-drawer a {
+  padding: 14px 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.mnav-drawer a:hover { color: var(--gold); }
+
+.mnav-cta {
+  margin-top: 14px;
+  text-align: center;
+  background: var(--gold) !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 100px;
+  padding: 13px 18px !important;
+  font-weight: 700;
+}
+
+.mnav-cta:hover { background: var(--gold-pressed) !important; color: #fff !important; }
+
+@media (max-width: 960px) {
+  .mnav { display: inline-flex; align-items: center; }
+}
+
 @media (max-width: 760px) {
   .shell,
   .article-shell {
@@ -1568,43 +1626,45 @@ h3 {
    site.css is fully tokenized, so overriding :root cascades automatically.
    ===================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #141009;              /* app .dark --color-cream-50 */
-    --bg-alt: #1e160b;          /* app .dark --color-cream-100 */
-    --panel: #1c1409;           /* app .dark .card surface */
-    --panel-elevated: #211910;
-    --panel-soft: rgba(28, 20, 9, 0.80);
+/* Dark mode is CLASS-BASED (.dark on <html>), set by the root theme
+   script from localStorage or OS preference and toggled by ThemeToggle —
+   the same mechanism as the app (globals.css). This keeps OS preference
+   as the default AND makes the marketing theme toggle work. */
+.dark {
+  --bg: #141009;              /* app .dark --color-cream-50 */
+  --bg-alt: #1e160b;          /* app .dark --color-cream-100 */
+  --panel: #1c1409;           /* app .dark .card surface */
+  --panel-elevated: #211910;
+  --panel-soft: rgba(28, 20, 9, 0.80);
 
-    --ink: #ede2ce;             /* app .dark --color-ink-900 */
-    --ink-soft: rgba(237, 226, 206, 0.72);
-    --ink-muted: rgba(237, 226, 206, 0.46);
+  --ink: #ede2ce;             /* app .dark --color-ink-900 */
+  --ink-soft: rgba(237, 226, 206, 0.72);
+  --ink-muted: rgba(237, 226, 206, 0.46);
 
-    --line: rgba(237, 226, 206, 0.09);
-    --line-strong: rgba(237, 226, 206, 0.15);
-  }
+  --line: rgba(237, 226, 206, 0.09);
+  --line-strong: rgba(237, 226, 206, 0.15);
+}
 
-  body::after {
-    background-image: radial-gradient(rgba(240, 210, 160, 0.045) 1px, transparent 1px);
-  }
+.dark body::after {
+  background-image: radial-gradient(rgba(240, 210, 160, 0.045) 1px, transparent 1px);
+}
 
-  .site-header {
-    background: rgba(20, 16, 9, 0.85);
-    border-bottom-color: rgba(237, 226, 206, 0.09);
-  }
+.dark .site-header {
+  background: rgba(20, 16, 9, 0.85);
+  border-bottom-color: rgba(237, 226, 206, 0.09);
+}
 
-  /* Translucent-white fills only legible on a light card → tint for dark */
-  .article-card table {
-    background: rgba(237, 226, 206, 0.04);
-  }
+/* Translucent-white fills only legible on a light card → tint for dark */
+.dark .article-card table {
+  background: rgba(237, 226, 206, 0.04);
+}
 
-  .article-card th {
-    background: rgba(240, 138, 60, 0.07);
-  }
+.dark .article-card th {
+  background: rgba(240, 138, 60, 0.07);
+}
 
-  .feature-code {
-    background: rgba(237, 226, 206, 0.05);
-  }
+.dark .feature-code {
+  background: rgba(237, 226, 206, 0.05);
 }
 
 /* ==== HOMEPAGE (ported from home.html) ==== */
@@ -2460,71 +2520,39 @@ h3 {
       #features { padding: 72px 20px; }
     }
 
-    /* ── DARK MODE ── */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg:          #141009;   /* app .dark --color-cream-50 */
-        --bg-2:        #1e160b;   /* app .dark --color-cream-100 */
-        --warm-dark:   #1c1409;   /* app .dark .card surface */
-        --warm-dark-2: #2e2011;   /* app .dark --color-cream-200 */
-        --text-dark:   #ede2ce;   /* app .dark --color-ink-900 */
+    /* ── DARK MODE (class-based; see the note on the main .dark block) ── */
+    .dark {
+        --bg:          #141009;
+        --bg-2:        #1e160b;
+        --warm-dark:   #1c1409;
+        --warm-dark-2: #2e2011;
+        --text-dark:   #ede2ce;
         --text-dark-2: rgba(237,226,206,0.70);
         --text-dark-3: rgba(237,226,206,0.38);
         --orange-mist: rgba(240,138,60,0.13);
-      }
-
-      #nav {
-        background: rgba(20,16,9,0.85);
-        border-bottom-color: rgba(237,226,206,0.07);
-      }
-      .nav-explore {
-        border-color: rgba(237,226,206,0.16);
-        color: var(--text-dark);
-      }
-      .nav-explore:hover { background: rgba(237,226,206,0.06); border-color: rgba(237,226,206,0.28); }
-
-      #hero::before {
-        background-image: radial-gradient(circle, rgba(237,226,206,0.045) 1px, transparent 1px);
-      }
-      .btn-outline {
-        border-color: rgba(237,226,206,0.18);
-        color: var(--text-dark);
-      }
-      .btn-outline:hover { border-color: rgba(237,226,206,0.32); background: rgba(237,226,206,0.05); }
-
-      .hero-stats { border-top-color: rgba(237,226,206,0.09); }
-
-      .logo-strip {
-        border-top-color: rgba(237,226,206,0.07);
-        border-bottom-color: rgba(237,226,206,0.07);
-      }
-      .ls-item { color: rgba(237,226,206,0.28); }
-      .ls-dot { background: rgba(237,226,206,0.14); }
-
-      /* Feature cards — white → dark surface */
-      .fc {
-        background: #1c1409;
-        border-color: rgba(237,226,206,0.08);
-      }
-      .fc:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
-      .fc-blurb { color: var(--text-dark-2); }
-      .fc-lbl { color: var(--text-dark-3); }
-      .fc-foot-text { color: var(--text-dark-3); }
-      .fc-btn-cream { background: #261b0e; color: var(--text-dark); }
-      .fc-btn-cream:hover { background: #2e2010; }
-
-      /* Split sections */
-      .split-section.light, .split-section.light-2 { background: var(--bg); }
-      .split-vis { background: #1c1409; border-color: rgba(237,226,206,0.07); }
-      .split-section.light .av,
-      .split-section.light-2 .av { border-color: #1c1409; }
-      .split-section.light .av-n,
-      .split-section.light-2 .av-n { border-color: #1c1409; background: var(--bg-2); color: var(--text-dark-3); }
-
-      /* Guides */
-      .guide-item { border-bottom-color: rgba(237,226,206,0.07); }
-
-      /* Footer */
-      footer { border-top-color: rgba(237,226,206,0.07); }
     }
+
+    .dark #nav { background: rgba(20,16,9,0.85); border-bottom-color: rgba(237,226,206,0.07); }
+    .dark .nav-explore { border-color: rgba(237,226,206,0.16); color: var(--text-dark); }
+    .dark .nav-explore:hover { background: rgba(237,226,206,0.06); border-color: rgba(237,226,206,0.28); }
+    .dark #hero::before { background-image: radial-gradient(circle, rgba(237,226,206,0.045) 1px, transparent 1px); }
+    .dark .btn-outline { border-color: rgba(237,226,206,0.18); color: var(--text-dark); }
+    .dark .btn-outline:hover { border-color: rgba(237,226,206,0.32); background: rgba(237,226,206,0.05); }
+    .dark .hero-stats { border-top-color: rgba(237,226,206,0.09); }
+    .dark .logo-strip { border-top-color: rgba(237,226,206,0.07); border-bottom-color: rgba(237,226,206,0.07); }
+    .dark .ls-item { color: rgba(237,226,206,0.28); }
+    .dark .ls-dot { background: rgba(237,226,206,0.14); }
+    .dark .fc { background: #1c1409; border-color: rgba(237,226,206,0.08); }
+    .dark .fc:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
+    .dark .fc-blurb { color: var(--text-dark-2); }
+    .dark .fc-lbl { color: var(--text-dark-3); }
+    .dark .fc-foot-text { color: var(--text-dark-3); }
+    .dark .fc-btn-cream { background: #261b0e; color: var(--text-dark); }
+    .dark .fc-btn-cream:hover { background: #2e2010; }
+    .dark .split-section.light, .dark .split-section.light-2 { background: var(--bg); }
+    .dark .split-vis { background: #1c1409; border-color: rgba(237,226,206,0.07); }
+    .dark .split-section.light .av, .dark .split-section.light-2 .av { border-color: #1c1409; }
+    .dark .split-section.light .av-n, .dark .split-section.light-2 .av-n { border-color: #1c1409; background: var(--bg-2); color: var(--text-dark-3); }
+    .dark .guide-item { border-bottom-color: rgba(237,226,206,0.07); }
+    .dark footer { border-top-color: rgba(237,226,206,0.07); }
 /* ==== END HOMEPAGE ==== */
