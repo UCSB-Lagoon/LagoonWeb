@@ -1,0 +1,53 @@
+name: SEO & quality
+
+# Guards the marketing → React/MDX migration: any change that drifts a
+# title / canonical / meta / JSON-LD vs. the captured goldens, or tanks a
+# Lighthouse SEO/accessibility score, fails here instead of silently
+# shipping. Runs on anything that touches the web app.
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/**", ".github/workflows/seo.yml"]
+  pull_request:
+    paths: ["web/**", ".github/workflows/seo.yml"]
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+
+      - name: Start production server
+        run: |
+          npx next start -p 3000 &
+          echo $! > /tmp/next.pid
+          npx --yes wait-on@7 http://localhost:3000 -t 60000
+
+      - name: SEO snapshot diff (title/meta/canonical/JSON-LD vs goldens)
+        run: node scripts/seo-snapshot.mjs check http://localhost:3000
+
+      - name: Lighthouse (SEO + a11y are hard gates; perf/BP advisory)
+        # autorun reads web/lighthouserc.json, hits the already-running
+        # server for all 4 URLs, asserts, uploads a public report. It
+        # exits non-zero only on the "error"-severity gates (seo,
+        # accessibility); perf/best-practices are "warn" so CI-noisy
+        # perf can't block a merge.
+        run: npx --yes @lhci/cli@0.14.x autorun
+
+      - name: Stop server
+        if: always()
+        run: kill "$(cat /tmp/next.pid)" 2>/dev/null || true

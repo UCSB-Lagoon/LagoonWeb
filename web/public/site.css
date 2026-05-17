@@ -1342,7 +1342,7 @@ h3 {
 .footer-copy {
   margin: 14px 0 0;
   max-width: 42ch;
-  color: var(--ink-muted);
+  color: var(--ink-soft);   /* was --ink-muted — failed WCAG AA on cream */
   font-size: 13.5px;
   line-height: 1.6;
 }
@@ -2556,3 +2556,24 @@ h3 {
     .dark .guide-item { border-bottom-color: rgba(237,226,206,0.07); }
     .dark footer { border-top-color: rgba(237,226,206,0.07); }
 /* ==== END HOMEPAGE ==== */
+
+/* ── Accessibility: respect reduced-motion ──
+   The homepage uses scroll-reveal (.r/.rl/.rr start at opacity:0), a
+   marquee, a floating phone, and blink/pulse loops. For users who ask
+   for less motion, show everything immediately and stop the loops. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .r,
+  .rl,
+  .rr {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
