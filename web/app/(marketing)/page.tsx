@@ -6,7 +6,7 @@ import { HomeClient } from "@/components/marketing/home-client";
 
 const URL = "https://lagoonucsb.com/";
 
-export const viewport: Viewport = { themeColor: "#003660" };
+export const viewport: Viewport = { themeColor: "#F08A3C" };
 
 export const metadata: Metadata = {
   title: { absolute: "Lagoon — UCSB Campus App for Grades, Schedule, Dining & Live Map" },

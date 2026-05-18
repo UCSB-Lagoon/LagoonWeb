@@ -51,7 +51,7 @@ export function Navbar() {
         <Link href="/" className="group flex items-center gap-2.5">
           <span
             aria-hidden="true"
-            className="grid place-items-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 text-white font-display font-extrabold text-lg leading-none shadow-[0_6px_18px_-8px_rgba(0,54,96,0.7)] transition-transform group-hover:rotate-[-4deg]"
+            className="grid place-items-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 text-white font-display font-extrabold text-lg leading-none shadow-[0_6px_18px_-8px_rgba(240,138,60,0.7)] transition-transform group-hover:rotate-[-4deg]"
           >
             L
           </span>

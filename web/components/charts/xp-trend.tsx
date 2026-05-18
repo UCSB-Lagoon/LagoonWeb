@@ -15,8 +15,8 @@ export function XpTrend({ data }: { data: TrendPoint[] }) {
           <AreaChart data={data} margin={{ left: 0, right: 0, top: 8, bottom: 0 }}>
             <defs>
               <linearGradient id="xpGrad" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%"   stopColor="#003660" stopOpacity={0.55} />
-                <stop offset="100%" stopColor="#003660" stopOpacity={0}    />
+                <stop offset="0%"   stopColor="#f08a3c" stopOpacity={0.55} />
+                <stop offset="100%" stopColor="#f08a3c" stopOpacity={0}    />
               </linearGradient>
             </defs>
             <XAxis dataKey="day" tickLine={false} axisLine={false}
@@ -29,7 +29,7 @@ export function XpTrend({ data }: { data: TrendPoint[] }) {
               }}
               labelStyle={{ color: "#6b5b4a" }}
             />
-            <Area type="monotone" dataKey="xp" stroke="#003660" strokeWidth={2.5}
+            <Area type="monotone" dataKey="xp" stroke="#f08a3c" strokeWidth={2.5}
                   fill="url(#xpGrad)" />
           </AreaChart>
         </ResponsiveContainer>
