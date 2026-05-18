@@ -128,7 +128,7 @@ export default function CaptainsPage() {
           {PERKS.map((p, i) => (
             <li key={p.title} className="card p-6 group">
               <div className="flex items-start justify-between mb-4">
-                <span className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-[0_8px_22px_-10px_rgba(240,138,60,0.7)] group-hover:rotate-[-4deg] transition-transform">
+                <span className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-[0_8px_22px_-10px_rgba(0,54,96,0.7)] group-hover:rotate-[-4deg] transition-transform">
                   <p.icon className="w-5 h-5" />
                 </span>
                 <span className="font-mono text-xs text-ink-300 tabular-nums">0{i + 1}</span>

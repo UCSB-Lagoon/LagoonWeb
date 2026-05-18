@@ -302,7 +302,7 @@ export function CampusMap({ signedIn }: Props) {
         }
         .lg-person--friend {
           width: 22px; height: 22px;
-          background: #f08a3c;
+          background: #003660;
           color: #fff;
         }
         .lg-person--anon {

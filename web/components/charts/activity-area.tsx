@@ -17,8 +17,8 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
         <AreaChart data={formatted} margin={{ left: 0, right: 8, top: 12, bottom: 0 }}>
           <defs>
             <linearGradient id="actGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%"   stopColor="#f08a3c" stopOpacity={0.55} />
-              <stop offset="100%" stopColor="#f08a3c" stopOpacity={0}    />
+              <stop offset="0%"   stopColor="#003660" stopOpacity={0.55} />
+              <stop offset="100%" stopColor="#003660" stopOpacity={0}    />
             </linearGradient>
           </defs>
           <CartesianGrid stroke="#f5e8d3" strokeDasharray="3 4" vertical={false} />
@@ -37,7 +37,7 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
               return [v.toLocaleString(), label];
             }}
           />
-          <Area type="monotone" dataKey="total_xp" stroke="#f08a3c" strokeWidth={2.5}
+          <Area type="monotone" dataKey="total_xp" stroke="#003660" strokeWidth={2.5}
                 fill="url(#actGrad)" />
           <Area type="monotone" dataKey="event_count" stroke="#febc11" strokeWidth={1.5}
                 fill="transparent" strokeDasharray="3 3" />

@@ -251,9 +251,9 @@ export default async function StatsPage() {
                       style={{
                         width: `${Math.max(2, ratio * 100)}%`,
                         background: r.rarity === "legendary"
-                          ? "linear-gradient(90deg, #ff7a59, #f08a3c)"
+                          ? "linear-gradient(90deg, #ff7a59, #003660)"
                           : r.rarity === "epic"
-                          ? "linear-gradient(90deg, #febc11, #f08a3c)"
+                          ? "linear-gradient(90deg, #febc11, #003660)"
                           : "linear-gradient(90deg, var(--color-orange-300), var(--color-orange-500))",
                       }}
                     />

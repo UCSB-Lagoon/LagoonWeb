@@ -6,7 +6,7 @@ import {
 
 export type FunnelStage = { stage: string; value: number; hint?: string };
 
-const COLORS = ["#F08A3C", "#FEBC11", "#C8754C", "#003660", "#1B2430"];
+const COLORS = ["#003660", "#FEBC11", "#C8754C", "#003660", "#1B2430"];
 
 export function CaptainFunnelChart({ stages }: { stages: FunnelStage[] }) {
   if (!stages.length || stages.every((s) => s.value === 0)) {

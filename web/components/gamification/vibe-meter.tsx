@@ -16,7 +16,14 @@ export function VibeMeter({ score }: { score: number }) {
         <h3 className="font-display text-lg font-bold text-ink-900">Campus vibe</h3>
         <span className="text-sm font-bold text-orange-600">{label}</span>
       </div>
-      <div className="h-3 rounded-full bg-cream-100 overflow-hidden border border-cream-200">
+      <div
+        className="h-3 rounded-full bg-cream-100 overflow-hidden border border-cream-200"
+        role="progressbar"
+        aria-valuenow={Math.round(pct * 100)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuetext={`Campus vibe: ${label}`}
+      >
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${pct * 100}%` }}

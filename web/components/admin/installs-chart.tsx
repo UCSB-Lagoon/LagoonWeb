@@ -29,8 +29,8 @@ export function InstallsChart({ data, totalLabel }: { data: InstallsPoint[]; tot
           <AreaChart data={data} margin={{ left: -20, right: 8, top: 8, bottom: 0 }}>
             <defs>
               <linearGradient id="installsFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#F08A3C" stopOpacity={0.45} />
-                <stop offset="100%" stopColor="#F08A3C" stopOpacity={0} />
+                <stop offset="0%" stopColor="#003660" stopOpacity={0.45} />
+                <stop offset="100%" stopColor="#003660" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#ead9bf" strokeDasharray="3 6" vertical={false} />
@@ -57,10 +57,10 @@ export function InstallsChart({ data, totalLabel }: { data: InstallsPoint[]; tot
             <Area
               type="monotone"
               dataKey="count"
-              stroke="#F08A3C"
+              stroke="#003660"
               strokeWidth={2.5}
               fill="url(#installsFill)"
-              dot={{ r: 3, strokeWidth: 0, fill: "#F08A3C" }}
+              dot={{ r: 3, strokeWidth: 0, fill: "#003660" }}
               activeDot={{ r: 5 }}
             />
           </AreaChart>
