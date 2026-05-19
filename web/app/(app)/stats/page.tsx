@@ -80,13 +80,17 @@ export default async function StatsPage() {
   }));
   const peakDow = dowBars.reduce((p, c) => (c.value > p.value ? c : p), dowBars[0]);
 
-  /* ---------- Streak buckets ---------- */
-  const streakDistTotal = streakDist.reduce((s, x) => s + x.users, 0);
-  const streakBars = streakDist.map((b, i) => ({
+  /* ---------- Streak buckets (scaled to the floored headline) ---------- */
+  const streakScaled = streakDist.map((b) => ({
+    ...b,
+    users: Math.round(b.users * s.scale.users),
+  }));
+  const streakDistTotal = streakScaled.reduce((sum, x) => sum + x.users, 0);
+  const streakBars = streakScaled.map((b, i) => ({
     label: `${b.bucket} days`,
     value: b.users,
     sub: streakDistTotal ? `${pct(b.users, streakDistTotal).toFixed(0)}%` : "",
-    tone: (i === streakDist.length - 1 ? "primary" : "muted") as "primary" | "muted",
+    tone: (i === streakScaled.length - 1 ? "primary" : "muted") as "primary" | "muted",
   }));
 
   /* ---------- Smart insights ---------- */

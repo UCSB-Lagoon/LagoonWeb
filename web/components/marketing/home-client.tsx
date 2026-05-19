@@ -37,19 +37,34 @@ export function HomeClient() {
         if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, "") + "k";
         return Number(n).toLocaleString();
       };
+      const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+      const countUp = (el: Element, to: number, render: (n: number) => string) => {
+        const dur = 1100;
+        const start = performance.now();
+        const step = (now: number) => {
+          const p = Math.min(1, (now - start) / dur);
+          el.textContent = render(Math.round(to * easeOut(p)));
+          if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
+
       fetch("/api/public/stats", { cache: "no-store" })
         .then((r) => (r.ok ? r.json() : null))
         .then((d) => {
           if (!d) return;
-          const map: Record<string, string> = {
-            users: fmt(d.total_users),
-            active: fmt(d.active_users_14d),
-            xp: fmt(d.lifetime_xp),
-            streak: d.top_streak != null ? d.top_streak + "d" : "—",
+          const nums: Record<string, { to: number; render: (n: number) => string }> = {
+            users: { to: d.total_users ?? 0, render: fmt },
+            active: { to: d.active_users_14d ?? 0, render: fmt },
+            xp: { to: d.lifetime_xp ?? 0, render: fmt },
+            streak: { to: d.top_streak ?? 0, render: (n) => (n > 0 ? n + "d" : "—") },
           };
           targets.forEach((el) => {
             const k = el.getAttribute("data-live");
-            if (k && map[k]) el.textContent = map[k];
+            const n = k ? nums[k] : null;
+            if (!n) return;
+            el.closest(".live-stat")?.classList.add("is-live");
+            countUp(el, n.to, n.render);
           });
           const u = document.querySelector("[data-live-updated]");
           if (u) u.textContent = "Live · refreshed just now";
