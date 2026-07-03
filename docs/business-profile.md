@@ -5,7 +5,8 @@ Lagoon is a mobile app built exclusively for UC Santa Barbara (UCSB) students. I
 
 ## Product
 - **Platform:** iOS mobile app (native)
-- **Stage:** Pre-launch / early access (waitlist active)
+- **Stage:** Live on the App Store, pre-traction (~75 lifetime signups as of July 2026)
+- **App Store:** https://apps.apple.com/us/app/ucsb-lagoon/id6760681142
 - **Core tagline:** "Your UCSB Campus Life, Simplified"
 
 ### Key Features
@@ -31,9 +32,10 @@ Lagoon is a mobile app built exclusively for UC Santa Barbara (UCSB) students. I
 5. **Beautiful design** — premium feel vs. clunky official university apps
 
 ## Current Stage & Goals
-- Currently collecting early access sign-ups (waitlist model)
-- No app store listing confirmed yet — pre-launch buzz phase
-- Marketing goals: social media growth, paid ads, SEO, and content to drive waitlist signups and eventual app downloads
+- Live on the App Store; every site CTA points to the listing (no waitlist)
+- Pre-traction: ~75 lifetime signups as of July 2026
+- The strategy is a fall week-0 launch (late September 2026): win incoming freshmen at orientation and seed 2–3 mega-lectures
+- Marketing goals: social media growth, paid ads, SEO, and content that converts the fall push into installs
 
 ## Key Metrics (Website Claims)
 - 37,000 Gauchos on campus (TAM)

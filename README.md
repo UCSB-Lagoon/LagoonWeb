@@ -19,8 +19,8 @@ LagoonWeb/
 │   ├── app/             ← routes (marketing rewrites, /hub, /admin, /captains, /r)
 │   ├── components/      ← shared UI (navbar, footer, admin bar, widgets)
 │   ├── lib/             ← supabase clients, email, helpers
-│   ├── content/         ← onboarding.md (source for /admin/handbook)
-│   ├── public/marketing/← hand-crafted static marketing + 25 SEO guide pages
+│   ├── content/         ← guides/ (29 MDX SEO guides), home/guides/company bodies
+│   ├── public/          ← site.css, OG cards, logos, lagoon-cta.js
 │   └── supabase/        ← additive web migrations
 ├── docs/                ← strategy & planning (not shipped)
 │   ├── strategy.md
