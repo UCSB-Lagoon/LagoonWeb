@@ -1,11 +1,9 @@
 {
   "title": "UCSB Student Guides | Lagoon",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "Browse Lagoon's UCSB student guides for freshmen, dorm life, move-in, meal plans, GOLD, class planning, study spots, and everyday campus questions.",
     "robots": "index, follow",
-    "og:type": "website",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Student Guides | Lagoon",
     "og:description": "Student-first UCSB guides from Lagoon for freshmen, transfer students, newly admitted students, and current Gauchos.",
     "og:url": "https://lagoonucsb.com/guides",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "UCSB Student Guides | Lagoon",
+    "og:type": "website",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Student Guides | Lagoon",
     "twitter:description": "Student-first UCSB guides from Lagoon for freshmen, transfer students, newly admitted students, and current Gauchos.",

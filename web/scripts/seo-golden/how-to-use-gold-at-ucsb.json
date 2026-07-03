@@ -1,21 +1,20 @@
 {
   "title": "How to Use GOLD at UCSB Without Hating It",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to using GOLD at UCSB for schedules and registration, plus how Lagoon makes your day-to-day class routine cleaner after GOLD does its job.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "How to Use GOLD at UCSB Without Hating It",
     "og:description": "Learn what GOLD is for, what it is not great at, and how Lagoon complements it.",
     "og:url": "https://lagoonucsb.com/how-to-use-gold-at-ucsb",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "How to Use GOLD at UCSB Without Hating It",
     "twitter:description": "Learn what GOLD is for, what it is not great at, and how Lagoon complements it.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "How to Use GOLD at UCSB Without Hating It",
-    "author": "Lagoon"
+    "twitter:image:alt": "How to Use GOLD at UCSB Without Hating It"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/how-to-use-gold-at-ucsb"

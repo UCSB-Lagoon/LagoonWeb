@@ -1,21 +1,20 @@
 {
   "title": "Isla Vista Guide for UCSB Students",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical Isla Vista guide for UCSB students covering what IV feels like, how it fits into student life, and how to find your rhythm there.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "Isla Vista Guide for UCSB Students",
     "og:description": "What Isla Vista feels like, how students use it, and how to settle into life near UCSB.",
     "og:url": "https://lagoonucsb.com/isla-vista-guide-for-students",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "Isla Vista Guide for UCSB Students",
     "twitter:description": "What Isla Vista feels like, how students use it, and how to settle into life near UCSB.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "Isla Vista Guide for UCSB Students",
-    "author": "Lagoon"
+    "twitter:image:alt": "Isla Vista Guide for UCSB Students"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/isla-vista-guide-for-students"

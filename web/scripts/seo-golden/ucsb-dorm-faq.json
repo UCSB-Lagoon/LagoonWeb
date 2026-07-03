@@ -1,21 +1,20 @@
 {
   "title": "UCSB Dorm FAQ: Packing, Routines, Meal Plans, and First-Year Life",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical UCSB dorm FAQ for freshmen and admitted students covering packing, roommates, meal plans, bikes, routines, and what dorm life actually feels like.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Dorm FAQ: Packing, Routines, Meal Plans, and First-Year Life",
     "og:description": "A student-first UCSB dorm FAQ covering what to bring, how routines work, and how to settle in quickly.",
     "og:url": "https://lagoonucsb.com/ucsb-dorm-faq",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Dorm FAQ: Packing, Routines, Meal Plans, and First-Year Life",
     "twitter:description": "A student-first UCSB dorm FAQ covering what to bring, how routines work, and how to settle in quickly.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "UCSB Dorm FAQ: Packing, Routines, Meal Plans, and First-Year Life",
-    "author": "Lagoon"
+    "twitter:image:alt": "UCSB Dorm FAQ: Packing, Routines, Meal Plans, and First-Year Life"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/ucsb-dorm-faq"

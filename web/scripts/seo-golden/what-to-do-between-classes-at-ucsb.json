@@ -1,11 +1,9 @@
 {
   "title": "What to Do Between Classes at UCSB",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to what to do between classes at UCSB so long gaps do not turn into wasted time, bad food decisions, or random stress.",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "What to Do Between Classes at UCSB",
     "og:description": "How to use gaps between UCSB classes for food, studying, errands, and getting your day back under control.",
     "og:url": "https://lagoonucsb.com/what-to-do-between-classes-at-ucsb",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "What to Do Between Classes at UCSB",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "What to Do Between Classes at UCSB",
     "twitter:description": "How to use gaps between UCSB classes for food, studying, errands, and getting your day back under control.",

@@ -4,7 +4,7 @@
     "@type": "WebSite",
     "name": "Lagoon",
     "url": "https://lagoonucsb.com/",
-    "description": "The UCSB campus app for schedules, dining, events, student news, and grade data.",
+    "description": "The UCSB campus app: import your GOLD schedule in about 30 seconds, see who's in your classes, plus grade data, live dining menus, and campus events.",
     "publisher": {
       "@type": "Organization",
       "name": "Lagoon"
@@ -47,12 +47,15 @@
       }
     },
     "featureList": [
+      "30-second GOLD schedule import (screenshot, sign-in, or paste)",
+      "Home-screen schedule widgets and Today view",
+      "Classmate discovery — see who shares your classes",
       "Real UCSB grade distributions and A-rate data",
       "GOLD schedule sync and quarter view",
       "Live UCSB dining commons menus",
       "Live campus map with friends and anonymous pins",
       "Campus events and Daily Nexus headlines",
-      "Classmate discovery and study groups",
+      "Study groups",
       "GE requirement tracker",
       "Class vibes and course reviews",
       "XP, streaks, and gamification"
@@ -104,6 +107,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Lagoon imports your registered courses from UCSB GOLD so your schedule, attendance, and finals countdown stay accurate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I import my UCSB schedule into Lagoon?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Snap a screenshot of your GOLD schedule and Lagoon reads it automatically — or sign in to GOLD, or paste your class list. Import takes about 30 seconds, and you get a Today view plus home-screen widgets."
         }
       },
       {

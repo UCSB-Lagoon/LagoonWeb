@@ -1,11 +1,9 @@
 {
   "title": "What to Bring to a UCSB Dorm",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical packing guide for UCSB dorms covering what to bring, what to skip, and what freshmen actually end up using every week.",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "What to Bring to a UCSB Dorm",
     "og:description": "A realistic UCSB dorm packing guide for freshmen who want the essentials without overpacking.",
     "og:url": "https://lagoonucsb.com/what-to-bring-to-ucsb-dorm",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "What to Bring to a UCSB Dorm",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "What to Bring to a UCSB Dorm",
     "twitter:description": "A realistic UCSB dorm packing guide for freshmen who want the essentials without overpacking.",

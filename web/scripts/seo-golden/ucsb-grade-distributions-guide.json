@@ -1,21 +1,20 @@
 {
   "title": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to using UCSB grade distributions without making bad schedule decisions. Learn what grade data is good for and how Lagoon surfaces it.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
     "og:description": "Use UCSB grade distributions to balance workload, compare sections, and make smarter schedule choices.",
     "og:url": "https://lagoonucsb.com/ucsb-grade-distributions-guide",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
     "twitter:description": "Use UCSB grade distributions to balance workload, compare sections, and make smarter schedule choices.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "UCSB Grade Distributions Guide: How to Use Grade Data Well",
-    "author": "Lagoon"
+    "twitter:image:alt": "UCSB Grade Distributions Guide: How to Use Grade Data Well"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/ucsb-grade-distributions-guide"

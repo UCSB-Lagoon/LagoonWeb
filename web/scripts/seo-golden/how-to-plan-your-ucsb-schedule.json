@@ -1,21 +1,20 @@
 {
   "title": "How to Plan Your UCSB Schedule",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "Learn how to plan your UCSB schedule around timing, workload, walking distance, and energy so your week feels manageable, not just technically possible.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "How to Plan Your UCSB Schedule",
     "og:description": "Build a UCSB schedule that works in real life, not just one that fits on paper.",
     "og:url": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "How to Plan Your UCSB Schedule",
     "twitter:description": "Build a UCSB schedule that works in real life, not just one that fits on paper.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "How to Plan Your UCSB Schedule",
-    "author": "Lagoon"
+    "twitter:image:alt": "How to Plan Your UCSB Schedule"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule"

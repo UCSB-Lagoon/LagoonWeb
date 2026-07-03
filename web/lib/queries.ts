@@ -1,6 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { weekStart } from "@/lib/utils";
-import { applyStatsFloor, statsScale, statsFloor } from "@/lib/public-stats-baseline";
 import type { LeaderRow } from "@/components/gamification/leaderboard-table";
 
 type ActivityFeedRow = {
@@ -193,9 +192,7 @@ export async function getXpStats() {
   return {
     xpThisWeek: leaderboardRows.reduce((sum: number, row) => sum + (row.xp ?? 0), 0),
     weekEvents: feed24h?.length ?? 0,    // last-24h actions; closest public proxy
-    // Floored to the shared baseline so the hub can't contradict the /stats
-    // and marketing headline (same single source of truth).
-    activeUsers: Math.max(activeUsers ?? 0, statsFloor().users),
+    activeUsers: activeUsers ?? 0,
   };
 }
 
@@ -246,12 +243,6 @@ export async function getStatsBundle() {
       sb.from("stats_badges_by_rarity").select("*"),
       sb.from("stats_top_badges").select("*").limit(8),
     ]);
-  // Scale every breakdown by the same factor that floors the headline so the
-  // whole page stays internally consistent (charts sum to the shown totals).
-  const sc = statsScale(overview.data ?? null);
-  const su = (n: number) => Math.round(n * sc.users);
-  const sx = (n: number) => Math.round(n * sc.xp);
-
   const sourcesArr = (sources.data ?? []) as Array<{ source: string; event_count: number; total_xp: number; avg_xp: number }>;
   const dailyArr   = (daily.data ?? []) as Array<{ day: string; event_count: number; active_users: number; total_xp: number }>;
   const majorsArr  = (majors.data ?? []) as Array<{ major_code: string; users: number }>;
@@ -260,14 +251,13 @@ export async function getStatsBundle() {
   const topBadgeArr = (topBadges.data ?? []) as Array<{ badge_id: string; title: string; icon: string; rarity: string; earned_count: number }>;
 
   return {
-    overview: applyStatsFloor(overview.data ?? null) as StatsOverview | null,
-    scale: sc,
-    sources: sourcesArr.map((r) => ({ ...r, event_count: sx(r.event_count), total_xp: sx(r.total_xp) })),
-    daily:   dailyArr.map((r) => ({ ...r, event_count: sx(r.event_count), total_xp: sx(r.total_xp), active_users: su(r.active_users) })),
-    majors:  majorsArr.map((r) => ({ ...r, users: su(r.users) })),
-    classLevels: classArr.map((r) => ({ ...r, users: su(r.users) })),
-    badgeRarity: rarityArr.map((r) => ({ ...r, earned: su(r.earned) })),
-    topBadges:   topBadgeArr.map((r) => ({ ...r, earned_count: su(r.earned_count) })),
+    overview: (overview.data ?? null) as StatsOverview | null,
+    sources: sourcesArr,
+    daily: dailyArr,
+    majors: majorsArr,
+    classLevels: classArr,
+    badgeRarity: rarityArr,
+    topBadges: topBadgeArr,
   };
 }
 

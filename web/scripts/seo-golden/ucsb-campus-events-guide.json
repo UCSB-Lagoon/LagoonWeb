@@ -1,21 +1,20 @@
 {
   "title": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical UCSB campus events guide covering where events get posted, why students miss good ones, and how Lagoon helps keep campus life in one place.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
     "og:description": "Learn where UCSB students find events, what gets lost across channels, and how Lagoon helps keep campus life in one place.",
     "og:url": "https://lagoonucsb.com/ucsb-campus-events-guide",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
     "twitter:description": "Learn where UCSB students find events, what gets lost across channels, and how Lagoon helps keep campus life in one place.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
-    "author": "Lagoon"
+    "twitter:image:alt": "UCSB Campus Events Guide: How Students Actually Find Things to Do"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/ucsb-campus-events-guide"

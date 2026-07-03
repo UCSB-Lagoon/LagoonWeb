@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { compileMDX } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { MIGRATED_GUIDE_SLUGS } from "@/lib/marketing-slugs";
 import { GuideJsonLd, type GuideFrontmatter } from "@/components/seo/guide-jsonld";
 import { GuideShell } from "@/components/marketing/guide-shell";
@@ -30,7 +31,12 @@ async function loadGuide(slug: string) {
   return compileMDX<GuideFrontmatter>({
     source,
     components: mdxComponents,
-    options: { parseFrontmatter: true },
+    options: {
+      parseFrontmatter: true,
+      // GFM so the guides' markdown tables render as <table> instead of
+      // literal pipe characters (they were authored as GFM).
+      mdxOptions: { remarkPlugins: [remarkGfm] },
+    },
   });
 }
 

@@ -1,0 +1,116 @@
+{
+  "title": "UCSB Dining Commons Hours: Carrillo, DLG, Portola & Ortega",
+  "metas": {
+    "description": "How UCSB dining commons hours work: typical meal windows at Carrillo, De La Guerra, Portola, and Ortega, weekend differences, and how to check before you walk.",
+    "author": "Lagoon",
+    "robots": "index, follow",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "og:title": "UCSB Dining Commons Hours: Carrillo, DLG, Portola & Ortega",
+    "og:description": "Typical meal windows at all four UCSB dining commons, how weekends differ, and how to check what's open before you walk.",
+    "og:url": "https://lagoonucsb.com/ucsb-dining-commons-hours",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Dining Commons Hours: Carrillo, DLG, Portola & Ortega",
+    "twitter:description": "Typical meal windows at all four UCSB dining commons, how weekends differ, and how to check what's open before you walk.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Dining Commons Hours: Carrillo, DLG, Portola & Ortega"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-dining-commons-hours"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-07-03",
+      "datePublished": "2026-07-03",
+      "description": "How UCSB dining commons hours work: typical meal windows at all four commons, weekend differences, and how to check before you walk.",
+      "headline": "UCSB Dining Commons Hours: Carrillo, DLG, Portola & Ortega",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-dining-commons-hours",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-07-03",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-dining-commons-hours",
+          "name": "UCSB Dining Hours",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UCSB has four dining commons: Carrillo, De La Guerra (DLG), Portola, and Ortega. Each serves different meal windows that change by quarter, weekends, and breaks."
+          },
+          "name": "What are the UCSB dining commons?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but with reduced service — fewer halls, shorter windows, and brunch-style scheduling at some commons. Check the current day's hours before walking over."
+          },
+          "name": "Are UCSB dining commons open on weekends?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "UCSB Dining publishes current hours and menus, and the Lagoon app shows live menus for all four commons in one view."
+          },
+          "name": "How do I check UCSB dining hours and menus quickly?"
+        }
+      ]
+    }
+  ]
+}

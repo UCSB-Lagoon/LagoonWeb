@@ -1,11 +1,9 @@
 {
   "title": "UCSB Registration Guide",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical UCSB registration guide covering how students think through passes, schedule prep, backups, and what to do before registration opens.",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Registration Guide",
     "og:description": "How to prepare for UCSB registration with backups, schedule planning, and less panic.",
     "og:url": "https://lagoonucsb.com/ucsb-registration-guide",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "UCSB Registration Guide",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Registration Guide",
     "twitter:description": "How to prepare for UCSB registration with backups, schedule planning, and less panic.",

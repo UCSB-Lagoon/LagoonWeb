@@ -1,0 +1,116 @@
+{
+  "title": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
+  "metas": {
+    "description": "What UCSB pass times are, where to find yours in GOLD, how Pass 1, 2, and 3 actually work, and how to prep so registration takes minutes, not a morning.",
+    "author": "Lagoon",
+    "robots": "index, follow",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
+    "og:title": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
+    "og:description": "Where to find your pass time in GOLD, what each pass is for, and the prep that makes registration painless.",
+    "og:url": "https://lagoonucsb.com/ucsb-pass-times-explained",
+    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
+    "twitter:description": "Where to find your pass time in GOLD, what each pass is for, and the prep that makes registration painless.",
+    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep"
+  },
+  "links": {
+    "canonical": "https://lagoonucsb.com/ucsb-pass-times-explained"
+  },
+  "jsonld": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "author": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      },
+      "dateModified": "2026-07-03",
+      "datePublished": "2026-07-03",
+      "description": "What UCSB pass times are, where to find yours in GOLD, how Pass 1, 2, and 3 work, and how to prep so registration takes minutes.",
+      "headline": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
+      "image": {
+        "@type": "ImageObject",
+        "height": 630,
+        "url": "https://lagoonucsb.com/og-card.png",
+        "width": 1200
+      },
+      "inLanguage": "en-US",
+      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-pass-times-explained",
+      "publisher": {
+        "@type": "Organization",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://lagoonucsb.com/logo.svg"
+        },
+        "name": "Lagoon",
+        "url": "https://lagoonucsb.com"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "dateModified": "2026-07-03",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Lagoon"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/",
+          "name": "Home",
+          "position": 1
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/guides",
+          "name": "Guides",
+          "position": 2
+        },
+        {
+          "@type": "ListItem",
+          "item": "https://lagoonucsb.com/ucsb-pass-times-explained",
+          "name": "UCSB Pass Times",
+          "position": 3
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In GOLD, under the registration section — pass times are posted there before each quarter's registration opens, and each student's windows are assigned individually."
+          },
+          "name": "Where do I find my UCSB pass time?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each pass is a registration window with a unit cap. Pass 1 is for must-have and fast-filling classes, Pass 2 completes a full schedule, and Pass 3 is for swaps and waitlist cleanup."
+          },
+          "name": "What is the difference between Pass 1, Pass 2, and Pass 3 at UCSB?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Register a backup schedule so you hold real classes, join the waitlist if available, and watch the first week of the quarter as seats open when students drop."
+          },
+          "name": "What should I do if a class is full at my pass time?"
+        }
+      ]
+    }
+  ]
+}

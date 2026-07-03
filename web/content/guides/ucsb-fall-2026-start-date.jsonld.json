@@ -1,0 +1,94 @@
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://lagoonucsb.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Guides",
+        "item": "https://lagoonucsb.com/guides"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "UCSB Fall 2026 Start Date",
+        "item": "https://lagoonucsb.com/ucsb-fall-2026-start-date"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "When Does UCSB Start? Fall Quarter 2026 Dates, Explained",
+    "description": "UCSB Fall Quarter 2026 begins Sunday, September 20, and instruction starts Thursday, September 24. Key dates, finals week, and what to do before day one.",
+    "datePublished": "2026-07-03",
+    "dateModified": "2026-07-03",
+    "inLanguage": "en-US",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://lagoonucsb.com/og-card.png",
+      "width": 1200,
+      "height": 630
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon",
+      "url": "https://lagoonucsb.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://lagoonucsb.com/logo.svg"
+      }
+    },
+    "mainEntityOfPage": "https://lagoonucsb.com/ucsb-fall-2026-start-date"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When does UCSB start in Fall 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fall Quarter 2026 officially begins Sunday, September 20, 2026, and instruction begins Thursday, September 24, 2026."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does UCSB start classes on a Thursday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "UCSB's fall calendar opens with pre-instruction days early in the week for orientation and settling in, so the first day of class lands on a Thursday."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is UCSB's Fall 2026 finals week?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Instruction ends Friday, December 4, 2026, and final exams run Saturday, December 5 through Friday, December 11, 2026."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "dateModified": "2026-07-03",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Lagoon"
+    }
+  }
+]

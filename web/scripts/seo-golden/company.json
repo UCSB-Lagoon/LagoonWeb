@@ -1,11 +1,9 @@
 {
   "title": "About Lagoon | Built for Gauchos, by Gauchos",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "Learn about Lagoon, the student-built UCSB campus app for schedules, dining menus, campus events, student news, and grade data.",
     "robots": "index, follow",
-    "og:type": "website",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "About Lagoon | Built for Gauchos, by Gauchos",
     "og:description": "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
     "og:url": "https://lagoonucsb.com/company",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "About Lagoon | Built for Gauchos, by Gauchos",
+    "og:type": "website",
     "twitter:card": "summary_large_image",
     "twitter:title": "About Lagoon | Built for Gauchos, by Gauchos",
     "twitter:description": "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",

@@ -1,21 +1,20 @@
 {
   "title": "How to Meet People at UCSB",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to meeting people at UCSB without forcing it: dorms, classes, study spots, campus events, and the routines that actually build friendships.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "How to Meet People at UCSB",
     "og:description": "The easiest ways to meet people at UCSB without trying to become instantly social with everyone.",
     "og:url": "https://lagoonucsb.com/how-to-meet-people-at-ucsb",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "How to Meet People at UCSB",
     "twitter:description": "The easiest ways to meet people at UCSB without trying to become instantly social with everyone.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "How to Meet People at UCSB",
-    "author": "Lagoon"
+    "twitter:image:alt": "How to Meet People at UCSB"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/how-to-meet-people-at-ucsb"

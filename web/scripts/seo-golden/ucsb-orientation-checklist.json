@@ -1,11 +1,9 @@
 {
   "title": "UCSB Orientation Checklist for Admitted Students",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A clear UCSB orientation checklist for admitted students: accounts, class planning, dorm prep, dining basics, campus map setup, and the apps worth downloading.",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Orientation Checklist for Admitted Students",
     "og:description": "A practical pre-arrival checklist for UCSB freshmen and admitted students.",
     "og:url": "https://lagoonucsb.com/ucsb-orientation-checklist",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "UCSB Orientation Checklist for Admitted Students",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Orientation Checklist for Admitted Students",
     "twitter:description": "A practical pre-arrival checklist for UCSB freshmen and admitted students.",

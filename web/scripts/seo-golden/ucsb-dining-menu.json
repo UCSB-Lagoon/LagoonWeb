@@ -1,21 +1,20 @@
 {
   "title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to the UCSB dining menu: how students check today's food, compare dining commons, and use Lagoon to see menus faster.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
     "og:description": "How Gauchos actually check dining menus, compare halls, and decide where to eat without wasting a walk.",
     "og:url": "https://lagoonucsb.com/ucsb-dining-menu",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
     "twitter:description": "How Gauchos actually check dining menus, compare halls, and decide where to eat without wasting a walk.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
-    "author": "Lagoon"
+    "twitter:image:alt": "UCSB Dining Menu Guide: How Students Check What's Worth Eating"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/ucsb-dining-menu"

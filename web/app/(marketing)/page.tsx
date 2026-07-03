@@ -9,11 +9,11 @@ const URL = "https://lagoonucsb.com/";
 export const viewport: Viewport = { themeColor: "#F08A3C" };
 
 export const metadata: Metadata = {
-  title: { absolute: "Lagoon — UCSB Campus App for Grades, Schedule, Dining & Live Map" },
+  title: { absolute: "Lagoon — UCSB Campus App: Your GOLD Schedule in 30 Seconds" },
   description:
-    "Lagoon is the free UCSB student app. Real grade distributions, GOLD schedule sync, live dining menus, a live campus map showing friends nearby, campus events, Daily Nexus news, and study groups — all in one place. Made by Gauchos.",
+    "Import your UCSB GOLD schedule in about 30 seconds, get a beautiful Today view with home-screen widgets, and see how many Gauchos share your classes. Plus real grade distributions, live dining menus, and a live campus map. Free, built at UCSB.",
   keywords:
-    "UCSB, UCSB app, Lagoon UCSB, UCSB schedule, UCSB grades, UCSB dining, GOLD sync, Daily Nexus, Isla Vista, Gaucho, UCSB student app, UCSB grade distribution",
+    "UCSB, UCSB app, Lagoon UCSB, UCSB schedule, UCSB schedule app, GOLD schedule import, who's in my class UCSB, UCSB grades, UCSB dining, GOLD sync, Daily Nexus, Isla Vista, Gaucho, UCSB student app, UCSB grade distribution",
   authors: [{ name: "Lagoon" }],
   alternates: {
     canonical: "/",
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Lagoon",
     locale: "en_US",
-    title: "Lagoon — The UCSB Campus App",
+    title: "Lagoon — Your UCSB schedule, beautiful in 30 seconds",
     description:
-      "Real grade data, GOLD schedule sync, live dining menus, campus events, Daily Nexus, and study groups — the free UCSB student app.",
+      "Snap your GOLD schedule, get a gorgeous Today view + widgets, and see who's in your classes. Free, built at UCSB.",
     url: URL,
     images: [
       {
@@ -51,9 +51,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Lagoon — The UCSB Campus App",
+    title: "Lagoon — Your UCSB schedule, beautiful in 30 seconds",
     description:
-      "Free UCSB student app. Grades, schedule, dining, events, news, and study groups — in one place.",
+      "Snap your GOLD schedule, get a gorgeous Today view + widgets, and see who's in your classes. Free, built at UCSB.",
     images: [
       { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
     ],

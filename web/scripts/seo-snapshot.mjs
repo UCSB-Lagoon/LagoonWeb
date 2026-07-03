@@ -29,12 +29,15 @@ const SLUGS = [
   "company","guides","how-lagoon-dining-works","how-lagoon-schedule-works",
   "how-to-choose-classes-at-ucsb","how-to-meet-people-at-ucsb",
   "how-to-plan-your-ucsb-schedule","how-to-use-gold-at-ucsb",
-  "isla-vista-guide-for-students","ucsb-campus-events-guide","ucsb-dining-menu",
-  "ucsb-dorm-faq","ucsb-finals-week-guide","ucsb-first-week-guide",
+  "isla-vista-guide-for-students","ucsb-campus-events-guide",
+  "ucsb-dining-commons-hours","ucsb-dining-menu",
+  "ucsb-dorm-faq","ucsb-fall-2026-start-date","ucsb-finals-week-guide",
+  "ucsb-first-week-guide",
   "ucsb-freshman-faq","ucsb-ge-requirements-guide","ucsb-grade-distributions-guide",
   "ucsb-meal-plan-guide","ucsb-move-in-checklist","ucsb-orientation-checklist",
-  "ucsb-registration-guide","ucsb-transfer-student-guide","what-to-bring-to-ucsb-dorm",
-  "what-to-do-between-classes-at-ucsb",
+  "ucsb-pass-times-explained","ucsb-registration-guide","ucsb-transfer-student-guide",
+  "what-to-bring-to-ucsb-dorm","what-to-do-between-classes-at-ucsb",
+  "whos-in-my-class-ucsb",
 ];
 const PATHS = [HOME, ...SLUGS.map((s) => `/${s}`)];
 const nameFor = (p) => (p === "/" ? "home" : p.replace(/^\//, ""));

@@ -1,11 +1,9 @@
 {
   "title": "UCSB Meal Plan Guide for Freshmen",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical UCSB meal plan guide for freshmen: how dining swipes fit into real routines, what to consider, and how to make campus dining easier.",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Meal Plan Guide for Freshmen",
     "og:description": "How UCSB meal plans fit into dorm life, class schedules, and the way students actually eat on campus.",
     "og:url": "https://lagoonucsb.com/ucsb-meal-plan-guide",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "UCSB Meal Plan Guide for Freshmen",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Meal Plan Guide for Freshmen",
     "twitter:description": "How UCSB meal plans fit into dorm life, class schedules, and the way students actually eat on campus.",

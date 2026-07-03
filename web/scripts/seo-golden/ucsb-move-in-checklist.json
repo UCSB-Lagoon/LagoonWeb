@@ -1,11 +1,9 @@
 {
   "title": "UCSB Move-In Checklist for Freshmen",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical UCSB move-in checklist for freshmen: what to pack, what to set up first, and how to make move-in week feel less chaotic.",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Move-In Checklist for Freshmen",
     "og:description": "A simple UCSB move-in checklist for dorm setup, essentials, and the first days on campus.",
     "og:url": "https://lagoonucsb.com/ucsb-move-in-checklist",
@@ -14,6 +12,7 @@
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "UCSB Move-In Checklist for Freshmen",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Move-In Checklist for Freshmen",
     "twitter:description": "A simple UCSB move-in checklist for dorm setup, essentials, and the first days on campus.",

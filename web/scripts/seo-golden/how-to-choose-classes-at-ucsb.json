@@ -1,21 +1,20 @@
 {
   "title": "How to Choose Classes at UCSB",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to choosing classes at UCSB using workload, interest, timing, and grade data without building a quarter you regret.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "How to Choose Classes at UCSB",
     "og:description": "How to choose UCSB classes based on workload, timing, and what your quarter will actually feel like.",
     "og:url": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "How to Choose Classes at UCSB",
     "twitter:description": "How to choose UCSB classes based on workload, timing, and what your quarter will actually feel like.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "How to Choose Classes at UCSB",
-    "author": "Lagoon"
+    "twitter:image:alt": "How to Choose Classes at UCSB"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb"

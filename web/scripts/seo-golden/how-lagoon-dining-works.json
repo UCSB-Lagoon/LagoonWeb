@@ -1,21 +1,20 @@
 {
   "title": "How Lagoon Dining Works for UCSB Students",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "Learn how Lagoon's dining feature helps UCSB students check menus, see dining commons in one place, and plan meals without tab-switching.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "How Lagoon Dining Works for UCSB Students",
     "og:description": "A feature explainer for Lagoon's UCSB dining menus and meal-planning workflow.",
     "og:url": "https://lagoonucsb.com/how-lagoon-dining-works",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "How Lagoon Dining Works for UCSB Students",
     "twitter:description": "A feature explainer for Lagoon's UCSB dining menus and meal-planning workflow.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "How Lagoon Dining Works for UCSB Students",
-    "author": "Lagoon"
+    "twitter:image:alt": "How Lagoon Dining Works for UCSB Students"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/how-lagoon-dining-works"

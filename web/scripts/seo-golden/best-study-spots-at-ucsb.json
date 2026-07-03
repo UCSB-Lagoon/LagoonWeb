@@ -1,21 +1,20 @@
 {
   "title": "Best Study Spots at UCSB",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical guide to the best study spots at UCSB for quiet focus, longer work sessions, and finding a place that matches how you study.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "Best Study Spots at UCSB",
     "og:description": "Find the best study spots at UCSB for quiet, long sessions, and getting real work done.",
     "og:url": "https://lagoonucsb.com/best-study-spots-at-ucsb",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "Best Study Spots at UCSB",
     "twitter:description": "Find the best study spots at UCSB for quiet, long sessions, and getting real work done.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "Best Study Spots at UCSB",
-    "author": "Lagoon"
+    "twitter:image:alt": "Best Study Spots at UCSB"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/best-study-spots-at-ucsb"

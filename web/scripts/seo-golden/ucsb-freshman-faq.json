@@ -1,21 +1,20 @@
 {
   "title": "UCSB Freshman FAQ: What New Students Actually Need to Know",
   "metas": {
-    "viewport": "width=device-width, initial-scale=1.0",
-    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "description": "A practical UCSB freshman FAQ covering classes, dining, dorm routines, meeting people, GOLD, and the apps worth setting up before your first quarter.",
+    "author": "Lagoon",
     "robots": "index, follow",
-    "og:type": "article",
+    "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Freshman FAQ: What New Students Actually Need to Know",
     "og:description": "A no-fluff guide for UCSB freshmen covering classes, dorm life, dining, friends, GOLD, and week-one setup.",
     "og:url": "https://lagoonucsb.com/ucsb-freshman-faq",
     "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Freshman FAQ: What New Students Actually Need to Know",
     "twitter:description": "A no-fluff guide for UCSB freshmen covering classes, dorm life, dining, friends, GOLD, and week-one setup.",
     "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "UCSB Freshman FAQ: What New Students Actually Need to Know",
-    "author": "Lagoon"
+    "twitter:image:alt": "UCSB Freshman FAQ: What New Students Actually Need to Know"
   },
   "links": {
     "canonical": "https://lagoonucsb.com/ucsb-freshman-faq"
