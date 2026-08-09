@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Trophy, Target, Map, User, BarChart3, Menu, X, Download, Home } from "lucide-react";
+import { Trophy, Target, Map, User, Menu, X, Download, Home } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
   { href: "/hub",           label: "Hub",         icon: Home },
   { href: "/leaderboard",   label: "Leaderboard", icon: Trophy },
   { href: "/challenges",    label: "Challenges",  icon: Target },
-  { href: "/stats",         label: "Stats",       icon: BarChart3, live: true },
   { href: "/map",           label: "Map",         icon: Map },
   { href: "/me",            label: "You",         icon: User },
 ];
@@ -63,17 +62,13 @@ export function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-1 text-sm text-ink-500">
-          {links.map(({ href, label, icon: Icon, live }) => (
+          {links.map(({ href, label, icon: Icon }) => (
             <li key={href}>
               <Link
                 href={href}
-                className={[
-                  "flex items-center gap-1.5 px-3 py-2 rounded-full transition",
-                  "hover:bg-cream-100 hover:text-ink-900",
-                  live ? "text-orange-700 font-semibold" : "",
-                ].filter(Boolean).join(" ")}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-full transition hover:bg-cream-100 hover:text-ink-900"
               >
-                {live ? <span className="live-dot" aria-hidden="true" /> : <Icon className="w-4 h-4" />}
+                <Icon className="w-4 h-4" />
                 <span>{label}</span>
               </Link>
             </li>
@@ -120,16 +115,15 @@ export function Navbar() {
         ].join(" ")}
       >
         <ul className="px-5 py-4 space-y-1 bg-cream-50/95 backdrop-blur-xl">
-          {links.map(({ href, label, icon: Icon, live }) => (
+          {links.map(({ href, label, icon: Icon }) => (
             <li key={href}>
               <Link
                 href={href}
                 onClick={() => setOpen(false)}
                 className="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-cream-100 text-ink-900 font-medium"
               >
-                {live ? <span className="live-dot" aria-hidden="true" /> : <Icon className="w-5 h-5 text-orange-500" />}
+                <Icon className="w-5 h-5 text-orange-500" />
                 <span>{label}</span>
-                {live && <span className="ml-auto text-[10px] uppercase tracking-wider text-orange-600 font-bold">Live</span>}
               </Link>
             </li>
           ))}

@@ -5,7 +5,7 @@ const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
 /**
  * Marketing site header — the pre-migration marketing nav (Features /
- * Community / Live data / Guides / Company), NOT the app nav. Uses the
+ * Community / Guides / Company), NOT the app nav. Uses the
  * unified .site-header design already in site.css. Marketing pages
  * deliberately don't carry the app's Hub/Leaderboard/etc. links or the
  * theme toggle (dark mode follows the OS via site.css, like before).
@@ -24,7 +24,6 @@ export function MarketingHeader() {
         <div className="nav-mid">
           <a href="/#features">Features</a>
           <a href="/#classmates">Community</a>
-          <a href="/stats" rel="noopener">Live data</a>
           <a href="/guides">Guides</a>
           <a href="/company">Company</a>
         </div>

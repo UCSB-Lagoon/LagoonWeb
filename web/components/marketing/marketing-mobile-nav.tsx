@@ -8,7 +8,6 @@ const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 const LINKS = [
   { href: "/#features", label: "Features" },
   { href: "/#classmates", label: "Community" },
-  { href: "/stats", label: "Live data" },
   { href: "/guides", label: "Guides" },
   { href: "/company", label: "About" },
 ];
