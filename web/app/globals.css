@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,600;1,9..144,700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -32,10 +31,14 @@
   --color-coral-400:  #ff7a59;
 
   /* ── Type stack ── */
-  --font-sans:    "Space Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
-  --font-display: "Space Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono:    "Space Mono", ui-monospace, SFMono-Regular, "Menlo", monospace;
-  --font-serif:   "Fraunces", ui-serif, Georgia, serif;
+  /* Face names come from next/font (app/layout.tsx), which self-hosts and
+     preloads them — no cross-origin @import on the critical path. */
+  --font-sans:    var(--font-space-grotesk), ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:    var(--font-space-mono), ui-monospace, SFMono-Regular, "Menlo", monospace;
+  /* Fraunces is scoped to the app route group; .app-shell re-declares
+     this with it. See the note by .app-shell below. */
+  --font-serif:   ui-serif, Georgia, serif;
 }
 
 @keyframes float       { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
@@ -113,6 +116,16 @@ body::before {
   background: var(--color-orange-100);
   color: var(--color-orange-700);
   border: 1px solid #ffd9b3;
+}
+
+/* Fraunces is loaded only by app/(app)/layout.tsx, so --font-serif has to
+   be re-declared on the element where --font-fraunces is in scope: a
+   custom property's nested var() is substituted against the element that
+   DECLARES it, not the one that uses it. Declaring it on :root (where
+   --font-fraunces is undefined) silently drops the whole font-family and
+   .italic-accent falls back to the sans stack. */
+.app-shell {
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
 /* Italic display accent */

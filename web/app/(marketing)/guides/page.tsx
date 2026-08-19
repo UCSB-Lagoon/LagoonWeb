@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { StaticMarketingPage } from "@/components/marketing/static-page";
+import { GuideJsonLd } from "@/components/seo/guide-jsonld";
+import { getGuideIndex } from "@/lib/guide-index";
 
 export const metadata: Metadata = {
   title: { absolute: "UCSB Student Guides | Lagoon" },
@@ -33,6 +35,30 @@ export const metadata: Metadata = {
   },
 };
 
-export default function GuidesIndexPage() {
-  return <StaticMarketingPage slug="guides" />;
+export default async function GuidesIndexPage() {
+  // The captured JSON-LD for this page describes it as a CollectionPage
+  // but never enumerates what it collects. An ItemList generated from the
+  // guide frontmatter gives crawlers the actual 29 members, in order.
+  const guides = await getGuideIndex();
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Lagoon UCSB Guides",
+    url: "https://lagoonucsb.com/guides",
+    numberOfItems: guides.length,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    itemListElement: guides.map((g, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: g.breadcrumbName,
+      url: `https://lagoonucsb.com/${g.slug}`,
+    })),
+  };
+
+  return (
+    <>
+      <GuideJsonLd blocks={[itemList]} />
+      <StaticMarketingPage slug="guides" />
+    </>
+  );
 }

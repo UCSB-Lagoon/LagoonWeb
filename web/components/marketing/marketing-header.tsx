@@ -4,11 +4,14 @@ import { MarketingMobileNav } from "@/components/marketing/marketing-mobile-nav"
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
 /**
- * Marketing site header — the pre-migration marketing nav (Features /
- * Community / Guides / Company), NOT the app nav. Uses the
- * unified .site-header design already in site.css. Marketing pages
- * deliberately don't carry the app's Hub/Leaderboard/etc. links or the
- * theme toggle (dark mode follows the OS via site.css, like before).
+ * Marketing site header — the marketing nav (Features / Community /
+ * Guides / Company), NOT the app nav. Uses the unified .site-header
+ * design already in site.css. Marketing pages deliberately don't carry
+ * the app's Hub/Leaderboard/etc. links.
+ *
+ * The link group is a real <nav> landmark so screen-reader users can
+ * jump straight to it; the skip link in the marketing layout targets
+ * #content to bypass it.
  */
 export function MarketingHeader() {
   return (
@@ -21,12 +24,12 @@ export function MarketingHeader() {
             <span>UCSB</span>
           </span>
         </a>
-        <div className="nav-mid">
+        <nav className="nav-mid" aria-label="Primary">
           <a href="/#features">Features</a>
           <a href="/#classmates">Community</a>
           <a href="/guides">Guides</a>
           <a href="/company">Company</a>
-        </div>
+        </nav>
         <div className="nav-right">
           <ThemeToggle />
           <a className="nav-explore" href="/guides">Explore</a>

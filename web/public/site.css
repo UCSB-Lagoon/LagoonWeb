@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
-
 :root {
   /* Surfaces — unified cream palette (see docs/brand-guidelines.md) */
   --bg: #faf6ee;          /* cream-50  — page background */
@@ -47,9 +45,12 @@
   --shadow-gold: 0 0 0 1px rgba(240, 138, 60, 0.30), 0 4px 28px rgba(240, 138, 60, 0.26);
 
   /* Typography */
-  --font-body: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono: 'Space Mono', 'Courier New', monospace;
+  /* Face names come from next/font (app/layout.tsx), which self-hosts and
+     preloads them. This file used to open with an @import of Google's
+     stylesheet, which blocked first paint on a cross-origin round trip. */
+  --font-body: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), 'Courier New', monospace;
   --font-accent: var(--font-display);
 }
 
@@ -135,6 +136,30 @@ h3 {
 }
 
 /* =====================
+   SKIP LINK
+   ===================== */
+
+/* Visually hidden until focused, then pinned over the header. Lets
+   keyboard and screen-reader users jump past the nav to #content. */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 1000;
+  padding: 10px 18px;
+  border-radius: 0 0 12px 12px;
+  background: var(--gold);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  transition: top 0.16s ease;
+}
+
+.skip-link:focus-visible {
+  top: 0;
+}
+
+/* =====================
    ANNOUNCE BAR
    ===================== */
 
@@ -170,8 +195,43 @@ h3 {
   color: #fff;
 }
 
+/* Set by the boot script in app/layout.tsx for visitors who already
+   dismissed the strip, so it never renders-then-vanishes. */
+.announce-dismissed .announce-bar { display: none; }
+
+.announce-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.announce-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.announce-bar a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(255, 255, 255, 0.5);
+}
+
+.announce-bar a:hover { text-decoration-color: #fff; }
+
 @media (max-width: 600px) {
   .announce-bar { font-size: 12px; padding: 10px 40px; }
+  .announce-tag { display: none; }
 }
 
 /* =====================
@@ -660,6 +720,29 @@ h3 {
 .section-head {
   margin-bottom: 44px;
   text-align: center;
+}
+
+/* Section lede — a section title that carries its own one-line subtitle.
+   Used to give the /guides list a real <h2> instead of letting 29 <h3>s
+   hang off the sidebar heading. */
+.section-lede {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 32px;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.section-lede span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--ink-muted);
+  max-width: 46ch;
 }
 
 .section-head-left {
@@ -1683,8 +1766,13 @@ h3 {
       --text-light:   #F8F4EE;
       --text-light-2: rgba(248,244,238,0.72);
       --text-light-3: rgba(248,244,238,0.40);
-      --sys:   'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --mono:  'Space Mono', 'Courier New', monospace;
+      /* Same next/font faces as the top-of-file stack, so the homepage
+         picks up the metric-matched fallbacks too. */
+      /* AA-safe orange for small text: --orange-deep is only 3.1:1 on the
+         cream ground, which fails for anything under 18.66px bold. */
+      --orange-ink: #ab5320;
+      --sys:   var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --mono:  var(--font-space-mono), 'Courier New', monospace;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -2490,13 +2578,34 @@ h3 {
     .f-cta:hover { background: var(--orange-deep) !important; color: #fff !important; transform: translateY(-1px); }
     .f-copy { font-size: 12.5px; color: var(--text-dark-3); }
 
-    /* ── REVEAL ── */
-    .r  { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
-    .rl { opacity: 0; transform: translateX(-28px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
-    .rr { opacity: 0; transform: translateX(28px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
-    .r.on, .rl.on, .rr.on { opacity: 1; transform: none; }
-    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
-    .d4{transition-delay:.32s} .d5{transition-delay:.40s} .d6{transition-delay:.48s}
+    /* ── REVEAL ──
+       Two mechanisms, deliberately kept apart:
+
+       1. Hero (.hr/.hrl/.hrr) animates on LOAD, in pure CSS. The <h1> is
+          the LCP element, so it must never wait for the JS bundle — a
+          keyframe that starts at opacity 0 still registers LCP on its
+          first painted frame, whereas a JS-toggled class does not.
+
+       2. Everything below the fold (.r/.rl/.rr) reveals on SCROLL via
+          IntersectionObserver. The hidden state is gated on `html.js`
+          (set by the inline script in app/layout.tsx) so that a visitor
+          without JavaScript — or anyone reading before hydration — gets
+          the fully visible page instead of a blank one. */
+    @keyframes reveal-up    { from { opacity: 0; transform: translateY(28px) } to { opacity: 1; transform: none } }
+    @keyframes reveal-left  { from { opacity: 0; transform: translateX(-28px) } to { opacity: 1; transform: none } }
+    @keyframes reveal-right { from { opacity: 0; transform: translateX(28px) } to { opacity: 1; transform: none } }
+
+    .hr  { animation: reveal-up    0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    .hrl { animation: reveal-left  0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    .hrr { animation: reveal-right 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+
+    .js .r  { opacity: 0; transform: translateY(28px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+    .js .rl { opacity: 0; transform: translateX(-28px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+    .js .rr { opacity: 0; transform: translateX(28px); transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1); }
+    .js .r.on, .js .rl.on, .js .rr.on { opacity: 1; transform: none; }
+    .d1{transition-delay:.08s; animation-delay:.08s} .d2{transition-delay:.16s; animation-delay:.16s}
+    .d3{transition-delay:.24s; animation-delay:.24s} .d4{transition-delay:.32s; animation-delay:.32s}
+    .d5{transition-delay:.40s; animation-delay:.40s} .d6{transition-delay:.48s; animation-delay:.48s}
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
@@ -2643,6 +2752,144 @@ h3 {
     .dark .imp-step { background: #1c1409; border-color: rgba(237,226,206,0.08); }
     .dark .imp-step:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
     .dark .imp-num { color: var(--orange-2); }
+
+    /* ── CLOSING CTA ──
+       The page used to stop dead on the guides list. This is the last
+       thing a visitor sees, so it stays typographic rather than adding
+       another card: one statement, one button, and a mono meta row that
+       answers the three questions people ask before tapping Download. */
+    .close-section {
+      position: relative;
+      padding: 132px 32px 148px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Hairline that fades out at both ends — separates the section from
+       the guides list above without drawing a hard rule across the page. */
+    .close-section::before {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(240,138,60,0.34) 22%, rgba(240,138,60,0.34) 78%, transparent);
+    }
+
+    /* Warm bloom behind the headline, sized to the type not the section. */
+    .close-section::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 34%;
+      width: min(720px, 92vw);
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(240,138,60,0.13), transparent 62%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .close-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+    .close-eyebrow {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange-ink);
+      margin-bottom: 22px;
+    }
+
+    .close-h {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 82px);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      color: var(--warm-dark);
+    }
+
+    .close-h em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .close-sub {
+      margin: 24px auto 0;
+      max-width: 46ch;
+      font-size: 17px;
+      line-height: 1.62;
+      color: var(--text-dark-2);
+    }
+
+    .close-actions {
+      margin-top: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .close-ghost {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark-2);
+      border-bottom: 1px solid rgba(240,138,60,0.36);
+      padding-bottom: 2px;
+      transition: color 0.16s ease, border-color 0.16s ease;
+    }
+
+    .close-ghost:hover { color: var(--orange-deep); border-bottom-color: var(--orange-deep); }
+
+    .close-meta {
+      list-style: none;
+      margin: 46px 0 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+    }
+
+    .close-meta li {
+      position: relative;
+      /* --text-dark-3 is a 2.4:1 hint colour — fine behind a label, not
+         for 11px text that has to be read. */
+      color: var(--text-dark-2);
+    }
+
+    .close-meta li + li::before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: rgba(240,138,60,0.5);
+    }
+
+    @media (max-width: 600px) {
+      .close-section { padding: 92px 20px 104px; }
+      .close-actions { flex-direction: column; gap: 18px; }
+    }
+
+    .dark .close-h { color: var(--text-light); }
+    .dark .close-sub { color: var(--text-light-2); }
+    .dark .close-eyebrow { color: var(--orange-2); }
+    .dark .close-ghost { color: var(--text-light-2); }
+    .dark .close-ghost:hover { color: var(--orange-2); border-bottom-color: var(--orange-2); }
+    .dark .close-section::after { background: radial-gradient(circle, rgba(240,138,60,0.10), transparent 62%); }
+
 /* ==== END HOMEPAGE ==== */
 
 /* ── Accessibility: respect reduced-motion ──
@@ -2660,8 +2907,12 @@ h3 {
   }
   .r,
   .rl,
-  .rr {
+  .rr,
+  .hr,
+  .hrl,
+  .hrr {
     opacity: 1 !important;
     transform: none !important;
+    animation: none !important;
   }
 }

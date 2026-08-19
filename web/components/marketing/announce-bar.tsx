@@ -1,35 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const KEY = "lagoon_announce_dismissed";
 
 /**
- * The marketing announce strip (was inline in every static page).
- * Dismissal now persists across visits via localStorage instead of
- * reappearing every navigation. Renders visible by default (SSR) and
- * hides on mount if previously dismissed — a brief flash is acceptable
- * vs. the layout shift of rendering nothing until hydrated.
+ * The marketing announce strip.
+ *
+ * Dismissal persists across visits, but the *hiding* is done by CSS, not
+ * by React: the boot script in app/layout.tsx puts `announce-dismissed`
+ * on <html> before first paint, and site.css hides the strip from there.
+ * That keeps the server and client markup identical (no hydration
+ * mismatch) while avoiding the layout shift a returning visitor used to
+ * get when the bar rendered and then vanished on mount.
  */
 export function AnnounceBar() {
-  const [open, setOpen] = useState(true);
+  const [dismissed, setDismissed] = useState(false);
 
-  useEffect(() => {
-    try {
-      if (localStorage.getItem(KEY) === "1") setOpen(false);
-    } catch {}
-  }, []);
-
-  if (!open) return null;
+  if (dismissed) return null;
 
   return (
     <div className="announce-bar" id="announce-bar">
-      <span>🌯 We just raised $10 to buy one burrito</span>
+      <span className="announce-copy">
+        <span className="announce-tag">Fall 2026</span>
+        Classes start Thursday, September 24 —{" "}
+        <a href="/ucsb-fall-2026-start-date">see every key date</a>
+      </span>
       <button
         className="announce-close"
+        type="button"
         aria-label="Dismiss announcement"
         onClick={() => {
-          setOpen(false);
+          document.documentElement.classList.add("announce-dismissed");
+          setDismissed(true);
           try {
             localStorage.setItem(KEY, "1");
           } catch {}

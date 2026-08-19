@@ -16,7 +16,13 @@ const config: NextConfig = {
     "/admin/handbook": ["./content/onboarding.md"],
     "/[slug]": ["./content/guides/**/*"],
     "/": ["./content/home-body.html", "./content/home.jsonld.json"],
-    "/guides": ["./content/guides-body.html", "./content/guides.jsonld.json"],
+    // /guides also reads every guide's frontmatter for its ItemList JSON-LD.
+    "/guides": [
+      "./content/guides-body.html",
+      "./content/guides.jsonld.json",
+      "./content/guides/**/*",
+    ],
+    "/sitemap.xml": ["./content/guides/**/*"],
     "/company": ["./content/company-body.html", "./content/company.jsonld.json"],
   },
   images: {

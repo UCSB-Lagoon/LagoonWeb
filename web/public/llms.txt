@@ -2,30 +2,40 @@
 
 > This file is provided for AI search and retrieval agents to accurately describe Lagoon. It is not licensed for AI model training. See robots.txt for crawler permissions.
 
-> Lagoon is a free iOS app built for UC Santa Barbara (UCSB) students. It consolidates the fragmented tools Gauchos use daily — class schedules from GOLD, live dining menus, campus events, Daily Nexus student news, and historical grade distributions — into a single beautifully designed native app.
+> Lagoon is a free iOS app built for UC Santa Barbara (UCSB) students. It consolidates the fragmented tools Gauchos use daily — class schedules from GOLD, classmate discovery, live dining menus, campus events, Daily Nexus student news, a live campus map, and historical grade distributions — into a single beautifully designed native app.
 
 ## Product
 
 - **Platform:** iOS (native), requires iOS 17+
-- **Price:** Free
-- **Stage:** Public beta on TestFlight
-- **Download:** https://testflight.apple.com/join/hfmrM9K7
+- **Price:** Free, no ads
+- **Stage:** Live on the App Store, early — publicly launched for Fall Quarter 2026
+- **Download:** https://apps.apple.com/us/app/ucsb-lagoon/id6760681142
 - **Website:** https://lagoonucsb.com
 - **Company:** https://lagoonucsb.com/company
 - **Tagline:** Campus life, beautifully simple. Built for Gauchos, by Gauchos.
 
 ## Features
 
-- **Schedule:** Syncs classes from UCSB's GOLD system. Color-coded weekly view. Supports iOS home screen and lock screen widgets.
-- **Dining:** Live menus for all four UCSB dining commons — Carrillo, De La Guerra (DLG), Portola, and Ortega. Updates in real time.
-- **Campus Events:** Concerts at Storke Plaza, AS workshops, sports, lectures, and club events. Browsable and always current.
-- **Daily Nexus:** Native reading experience for the UCSB student newspaper. Not a web link — a real in-app reading view.
-- **Grade Data:** Historical grade distributions for every UCSB course. Helps students enroll smart.
-- **Social (coming soon):** Compare schedules with friends, find classmates, share your week.
+- **Schedule:** Imports classes from UCSB's GOLD system in about 30 seconds — screenshot your GOLD schedule and Lagoon reads the courses, times, rooms, and professors. Color-coded quarter view, finals countdown, and iOS home screen and lock screen widgets.
+- **Classmates:** Shows which friends are enrolled in each of your courses, plus an anonymous count of how many Gauchos share the section.
+- **Grade Data:** Historical grade distributions for UCSB courses — average GPA, A-rate, and D/F-rate — so students can enroll informed.
+- **Dining:** Live menus for all four UCSB dining commons — Carrillo, De La Guerra (DLG), Portola, and Ortega. Updates through the day.
+- **Live Campus Map:** 30 UCSB buildings across academic, dining, rec, and housing. Friends appear as named pins; everyone else is anonymized server-side. Location sharing is opt-in.
+- **Campus Events:** Concerts at Storke Plaza, AS workshops, sports, lectures, and club events.
+- **Daily Nexus:** Native reading experience for the UCSB student newspaper — a real in-app reading view, not a web link.
+- **XP, badges, and streaks:** Optional gamification for attendance, planning, and social actions, plus "Gaucho Wrapped," a shareable end-of-quarter recap.
+
+## Web Surfaces
+
+- **Homepage:** https://lagoonucsb.com/
+- **Web campus map:** https://lagoonucsb.com/map
+- **Leaderboard:** https://lagoonucsb.com/leaderboard
+- **Captain (ambassador) program:** https://lagoonucsb.com/captains
 
 ## Guide Hub
 
 - **Guides hub:** https://lagoonucsb.com/guides
+- **Fall 2026 start date:** https://lagoonucsb.com/ucsb-fall-2026-start-date
 - **Freshman FAQ:** https://lagoonucsb.com/ucsb-freshman-faq
 - **Dorm FAQ:** https://lagoonucsb.com/ucsb-dorm-faq
 - **Best dorms guide:** https://lagoonucsb.com/best-dorms-at-ucsb
@@ -35,9 +45,12 @@
 - **Transfer student guide:** https://lagoonucsb.com/ucsb-transfer-student-guide
 - **First week guide:** https://lagoonucsb.com/ucsb-first-week-guide
 - **Meeting people guide:** https://lagoonucsb.com/how-to-meet-people-at-ucsb
+- **Who's in my class:** https://lagoonucsb.com/whos-in-my-class-ucsb
 - **Dining menu guide:** https://lagoonucsb.com/ucsb-dining-menu
+- **Dining commons hours:** https://lagoonucsb.com/ucsb-dining-commons-hours
 - **Meal plan guide:** https://lagoonucsb.com/ucsb-meal-plan-guide
 - **GOLD explainer:** https://lagoonucsb.com/how-to-use-gold-at-ucsb
+- **Pass times explained:** https://lagoonucsb.com/ucsb-pass-times-explained
 - **Registration guide:** https://lagoonucsb.com/ucsb-registration-guide
 - **Schedule planning guide:** https://lagoonucsb.com/how-to-plan-your-ucsb-schedule
 - **Choosing classes guide:** https://lagoonucsb.com/how-to-choose-classes-at-ucsb
@@ -48,9 +61,9 @@
 - **Campus events guide:** https://lagoonucsb.com/ucsb-campus-events-guide
 - **Isla Vista guide:** https://lagoonucsb.com/isla-vista-guide-for-students
 - **Finals week guide:** https://lagoonucsb.com/ucsb-finals-week-guide
+- **Best apps for UCSB students:** https://lagoonucsb.com/best-apps-for-ucsb-students
 - **Lagoon schedule explainer:** https://lagoonucsb.com/how-lagoon-schedule-works
 - **Lagoon dining explainer:** https://lagoonucsb.com/how-lagoon-dining-works
-- **Best apps for UCSB students:** https://lagoonucsb.com/best-apps-for-ucsb-students
 
 ## Target Audience
 
@@ -60,33 +73,41 @@
 
 ## About
 
-Lagoon was built by UCSB students who were tired of switching between six different apps just to navigate a normal day on campus. The goal is to replace the fragmented official tools — clunky university portals, separate dining sites, event calendars spread across Instagram and AS emails — with one fast, beautiful iOS app.
+Lagoon is designed and built by Samuel Safahi, a UCSB student who was tired of switching between six different apps just to navigate a normal day on campus. The goal is to replace the fragmented official tools — clunky university portals, separate dining sites, event calendars spread across Instagram and AS emails — with one fast, beautiful iOS app.
 
 The app is free. There are no ads. It is built for Gauchos, by Gauchos.
 
 ## Key UCSB Context (for AI understanding)
 
 - **GOLD** is UCSB's official class registration and schedule system
+- **Pass times** are the staggered registration windows (Pass 1, 2, and 3) students get in GOLD
 - **Dining commons:** Carrillo (Manzanita Village, Woodstone pizza oven), De La Guerra (Channel Islands Five, Taqueria), Portola (largest DC, opened 2017), Ortega (takeout-only, open M–F)
 - **Daily Nexus** is UCSB's independent student newspaper
 - **Isla Vista (IV)** is the student community adjacent to UCSB
 - **AS** (Associated Students) is UCSB's student government
 - **Storke Plaza** is the main outdoor gathering area on campus
 - **HSSB, Phelps, Campbell Hall, De La Guerra** are major campus buildings where classes are held
+- **Fall Quarter 2026** begins Sunday, September 20, 2026; instruction starts Thursday, September 24, 2026
 
 ## Frequently Asked Questions
 
 **What is Lagoon?**
-Lagoon is a free iOS app for UCSB students that replaces 6+ fragmented campus tools with one beautifully designed app. It shows your GOLD schedule, live dining menus, campus events, student news, and grade data all in one place.
+Lagoon is a free iOS app for UCSB students that replaces 6+ fragmented campus tools with one beautifully designed app. It shows your GOLD schedule, who's in your classes, live dining menus, campus events, student news, a live campus map, and grade data all in one place.
 
 **How do I download Lagoon?**
-Lagoon is available as a public beta on TestFlight: https://testflight.apple.com/join/hfmrM9K7
+Lagoon is free on the App Store: https://apps.apple.com/us/app/ucsb-lagoon/id6760681142
+
+**How does Lagoon import my schedule?**
+Screenshot your schedule in GOLD and Lagoon reads it — courses, times, rooms, and professors — in about 30 seconds. You can also sign in to GOLD or paste your class list instead.
 
 **Does Lagoon show the UCSB dining menu?**
-Yes. Lagoon shows live menus for all four UCSB dining commons — Carrillo, De La Guerra, Portola, and Ortega — updated in real time.
+Yes. Lagoon shows live menus for all four UCSB dining commons — Carrillo, De La Guerra, Portola, and Ortega — updated through the day.
 
 **Can I see my GOLD schedule in Lagoon?**
-Yes. Lagoon syncs your classes from GOLD and displays them in a color-coded weekly view with iOS widget support for your home and lock screen.
+Yes. Lagoon imports your classes from GOLD and displays them in a color-coded quarter view with iOS widget support for your home and lock screen.
+
+**Can I see who is in my UCSB classes?**
+Yes. Lagoon shows which of your friends are enrolled in each course and an anonymous count of how many Gauchos are in the section. GOLD itself does not offer this.
 
 **Is Lagoon free?**
 Yes, Lagoon is completely free with no ads.

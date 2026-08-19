@@ -6,11 +6,12 @@ import { MarketingHeader } from "@/components/marketing/marketing-header";
 import { MarketingFooter } from "@/components/marketing/marketing-footer";
 
 /**
- * Marketing + guides shell — the 25 SEO guides, /guides, /company, the
+ * Marketing + guides shell — the 29 SEO guides, /guides, /company, the
  * homepage. Reports to the MARKETING GA4 stream (G-2F8CTN4DNP). Uses a
- * MARKETING-specific header/footer (its own nav + no theme toggle); the
- * app's Navbar/Footer are not used here. Dark mode follows the OS via
- * site.css's prefers-color-scheme, like the original static site.
+ * MARKETING-specific header/footer (its own nav); the app's
+ * Navbar/Footer are not used here. Dark mode is class-based (.dark on
+ * <html>, set by the boot script in the root layout) and toggleable from
+ * the header.
  *
  * Default metadata mirrors what every static guide carried (author,
  * robots, Apple smart-banner). Per-page title/description/canonical/
@@ -35,9 +36,10 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
           not-yet-ported static pages also link it; React 19 hoists this
           <link> into <head>. */}
       <link rel="stylesheet" href="/site.css" precedence="default" />
+      <a className="skip-link" href="#content">Skip to content</a>
       <AnnounceBar />
       <MarketingHeader />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1" id="content">{children}</main>
       <MarketingFooter />
       <SiteAnalytics gaId="G-2F8CTN4DNP" />
       <Script src="/lagoon-cta.js" strategy="afterInteractive" />

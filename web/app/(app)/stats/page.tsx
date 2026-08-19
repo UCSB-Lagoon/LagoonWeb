@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Activity, Award, BarChart3, Flame, GraduationCap, Heart, MessageSquare, Sparkles, TrendingUp, Users } from "lucide-react";
 import { StatCard } from "@/components/ui/stat-card";
 import { BarRow } from "@/components/charts/bar-row";
@@ -19,7 +20,33 @@ import {
 } from "@/lib/stats-helpers";
 
 export const revalidate = 120;
-export const metadata = { title: "Stats for nerds" };
+
+/**
+ * Public, indexable, and listed in sitemap.ts — so it needs more than a
+ * title. It is no longer linked from the marketing nav, which makes the
+ * canonical + description the only things telling a crawler what it is.
+ */
+export const metadata: Metadata = {
+  title: "Stats for nerds",
+  description:
+    "Lagoon's public numbers for UCSB, straight from the live database: signups, streaks, XP by source, badges, class years, majors, and trending classes. Real aggregates, nothing padded.",
+  alternates: { canonical: "https://lagoonucsb.com/stats" },
+  openGraph: {
+    type: "website",
+    title: "Stats for nerds — Lagoon",
+    description:
+      "Lagoon's real, anonymized UCSB numbers, straight from the live database.",
+    url: "https://lagoonucsb.com/stats",
+    images: [{ url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Stats for nerds — Lagoon",
+    description:
+      "Lagoon's real, anonymized UCSB numbers, straight from the live database.",
+    images: [{ url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
+  },
+};
 
 const RARITY_COLORS: Record<string, string> = {
   common:    "bg-cream-100 text-ink-600 border-cream-200",

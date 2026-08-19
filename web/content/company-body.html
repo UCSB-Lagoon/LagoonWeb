@@ -1,149 +1,128 @@
-<main>
-    <section class="page-hero">
-      <div class="shell guide-hero-grid">
-        <div>
-          <div class="breadcrumb">
-            <a href="/">Home</a>
-            <span>/</span>
-            <span>Company</span>
-          </div>
-          <p class="eyebrow">About Lagoon</p>
-          <h1>Built because campus life should not feel this fragmented.</h1>
-          <p>
-            Lagoon started with a simple frustration: UCSB students were switching between separate
-            systems for schedules, dining, events, campus news, and planning, even though those tools
-            all shape the same day. The company exists to make that experience simpler, calmer, and
-            more useful.
-          </p>
-          <div class="article-meta">
-            <span class="meta-pill">Student-built</span>
-            <span class="meta-pill">UCSB first</span>
-            <span class="meta-pill">iOS app</span>
-          </div>
-        </div>
-
-        <aside class="glass-panel guide-sidebar">
-          <h2>What Lagoon is building</h2>
-          <p>One connected campus app for UCSB students, starting with the tools they already check every day.</p>
-          <a class="button button-primary" href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer">Download the iOS Beta</a>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section-block">
-      <div class="shell">
-        <div class="card-grid card-grid-three">
-          <article class="feature-card">
-            <span class="card-tag">Mission</span>
-            <h3>Make student life feel more connected</h3>
-            <p>The goal is not to add another campus app. It is to replace the scattered experience students already have.</p>
-          </article>
-          <article class="feature-card">
-            <span class="card-tag">Starting point</span>
-            <h3>Build it for UCSB first</h3>
-            <p>Lagoon starts with UCSB so the product can feel local, specific, and genuinely useful to Gauchos.</p>
-          </article>
-          <article class="feature-card">
-            <span class="card-tag">Product</span>
-            <h3>Design around the normal week</h3>
-            <p>The app is built around what students do repeatedly: class checks, dining decisions, event browsing, and planning.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-block section-dark">
-      <div class="shell split-layout">
-        <div>
-          <p class="eyebrow">What Lagoon Includes</p>
-          <h2>The product is built around the rhythm of a normal UCSB day.</h2>
-          <ul class="bullet-list">
-            <li>GOLD schedule sync and a cleaner weekly view</li>
-            <li>Live UCSB dining menus in one place</li>
-            <li>Campus events students actually want to keep up with</li>
-            <li>Daily Nexus news in-app</li>
-            <li>Grade data and planning context</li>
-          </ul>
-        </div>
-
-        <div class="glass-panel metric-panel">
-          <div class="metric-row">
-            <span>Platform</span>
-            <strong>iOS</strong>
-          </div>
-          <div class="metric-row">
-            <span>Price</span>
-            <strong>Free</strong>
-          </div>
-          <div class="metric-row">
-            <span>Audience</span>
-            <strong>UC Santa Barbara students</strong>
-          </div>
-          <div class="metric-row">
-            <span>Guiding idea</span>
-            <strong>Campus life, beautifully simple.</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-block">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow">Also On The Site</p>
-          <h2>Lagoon also publishes student guides.</h2>
-          <p>
-            The company is centered on the app, but the site also includes helpful UCSB guides for
-            freshmen, dorm life, dining, GOLD, move-in, and the early questions students usually have.
-          </p>
-        </div>
-
-        <div class="mini-guide-grid">
-          <a class="mini-guide" href="/guides">
-            <h3>Browse all student guides</h3>
-            <p>See the full library of UCSB guides and FAQ pages.</p>
-          </a>
-          <a class="mini-guide" href="/ucsb-freshman-faq">
-            <h3>Start with the freshman FAQ</h3>
-            <p>One of the best entry points for new students figuring out the first quarter.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-block section-dark">
-      <div class="shell">
-        <div class="section-head">
-          <p class="eyebrow">Credits</p>
-          <h2>Built by Samuel Safahi, a UCSB student.</h2>
-          <p>Lagoon is designed and built by Samuel Safahi, a student at UC Santa Barbara.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="shell footer-grid">
+<!-- Body only. The <main> landmark, the site header, the site footer and
+     the lagoon-cta.js tag all come from app/(marketing)/layout.tsx. This
+     file used to carry its own copies (leftovers from the static-HTML
+     migration), which rendered a second <main>, a second footer, and a
+     second copy of lagoon-cta.js — double-firing every GA4
+     app_store_click/conversion event and stacking two sticky CTA bars. -->
+  <section class="page-hero">
+    <div class="shell guide-hero-grid">
       <div>
-        <a class="brand brand-footer" href="/">
-          <span class="brand-mark">L</span>
-          <span class="brand-copy">
-            <strong>Lagoon</strong>
-            <span>Campus life, beautifully simple.</span>
-          </span>
-        </a>
-        <p class="footer-copy">A student-built company focused on making campus life at UCSB feel more connected.</p>
+        <div class="breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <span>Company</span>
+        </div>
+        <p class="eyebrow">About Lagoon</p>
+        <h1>Built because campus life should not feel this fragmented.</h1>
+        <p>
+          Lagoon started with a simple frustration: UCSB students were switching between separate
+          systems for schedules, dining, events, campus news, and planning, even though those tools
+          all shape the same day. The company exists to make that experience simpler, calmer, and
+          more useful.
+        </p>
+        <div class="article-meta">
+          <span class="meta-pill">Student-built</span>
+          <span class="meta-pill">UCSB first</span>
+          <span class="meta-pill">iOS app</span>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="/">App</a>
-        <a href="/guides">Guides</a>
-        <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer">Download Lagoon</a>
+
+      <aside class="glass-panel guide-sidebar">
+        <h2>What Lagoon is building</h2>
+        <p>One connected campus app for UCSB students, starting with the tools they already check every day.</p>
+        <a class="button button-primary" href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" rel="noreferrer">Download the iOS Beta</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="shell">
+      <div class="card-grid card-grid-three">
+        <article class="feature-card">
+          <span class="card-tag">Mission</span>
+          <h3>Make student life feel more connected</h3>
+          <p>The goal is not to add another campus app. It is to replace the scattered experience students already have.</p>
+        </article>
+        <article class="feature-card">
+          <span class="card-tag">Starting point</span>
+          <h3>Build it for UCSB first</h3>
+          <p>Lagoon starts with UCSB so the product can feel local, specific, and genuinely useful to Gauchos.</p>
+        </article>
+        <article class="feature-card">
+          <span class="card-tag">Product</span>
+          <h3>Design around the normal week</h3>
+          <p>The app is built around what students do repeatedly: class checks, dining decisions, event browsing, and planning.</p>
+        </article>
       </div>
     </div>
-  </footer>
-  <script>
-    (function(){var ac=document.getElementById('announce-close');if(ac)ac.addEventListener('click',function(){document.getElementById('announce-bar').remove();});})();
-  </script>
-<script defer src="/lagoon-cta.js"></script>
-</body>
-</html>
+  </section>
+
+  <section class="section-block section-dark">
+    <div class="shell split-layout">
+      <div>
+        <p class="eyebrow">What Lagoon Includes</p>
+        <h2>The product is built around the rhythm of a normal UCSB day.</h2>
+        <ul class="bullet-list">
+          <li>GOLD schedule sync and a cleaner weekly view</li>
+          <li>Live UCSB dining menus in one place</li>
+          <li>Campus events students actually want to keep up with</li>
+          <li>Daily Nexus news in-app</li>
+          <li>Grade data and planning context</li>
+        </ul>
+      </div>
+
+      <div class="glass-panel metric-panel">
+        <div class="metric-row">
+          <span>Platform</span>
+          <strong>iOS</strong>
+        </div>
+        <div class="metric-row">
+          <span>Price</span>
+          <strong>Free</strong>
+        </div>
+        <div class="metric-row">
+          <span>Audience</span>
+          <strong>UC Santa Barbara students</strong>
+        </div>
+        <div class="metric-row">
+          <span>Guiding idea</span>
+          <strong>Campus life, beautifully simple.</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Also On The Site</p>
+        <h2>Lagoon also publishes student guides.</h2>
+        <p>
+          The company is centered on the app, but the site also includes helpful UCSB guides for
+          freshmen, dorm life, dining, GOLD, move-in, and the early questions students usually have.
+        </p>
+      </div>
+
+      <div class="mini-guide-grid">
+        <a class="mini-guide" href="/guides">
+          <h3>Browse all student guides</h3>
+          <p>See the full library of UCSB guides and FAQ pages.</p>
+        </a>
+        <a class="mini-guide" href="/ucsb-freshman-faq">
+          <h3>Start with the freshman FAQ</h3>
+          <p>One of the best entry points for new students figuring out the first quarter.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section-dark">
+    <div class="shell">
+      <div class="section-head">
+        <p class="eyebrow">Credits</p>
+        <h2>Built by Samuel Safahi, a UCSB student.</h2>
+        <p>Lagoon is designed and built by Samuel Safahi, a student at UC Santa Barbara.</p>
+      </div>
+    </div>
+  </section>
+

@@ -12,9 +12,9 @@ export const metadata: Metadata = {
     description:
       "20 captains. Free hoodie, paid quarterly dinners, $50 Apple gift cards for top referrers, and a direct line to the founders.",
     url: "https://app.lagoonucsb.com/captains",
-    images: ["/og.png"],
+    images: ["/og-card.png"],
   },
-  twitter: { card: "summary_large_image", title: "Lagoon Captains — UCSB", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "Lagoon Captains — UCSB", images: ["/og-card.png"] },
 };
 
 const PERKS = [

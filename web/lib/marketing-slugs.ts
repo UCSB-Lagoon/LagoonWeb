@@ -3,7 +3,7 @@
  *
  * - MARKETING_SLUGS: every marketing path (drives sitemap.ts). "/" (the
  *   homepage) is its own route and tracked separately by the sitemap.
- * - MIGRATED_GUIDE_SLUGS: the 25 MDX guide bodies under content/guides/;
+ * - MIGRATED_GUIDE_SLUGS: the 29 MDX guide bodies under content/guides/;
  *   used by app/(marketing)/[slug] generateStaticParams. (/guides and
  *   /company are NOT here — they have their own dedicated routes.)
  *
