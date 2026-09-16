@@ -49,7 +49,7 @@ export function CaptainForm() {
   if (status === "ok") {
     return (
       <div className="text-center py-8">
-        <div className="grid place-items-center w-16 h-16 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white mx-auto shadow-[0_12px_28px_-10px_rgba(240,138,60,0.55)]">
+        <div className="grid place-items-center w-16 h-16 rounded-full bg-gold-500 text-ink-900 mx-auto">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <h3 className="mt-5 font-display font-bold text-2xl text-ink-900">You&apos;re in our inbox.</h3>
@@ -122,7 +122,7 @@ function Field({
   return (
     <label className="block">
       <span className="text-xs uppercase tracking-[0.14em] font-semibold text-ink-400 mb-1.5 block">
-        {label}{required && <span className="text-orange-500"> *</span>}
+        {label}{required && <span className="text-gold-700"> *</span>}
       </span>
       <input
         type={type}
@@ -130,7 +130,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300
-          focus:outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition"
+          focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition"
       />
     </label>
   );
@@ -142,7 +142,7 @@ function Textarea({
   return (
     <label className="block">
       <span className="text-xs uppercase tracking-[0.14em] font-semibold text-ink-400 mb-1.5 block">
-        {label}{required && <span className="text-orange-500"> *</span>}
+        {label}{required && <span className="text-gold-700"> *</span>}
       </span>
       <textarea
         name={name}
@@ -150,7 +150,7 @@ function Textarea({
         placeholder={placeholder}
         rows={4}
         className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300
-          focus:outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition resize-y"
+          focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition resize-y"
       />
     </label>
   );

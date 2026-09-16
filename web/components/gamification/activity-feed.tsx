@@ -86,7 +86,7 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
             transition={{ type: "spring", stiffness: 320, damping: 28 }}
             className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-cream-100/70 transition"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-orange-100 border border-orange-200 text-base">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-gold-100 border border-gold-200 text-base">
               {ICON[r.source] ?? "✨"}
             </span>
             <div className="flex-1 min-w-0">
@@ -96,7 +96,7 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
               </p>
               <p className="text-xs text-ink-400">{formatRelative(r.created_at)}</p>
             </div>
-            <span className="text-xs font-bold text-orange-600 tabular-nums">+{r.points}</span>
+            <span className="text-xs font-bold text-gold-700 tabular-nums">+{r.points}</span>
           </motion.li>
         ))}
       </AnimatePresence>

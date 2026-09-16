@@ -28,7 +28,7 @@ export default function LoginPage() {
     <div className="min-h-[70vh] flex items-center justify-center px-5">
       <div className="card p-8 w-full max-w-md">
         <div className="flex items-center gap-3 mb-6">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-orange-500 text-white">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gold-500 text-ink-900">
             <Waves className="w-5 h-5" />
           </span>
           <div>
@@ -50,7 +50,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@ucsb.edu"
-                className="mt-1.5 w-full bg-cream-50 border border-cream-200 rounded-xl px-3.5 py-2.5 text-ink-900 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-200"
+                className="mt-1.5 w-full bg-cream-50 border border-cream-200 rounded-xl px-3.5 py-2.5 text-ink-900 outline-none focus:border-gold-400 focus:ring-2 focus:ring-gold-200"
               />
             </label>
             {error && <p className="text-sm text-rose-600">{error}</p>}

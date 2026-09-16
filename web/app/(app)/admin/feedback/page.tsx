@@ -23,15 +23,15 @@ type Row = {
 
 const STATUSES = ["new", "triaged", "planned", "shipped", "declined"] as const;
 const KIND_META: Record<string, { icon: typeof Bug; cls: string }> = {
-  idea:     { icon: Lightbulb,   cls: "bg-amber-100 text-amber-700 border-amber-200" },
+  idea:     { icon: Lightbulb,   cls: "bg-gold-100 text-gold-700 border-gold-200" },
   bug:      { icon: Bug,         cls: "bg-rose-100 text-rose-700 border-rose-200" },
   praise:   { icon: Heart,       cls: "bg-emerald-100 text-emerald-700 border-emerald-200" },
   question: { icon: HelpCircle,  cls: "bg-sky-100 text-sky-700 border-sky-200" },
   other:    { icon: MessageSquare, cls: "bg-stone-100 text-stone-600 border-stone-200" },
 };
 const STATUS_CLS: Record<string, string> = {
-  new:      "bg-orange-100 text-orange-700 border-orange-200",
-  triaged:  "bg-amber-100 text-amber-700 border-amber-200",
+  new:      "bg-gold-100 text-gold-700 border-gold-200",
+  triaged:  "bg-gold-100 text-gold-700 border-gold-200",
   planned:  "bg-sky-100 text-sky-700 border-sky-200",
   shipped:  "bg-emerald-100 text-emerald-700 border-emerald-200",
   declined: "bg-stone-100 text-stone-600 border-stone-200",
@@ -83,7 +83,7 @@ export default async function AdminFeedbackPage(
     <div className="max-w-7xl mx-auto px-5 py-12">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <span className="pill mb-3"><span className="w-1.5 h-1.5 rounded-full bg-orange-500" /> Admin</span>
+          <span className="pill mb-3"><span className="w-1.5 h-1.5 rounded-full bg-gold-500" /> Admin</span>
           <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">Feedback inbox</h1>
           <p className="mt-2 text-ink-500">{rows.length} shown · signed in as <span className="font-mono">{user.email}</span></p>
         </div>
@@ -129,11 +129,11 @@ export default async function AdminFeedbackPage(
             const km = KIND_META[f.kind] || KIND_META.other;
             const KIcon = km.icon;
             return (
-              <li key={f.id} className={["card p-5", f.pinned ? "ring-2 ring-amber-300/50" : ""].join(" ")}>
+              <li key={f.id} className={["card p-5", f.pinned ? "ring-2 ring-gold-300/50" : ""].join(" ")}>
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap mb-2">
-                      {f.pinned && <Pin className="w-3.5 h-3.5 text-amber-600" />}
+                      {f.pinned && <Pin className="w-3.5 h-3.5 text-gold-700" />}
                       <span className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border ${km.cls}`}>
                         <KIcon className="w-3 h-3" /> {f.kind}
                       </span>
@@ -149,7 +149,7 @@ export default async function AdminFeedbackPage(
                     </div>
                     <p className="text-ink-900 whitespace-pre-wrap leading-relaxed">{f.message}</p>
                     {f.email && (
-                      <a href={`mailto:${f.email}?subject=Re:%20your%20Lagoon%20feedback`} className="mt-2 inline-flex items-center gap-1.5 text-sm text-orange-600 hover:text-orange-700">
+                      <a href={`mailto:${f.email}?subject=Re:%20your%20Lagoon%20feedback`} className="mt-2 inline-flex items-center gap-1.5 text-sm text-gold-700 hover:text-gold-700">
                         <Mail className="w-3.5 h-3.5" /> {f.email}
                       </a>
                     )}
@@ -171,7 +171,7 @@ function Chip({ href, label, active }: { href: string; label: string; active: bo
       href={href}
       className={[
         "px-3 py-1.5 rounded-full text-xs font-semibold border transition capitalize",
-        active ? "bg-orange-500 text-white border-orange-500" : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
+        active ? "bg-gold-500 text-ink-900 border-gold-500" : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
       ].join(" ")}
     >
       {label}

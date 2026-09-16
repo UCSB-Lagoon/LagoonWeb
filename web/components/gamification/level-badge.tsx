@@ -7,7 +7,7 @@ export function LevelBadge({ level, size = "md" }: { level: number; size?: "sm" 
   return (
     <div
       className={cn(
-        "rounded-2xl grid place-items-center bg-orange-100 border border-orange-200 text-orange-700",
+        "rounded-2xl grid place-items-center bg-gold-100 border border-gold-200 text-gold-700",
         dim,
       )}
       title={`Level ${lvl.rank} · ${lvl.name}`}

@@ -131,7 +131,7 @@ export default async function ReferralRedirect(
     return (
       <div className="max-w-3xl mx-auto px-5 py-24 text-center">
         <span className="pill mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+          <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
           Captain referral
         </span>
         <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-ink-900">

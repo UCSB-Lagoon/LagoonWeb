@@ -182,13 +182,13 @@ export function CampusMap({ signedIn }: Props) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search buildings, codes, dining halls…"
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-cream-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-cream-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-gold-300"
             />
           </div>
           <div className="mt-2.5 flex flex-wrap gap-1.5">
             <button
               onClick={() => setActiveCat(null)}
-              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-orange-500 text-white border-orange-500" : "bg-white border-cream-200 text-ink-500 hover:border-orange-300"}`}
+              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-ink-900 border-gold-500" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
             >
               All
             </button>
@@ -196,7 +196,7 @@ export function CampusMap({ signedIn }: Props) {
               <button
                 key={c}
                 onClick={() => setActiveCat(activeCat === c ? null : c)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${activeCat === c ? "text-white border-transparent" : "bg-white border-cream-200 text-ink-500 hover:border-orange-300"}`}
+                className={`text-xs px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${activeCat === c ? "text-white border-transparent" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
                 style={activeCat === c ? { background: CATEGORY_META[c].color } : undefined}
               >
                 <span>{CATEGORY_META[c].emoji}</span>
@@ -222,7 +222,7 @@ export function CampusMap({ signedIn }: Props) {
                 {friendCount} friend{friendCount === 1 ? "" : "s"} · {anonCount} on campus
               </span>
             </div>
-            {peopleErr && <div className="mt-1 text-[11px] text-orange-700">{peopleErr}</div>}
+            {peopleErr && <div className="mt-1 text-[11px] text-gold-700">{peopleErr}</div>}
           </div>
         </div>
       )}
@@ -262,7 +262,7 @@ export function CampusMap({ signedIn }: Props) {
                   href={`https://maps.apple.com/?q=${encodeURIComponent(selected.name + " UCSB")}&ll=${selected.lat},${selected.lng}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-orange-600 hover:text-orange-700"
+                  className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-700 hover:text-gold-700"
                 >
                   Open in Apple Maps <ExternalLink className="w-3.5 h-3.5" />
                 </a>

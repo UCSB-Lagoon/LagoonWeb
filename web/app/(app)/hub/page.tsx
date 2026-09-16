@@ -33,7 +33,7 @@ export default async function HomePage() {
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
             <span className="pill mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
               Live across UCSB
             </span>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[0.98] text-ink-900">
@@ -54,7 +54,7 @@ export default async function HomePage() {
                 Download Lagoon free <ArrowRight className="w-4 h-4" />
               </a>
               <Link href="/leaderboard" className="btn-secondary">
-                <Trophy className="w-4 h-4 text-orange-500" /> See the leaderboard
+                <Trophy className="w-4 h-4 text-gold-700" /> See the leaderboard
               </Link>
             </div>
             <p className="mt-5 flex items-center gap-2 text-sm text-ink-400">
@@ -73,18 +73,18 @@ export default async function HomePage() {
           {/* Hero side card — live vibe + top race */}
           <div className="lg:col-span-5">
             <div className="card p-6 relative overflow-hidden">
-              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-orange-200/50 blur-3xl" />
+              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-gold-200/50 blur-3xl" />
               <div className="relative">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-xs uppercase tracking-[0.18em] text-ink-400 font-semibold">Right now</span>
-                  <span className="flex items-center gap-1.5 text-xs text-orange-600 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-orange-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
+                  <span className="flex items-center gap-1.5 text-xs text-gold-700 font-semibold">
+                    <span className="w-2 h-2 rounded-full bg-gold-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
                     live
                   </span>
                 </div>
-                <p className="font-serif italic text-3xl text-ink-900 leading-tight">
+                <p className="text-3xl font-extrabold tracking-tight text-ink-900 leading-tight">
                   {stats.activeUsers} Gauchos<br />
-                  <span className="text-orange-500">earning XP</span>
+                  <span className="text-gold-700">earning XP</span>
                 </p>
                 <p className="mt-3 text-sm text-ink-500">
                   {stats.weekEvents.toLocaleString()} actions in the last 24h · top streak {topStreak} days
@@ -123,7 +123,7 @@ export default async function HomePage() {
           <div className="card p-5">
             <div className="flex items-baseline justify-between mb-3">
               <h2 className="font-display text-lg font-bold text-ink-900">This week's leaderboard</h2>
-              <Link href="/leaderboard" className="text-sm font-semibold text-orange-600 hover:text-orange-700">
+              <Link href="/leaderboard" className="text-sm font-semibold text-gold-700 hover:text-gold-700">
                 Full board →
               </Link>
             </div>
@@ -136,8 +136,8 @@ export default async function HomePage() {
           <div className="card p-5">
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-display text-lg font-bold text-ink-900">Live activity</h2>
-              <span className="flex items-center gap-1.5 text-xs text-orange-600 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-orange-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
+              <span className="flex items-center gap-1.5 text-xs text-gold-700 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-gold-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
                 live
               </span>
             </div>
@@ -150,8 +150,8 @@ export default async function HomePage() {
 
       {/* Closing band */}
       <section className="card-tinted mt-10 mb-12 px-6 sm:px-10 py-10 sm:py-14 text-center relative overflow-hidden">
-        <div className="absolute -left-12 -top-12 h-44 w-44 rounded-full bg-orange-300/50 blur-3xl" />
-        <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-amber-400/40 blur-3xl" />
+        <div className="absolute -left-12 -top-12 h-44 w-44 rounded-full bg-gold-300/50 blur-3xl" />
+        <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-gold-500/40 blur-3xl" />
         <div className="relative">
           <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
             Everything Gaucho. <span className="italic-accent">In one tide.</span>
@@ -170,7 +170,7 @@ export default async function HomePage() {
               Download Lagoon <ArrowRight className="w-4 h-4" />
             </a>
             <Link href="/captains" className="btn-secondary">
-              <Sparkles className="w-4 h-4 text-orange-500" /> Become a captain
+              <Sparkles className="w-4 h-4 text-gold-700" /> Become a captain
             </Link>
           </div>
         </div>

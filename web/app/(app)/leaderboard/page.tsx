@@ -30,7 +30,7 @@ export default async function LeaderboardPage({
   return (
     <div className="max-w-3xl mx-auto px-5 py-12">
       <header className="mb-6 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-100 border border-orange-200 text-orange-600">
+        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
           <Trophy className="w-5 h-5" />
         </span>
         <div>
@@ -56,7 +56,7 @@ export default async function LeaderboardPage({
 
       {period === "weekly" && (
         <p className="text-xs text-ink-400 mt-4 text-center">
-          Want to see who&apos;s on top forever? <Link href="/leaderboard?period=all-time" className="text-orange-600 font-semibold hover:underline">Switch to all-time →</Link>
+          Want to see who&apos;s on top forever? <Link href="/leaderboard?period=all-time" className="text-gold-700 font-semibold hover:underline">Switch to all-time →</Link>
         </p>
       )}
     </div>

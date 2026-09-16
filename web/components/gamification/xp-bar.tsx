@@ -16,7 +16,7 @@ export function XpBar({ xp, level }: { xp: number; level: number }) {
           className="h-full rounded-full transition-[width] duration-700"
           style={{
             width: `${Math.min(100, pct * 100)}%`,
-            background: `linear-gradient(90deg, var(--color-orange-400), var(--color-orange-500))`,
+            background: "var(--color-gold-500)",
           }}
         />
       </div>

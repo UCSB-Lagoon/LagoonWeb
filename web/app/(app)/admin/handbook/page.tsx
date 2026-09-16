@@ -35,7 +35,7 @@ export default async function HandbookPage() {
     <div className="max-w-3xl mx-auto px-5 py-12">
       <div className="flex items-center justify-between mb-8">
         <span className="pill"><Shield className="w-3 h-3" /> Admin · Handbook</span>
-        <Link href="/admin" className="text-sm font-semibold text-orange-600 hover:text-orange-700 inline-flex items-center gap-1">
+        <Link href="/admin" className="text-sm font-semibold text-gold-700 hover:text-gold-700 inline-flex items-center gap-1">
           <ArrowLeft className="w-4 h-4" /> Dashboard
         </Link>
       </div>

@@ -31,7 +31,7 @@
   /* Text — light bg */
   --ink: #001e30;
   --ink-soft: #4a5d6b;
-  --ink-muted: #7a8a95;
+  --ink-muted: #586c7a;   /* 4.85:1 on cream — was 3.16 */
 
   /* Text — dark bg */
   --ink-light: #f4f1ea;

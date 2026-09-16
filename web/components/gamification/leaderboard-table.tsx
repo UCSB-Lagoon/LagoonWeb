@@ -36,7 +36,7 @@ export function LeaderboardTable({ rows }: { rows: LeaderRow[] }) {
             <p className="font-semibold text-ink-900 truncate">{r.display_name ?? "Anonymous Gaucho"}</p>
             {r.tagline && <p className="text-xs text-ink-400 truncate uppercase tracking-wide">{r.tagline}</p>}
           </div>
-          <span className="font-bold text-orange-600 tabular-nums">
+          <span className="font-bold text-gold-700 tabular-nums">
             {r.xp.toLocaleString()} <span className="text-xs text-ink-400 font-medium">XP</span>
           </span>
         </li>

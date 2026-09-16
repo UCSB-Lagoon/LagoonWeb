@@ -29,8 +29,8 @@ type Application = {
 
 const STATUSES = ["new", "reviewing", "accepted", "rejected", "withdrawn"] as const;
 const STATUS_STYLES: Record<string, string> = {
-  new:        "bg-orange-100 text-orange-700 border-orange-200",
-  reviewing:  "bg-amber-100 text-amber-700 border-amber-200",
+  new:        "bg-gold-100 text-gold-700 border-gold-200",
+  reviewing:  "bg-gold-100 text-gold-700 border-gold-200",
   accepted:   "bg-emerald-100 text-emerald-700 border-emerald-200",
   rejected:   "bg-rose-100 text-rose-700 border-rose-200",
   withdrawn:  "bg-stone-100 text-stone-600 border-stone-200",
@@ -81,7 +81,7 @@ export default async function AdminCaptainsPage(
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
           <span className="pill mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
             Admin
           </span>
           <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">
@@ -145,7 +145,7 @@ export default async function AdminCaptainsPage(
                         target="_blank"
                         rel="noreferrer"
                         title={`Captain link · /r/${a.captain_code}`}
-                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-orange-500 text-white border-orange-500 hover:bg-orange-600 transition"
+                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-gold-500 text-ink-900 border-gold-500 hover:bg-gold-600 transition"
                       >
                         /r/{a.captain_code}
                       </a>
@@ -158,7 +158,7 @@ export default async function AdminCaptainsPage(
                     )}
                   </div>
                   <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-500">
-                    <a href={`mailto:${a.email}`} className="inline-flex items-center gap-1.5 hover:text-orange-600">
+                    <a href={`mailto:${a.email}`} className="inline-flex items-center gap-1.5 hover:text-gold-700">
                       <Mail className="w-3.5 h-3.5" /> {a.email}
                     </a>
                     {a.instagram && (
@@ -166,7 +166,7 @@ export default async function AdminCaptainsPage(
                         href={`https://instagram.com/${a.instagram.replace(/^@/, "")}`}
                         rel="noreferrer"
                         target="_blank"
-                        className="inline-flex items-center gap-1.5 hover:text-orange-600"
+                        className="inline-flex items-center gap-1.5 hover:text-gold-700"
                       >
                         <Instagram className="w-3.5 h-3.5" /> {a.instagram}
                         <ExternalLink className="w-3 h-3 opacity-60" />
@@ -202,7 +202,7 @@ function FilterChip({ href, label, active }: { href: string; label: string; acti
       className={[
         "px-3 py-1.5 rounded-full text-xs font-semibold border transition",
         active
-          ? "bg-orange-500 text-white border-orange-500"
+          ? "bg-gold-500 text-ink-900 border-gold-500"
           : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
       ].join(" ")}
     >

@@ -17,7 +17,7 @@ export default async function ChallengesPage() {
   return (
     <div className="max-w-3xl mx-auto px-5 py-12">
       <header className="mb-8 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-100 border border-orange-200 text-orange-600">
+        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
           <Target className="w-5 h-5" />
         </span>
         <div>
@@ -35,7 +35,7 @@ export default async function ChallengesPage() {
             <li key={c.id} className="card p-5">
               <div className="flex items-baseline justify-between gap-3">
                 <h2 className="font-display text-xl font-bold text-ink-900">{c.title}</h2>
-                <span className="text-sm font-bold text-orange-600 tabular-nums">
+                <span className="text-sm font-bold text-gold-700 tabular-nums">
                   +{c.xp_reward} XP
                 </span>
               </div>

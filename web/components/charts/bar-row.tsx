@@ -34,8 +34,8 @@ export function BarRow({
                 style={{
                   width: `${Math.max(2, pct)}%`,
                   background: tone === "primary"
-                    ? "linear-gradient(90deg, var(--color-orange-400), var(--color-orange-600))"
-                    : "var(--color-orange-200)",
+                    ? "var(--chart-2)"
+                    : "var(--chart-other)",
                 }}
               />
             </div>

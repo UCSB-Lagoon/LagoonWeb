@@ -60,10 +60,10 @@ export async function AdminBar() {
   ]);
 
   return (
-    <div className="relative z-50 bg-gradient-to-r from-ink-900 via-[#241208] to-ink-900 text-cream-50 border-b border-orange-500/30 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)]">
+    <div className="relative z-50 bg-ink-900 text-cream-50 border-b border-gold-500/30 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.4)]">
       <div className="max-w-7xl mx-auto px-5 h-11 flex items-center gap-3 text-xs">
         {/* Brand badge */}
-        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-orange-500/15 text-orange-300 font-bold tracking-[0.18em] text-[10px] uppercase ring-1 ring-orange-500/30">
+        <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-gold-500/15 text-gold-300 font-bold tracking-[0.18em] text-[10px] uppercase ring-1 ring-gold-500/30">
           <Shield className="w-3 h-3" /> Admin
         </span>
 
@@ -136,16 +136,16 @@ function Stat({
       className={[
         "inline-flex items-center gap-1.5 px-2 py-1 rounded-md transition",
         "text-cream-50/85 hover:text-cream-50 hover:bg-cream-50/8",
-        hot ? "ring-1 ring-orange-500/40" : "",
+        hot ? "ring-1 ring-gold-500/40" : "",
       ].join(" ")}
     >
-      <Icon className={`w-3 h-3 ${hot ? "text-orange-300" : "text-cream-50/60"}`} />
+      <Icon className={`w-3 h-3 ${hot ? "text-gold-300" : "text-cream-50/60"}`} />
       <span className="text-cream-50/60">{label}</span>
-      <span className={`font-bold tabular-nums ${hot ? "text-orange-300" : "text-cream-50"}`}>
+      <span className={`font-bold tabular-nums ${hot ? "text-gold-300" : "text-cream-50"}`}>
         {value}
       </span>
       {hot && (
-        <span className="ml-0.5 w-1.5 h-1.5 rounded-full bg-orange-400 animate-[pulse-soft_2s_ease-in-out_infinite]" aria-hidden />
+        <span className="ml-0.5 w-1.5 h-1.5 rounded-full bg-gold-400 animate-[pulse-soft_2s_ease-in-out_infinite]" aria-hidden />
       )}
     </Link>
   );

@@ -92,7 +92,7 @@ export function FeedbackWidget() {
 
             {status === "done" ? (
               <div className="text-center py-8">
-                <div className="grid place-items-center w-14 h-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white mx-auto">
+                <div className="grid place-items-center w-14 h-14 rounded-full bg-gold-500 text-ink-900 mx-auto">
                   <CheckCircle2 className="w-7 h-7" />
                 </div>
                 <p className="mt-4 font-display font-bold text-lg text-ink-900">Got it — thank you.</p>
@@ -110,7 +110,7 @@ export function FeedbackWidget() {
                       className={[
                         "flex flex-col items-center gap-1 rounded-xl border px-2 py-2.5 text-xs font-semibold transition",
                         kind === value
-                          ? "border-orange-400 bg-orange-50 text-orange-700"
+                          ? "border-gold-400 bg-gold-50 text-gold-700"
                           : "border-cream-200 text-ink-500 hover:bg-cream-100",
                       ].join(" ")}
                     >
@@ -131,13 +131,13 @@ export function FeedbackWidget() {
                         ? "What would make Lagoon better for you?"
                         : "Tell us anything…"
                   }
-                  className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition resize-y"
+                  className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition resize-y"
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email (optional — only if you want a reply)"
-                  className="w-full rounded-xl bg-white border border-cream-200 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-100 transition"
+                  className="w-full rounded-xl bg-white border border-cream-200 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition"
                 />
                 {status === "error" && error && (
                   <p className="text-sm text-rose-600">{error}</p>

@@ -19,9 +19,6 @@
   --color-gold-700: #8a6a00;     /* gold you can read on cream — 4.5:1 */
   --color-gold-ink: #8a6a00;
 
-  --color-amber-400: #ffd200;
-  --color-amber-500: #ffd200;
-
   /* Navy — the ground, and the raised blocks on it */
   --color-navy-900: #001e30;     /* page ground at night */
   --color-navy-800: #002a42;
@@ -39,7 +36,7 @@
   --color-ink-900: #001e30;
   --color-ink-700: #003a60;
   --color-ink-500: #4a5d6b;
-  --color-ink-400: #7a8a95;
+  --color-ink-400: #586c7a;   /* 4.85:1 on cream — was 3.16 */
   --color-ink-300: #a9bdc9;
 
   /* ── Chart series ──
@@ -156,8 +153,8 @@ body::before {
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  background: var(--color-orange-100);
-  color: var(--color-orange-700);
+  background: var(--color-gold-100);
+  color: var(--color-gold-700);
   border: 1px solid #ffd9b3;
 }
 
@@ -171,13 +168,19 @@ body::before {
   --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
-/* Italic display accent */
+/* Display accent.
+ *
+ * Was Fraunces italic in the brand's serif voice. The 2026-09 repaint retired
+ * the serif italic — the emphasis is weight and colour now, one tight
+ * grotesque throughout. Gold is 1.3:1 on the cream page, so this takes the
+ * readable gold; `--color-gold-ink` resolves to true #FFD200 inside .dark,
+ * where gold sits at ~11.8:1 on navy. */
 .italic-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: var(--color-orange-500);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: inherit;
+  font-style: normal;
+  color: var(--color-gold-ink);
+  font-weight: 800;
+  letter-spacing: -0.018em;
 }
 
 /* Live status pulse, used in nav + hero "Right now" cards */
@@ -193,21 +196,21 @@ body::before {
   display: inline-flex; align-items: center; gap: 0.55rem;
   padding: 0.85rem 1.4rem;
   border-radius: 9999px;
-  background: var(--color-orange-500);
-  color: white;
+  background: var(--color-gold-500);
+  color: var(--color-ink-900);   /* navy — white on gold is 1.4:1 */
   font-weight: 700;
   letter-spacing: -0.005em;
   box-shadow:
     0 1px 0 rgba(255,255,255,0.18) inset,
-    0 12px 28px -10px rgba(255, 210, 0, 0.55);
+    0 0 0 1px var(--color-cream-200);
   transition: transform 140ms cubic-bezier(.2,.7,.2,1), background 160ms ease, box-shadow 200ms ease;
 }
 .btn-primary:hover {
-  background: var(--color-orange-600);
+  background: var(--color-gold-600);
   transform: translateY(-1px);
   box-shadow:
     0 1px 0 rgba(255,255,255,0.22) inset,
-    0 16px 32px -10px rgba(217, 112, 31, 0.55);
+    0 0 0 1px var(--color-cream-200);
 }
 .btn-primary:active { transform: translateY(0); }
 
@@ -226,14 +229,14 @@ body::before {
   border-color: rgba(255, 210, 0, 0.32);
 }
 
-::selection { background: var(--color-orange-200); color: var(--color-ink-900); }
+::selection { background: var(--color-gold-200); color: var(--color-ink-900); }
 
 /* Default tabular numbers in headings (most stat values are headings) */
 .font-display { font-feature-settings: "tnum" 1, "ss01", "ss02"; }
 
 /* Focus visible — use orange ring instead of browser default */
 :focus-visible {
-  outline: 2px solid var(--color-orange-500);
+  outline: 2px solid var(--color-gold-500);
   outline-offset: 2px;
   border-radius: 4px;
 }

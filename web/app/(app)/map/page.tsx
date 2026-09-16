@@ -13,7 +13,7 @@ export default async function MapPage() {
     <div className="max-w-7xl mx-auto px-5 py-6">
       <header className="mb-4 flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-100 border border-orange-200 text-orange-600">
+          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
             <MapIcon className="w-5 h-5" />
           </span>
           <div>

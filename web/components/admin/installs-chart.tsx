@@ -49,7 +49,7 @@ export function InstallsChart({ data, totalLabel }: { data: InstallsPoint[]; tot
                 return (
                   <div className="rounded-xl border border-cream-200 bg-white px-3 py-2 shadow-sm text-sm">
                     <p className="font-semibold text-ink-900">{formatDay(p.day, true)}</p>
-                    <p className="text-orange-600 font-bold tabular-nums">{p.count.toLocaleString()} clicks</p>
+                    <p className="text-gold-700 font-bold tabular-nums">{p.count.toLocaleString()} clicks</p>
                   </div>
                 );
               }}

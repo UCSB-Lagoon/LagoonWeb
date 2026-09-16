@@ -9,11 +9,11 @@ export function Footer() {
     <footer className="mt-24 relative overflow-hidden">
       {/* Tinted CTA strip */}
       <div className="card-tinted mx-5 sm:mx-8 px-6 sm:px-10 py-10 sm:py-12 max-w-7xl lg:mx-auto relative overflow-hidden">
-        <div className="absolute -left-10 -top-10 h-44 w-44 rounded-full bg-orange-300/40 blur-3xl" aria-hidden="true" />
-        <div className="absolute -right-10 -bottom-10 h-48 w-48 rounded-full bg-amber-400/40 blur-3xl" aria-hidden="true" />
+        <div className="absolute -left-10 -top-10 h-44 w-44 rounded-full bg-gold-300/40 blur-3xl" aria-hidden="true" />
+        <div className="absolute -right-10 -bottom-10 h-48 w-48 rounded-full bg-gold-500/40 blur-3xl" aria-hidden="true" />
         <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.18em] font-semibold text-orange-700">Built for Gauchos</p>
+            <p className="text-xs uppercase tracking-[0.18em] font-semibold text-gold-700">Built for Gauchos</p>
             <h3 className="font-display text-2xl sm:text-3xl font-bold text-ink-900 mt-2">
               Get Lagoon on your phone.
             </h3>
@@ -38,7 +38,7 @@ export function Footer() {
           <div className="flex items-center gap-2">
             <span
               aria-hidden="true"
-              className="grid place-items-center w-8 h-8 rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 text-white font-display font-extrabold text-lg leading-none shadow-[0_6px_18px_-8px_rgba(240,138,60,0.7)]"
+              className="grid place-items-center w-8 h-8 rounded-lg bg-gold-500 text-ink-900 font-display font-extrabold text-lg leading-none"
             >
               L
             </span>
@@ -52,9 +52,9 @@ export function Footer() {
         <div>
           <h4 className="text-xs uppercase tracking-[0.18em] font-semibold text-ink-400 mb-3">Product</h4>
           <ul className="space-y-2 text-ink-700">
-            <li><Link href="/leaderboard" className="hover:text-orange-600 transition">Leaderboard</Link></li>
-            <li><Link href="/challenges" className="hover:text-orange-600 transition">Challenges</Link></li>
-            <li><Link href="/map" className="hover:text-orange-600 transition">Campus map</Link></li>
+            <li><Link href="/leaderboard" className="hover:text-gold-700 transition">Leaderboard</Link></li>
+            <li><Link href="/challenges" className="hover:text-gold-700 transition">Challenges</Link></li>
+            <li><Link href="/map" className="hover:text-gold-700 transition">Campus map</Link></li>
           </ul>
         </div>
 
@@ -62,22 +62,22 @@ export function Footer() {
           <h4 className="text-xs uppercase tracking-[0.18em] font-semibold text-ink-400 mb-3">Resources</h4>
           <ul className="space-y-2 text-ink-700">
             <li>
-              <a href="https://lagoonucsb.com/guides" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <a href="https://lagoonucsb.com/guides" className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 UCSB guides <ArrowUpRight className="w-3 h-3" />
               </a>
             </li>
             <li>
-              <a href="https://lagoonucsb.com/ucsb-dining-menu" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <a href="https://lagoonucsb.com/ucsb-dining-menu" className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 Dining menu <ArrowUpRight className="w-3 h-3" />
               </a>
             </li>
             <li>
-              <a href="https://lagoonucsb.com/ucsb-grade-distributions-guide" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <a href="https://lagoonucsb.com/ucsb-grade-distributions-guide" className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 Grade distributions <ArrowUpRight className="w-3 h-3" />
               </a>
             </li>
             <li>
-              <Link href="/captains" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <Link href="/captains" className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 Captain program <ArrowUpRight className="w-3 h-3" />
               </Link>
             </li>
@@ -88,18 +88,18 @@ export function Footer() {
           <h4 className="text-xs uppercase tracking-[0.18em] font-semibold text-ink-400 mb-3">Lagoon</h4>
           <ul className="space-y-2 text-ink-700">
             <li>
-              <a href="https://lagoonucsb.com" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <a href="https://lagoonucsb.com" className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 lagoonucsb.com <ArrowUpRight className="w-3 h-3" />
               </a>
             </li>
             <li>
-              <a href="https://lagoonucsb.com/company" className="hover:text-orange-600 transition inline-flex items-center gap-1">
+              <a href="https://lagoonucsb.com/company" className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 About <ArrowUpRight className="w-3 h-3" />
               </a>
             </li>
             <li>
               <a href={APP_STORE} rel="noreferrer" data-lagoon-cta="footer-link"
-                className="hover:text-orange-600 transition inline-flex items-center gap-1">
+                className="hover:text-gold-700 transition inline-flex items-center gap-1">
                 Download iOS <ArrowUpRight className="w-3 h-3" />
               </a>
             </li>

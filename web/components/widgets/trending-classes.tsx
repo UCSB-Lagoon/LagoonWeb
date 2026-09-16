@@ -3,9 +3,9 @@ import type { TrendingClass } from "@/lib/queries";
 
 const MOOD_STYLES: Record<string, string> = {
   Loved:   "bg-kelp-400/15 text-emerald-700 border-emerald-200",
-  Solid:   "bg-orange-100 text-orange-700 border-orange-200",
+  Solid:   "bg-gold-100 text-gold-700 border-gold-200",
   Steady:  "bg-cream-100 text-ink-500 border-cream-200",
-  Heavy:   "bg-amber-50 text-amber-700 border-amber-200",
+  Heavy:   "bg-gold-50 text-gold-700 border-gold-200",
   Brutal:  "bg-rose-50 text-rose-700 border-rose-200",
 };
 
@@ -13,7 +13,7 @@ export function TrendingClassesCard({ rows }: { rows: TrendingClass[] }) {
   return (
     <div className="card p-5">
       <div className="flex items-center gap-2 mb-4">
-        <span className="grid h-9 w-9 place-items-center rounded-xl bg-orange-100 border border-orange-200 text-orange-600">
+        <span className="grid h-9 w-9 place-items-center rounded-xl bg-gold-100 border border-gold-200 text-gold-700">
           <BookOpen className="w-4 h-4" />
         </span>
         <div>

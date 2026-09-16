@@ -36,15 +36,15 @@ export default function CaptainsPage() {
   return (
     <div className="relative overflow-x-clip">
       {/* Ambient blobs */}
-      <div className="absolute -top-32 -left-32 w-[28rem] h-[28rem] rounded-full bg-orange-200/40 blur-3xl pointer-events-none" aria-hidden />
-      <div className="absolute top-96 -right-24 w-[24rem] h-[24rem] rounded-full bg-amber-300/30 blur-3xl pointer-events-none" aria-hidden />
+      <div className="absolute -top-32 -left-32 w-[28rem] h-[28rem] rounded-full bg-gold-200/40 blur-3xl pointer-events-none" aria-hidden />
+      <div className="absolute top-96 -right-24 w-[24rem] h-[24rem] rounded-full bg-gold-300/30 blur-3xl pointer-events-none" aria-hidden />
 
       {/* ───────────────── HERO ───────────────── */}
       <section className="max-w-7xl mx-auto px-5 pt-16 sm:pt-24 pb-12 relative">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
             <span className="pill mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
               20 spots · Fall cohort
             </span>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[0.96] text-ink-900">
@@ -60,7 +60,7 @@ export default function CaptainsPage() {
                 Apply to be a captain <ArrowRight className="w-4 h-4" />
               </a>
               <Link href="/" className="btn-secondary">
-                <Trophy className="w-4 h-4 text-orange-500" /> See the live hub
+                <Trophy className="w-4 h-4 text-gold-700" /> See the live hub
               </Link>
             </div>
             <p className="mt-5 text-sm text-ink-400">
@@ -71,31 +71,31 @@ export default function CaptainsPage() {
           {/* Hero side: "What you walk away with" stack */}
           <div className="lg:col-span-5">
             <div className="card p-6 relative overflow-hidden">
-              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-orange-200/50 blur-3xl" aria-hidden />
+              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-gold-200/50 blur-3xl" aria-hidden />
               <div className="relative">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-xs uppercase tracking-[0.18em] text-ink-400 font-semibold">What you get</span>
-                  <span className="flex items-center gap-1.5 text-xs text-orange-600 font-semibold">
+                  <span className="flex items-center gap-1.5 text-xs text-gold-700 font-semibold">
                     <Flame className="w-3.5 h-3.5" /> Day 1
                   </span>
                 </div>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 rounded-xl bg-cream-100 border border-cream-200 px-3 py-3">
-                    <Shirt className="w-5 h-5 mt-0.5 text-orange-500 shrink-0" />
+                    <Shirt className="w-5 h-5 mt-0.5 text-gold-700 shrink-0" />
                     <div>
                       <p className="font-bold text-ink-900">Lagoon hoodie</p>
                       <p className="text-sm text-ink-500">Embroidered. Ships the week you&apos;re in.</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3 rounded-xl bg-cream-100 border border-cream-200 px-3 py-3">
-                    <Users className="w-5 h-5 mt-0.5 text-orange-500 shrink-0" />
+                    <Users className="w-5 h-5 mt-0.5 text-gold-700 shrink-0" />
                     <div>
                       <p className="font-bold text-ink-900">A trackable referral link</p>
                       <p className="text-sm text-ink-500">Every install is yours. Real-time dashboard.</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3 rounded-xl bg-cream-100 border border-cream-200 px-3 py-3">
-                    <Gift className="w-5 h-5 mt-0.5 text-orange-500 shrink-0" />
+                    <Gift className="w-5 h-5 mt-0.5 text-gold-700 shrink-0" />
                     <div>
                       <p className="font-bold text-ink-900">Top 3 / quarter = $50 each</p>
                       <p className="text-sm text-ink-500">Plus paid IV dinners with the team.</p>
@@ -112,7 +112,7 @@ export default function CaptainsPage() {
       <section className="max-w-7xl mx-auto px-5 py-12 sm:py-20">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="pill mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
             The deal
           </span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-ink-900">
@@ -128,10 +128,10 @@ export default function CaptainsPage() {
           {PERKS.map((p, i) => (
             <li key={p.title} className="card p-6 group">
               <div className="flex items-start justify-between mb-4">
-                <span className="grid place-items-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white shadow-[0_8px_22px_-10px_rgba(240,138,60,0.7)] group-hover:rotate-[-4deg] transition-transform">
+                <span className="grid place-items-center w-11 h-11 rounded-xl bg-gold-500 text-ink-900 group-hover:rotate-[-4deg] transition-transform">
                   <p.icon className="w-5 h-5" />
                 </span>
-                <span className="font-mono text-xs text-ink-300 tabular-nums">0{i + 1}</span>
+                <span className="font-mono text-xs text-ink-400 tabular-nums">0{i + 1}</span>
               </div>
               <h3 className="font-display font-bold text-lg text-ink-900">{p.title}</h3>
               <p className="mt-2 text-ink-500 text-sm leading-relaxed">{p.body}</p>
@@ -145,7 +145,7 @@ export default function CaptainsPage() {
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-4">
             <span className="pill mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
               How it works
             </span>
             <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-ink-900">
@@ -160,7 +160,7 @@ export default function CaptainsPage() {
           <ol className="lg:col-span-8 space-y-4">
             {STEPS.map(s => (
               <li key={s.n} className="card p-6 flex gap-5 items-start">
-                <span className="font-display font-extrabold text-4xl sm:text-5xl text-orange-500/90 tabular-nums leading-none w-16 shrink-0">
+                <span className="font-display font-extrabold text-4xl sm:text-5xl text-gold-700/90 tabular-nums leading-none w-16 shrink-0">
                   {s.n}
                 </span>
                 <div>
@@ -176,8 +176,8 @@ export default function CaptainsPage() {
       {/* ───────────────── WHO WE WANT ───────────────── */}
       <section className="max-w-7xl mx-auto px-5 py-12 sm:py-20">
         <div className="card-tinted p-8 sm:p-12 relative overflow-hidden">
-          <div className="absolute -left-12 -top-12 h-44 w-44 rounded-full bg-orange-300/40 blur-3xl" aria-hidden />
-          <div className="absolute -right-12 -bottom-12 h-48 w-48 rounded-full bg-amber-400/40 blur-3xl" aria-hidden />
+          <div className="absolute -left-12 -top-12 h-44 w-44 rounded-full bg-gold-300/40 blur-3xl" aria-hidden />
+          <div className="absolute -right-12 -bottom-12 h-48 w-48 rounded-full bg-gold-500/40 blur-3xl" aria-hidden />
           <div className="relative grid lg:grid-cols-2 gap-10">
             <div>
               <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
@@ -195,7 +195,7 @@ export default function CaptainsPage() {
                 "You&apos;d say yes to free food, hoodies, and the chance to shape what students use daily.",
               ].map((t, i) => (
                 <li key={i} className="flex gap-3 items-start">
-                  <span className="grid place-items-center w-6 h-6 rounded-full bg-orange-500 text-white text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span className="grid place-items-center w-6 h-6 rounded-full bg-gold-500 text-ink-900 text-xs font-bold shrink-0 mt-0.5">✓</span>
                   <span dangerouslySetInnerHTML={{ __html: t }} />
                 </li>
               ))}
@@ -208,7 +208,7 @@ export default function CaptainsPage() {
       <section id="apply" className="max-w-3xl mx-auto px-5 py-12 sm:py-20 scroll-mt-24">
         <div className="text-center mb-10">
           <span className="pill mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
             60 seconds
           </span>
           <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-ink-900">
@@ -224,7 +224,7 @@ export default function CaptainsPage() {
         </div>
 
         <p className="mt-6 text-sm text-ink-400 text-center">
-          Already have a captain link? <Link href="/r/example?noredirect=1" className="text-orange-600 font-semibold hover:underline">See what shared links look like →</Link>
+          Already have a captain link? <Link href="/r/example?noredirect=1" className="text-gold-700 font-semibold hover:underline">See what shared links look like →</Link>
         </p>
       </section>
 
@@ -242,7 +242,7 @@ export default function CaptainsPage() {
             <details key={item.q} className="card p-5 group">
               <summary className="cursor-pointer font-display font-bold text-ink-900 flex items-center justify-between list-none">
                 {item.q}
-                <span className="text-orange-500 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+                <span className="text-gold-700 transition-transform group-open:rotate-45 text-xl leading-none">+</span>
               </summary>
               <p className="mt-3 text-ink-500 leading-relaxed">{item.a}</p>
             </details>

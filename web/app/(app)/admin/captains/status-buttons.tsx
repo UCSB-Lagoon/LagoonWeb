@@ -127,7 +127,7 @@ export function StatusButtons({ id, current, captainCode, emailedAt }: Props) {
                 "inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition",
                 isCurrent
                   ? "bg-cream-100 text-ink-400 border-cream-200 cursor-default"
-                  : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100 hover:border-orange-300",
+                  : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100 hover:border-gold-300",
                 isBusy ? "opacity-60 cursor-wait" : "",
               ].join(" ")}
             >

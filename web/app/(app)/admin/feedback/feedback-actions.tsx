@@ -45,7 +45,7 @@ export function FeedbackActions({
           className={[
             "inline-flex items-center gap-1 px-2 py-1.5 rounded-lg text-xs font-semibold border transition",
             pinned
-              ? "bg-amber-100 text-amber-700 border-amber-200"
+              ? "bg-gold-100 text-gold-700 border-gold-200"
               : "bg-white text-ink-500 border-cream-200 hover:bg-cream-100",
           ].join(" ")}
         >
@@ -60,7 +60,7 @@ export function FeedbackActions({
               "px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition capitalize",
               status === s
                 ? "bg-cream-100 text-ink-400 border-cream-200 cursor-default"
-                : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100 hover:border-orange-300",
+                : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100 hover:border-gold-300",
               busy === s ? "opacity-60" : "",
             ].join(" ")}
           >

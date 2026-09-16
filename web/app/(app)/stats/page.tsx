@@ -50,8 +50,8 @@ export const metadata: Metadata = {
 
 const RARITY_COLORS: Record<string, string> = {
   common:    "bg-cream-100 text-ink-600 border-cream-200",
-  rare:      "bg-orange-100 text-orange-700 border-orange-200",
-  epic:      "bg-amber-50  text-amber-700  border-amber-200",
+  rare:      "bg-gold-100 text-gold-700 border-gold-200",
+  epic:      "bg-gold-50  text-gold-700  border-gold-200",
   legendary: "bg-rose-50   text-rose-700   border-rose-200",
 };
 
@@ -170,7 +170,7 @@ export default async function StatsPage() {
   return (
     <div className="max-w-7xl mx-auto px-5 py-12">
       <header className="mb-8 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-100 border border-orange-200 text-orange-600">
+        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
           <BarChart3 className="w-5 h-5" />
         </span>
         <div>
@@ -304,7 +304,7 @@ export default async function StatsPage() {
                 key={b.badge_id}
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-cream-100/70 transition"
               >
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-orange-100 border border-orange-200 text-base">
+                <span className="grid h-9 w-9 place-items-center rounded-xl bg-gold-100 border border-gold-200 text-base">
                   {badgeIconToEmoji(b.icon)}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -366,7 +366,7 @@ export default async function StatsPage() {
                       Lvl {u.level}{u.major ? ` · ${prettifyMajor(u.major)}` : ""}
                     </p>
                   </div>
-                  <span className="text-sm font-bold text-orange-600 tabular-nums">
+                  <span className="text-sm font-bold text-gold-700 tabular-nums">
                     {u.streak_days}d
                   </span>
                 </li>
@@ -417,7 +417,7 @@ export default async function StatsPage() {
                       {t.mood}
                     </p>
                   </div>
-                  <span className="text-xs font-bold text-orange-600 tabular-nums">
+                  <span className="text-xs font-bold text-gold-700 tabular-nums">
                     {t.vibes} <span className="font-medium text-ink-400">vibe{t.vibes === 1 ? "" : "s"}</span>
                   </span>
                 </li>
@@ -460,7 +460,7 @@ export default async function StatsPage() {
             return (
               <div key={ins.title} className="card p-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-orange-100 border border-orange-200 text-orange-600">
+                  <span className="grid h-8 w-8 place-items-center rounded-lg bg-gold-100 border border-gold-200 text-gold-700">
                     <Icon className="w-4 h-4" />
                   </span>
                   <span className="text-[10px] uppercase tracking-[0.18em] text-ink-400 font-semibold">Insight</span>

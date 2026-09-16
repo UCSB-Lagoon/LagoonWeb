@@ -14,7 +14,7 @@ export function VibeMeter({ score }: { score: number }) {
     <div className="card p-5">
       <div className="flex items-baseline justify-between mb-3">
         <h3 className="font-display text-lg font-bold text-ink-900">Campus vibe</h3>
-        <span className="text-sm font-bold text-orange-600">{label}</span>
+        <span className="text-sm font-bold text-gold-700">{label}</span>
       </div>
       <div
         className="h-3 rounded-full bg-cream-100 overflow-hidden border border-cream-200"
@@ -30,7 +30,7 @@ export function VibeMeter({ score }: { score: number }) {
           transition={{ duration: 1.1, ease: "easeOut" }}
           className="h-full rounded-full"
           style={{
-            background: "linear-gradient(90deg, var(--color-amber-400), var(--color-orange-500), var(--color-orange-600))",
+            background: "var(--color-gold-500)",
           }}
         />
       </div>

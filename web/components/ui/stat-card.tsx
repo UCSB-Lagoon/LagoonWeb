@@ -18,7 +18,7 @@ export function StatCard({
     <div className={cn("card p-5 group", className)}>
       <div className="flex items-center gap-2 text-ink-500 text-[11px] uppercase tracking-[0.18em] font-semibold">
         {Icon && (
-          <span className="grid h-6 w-6 place-items-center rounded-lg bg-orange-100/70 border border-orange-200/70 text-orange-600 transition-colors group-hover:bg-orange-100 group-hover:border-orange-200">
+          <span className="grid h-6 w-6 place-items-center rounded-lg bg-gold-100/70 border border-gold-200/70 text-gold-700 transition-colors group-hover:bg-gold-100 group-hover:border-gold-200">
             <Icon className="w-3 h-3" />
           </span>
         )}
