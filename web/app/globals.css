@@ -22,8 +22,8 @@
   /* Navy — the ground, and the raised blocks on it */
   --color-navy-900: #001e30;     /* page ground at night */
   --color-navy-800: #002a42;
-  --color-navy-700: #00304c;     /* card */
-  --color-navy-600: #003a5c;
+  --color-navy-700: var(--color-navy-700);     /* card */
+  --color-navy-600: var(--color-navy-600);
   --color-navy-500: #003a60;     /* painted block / plate */
   --color-navy-300: #7fb0d8;     /* navy you can read on navy */
 
@@ -31,6 +31,8 @@
   --color-cream-50:  #f4f1ea;
   --color-cream-100: #ebe7dc;
   --color-cream-200: #dfd9ca;
+  --color-panel: #fbf9f3;          /* card surface on the cream page */
+  --color-panel-elevated: var(--color-panel-elevated);
 
   /* Ink */
   --color-ink-900: #001e30;
@@ -63,6 +65,15 @@
   --chart-5: #6E4FB0;   /* violet   */
   --chart-other: #7a8a95;
   --chart-grid: #dfd9ca;
+
+  /* Level ranks — SEQUENTIAL, not categorical. Rank is ordinal, so it is one
+     hue getting brighter, not six unrelated colours. */
+  --level-1: #5c4a12;
+  --level-2: #8a6a00;
+  --level-3: #b8900a;
+  --level-4: #d9ac00;
+  --level-5: #ffd200;
+  --level-6: #ffe870;
 
   /* Course-block hues — data, not decoration (mirrors LagoonCourseColor) */
   --color-teal-400:   #2bb3a3;
@@ -118,7 +129,7 @@ body::before {
 
 /* ── Card surface ── */
 .card {
-  background: #ffffff;
+  background: var(--color-panel-elevated);
   border: 1px solid var(--color-cream-200);
   border-radius: 1.25rem;
   box-shadow:
@@ -137,8 +148,8 @@ body::before {
 }
 
 .card-tinted {
-  background: linear-gradient(180deg, #fff8ed, #fdf1de);
-  border: 1px solid #f3dfbe;
+  background: linear-gradient(180deg, var(--color-cream-100), var(--color-cream-100));
+  border: 1px solid var(--color-cream-200);
   border-radius: 1.25rem;
 }
 
@@ -155,7 +166,7 @@ body::before {
   text-transform: uppercase;
   background: var(--color-gold-100);
   color: var(--color-gold-700);
-  border: 1px solid #ffd9b3;
+  border: 1px solid var(--color-cream-200);
 }
 
 /* Fraunces is loaded only by app/(app)/layout.tsx, so --font-serif has to
@@ -185,7 +196,7 @@ body::before {
 
 /* Live status pulse, used in nav + hero "Right now" cards */
 .live-dot {
-  width: 8px; height: 8px; border-radius: 9999px; background: #2ecc71;
+  width: 8px; height: 8px; border-radius: 9999px; background: var(--color-teal-400);
   box-shadow: 0 0 0 0 rgba(46,204,113,0.55);
   animation: live-pulse 1.8s ease-out infinite;
   display: inline-block; flex-shrink: 0;
@@ -254,6 +265,8 @@ body::before {
   --color-cream-50:  #001e30;
   --color-cream-100: #002a42;
   --color-cream-200: #14415e;
+  --color-panel: var(--color-navy-700);
+  --color-panel-elevated: var(--color-navy-600);
 
   --color-ink-900: #f4f1ea;
   --color-ink-700: #a9bdc9;
@@ -282,8 +295,8 @@ body::before {
 }
 
 .dark .card {
-  background: #00304c;
-  border-color: #003a5c;
+  background: var(--color-navy-700);
+  border-color: var(--color-navy-600);
   box-shadow:
     0 1px 0 rgba(255, 220, 160, 0.03),
     0 22px 40px -28px rgba(0, 0, 0, 0.5);
@@ -296,17 +309,17 @@ body::before {
 }
 
 .dark .card-tinted {
-  background: linear-gradient(180deg, #231808, #1c1307);
-  border-color: #3a2510;
+  background: linear-gradient(180deg, var(--color-navy-700), var(--color-navy-800));
+  border-color: var(--color-navy-600);
 }
 
 .dark .btn-secondary {
-  background: #241a0c;
-  border-color: #3a2813;
+  background: var(--color-navy-700);
+  border-color: var(--color-navy-600);
   color: var(--color-ink-900);
 }
 .dark .btn-secondary:hover {
-  background: #2d2010;
+  background: var(--color-navy-700);
   border-color: rgba(255, 210, 0, 0.35);
 }
 

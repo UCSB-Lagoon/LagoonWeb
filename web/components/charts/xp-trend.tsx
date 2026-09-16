@@ -20,14 +20,14 @@ export function XpTrend({ data }: { data: TrendPoint[] }) {
               </linearGradient>
             </defs>
             <XAxis dataKey="day" tickLine={false} axisLine={false}
-                   tick={{ fill: "#8c7a66", fontSize: 11 }} />
+                   tick={{ fill: "var(--color-ink-400)", fontSize: 11 }} />
             <YAxis hide />
             <Tooltip
               contentStyle={{
-                background: "#fffaf3", border: "1px solid #f5e8d3",
-                borderRadius: 12, fontSize: 12, color: "#18120b",
+                background: "var(--color-panel-elevated)", border: "1px solid var(--chart-grid)",
+                borderRadius: 12, fontSize: 12, color: "var(--color-ink-900)",
               }}
-              labelStyle={{ color: "#6b5b4a" }}
+              labelStyle={{ color: "var(--color-ink-500)" }}
             />
             <Area type="monotone" dataKey="xp" stroke="var(--chart-2)" strokeWidth={2.5}
                   fill="url(#xpGrad)" />

@@ -19,16 +19,27 @@ export type CampusBuilding = {
   category: BuildingCategory;
 };
 
+/**
+ * One pin colour, on purpose.
+ *
+ * Six categories can't be given six colours that separate — coral↔gold is
+ * ΔE 0.7 under deuteranopia, and the previous palette had teal↔violet at
+ * ΔE 14.4 for *normal* vision. Every pin carries an emoji and a label, so the
+ * colour was redundant encoding that implied a distinction the eye couldn't
+ * make. `color` is kept on the shape so callers don't change.
+ */
+const PIN = "var(--color-navy-500)";
+
 export const CATEGORY_META: Record<
   BuildingCategory,
   { label: string; color: string; emoji: string }
 > = {
-  academic:   { label: "Academic",   color: "#1F4E79", emoji: "📘" },
-  dining:     { label: "Dining",     color: "#3A8C5A", emoji: "🍽" },
-  recreation: { label: "Recreation", color: "#E0A50C", emoji: "🏃" },
-  housing:    { label: "Housing",    color: "#5B5BA8", emoji: "🏠" },
-  services:   { label: "Services",   color: "#2A8A9C", emoji: "🛎" },
-  landmark:   { label: "Landmark",   color: "#C44E2D", emoji: "📍" },
+  academic:   { label: "Academic",   color: PIN, emoji: "📘" },
+  dining:     { label: "Dining",     color: PIN, emoji: "🍽" },
+  recreation: { label: "Recreation", color: PIN, emoji: "🏃" },
+  housing:    { label: "Housing",    color: PIN, emoji: "🏠" },
+  services:   { label: "Services",   color: PIN, emoji: "🛎" },
+  landmark:   { label: "Landmark",   color: PIN, emoji: "📍" },
 };
 
 export const CAMPUS_CENTER = { lat: 34.4140, lng: -119.8489 };

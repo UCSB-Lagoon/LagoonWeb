@@ -12,12 +12,12 @@ export type LevelDisplay = {
 };
 
 export const LEVEL_DISPLAY: LevelDisplay[] = [
-  { rank: 1, name: "Tadpole",       emoji: "🐸", color: "#a5f3fc" },
-  { rank: 2, name: "Minnow",        emoji: "🐟", color: "#67e8f9" },
-  { rank: 3, name: "Dolphin",       emoji: "🐬", color: "#22d3ee" },
-  { rank: 4, name: "Sea Otter",     emoji: "🦦", color: "#4ade80" },
-  { rank: 5, name: "Shark",         emoji: "🦈", color: "#fb7185" },
-  { rank: 6, name: "Lagoon Legend", emoji: "👑", color: "#fde68a" },
+  { rank: 1, name: "Tadpole",       emoji: "🐸", color: "var(--level-1)" },
+  { rank: 2, name: "Minnow",        emoji: "🐟", color: "var(--level-2)" },
+  { rank: 3, name: "Dolphin",       emoji: "🐬", color: "var(--level-3)" },
+  { rank: 4, name: "Sea Otter",     emoji: "🦦", color: "var(--level-4)" },
+  { rank: 5, name: "Shark",         emoji: "🦈", color: "var(--level-5)" },
+  { rank: 6, name: "Lagoon Legend", emoji: "👑", color: "var(--level-6)" },
 ];
 
 export function levelDisplay(level: number | null | undefined): LevelDisplay {

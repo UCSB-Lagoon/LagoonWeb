@@ -23,15 +23,15 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
           </defs>
           <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 4" vertical={false} />
           <XAxis dataKey="label" tickLine={false} axisLine={false}
-                 tick={{ fill: "#8c7a66", fontSize: 11 }} interval="preserveStartEnd" />
+                 tick={{ fill: "var(--color-ink-400)", fontSize: 11 }} interval="preserveStartEnd" />
           <YAxis tickLine={false} axisLine={false}
-                 tick={{ fill: "#8c7a66", fontSize: 11 }} width={28} />
+                 tick={{ fill: "var(--color-ink-400)", fontSize: 11 }} width={28} />
           <Tooltip
             contentStyle={{
-              background: "#fffaf3", border: "1px solid #f5e8d3",
-              borderRadius: 12, fontSize: 12, color: "#18120b",
+              background: "var(--color-panel-elevated)", border: "1px solid var(--chart-grid)",
+              borderRadius: 12, fontSize: 12, color: "var(--color-ink-900)",
             }}
-            labelStyle={{ color: "#6b5b4a", fontWeight: 600 }}
+            labelStyle={{ color: "var(--color-ink-500)", fontWeight: 600 }}
             formatter={(v: number, n) => {
               const label = n === "total_xp" ? "XP" : n === "event_count" ? "Actions" : "Active users";
               return [v.toLocaleString(), label];

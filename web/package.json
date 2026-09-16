@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "db:types": "supabase gen types typescript --linked > types/database.ts"
+    "db:types": "supabase gen types typescript --linked > types/database.ts",
+    "check:brand": "node scripts/check-brand.mjs",
+    "check": "npm run typecheck && npm run check:brand && npm run lint"
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.1",

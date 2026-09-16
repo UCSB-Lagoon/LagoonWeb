@@ -80,18 +80,34 @@ What it cost in practice, during the 2026-09 repaint:
 **Target:** one source of truth, `@theme` in `globals.css`, with `site.css`
 reduced to layout/component rules that reference those tokens and nothing else.
 
-**Sequence** (each step independently shippable, none of it a rewrite):
+**Status: done (2026-09-15).** `site.css` declared its tokens in **four**
+blocks — two `:root` and two `.dark` — with the later ones silently winning.
+They are now one `:root` and one `.dark`, holding no colour of their own: every
+token resolves from `@theme`, including the ~120 legacy `--orange-*` aliases
+the homepage rules still reference. `@theme` is the only place a colour is
+defined, and `scripts/check-brand.mjs` fails the build if that stops being
+true.
 
-1. Delete the duplicate `:root` blocks in `site.css`; keep one, at the top.
-   *Mechanical. Removes the class of bug that cost two rounds above.*
-2. Replace `site.css`'s own colour tokens with `var(--color-*)` from `@theme`.
-   One brand definition; `site.css` becomes a consumer.
-3. Add a CI grep that fails on a raw hex in `app/`, `components/` or
-   `site.css` outside the `@theme` block. This is what makes step 2 stay true —
-   without it the file drifts back, which is exactly how it got here.
-4. Only then, opportunistically, port marketing sections to Tailwind as they
-   are touched. **Not a big-bang migration** — there is no deadline pressure
-   and a 2977-line rewrite risks more than it fixes.
+Running the guard for the first time found 114 raw colours that three
+hand-passes had missed — warm browns still inside `.dark` component rules, the
+pre-repaint app palette embedded in chart fallbacks, and six more white-on-gold
+labels at 1.4:1. That is the argument for the guard in one number.
+
+What it also surfaced, which no colour sweep would have:
+
+- **The campus map painted six categories in six colours that can't be told
+  apart** — teal↔violet was ΔE 14.4 for *normal* vision, and coral↔gold ΔE 0.7
+  under deuteranopia. Six categorical hues that separate pairwise is not
+  achievable. Every pin already carries an emoji and a label, so the colour was
+  redundant encoding implying a distinction the eye could not make. One pin
+  colour now; the emoji is the identity.
+- **Level ranks were a rainbow** (cyan, cyan, cyan, green, pink, yellow) for
+  ranks 1–6. Rank is *ordinal*; a rainbow reads as six unrelated categories and
+  hides the ordering. It is one gold hue getting brighter now.
+
+Porting marketing sections from `site.css` to Tailwind stays opportunistic —
+do it when a section is touched. A 2977-line rewrite still risks more than it
+fixes, and the guard means the file can no longer drift while it waits.
 
 ## Request flow
 
@@ -180,8 +196,23 @@ queue or cache tier here is paid every time one person tries to change a page.
 
 ## What I would revisit first
 
-1. **CI type generation against the live schema.** Highest value, lowest effort.
-2. **The duplicate `:root` blocks.** One afternoon; removes a whole bug class.
-3. **The hex-literal CI check.** What keeps step 2 from silently regressing.
-4. **`/leaderboard`'s revalidate window.** Small, but it is a number that
-   currently means nothing.
+Three of the four originally listed here are now done — the brand guard, the
+de-duplicated tokens, and CI type generation against the live schema
+(`.github/workflows/ci.yml`, which skips rather than fails when the Supabase
+secrets are absent, so forks stay green).
+
+**Set `SUPABASE_ACCESS_TOKEN` and `SUPABASE_PROJECT_ID` as repo secrets.**
+Until those exist the schema job skips, which means the highest-value guard in
+this document is present but not yet armed. It is two secrets.
+
+Remaining, in order:
+
+1. **`/leaderboard`'s revalidate window.** 60s against a view the cron rebuilds
+   every 24h. The number currently means nothing — match it to the matview or
+   move the refresh to a trigger.
+2. **Port marketing sections to Tailwind as they're touched.** Not a project.
+3. **A visual regression check.** Four passes of this repaint shipped something
+   that looked right and wasn't; the contrast bugs were only ever caught by
+   measuring rendered pages. The brand guard catches raw colour, not a
+   1.4:1 pairing. Playwright screenshots on the six main routes would close
+   that gap, and it is the only item here worth real effort.

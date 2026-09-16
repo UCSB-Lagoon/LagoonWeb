@@ -33,15 +33,15 @@ export function InstallsChart({ data, totalLabel }: { data: InstallsPoint[]; tot
                 <stop offset="100%" stopColor="var(--chart-2)" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="#ead9bf" strokeDasharray="3 6" vertical={false} />
+            <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 6" vertical={false} />
             <XAxis
               dataKey="day"
               tickFormatter={(d) => formatDay(d)}
-              stroke="#8c7a66"
+              stroke="var(--color-ink-400)"
               fontSize={11}
               tickMargin={6}
             />
-            <YAxis stroke="#8c7a66" fontSize={11} allowDecimals={false} width={28} />
+            <YAxis stroke="var(--color-ink-400)" fontSize={11} allowDecimals={false} width={28} />
             <Tooltip
               content={({ active, payload }) => {
                 if (!active || !payload?.length) return null;

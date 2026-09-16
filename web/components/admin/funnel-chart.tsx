@@ -6,7 +6,7 @@ import {
 
 export type FunnelStage = { stage: string; value: number; hint?: string };
 
-const COLORS = ["var(--chart-2)", "var(--chart-2)", "#C8754C", "#003660", "#1B2430"];
+const COLORS = ["var(--chart-2)", "var(--chart-2)", "var(--chart-4)", "var(--chart-1)", "var(--color-ink-900)"];
 
 export function CaptainFunnelChart({ stages }: { stages: FunnelStage[] }) {
   if (!stages.length || stages.every((s) => s.value === 0)) {
@@ -46,7 +46,7 @@ export function CaptainFunnelChart({ stages }: { stages: FunnelStage[] }) {
             <Funnel dataKey="value" data={data} isAnimationActive>
               <LabelList
                 position="right"
-                fill="#1B2430"
+                fill="var(--color-ink-900)"
                 stroke="none"
                 dataKey="name"
                 fontSize={12}

@@ -4,59 +4,59 @@
      See ../../docs/brand-guidelines.md, and Lagoon/DESIGN_SYSTEM.md in the
      app repo, which is the upstream source for these four decisions:
 
-       1. Navy #001E30 ground, cream #F4F1EA ink (inverted for light pages).
-       2. Electric Gold #FFD200 is the ONLY accent, once per screen.
+       1. Navy var(--night) ground, cream #F4F1EA ink (inverted for light pages).
+       2. Electric Gold var(--gold) is the ONLY accent, once per screen.
        3. Nothing is a gradient; nothing casts a shadow. Surfaces separate by
           a lighter step plus a hairline.
        4. One tight grotesque, negative tracking at display sizes.
 
-     Gold is a FILL, never body text: #FFD200 on cream is 1.3:1. Anything you
+     Gold is a FILL, never body text: var(--gold) on cream is 1.3:1. Anything you
      actually read uses --gold-ink.
      ──────────────────────────────────────────────────────────────────── */
 
   /* Surfaces — cream page, white cards */
-  --bg: #f4f1ea;
-  --bg-alt: #ebe7dc;
-  --panel: #fbf9f3;
-  --panel-elevated: #ffffff;
-  --panel-soft: #fbf9f3;
+  --bg: var(--color-cream-50);
+  --bg-alt: var(--color-cream-100);
+  --panel: var(--color-panel);
+  --panel-elevated: var(--color-panel-elevated);
+  --panel-soft: var(--color-panel);
 
   /* Dark surfaces — the navy the app is built on */
-  --night: #001e30;
-  --night-mid: #002a42;
-  --night-surface: #00304c;
+  --night: var(--color-navy-900);
+  --night-mid: var(--color-navy-800);
+  --night-surface: var(--color-navy-700);
   --night-border: rgba(255, 255, 255, 0.10);
   --night-border-bright: rgba(255, 255, 255, 0.18);
 
   /* Text — light bg */
-  --ink: #001e30;
-  --ink-soft: #4a5d6b;
-  --ink-muted: #586c7a;   /* 4.85:1 on cream — was 3.16 */
+  --ink: var(--color-ink-900);
+  --ink-soft: var(--color-ink-500);
+  --ink-muted: var(--color-ink-400);   /* 4.85:1 on cream — was 3.16 */
 
   /* Text — dark bg */
-  --ink-light: #f4f1ea;
+  --ink-light: var(--color-cream-50);
   --ink-light-soft: rgba(244, 241, 234, 0.78);
   --ink-light-muted: rgba(244, 241, 234, 0.55);
 
   /* Borders */
-  --line: #dfd9ca;
-  --line-strong: #dcd5c5;
+  --line: var(--color-cream-200);
+  --line-strong: var(--color-cream-200);
 
   /* Brand */
-  --gold: #ffd200;              /* fills: buttons, badges, bars */
-  --gold-bright: #ffdd3d;
-  --gold-pressed: #e6bd00;
+  --gold: var(--color-gold-500);              /* fills: buttons, badges, bars */
+  --gold-bright: var(--color-gold-300);
+  --gold-pressed: var(--color-gold-600);
   --gold-dim: rgba(255, 210, 0, 0.16);
-  --gold-ink: #8a6a00;          /* gold you can READ on cream — 4.5:1 */
-  --on-accent: #001e30;         /* ink that belongs on a gold/painted fill */
+  --gold-ink: var(--color-gold-ink);          /* gold you can READ on cream — 4.5:1 */
+  --on-accent: var(--color-ink-900);         /* ink that belongs on a gold/painted fill */
 
-  --pacific: #003a60;           /* raised navy: painted blocks, plates */
-  --pacific-ink: #003a60;       /* pacific you can read on cream */
+  --pacific: var(--color-navy-500);           /* raised navy: painted blocks, plates */
+  --pacific-ink: var(--color-navy-500);       /* pacific you can read on cream */
 
   /* Course-block hues — data, not decoration. Mirrors LagoonCourseColor. */
-  --teal: #2bb3a3;
-  --coral: #e8734a;
-  --violet: #9b7bd8;
+  --teal: var(--color-teal-400);
+  --coral: var(--color-coral-400);
+  --violet: var(--color-violet-400);
   --terracotta: var(--coral);
   --kelp: var(--teal);
   --seafoam: var(--teal);
@@ -87,6 +87,33 @@
      masthead, i.e. -0.01em. Expressed as em so it scales with the type. */
   --track-display: -0.028em;
   --track-title: -0.018em;
+
+  /* ── Homepage aliases ───────────────────────────────────────────────
+     These names came from the old standalone home.html and are referenced
+     by ~120 rules further down. They used to live in a SECOND :root block
+     lower in this file, which -- same specificity, later in source --
+     silently won over everything above it. That cost two rounds of the
+     2026-09 repaint: editing the real tokens changed nothing visible.
+     They are aliases now, resolved from the tokens above, in one place. */
+  --bg: var(--color-cream-50);
+  --bg-2: var(--color-cream-100);
+  --orange: var(--color-gold-500);
+  --orange-2: var(--color-gold-300);
+  --orange-deep: var(--color-gold-600);
+  --orange-mist: rgba(255,210,0,0.14);
+  --on-accent: var(--color-ink-900);
+  --warm-dark: var(--color-navy-900);
+  --warm-dark-2: var(--color-navy-800);
+  --text-dark: var(--color-ink-900);
+  --text-dark-2: rgba(0,30,48,0.66);
+  --text-dark-3: rgba(0,30,48,0.40);
+  --text-light: var(--color-cream-50);
+  --text-light-2: rgba(244,241,234,0.76);
+  --text-light-3: rgba(244,241,234,0.44);
+  --orange-ink: var(--color-gold-ink);
+  --sys: var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: var(--font-space-mono), 'Courier New', monospace;
+
 }
 
 
@@ -185,7 +212,7 @@ h3 {
   padding: 10px 18px;
   border-radius: 0 0 12px 12px;
   background: var(--gold);
-  color: #fff;
+  color: var(--on-accent);
   font-weight: 700;
   font-size: 14px;
   transition: top 0.16s ease;
@@ -200,8 +227,8 @@ h3 {
    ===================== */
 
 .announce-bar {
-  background: #FFD200;
-  color: #fff;
+  background: var(--gold);
+  color: var(--on-accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -228,7 +255,7 @@ h3 {
 }
 
 .announce-close:hover {
-  color: #fff;
+  color: var(--ink-light);
 }
 
 /* Set by the boot script in app/layout.tsx for visitors who already
@@ -252,18 +279,18 @@ h3 {
   padding: 3px 8px;
   border-radius: 100px;
   background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+  color: var(--ink-light);
 }
 
 .announce-bar a {
-  color: #fff;
+  color: var(--ink-light);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
   text-decoration-color: rgba(255, 255, 255, 0.5);
 }
 
-.announce-bar a:hover { text-decoration-color: #fff; }
+.announce-bar a:hover { text-decoration-color: var(--ink-light); }
 
 @media (max-width: 600px) {
   .announce-bar { font-size: 12px; padding: 10px 40px; }
@@ -305,8 +332,8 @@ h3 {
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background: linear-gradient(135deg, #ffd200, var(--gold));
-  color: #fff;
+  background: linear-gradient(135deg, var(--gold), var(--gold));
+  color: var(--ink-light);
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 18px;
@@ -385,7 +412,7 @@ h3 {
   padding: 9px 20px !important;
   border-radius: 100px !important;
   background: var(--gold) !important;       /* orange primary — matches app .btn-primary */
-  color: #fff !important;
+  color: var(--on-accent) !important;
   font-weight: 700 !important;
   font-size: 13.5px !important;
   white-space: nowrap;
@@ -395,7 +422,7 @@ h3 {
 }
 
 .nav-cta:hover {
-  background: var(--gold-pressed, #e6bd00) !important;
+  background: var(--gold-pressed, var(--gold-pressed)) !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 1px 0 rgba(255,255,255,0.22) inset,
               0 16px 32px -10px rgba(217, 112, 31, 0.55) !important;
@@ -412,7 +439,7 @@ h3 {
     radial-gradient(ellipse 70% 50% at 15% 0%, rgba(255, 210, 0, 0.13), transparent),
     radial-gradient(ellipse 55% 40% at 90% 55%, rgba(255, 159, 92, 0.10), transparent),
     radial-gradient(ellipse 40% 30% at 50% 100%, rgba(30, 20, 16, 0.30), transparent),
-    linear-gradient(175deg, #08132200 0%, var(--night) 8%, var(--night-mid) 100%);
+    linear-gradient(175deg, transparent 0%, var(--night) 8%, var(--night-mid) 100%);
   overflow: hidden;
 }
 
@@ -451,7 +478,7 @@ h3 {
 
 .hero-copy h1 em {
   font-style: normal;
-  background: linear-gradient(135deg, var(--gold-bright) 0%, #f5a623 100%);
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -524,7 +551,7 @@ h3 {
 
 .button-primary {
   background: var(--gold);                  /* solid orange — matches app */
-  color: #fff;
+  color: var(--on-accent);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset,
               0 12px 28px -10px rgba(255, 210, 0, 0.55);
 }
@@ -583,7 +610,7 @@ h3 {
   border-radius: 999px;
   background: var(--gold-dim);
   border: 1px solid rgba(255, 210, 0, 0.22);
-  color: #8f6a10;
+  color: var(--gold-ink);
   font-size: 10.5px;
   font-family: var(--font-accent);
   font-weight: 800;
@@ -629,7 +656,7 @@ h3 {
   padding: 28px;
   border-radius: 1.25rem;
   border: 1px solid var(--night-border-bright);
-  background: linear-gradient(160deg, #002a42 0%, #001e30 100%);
+  background: linear-gradient(160deg, var(--night-mid) 0%, var(--night) 100%);
   box-shadow: 0 16px 56px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
@@ -915,7 +942,7 @@ h3 {
 
 .section-dark .glass-panel,
 .section-dark .metric-panel {
-  background: linear-gradient(160deg, #002a42, #001e30);
+  background: linear-gradient(160deg, var(--night-mid), var(--night));
   border-color: var(--night-border-bright);
 }
 
@@ -1492,7 +1519,7 @@ h3 {
   padding: 9px 18px;
   border-radius: 100px;
   background: var(--gold);
-  color: #fff;
+  color: var(--on-accent);
   box-shadow: 0 1px 0 rgba(255,255,255,0.18) inset,
               0 12px 28px -10px rgba(255, 210, 0, 0.55);
   transition: background 0.16s ease, transform 0.14s ease;
@@ -1500,7 +1527,7 @@ h3 {
 
 .footer-links a:last-child:hover {
   background: var(--gold-pressed);
-  color: #fff;
+  color: var(--ink-light);
   transform: translateY(-1px);
 }
 
@@ -1599,14 +1626,14 @@ h3 {
   margin-top: 14px;
   text-align: center;
   background: var(--gold) !important;
-  color: #fff !important;
+  color: var(--on-accent) !important;
   border: 0 !important;
   border-radius: 100px;
   padding: 13px 18px !important;
   font-weight: 700;
 }
 
-.mnav-cta:hover { background: var(--gold-pressed) !important; color: #fff !important; }
+.mnav-cta:hover { background: var(--gold-pressed) !important; color: var(--ink-light) !important; }
 
 @media (max-width: 960px) {
   .mnav { display: inline-flex; align-items: center; }
@@ -1750,23 +1777,35 @@ h3 {
    the same mechanism as the app (globals.css). This keeps OS preference
    as the default AND makes the marketing theme toggle work. */
 .dark {
-  --bg: #001e30;              /* app backgroundDark */
-  --bg-alt: #002a42;          /* app secondaryBackgroundDark */
-  --panel: #00304c;           /* app cardBackgroundDark */
-  --panel-elevated: #003a5c;  /* app cardBackgroundElevatedDark */
-  --panel-soft: #00304c;
+  --bg: var(--color-cream-50);              /* app backgroundDark */
+  --bg-alt: var(--color-cream-100);          /* app secondaryBackgroundDark */
+  --panel: var(--color-panel);           /* app cardBackgroundDark */
+  --panel-elevated: var(--color-panel-elevated);  /* app cardBackgroundElevatedDark */
+  --panel-soft: var(--color-panel);
 
-  --ink: #f4f1ea;             /* cream */
-  --ink-soft: rgba(244, 241, 234, 0.78);
-  --ink-muted: rgba(244, 241, 234, 0.52);
+  --ink: var(--color-ink-900);             /* cream */
+  --ink-soft: var(--color-ink-500);
+  --ink-muted: var(--color-ink-400);
 
-  --line: rgba(255, 255, 255, 0.10);
-  --line-strong: rgba(255, 255, 255, 0.18);
+  --line: var(--color-cream-200);
+  --line-strong: var(--color-cream-200);
 
   /* Gold reads at ~11.8:1 on navy, so at night it needs no deepening —
      unlike on cream, where --gold-ink exists for exactly that reason. */
-  --gold-ink: #ffd200;
-  --pacific-ink: #7fb0d8;
+  --gold-ink: var(--color-gold-ink);
+  --pacific-ink: var(--color-navy-500);
+
+  /* Homepage aliases, dark. Merged from the second .dark block. */
+  --bg: var(--color-cream-50);
+  --bg-2: var(--color-cream-100);
+  --warm-dark: var(--color-navy-900);
+  --warm-dark-2: var(--color-navy-800);
+  --text-dark: var(--color-ink-900);
+  --text-dark-2: rgba(244, 241, 234,0.70);
+  --text-dark-3: rgba(244, 241, 234,0.38);
+  --orange-mist: rgba(255, 210, 0,0.13);
+  --orange-ink: var(--color-gold-ink);
+
 }
 
 .dark body::after {
@@ -1801,32 +1840,6 @@ h3 {
  * carry the brand's GOLD, not orange. Read them as "the accent". Any new rule
  * should use the top-of-file tokens (--gold, --gold-ink, --on-accent) instead.
  */
-:root {
-      --bg:           #f4f1ea;
-      --bg-2:         #ebe7dc;
-
-      /* "orange" = the accent, which is now gold. A FILL: never put white on
-         it — #fff on #ffd200 is 1.4:1. Use --on-accent, which is the navy. */
-      --orange:       #FFD200;
-      --orange-2:     #FFDD3D;
-      --orange-deep:  #E6BD00;
-      --orange-mist:  rgba(255,210,0,0.14);
-      --on-accent:    #001E30;
-
-      --warm-dark:    #001E30;
-      --warm-dark-2:  #002A42;
-      --text-dark:    #001e30;
-      --text-dark-2:  rgba(0,30,48,0.66);
-      --text-dark-3:  rgba(0,30,48,0.40);
-      --text-light:   #F4F1EA;
-      --text-light-2: rgba(244,241,234,0.76);
-      --text-light-3: rgba(244,241,234,0.44);
-      /* Gold you can READ on the cream ground — #FFD200 itself is 1.3:1 there,
-         so small text and links use this instead. */
-      --orange-ink:   #8a6a00;
-      --sys:   var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      --mono:  var(--font-space-mono), 'Courier New', monospace;
-    }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -1854,7 +1867,7 @@ h3 {
       background: none; border: none; color: rgba(255,255,255,0.75);
       font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 8px;
     }
-    .announce-close:hover { color: #fff; }
+    .announce-close:hover { color: var(--ink-light); }
 
     /* ── NAV ── */
     #nav {
@@ -1872,8 +1885,8 @@ h3 {
       display: grid; place-items: center;
       width: 32px; height: 32px;
       border-radius: 9px;
-      background: linear-gradient(135deg, #ffd200, var(--orange));
-      color: #fff; font-weight: 800; font-size: 18px; line-height: 1;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: var(--ink-light); font-weight: 800; font-size: 18px; line-height: 1;
       box-shadow: 0 6px 18px -8px rgba(255, 210, 0,0.7);
     }
     .nav-wordmark { display: flex; flex-direction: column; gap: 1px; line-height: 1; }
@@ -1894,7 +1907,7 @@ h3 {
     }
     .nav-mid a.nav-live:hover { background: rgba(255, 210, 0,0.16); color: var(--orange-ink); }
     .nav-live-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #2ecc71;
+      width: 7px; height: 7px; border-radius: 50%; background: var(--teal);
       box-shadow: 0 0 0 0 rgba(46,204,113,0.55);
       animation: nav-live-pulse 1.8s ease-out infinite;
     }
@@ -2001,7 +2014,7 @@ h3 {
     .phone-body {
       position: relative; z-index: 1;
       width: 252px; height: 520px;
-      background: #0A1622;
+      background: var(--night);
       border-radius: 48px; padding: 11px;
       box-shadow:
         0 0 0 1px rgba(0, 30, 48,0.14),
@@ -2010,8 +2023,8 @@ h3 {
       animation: phoneFloat 5.5s ease-in-out infinite;
     }
     @keyframes phoneFloat { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(-0.5deg)} }
-    .phone-screen { width: 100%; height: 100%; background: #001E30; border-radius: 39px; overflow: hidden; position: relative; }
-    .phone-island { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 78px; height: 22px; background: #000000; border-radius: 100px; z-index: 5; }
+    .phone-screen { width: 100%; height: 100%; background: var(--night); border-radius: 39px; overflow: hidden; position: relative; }
+    .phone-island { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 78px; height: 22px; background: var(--night); border-radius: 100px; z-index: 5; }
     .ps { padding: 42px 12px 12px; height: 100%; display: flex; flex-direction: column; gap: 7px; }
     .ps-hi { font-size: 10px; font-weight: 700; color: rgba(244, 241, 234,0.9); }
     .ps-hi span { color: var(--orange-2); }
@@ -2025,7 +2038,7 @@ h3 {
     .ps-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
     .ps-pill { font-size: 7px; font-weight: 700; padding: 3px 8px; border-radius: 100px; }
     .ps-pill.t { background: rgba(255, 210, 0,0.18); color: var(--orange-2); }
-    .ps-pill.a { background: rgba(232,160,74,0.20); color: #E8A04A; }
+    .ps-pill.a { background: var(--gold-dim); color: var(--gold-ink); }
 
     /* ── LOGO STRIP ── */
     .logo-strip {
@@ -2117,7 +2130,7 @@ h3 {
     .fc {
       border-radius: 20px;
       border: 1px solid rgba(0, 30, 48,0.09);
-      background: #fff;
+      background: var(--panel-elevated);
       display: flex; flex-direction: column;
       overflow: hidden;
     }
@@ -2174,7 +2187,7 @@ h3 {
       color: var(--orange-ink); margin-bottom: 14px;
     }
     .live-eyebrow .ld-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: #2ecc71;
+      width: 8px; height: 8px; border-radius: 50%; background: var(--teal);
       box-shadow: 0 0 0 0 rgba(46,204,113,0.6);
       animation: nav-live-pulse 1.8s ease-out infinite;
     }
@@ -2235,7 +2248,7 @@ h3 {
     .live-stat.is-live .live-stat-lbl::before {
       content: ""; width: 0; height: 0; margin-top: 3px;
       border-left: 4px solid transparent; border-right: 4px solid transparent;
-      border-bottom: 6px solid #2ecc71; flex: none;
+      border-bottom: 6px solid var(--teal); flex: none;
     }
     .live-stat-sub {
       font-size: 10.5px; color: var(--text-light-3);
@@ -2247,7 +2260,7 @@ h3 {
       margin-top: 4px; letter-spacing: 0.04em;
       display: flex; gap: 8px; align-items: center;
     }
-    .live-foot .ld-dot { width: 6px; height: 6px; border-radius: 50%; background: #2ecc71; }
+    .live-foot .ld-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
     @media (max-width: 880px) {
       .live-strip { padding: 40px 20px 0; }
       .live-card { grid-template-columns: 1fr; padding: 28px; gap: 24px; }
@@ -2277,8 +2290,8 @@ h3 {
     .fc-btn:hover { transform: translateY(-1px); }
     .fc-btn-orange { background: var(--orange); color: var(--on-accent); }
     .fc-btn-orange:hover { background: var(--orange-2); }
-    .fc-btn-cream { background: #F2F1EF; color: var(--text-dark); }
-    .fc-btn-cream:hover { background: #fff; }
+    .fc-btn-cream { background: var(--bg-alt); color: var(--text-dark); }
+    .fc-btn-cream:hover { background: var(--panel-elevated); }
 
     /* Card body footer text — replaces the per-card CTA */
     .fc-foot-text {
@@ -2343,10 +2356,10 @@ h3 {
 
     .split-vis {
       border-radius: 20px; overflow: hidden;
-      border: 1px solid rgba(0, 30, 48,0.08); background: #fff;
+      border: 1px solid rgba(0, 30, 48,0.08); background: var(--panel-elevated);
     }
     .split-section.dark .split-vis { background: rgba(255,255,255,0.04); border-color: rgba(255, 210, 0,0.14); }
-    .split-section.light-2 .split-vis { background: #fff; }
+    .split-section.light-2 .split-vis { background: var(--panel-elevated); }
 
     .s-eyebrow {
       font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
@@ -2395,8 +2408,8 @@ h3 {
     .av { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--warm-dark-2); margin-left: -6px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: white; }
     .av:first-child { margin-left: 0; }
     .av-n { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--warm-dark-2); background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: var(--text-light-3); margin-left: -6px; }
-    .split-section.light .av, .split-section.light-2 .av { border-color: #fff; }
-    .split-section.light .av-n, .split-section.light-2 .av-n { border-color: #fff; background: var(--bg-2); color: var(--text-dark-3); }
+    .split-section.light .av, .split-section.light-2 .av { border-color: var(--ink-light); }
+    .split-section.light .av-n, .split-section.light-2 .av-n { border-color: var(--ink-light); background: var(--bg-2); color: var(--text-dark-3); }
 
     /* grades vis */
     .gd-vis { padding: 24px; }
@@ -2422,7 +2435,7 @@ h3 {
     .gm-fill { height: 100%; width: 72%; border-radius: 100px; background: linear-gradient(90deg, var(--orange), var(--orange-2)); }
     .gm-bl { font-size: 10px; font-weight: 700; color: var(--text-dark-3); letter-spacing: 0.05em; text-transform: uppercase; margin-top: 4px; }
     .gm-badges { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-top: 5px; }
-    .gm-badge { background: #fff; border-radius: 10px; padding: 8px 5px; text-align: center; box-shadow: 0 1px 4px rgba(0, 30, 48,0.06); }
+    .gm-badge { background: var(--panel-elevated); border-radius: 10px; padding: 8px 5px; text-align: center; box-shadow: 0 1px 4px rgba(0, 30, 48,0.06); }
     .gm-badge.off { opacity: 0.3; }
     .gm-emoji { font-size: 17px; }
     .gm-name { font-size: 7.5px; font-weight: 600; color: var(--text-dark-3); margin-top: 3px; line-height: 1.2; }
@@ -2528,7 +2541,7 @@ h3 {
       margin: 0 auto;
     }
     .cr-card {
-      background: #FFF;
+      background: var(--panel-elevated);
       border: 1px solid rgba(0, 30, 48,0.08);
       border-radius: 18px;
       padding: 24px 22px;
@@ -2547,7 +2560,7 @@ h3 {
       width: 56px; height: 56px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
-      color: #FFF8EE;
+      color: var(--ink-light);
       display: grid; place-items: center;
       font-weight: 700; font-size: 18px; letter-spacing: 0.5px;
       margin-bottom: 14px;
@@ -2610,8 +2623,8 @@ h3 {
     .f-mark {
       display: grid; place-items: center;
       width: 32px; height: 32px; border-radius: 9px;
-      background: linear-gradient(135deg, #ffd200, var(--orange));
-      color: #fff; font-weight: 800; font-size: 18px; line-height: 1;
+      background: linear-gradient(135deg, var(--gold), var(--orange));
+      color: var(--ink-light); font-weight: 800; font-size: 18px; line-height: 1;
       box-shadow: 0 6px 18px -8px rgba(255, 210, 0,0.7);
     }
     .f-wordmark { display: flex; flex-direction: column; gap: 1px; line-height: 1; }
@@ -2722,7 +2735,7 @@ h3 {
       gap: 14px; align-items: stretch;
     }
     .imp-step {
-      background: #fff;
+      background: var(--panel-elevated);
       border: 1px solid rgba(0, 30, 48,0.09);
       border-radius: 20px;
       padding: 28px 24px;
@@ -2771,19 +2784,6 @@ h3 {
     }
 
     /* ── DARK MODE (class-based; see the note on the main .dark block) ── */
-    .dark {
-        --bg:          #001e30;
-        --bg-2:        #002a42;
-        --warm-dark:   #00304c;
-        --warm-dark-2: #003a5c;
-        --text-dark:   #f4f1ea;
-        --text-dark-2: rgba(244, 241, 234,0.70);
-        --text-dark-3: rgba(244, 241, 234,0.38);
-        --orange-mist: rgba(255, 210, 0,0.13);
-        /* On navy, gold is ~11.8:1 — it needs no deepening. --orange-ink only
-           exists because #FFD200 on the cream page is 1.3:1. */
-        --orange-ink:  #FFD200;
-    }
 
     .dark #nav { background: rgba(0, 30, 48,0.85); border-bottom-color: rgba(244, 241, 234,0.07); }
     .dark .nav-explore { border-color: rgba(244, 241, 234,0.16); color: var(--text-dark); }
@@ -2795,20 +2795,20 @@ h3 {
     .dark .logo-strip { border-top-color: rgba(244, 241, 234,0.07); border-bottom-color: rgba(244, 241, 234,0.07); }
     .dark .ls-item { color: rgba(244, 241, 234,0.28); }
     .dark .ls-dot { background: rgba(244, 241, 234,0.14); }
-    .dark .fc { background: #00304c; border-color: rgba(244, 241, 234,0.08); }
+    .dark .fc { background: var(--panel); border-color: rgba(244, 241, 234,0.08); }
     .dark .fc:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
     .dark .fc-blurb { color: var(--text-dark-2); }
     .dark .fc-lbl { color: var(--text-dark-3); }
     .dark .fc-foot-text { color: var(--text-dark-3); }
-    .dark .fc-btn-cream { background: #003a5c; color: var(--text-dark); }
-    .dark .fc-btn-cream:hover { background: #2e2010; }
+    .dark .fc-btn-cream { background: var(--panel-elevated); color: var(--text-dark); }
+    .dark .fc-btn-cream:hover { background: var(--night-mid); }
     .dark .split-section.light, .dark .split-section.light-2 { background: var(--bg); }
-    .dark .split-vis { background: #00304c; border-color: rgba(244, 241, 234,0.07); }
-    .dark .split-section.light .av, .dark .split-section.light-2 .av { border-color: #00304c; }
-    .dark .split-section.light .av-n, .dark .split-section.light-2 .av-n { border-color: #00304c; background: var(--bg-2); color: var(--text-dark-3); }
+    .dark .split-vis { background: var(--panel); border-color: rgba(244, 241, 234,0.07); }
+    .dark .split-section.light .av, .dark .split-section.light-2 .av { border-color: var(--panel); }
+    .dark .split-section.light .av-n, .dark .split-section.light-2 .av-n { border-color: var(--panel); background: var(--bg-2); color: var(--text-dark-3); }
     .dark .guide-item { border-bottom-color: rgba(244, 241, 234,0.07); }
     .dark footer { border-top-color: rgba(244, 241, 234,0.07); }
-    .dark .imp-step { background: #00304c; border-color: rgba(244, 241, 234,0.08); }
+    .dark .imp-step { background: var(--panel); border-color: rgba(244, 241, 234,0.08); }
     .dark .imp-step:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
     .dark .imp-num { color: var(--orange-2); }
 

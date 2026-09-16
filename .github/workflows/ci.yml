@@ -1,0 +1,73 @@
+name: CI
+
+on:
+  push: { branches: [main] }
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: typecheck · brand · lint · build
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: web } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Brand guard
+        # Fails on a raw colour outside app/globals.css @theme. The brand used
+        # to live in two files kept in sync by hand; this is what replaced the
+        # comment asking people to remember.
+        run: npm run check:brand
+      - run: npm run lint
+      - run: npm run build
+
+  schema:
+    name: schema drift
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: web } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+
+      # The iOS repo owns the schema; this one reads tables it does not own.
+      # A rename over there breaks the website at RUNTIME, with nothing to
+      # catch it. Regenerating the types and diffing turns that 500 into a
+      # red check — the single highest-value guard in docs/ARCHITECTURE.md.
+      #
+      # Skips (does not fail) when the secrets aren't configured, so a fork or
+      # a first-time contributor still gets a green, honest run.
+      - name: Check generated types match the live schema
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+          SUPABASE_PROJECT_ID: ${{ secrets.SUPABASE_PROJECT_ID }}
+        run: |
+          if [ -z "$SUPABASE_ACCESS_TOKEN" ] || [ -z "$SUPABASE_PROJECT_ID" ]; then
+            echo "::notice title=Schema drift::SUPABASE_ACCESS_TOKEN / SUPABASE_PROJECT_ID not set — skipping."
+            echo "Set both repo secrets to turn a runtime 500 into a build failure."
+            exit 0
+          fi
+          npx --yes supabase@latest gen types typescript \
+            --project-id "$SUPABASE_PROJECT_ID" > /tmp/database.ts
+          if ! diff -q /tmp/database.ts types/database.ts > /dev/null; then
+            echo "::error title=Schema drift::types/database.ts is out of date."
+            echo "The database has changed since these types were generated."
+            echo "Run 'npm run db:types' and commit the result."
+            echo "--- committed / +++ live ---"
+            diff types/database.ts /tmp/database.ts | head -60
+            exit 1
+          fi
+          echo "✓ types match the live schema"

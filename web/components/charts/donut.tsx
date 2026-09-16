@@ -24,7 +24,7 @@ export function Donut({
             outerRadius={88}
             paddingAngle={2}
             dataKey="value"
-            stroke="#fffaf3"
+            stroke="var(--color-panel-elevated)"
             strokeWidth={2}
           >
             {data.map((_, i) => (
@@ -33,8 +33,8 @@ export function Donut({
           </Pie>
           <Tooltip
             contentStyle={{
-              background: "#fffaf3", border: "1px solid #f5e8d3",
-              borderRadius: 12, fontSize: 12, color: "#18120b",
+              background: "var(--color-panel-elevated)", border: "1px solid var(--chart-grid)",
+              borderRadius: 12, fontSize: 12, color: "var(--color-ink-900)",
             }}
             formatter={(v: number, n) => [`${v} (${total ? Math.round((v / total) * 100) : 0}%)`, n as string]}
           />
