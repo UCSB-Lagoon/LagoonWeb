@@ -42,6 +42,31 @@
   --color-ink-400: #7a8a95;
   --color-ink-300: #a9bdc9;
 
+  /* ── Chart series ──
+     The brand FILLS are surface colours and fail as chart marks: #FFD200 is
+     1.29:1 on cream and #003A60 reads grey. These are the same five hues
+     snapped to steps that pass all six checks of the categorical palette
+     validator (lightness band, chroma floor, CVD separation, normal-vision
+     floor, contrast) against each surface.
+       light, on #f4f1ea — worst adjacent pair ΔE 13.0 protan, all ≥ 3:1
+       dark,  on #001e30 — worst adjacent pair ΔE 11.9 protan, all ≥ 3:1
+     Dark is a *selected* set, not a flip: the light steps leave violet at
+     2.77:1 on navy. Assign in this fixed order and never cycle — a 6th series
+     folds into "Other", it does not get a generated hue.
+
+     Charts reference these as `var(--chart-N)` directly, including inside
+     <stop stop-color>. That was worth checking rather than assuming: var()
+     in an SVG gradient stop is sometimes claimed to be unreliable, and it
+     renders correctly here in both the stop and a plain fill — which is why
+     there is no JS colour-resolution helper. */
+  --chart-1: #1E6FA8;   /* pacific  */
+  --chart-2: #A87C00;   /* gold     */
+  --chart-3: #00968A;   /* teal     */
+  --chart-4: #D4501F;   /* coral    */
+  --chart-5: #6E4FB0;   /* violet   */
+  --chart-other: #7a8a95;
+  --chart-grid: #dfd9ca;
+
   /* Course-block hues — data, not decoration (mirrors LagoonCourseColor) */
   --color-teal-400:   #2bb3a3;
   --color-coral-400:  #e8734a;
@@ -232,6 +257,15 @@ body::before {
   --color-ink-500: #7e95a3;
   --color-ink-400: #7e95a3;
   --color-ink-300: #4a5d6b;
+
+  /* Chart series, selected for the navy surface — see the light set above. */
+  --chart-1: #4A92CB;
+  --chart-2: #AD8A0C;
+  --chart-3: #0E9C8F;
+  --chart-4: #DE6A38;
+  --chart-5: #8E72C8;
+  --chart-other: #7e95a3;
+  --chart-grid: rgba(255, 255, 255, 0.10);
 
   /* Gold is ~11.8:1 on navy; no deepening needed at night. */
   --color-gold-700: #ffd200;

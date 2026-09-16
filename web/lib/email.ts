@@ -97,10 +97,10 @@ Reply to this email if you have questions — we read every one ourselves.
 https://lagoonucsb.com`;
 
   const html = `<!doctype html>
-<html><body style="margin:0;background:#FBF7F0;font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,sans-serif;color:#1e1410;line-height:1.5">
+<html><body style="margin:0;background:#FBF7F0;font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,sans-serif;color:#001e30;line-height:1.5">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" width="600" style="max-width:600px;margin:0 auto;padding:32px 24px">
   <tr><td>
-    <div style="display:inline-block;padding:6px 14px;border-radius:9999px;background:#FFE6D1;color:#B95B22;font-size:11px;letter-spacing:.18em;font-weight:700;text-transform:uppercase">You're in</div>
+    <div style="display:inline-block;padding:6px 14px;border-radius:9999px;background:#FFE6D1;color:#8a6a00;font-size:11px;letter-spacing:.18em;font-weight:700;text-transform:uppercase">You're in</div>
     <h1 style="font-size:36px;line-height:1.05;margin:18px 0 8px;font-weight:800;letter-spacing:-.03em">
       Welcome to the crew, ${escapeHtml(firstName)}.
     </h1>
@@ -110,16 +110,16 @@ https://lagoonucsb.com`;
 
     <div style="background:#FFFCF7;border:1px solid #E2D2BF;border-radius:18px;padding:24px;text-align:center">
       <div style="font-size:11px;letter-spacing:.18em;color:#8c7a66;text-transform:uppercase;font-weight:700;margin-bottom:8px">Your captain link</div>
-      <div style="font-family:'Space Mono',ui-monospace,SFMono-Regular,monospace;font-size:18px;font-weight:700;color:#1e1410;word-break:break-all">
+      <div style="font-family:'Space Mono',ui-monospace,SFMono-Regular,monospace;font-size:18px;font-weight:700;color:#001e30;word-break:break-all">
         ${escapeHtml(link)}
       </div>
-      <a href="${escapeHtml(link)}" style="display:inline-block;margin-top:18px;background:#F08A3C;color:white;font-weight:700;padding:14px 26px;border-radius:9999px;text-decoration:none;font-size:15px">
+      <a href="${escapeHtml(link)}" style="display:inline-block;margin-top:18px;background:#FFD200;color:white;font-weight:700;padding:14px 26px;border-radius:9999px;text-decoration:none;font-size:15px">
         Test your link
       </a>
     </div>
 
     <h2 style="font-size:20px;margin:36px 0 12px;font-weight:700">Next steps</h2>
-    <ol style="padding-left:20px;color:#2a1a0f;font-size:15px">
+    <ol style="padding-left:20px;color:#002a42;font-size:15px">
       <li style="margin-bottom:8px"><strong>Drop the link in your IG bio</strong> (or wherever feels natural — no quotas, no posting requirements).</li>
       <li style="margin-bottom:8px"><strong>We'll DM you the share-asset pack</strong> within 48h: short clips, screenshots, suggested captions.</li>
       <li style="margin-bottom:8px"><strong>Hoodie ships this week</strong>. We'll confirm your size/shipping address in the DM.</li>

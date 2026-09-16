@@ -2,7 +2,7 @@
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-const PALETTE = ["#f08a3c", "#febc11", "#ffa86d", "#ff7a59", "#e07530", "#b95b22", "#f5e2b8"];
+const PALETTE = ["var(--chart-2)", "var(--chart-2)", "var(--chart-4)", "var(--chart-4)", "var(--chart-4)", "var(--chart-5)", "var(--chart-other)"];
 
 export function Donut({
   data,

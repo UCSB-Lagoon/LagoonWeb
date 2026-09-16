@@ -17,11 +17,11 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
         <AreaChart data={formatted} margin={{ left: 0, right: 8, top: 12, bottom: 0 }}>
           <defs>
             <linearGradient id="actGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%"   stopColor="#f08a3c" stopOpacity={0.55} />
-              <stop offset="100%" stopColor="#f08a3c" stopOpacity={0}    />
+              <stop offset="0%"   stopColor="var(--chart-2)" stopOpacity={0.55} />
+              <stop offset="100%" stopColor="var(--chart-2)" stopOpacity={0}    />
             </linearGradient>
           </defs>
-          <CartesianGrid stroke="#f5e8d3" strokeDasharray="3 4" vertical={false} />
+          <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 4" vertical={false} />
           <XAxis dataKey="label" tickLine={false} axisLine={false}
                  tick={{ fill: "#8c7a66", fontSize: 11 }} interval="preserveStartEnd" />
           <YAxis tickLine={false} axisLine={false}
@@ -37,9 +37,9 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
               return [v.toLocaleString(), label];
             }}
           />
-          <Area type="monotone" dataKey="total_xp" stroke="#f08a3c" strokeWidth={2.5}
+          <Area type="monotone" dataKey="total_xp" stroke="var(--chart-2)" strokeWidth={2.5}
                 fill="url(#actGrad)" />
-          <Area type="monotone" dataKey="event_count" stroke="#febc11" strokeWidth={1.5}
+          <Area type="monotone" dataKey="event_count" stroke="var(--chart-2)" strokeWidth={1.5}
                 fill="transparent" strokeDasharray="3 3" />
         </AreaChart>
       </ResponsiveContainer>

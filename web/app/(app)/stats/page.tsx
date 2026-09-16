@@ -277,11 +277,15 @@ export default async function StatsPage() {
                       className="h-full rounded-full"
                       style={{
                         width: `${Math.max(2, ratio * 100)}%`,
+                        // Flat, and one step per rarity. These were gradients
+                        // encoding rarity by hue; the system has no gradients,
+                        // and rarity is ordinal so it reads better as one hue
+                        // getting stronger.
                         background: r.rarity === "legendary"
-                          ? "linear-gradient(90deg, #ff7a59, #f08a3c)"
+                          ? "var(--color-gold-500)"
                           : r.rarity === "epic"
-                          ? "linear-gradient(90deg, #febc11, #f08a3c)"
-                          : "linear-gradient(90deg, var(--color-orange-300), var(--color-orange-500))",
+                          ? "var(--color-gold-600)"
+                          : "var(--color-gold-700)",
                       }}
                     />
                   </div>

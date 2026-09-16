@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
-export const viewport: Viewport = { themeColor: "#F08A3C" };
+export const viewport: Viewport = { themeColor: "#FFD200" };
 
 /**
  * Web fallback for Schedule Match Card links
