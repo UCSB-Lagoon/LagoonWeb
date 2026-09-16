@@ -171,7 +171,7 @@ function Chip({ href, label, active }: { href: string; label: string; active: bo
       href={href}
       className={[
         "px-3 py-1.5 rounded-full text-xs font-semibold border transition capitalize",
-        active ? "bg-gold-500 text-ink-900 border-gold-500" : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
+        active ? "bg-gold-500 text-on-accent border-gold-500" : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
       ].join(" ")}
     >
       {label}

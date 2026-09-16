@@ -220,7 +220,7 @@ export default async function AdminHomePage() {
           <Link href="/admin/feedback" className="btn-secondary !py-2 !px-4 text-sm">
             <Inbox className="w-4 h-4 text-gold-700" /> Feedback
             {feedback.open > 0 && (
-              <span className="ml-1 inline-grid place-items-center min-w-5 h-5 px-1.5 rounded-full bg-gold-500 text-ink-900 text-[10px] font-bold tabular-nums">
+              <span className="ml-1 inline-grid place-items-center min-w-5 h-5 px-1.5 rounded-full bg-gold-500 text-on-accent text-[10px] font-bold tabular-nums">
                 {feedback.open}
               </span>
             )}

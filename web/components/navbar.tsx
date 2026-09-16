@@ -50,7 +50,7 @@ export function Navbar() {
         <Link href="/" className="group flex items-center gap-2.5">
           <span
             aria-hidden="true"
-            className="grid place-items-center w-8 h-8 rounded-lg bg-gold-500 text-ink-900 font-display font-extrabold text-lg leading-none transition-transform group-hover:rotate-[-4deg]"
+            className="grid place-items-center w-8 h-8 rounded-lg bg-gold-500 text-on-accent font-display font-extrabold text-lg leading-none transition-transform group-hover:rotate-[-4deg]"
           >
             L
           </span>

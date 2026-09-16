@@ -49,7 +49,7 @@ export function CaptainForm() {
   if (status === "ok") {
     return (
       <div className="text-center py-8">
-        <div className="grid place-items-center w-16 h-16 rounded-full bg-gold-500 text-ink-900 mx-auto">
+        <div className="grid place-items-center w-16 h-16 rounded-full bg-gold-500 text-on-accent mx-auto">
           <CheckCircle2 className="w-8 h-8" />
         </div>
         <h3 className="mt-5 font-display font-bold text-2xl text-ink-900">You&apos;re in our inbox.</h3>

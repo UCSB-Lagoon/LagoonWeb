@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme static {
   /* ── Navy / cream / gold — aligned to the iOS app's 2026-09 repaint ──
      Mirrors public/site.css :root. Change a token here and there in the same
      commit; a user moving marketing → /captains → /hub should feel one
@@ -19,11 +19,23 @@
   --color-gold-700: #8a6a00;     /* gold you can read on cream — 4.5:1 */
   --color-gold-ink: #8a6a00;
 
+  /* Ink for text sitting on a PAINTED brand fill (a gold plate, a gold pill).
+     Deliberately does NOT flip with the theme: `ink-900` is correct on a page
+     surface and wrong here, because it becomes cream at night while the gold
+     underneath stays gold — 1.29:1. This is the web's --on-accent. */
+  --color-on-accent: #001e30;
+
+  /* Cream ink for text on a DARK or painted ground. Like --color-on-accent
+     this deliberately does NOT flip: a navy band stays navy at night, so the
+     ink on it must stay cream. Pointing this at `cream-50` is the bug it
+     exists to prevent — that name holds the navy ramp inside .dark. */
+  --color-ink-light: #f4f1ea;
+
   /* Navy — the ground, and the raised blocks on it */
   --color-navy-900: #001e30;     /* page ground at night */
   --color-navy-800: #002a42;
-  --color-navy-700: var(--color-navy-700);     /* card */
-  --color-navy-600: var(--color-navy-600);
+  --color-navy-700: #00304c;     /* card at night */
+  --color-navy-600: #003a5c;     /* elevated card at night */
   --color-navy-500: #003a60;     /* painted block / plate */
   --color-navy-300: #7fb0d8;     /* navy you can read on navy */
 
@@ -32,7 +44,7 @@
   --color-cream-100: #ebe7dc;
   --color-cream-200: #dfd9ca;
   --color-panel: #fbf9f3;          /* card surface on the cream page */
-  --color-panel-elevated: var(--color-panel-elevated);
+  --color-panel-elevated: #ffffff;  /* elevated card on the cream page */
 
   /* Ink */
   --color-ink-900: #001e30;

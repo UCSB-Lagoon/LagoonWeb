@@ -92,7 +92,7 @@ export function FeedbackWidget() {
 
             {status === "done" ? (
               <div className="text-center py-8">
-                <div className="grid place-items-center w-14 h-14 rounded-full bg-gold-500 text-ink-900 mx-auto">
+                <div className="grid place-items-center w-14 h-14 rounded-full bg-gold-500 text-on-accent mx-auto">
                   <CheckCircle2 className="w-7 h-7" />
                 </div>
                 <p className="mt-4 font-display font-bold text-lg text-ink-900">Got it — thank you.</p>

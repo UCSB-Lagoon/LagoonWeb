@@ -188,7 +188,7 @@ export function CampusMap({ signedIn }: Props) {
           <div className="mt-2.5 flex flex-wrap gap-1.5">
             <button
               onClick={() => setActiveCat(null)}
-              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-ink-900 border-gold-500" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
+              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-on-accent border-gold-500" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
             >
               All
             </button>

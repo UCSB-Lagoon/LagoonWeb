@@ -145,7 +145,7 @@ export default async function AdminCaptainsPage(
                         target="_blank"
                         rel="noreferrer"
                         title={`Captain link · /r/${a.captain_code}`}
-                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-gold-500 text-ink-900 border-gold-500 hover:bg-gold-600 transition"
+                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-gold-500 text-on-accent border-gold-500 hover:bg-gold-600 transition"
                       >
                         /r/{a.captain_code}
                       </a>
@@ -202,7 +202,7 @@ function FilterChip({ href, label, active }: { href: string; label: string; acti
       className={[
         "px-3 py-1.5 rounded-full text-xs font-semibold border transition",
         active
-          ? "bg-gold-500 text-ink-900 border-gold-500"
+          ? "bg-gold-500 text-on-accent border-gold-500"
           : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
       ].join(" ")}
     >

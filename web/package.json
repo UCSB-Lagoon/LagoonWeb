@@ -10,7 +10,10 @@
     "typecheck": "tsc --noEmit",
     "db:types": "supabase gen types typescript --linked > types/database.ts",
     "check:brand": "node scripts/check-brand.mjs",
-    "check": "npm run typecheck && npm run check:brand && npm run lint"
+    "check": "npm run typecheck && npm run check:brand && npm run lint",
+    "test:e2e": "playwright test",
+    "test:contrast": "playwright test e2e/contrast.spec.ts",
+    "test:visual": "playwright test e2e/visual.spec.ts"
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
@@ -32,6 +35,7 @@
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4.0.0-beta.4",
     "@types/node": "^22.9.0",
     "@types/react": "^19.0.0",

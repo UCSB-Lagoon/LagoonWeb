@@ -128,7 +128,7 @@ export default function CaptainsPage() {
           {PERKS.map((p, i) => (
             <li key={p.title} className="card p-6 group">
               <div className="flex items-start justify-between mb-4">
-                <span className="grid place-items-center w-11 h-11 rounded-xl bg-gold-500 text-ink-900 group-hover:rotate-[-4deg] transition-transform">
+                <span className="grid place-items-center w-11 h-11 rounded-xl bg-gold-500 text-on-accent group-hover:rotate-[-4deg] transition-transform">
                   <p.icon className="w-5 h-5" />
                 </span>
                 <span className="font-mono text-xs text-ink-400 tabular-nums">0{i + 1}</span>
@@ -195,7 +195,7 @@ export default function CaptainsPage() {
                 "You&apos;d say yes to free food, hoodies, and the chance to shape what students use daily.",
               ].map((t, i) => (
                 <li key={i} className="flex gap-3 items-start">
-                  <span className="grid place-items-center w-6 h-6 rounded-full bg-gold-500 text-ink-900 text-xs font-bold shrink-0 mt-0.5">✓</span>
+                  <span className="grid place-items-center w-6 h-6 rounded-full bg-gold-500 text-on-accent text-xs font-bold shrink-0 mt-0.5">✓</span>
                   <span dangerouslySetInnerHTML={{ __html: t }} />
                 </li>
               ))}

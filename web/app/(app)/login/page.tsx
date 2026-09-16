@@ -28,7 +28,7 @@ export default function LoginPage() {
     <div className="min-h-[70vh] flex items-center justify-center px-5">
       <div className="card p-8 w-full max-w-md">
         <div className="flex items-center gap-3 mb-6">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gold-500 text-ink-900">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gold-500 text-on-accent">
             <Waves className="w-5 h-5" />
           </span>
           <div>

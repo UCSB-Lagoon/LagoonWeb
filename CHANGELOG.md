@@ -1,5 +1,134 @@
 # Lagoon Web — Changelog
 
+## [2026-09-15] — Align the site to the app's navy / cream / gold, and build the guards that keep it there
+
+Repainted LagoonWeb onto the iOS app's 2026-09 system (navy `#001E30`,
+cream `#F4F1EA`, gold `#FFD200`) and, because three separate colour
+sweeps shipped visibly-wrong output during this work, added two
+mechanisms that catch the two different ways it went wrong.
+
+**Status: the repaint is NOT finished.** Tokens are correct; the
+homepage composition is not. See "Known broken" below before continuing.
+
+### The single root cause, stated once
+
+Almost every fault this session was the same shape: *a brand colour placed
+too close to, or blended into, the surface it sits on.* Gold is a **fill**,
+not a text colour — `#FFD200` on cream is 1.3:1. That produced the
+fill-vs-ink token split: `--color-on-accent` (navy ink for text on a
+painted gold plate) and `--color-gold-ink` (`#8A6A00`, gold you can
+actually read on cream).
+
+### Colour is now sourced once
+
+- `app/globals.css` `@theme static` is the only place a colour is
+  defined: gold / navy / cream / ink scales, `--color-panel`,
+  `--color-on-accent`, `--chart-1..5` + `--chart-other`/`--chart-grid`,
+  `--level-1..6`.
+- `public/site.css` had **four** token blocks; merged to two (`:root`
+  and `.dark`), all 53 tokens repointed at `@theme`.
+- `lib/campus-buildings.ts`: 6 hand-picked pin colours → one `PIN`.
+- `lib/gamification/levels.ts`: a rainbow → a **sequential** gold ramp.
+  Rank is ordinal, so it is one hue getting brighter, not six unrelated
+  hues.
+- Chart series are not the brand fills. `#FFD200` is 1.29:1 on cream and
+  `#003A60` reads as grey, so the five hues were re-stepped and validated
+  (lightness band, chroma floor, CVD ΔE, normal-vision floor, contrast).
+  Dark is a **selected** set, not a flip — the light steps leave violet at
+  2.77:1 on navy.
+
+### Two guards, because a linter cannot see this class of bug
+
+`scripts/check-brand.mjs` fails the build on raw colour outside `@theme`,
+and now also enforces three structural invariants learned the hard way:
+
+1. **Literal fallbacks must not drift.** Every `var(--color-x, #hex)` in
+   site.css is checked against `@theme`.
+2. **Token chains must resolve.** A token defined as `var(--itself)` is
+   invalid CSS, so every consumer silently drops to its fallback. The
+   guard now follows `var()` chains and fails on a loop or a dangling ref.
+3. **Theme-invariant tokens may not reference flipping names.** A
+   `:root` token that `.dark` does not override is the same colour day
+   and night, so it must not be built from a name `globals.css` flips.
+
+`e2e/contrast.spec.ts` (Playwright) measures *rendered* contrast on
+`/`, `/guides`, `/company`, `/hub` in both themes. A linter cannot catch
+a pairing of two perfectly legal tokens; this can.
+
+### Bugs this actually caught — the reason the guards exist
+
+- **`/guides` shipped rendering fully black.** Tailwind **tree-shakes
+  `@theme` variables no utility references**. Marketing routes use
+  site.css class names, so their chunk stripped the variables and every
+  `var(--color-x)` resolved to nothing. `@theme static` did *not* fix it.
+  Fixed with literal fallbacks + drift enforcement (guard 1).
+- **The app shell was never repainted, while CI stayed green.** Renaming
+  `@theme`'s `orange-*` → `gold-*` silently *detached* 168 utility classes
+  onto Tailwind's **built-in** `--color-orange-*` palette. `/hub` stayed
+  fully orange and nothing failed.
+- **Three self-referential tokens** (`--color-navy-700`, `--color-navy-600`,
+  `--color-panel-elevated`, each `var(--itself)`) made `--color-panel`
+  invalid inside `.dark`. Every card at night fell through to the *light*
+  fallback — cream cards under cream ink, 1.07:1. One defect, all four
+  `glass-panel`/`resource-row` failures. Now guard 2.
+- **`--ink-light` inverted at night.** Cream ink for dark bands, defined as
+  `var(--color-cream-50)` — a name `.dark` flips to the navy ramp. Cream
+  labels on navy became navy-on-navy on any route that kept the variable;
+  marketing routes tree-shook it and the fallback masked it. Now guard 3.
+- **A duplicate `.announce-close`** in the homepage band sat *later* in the
+  file than the canonical rule and reintroduced white-on-gold (1.31:1).
+  The announce bar is gold in **both** themes, so its tag, link and close
+  now wear `--on-accent`, never `--ink-light`.
+
+### Measurement bugs — recorded because they cost more than the real bugs
+
+Contrast auditing produced false results three times before it produced a
+true one. Anyone extending the suite should know:
+
+1. Measuring in a **detached iframe** returned nonsense — readable nav at
+   1.23:1.
+2. **No visibility filter**, so a closed hamburger menu was audited.
+3. The big one: `c.match(/[\d.]+/g)` parsed Tailwind v4's
+   `oklab(0.958 0.0004 0.0098 / 0.8)` as near-black RGB. Every colour is
+   now normalized through a 1×1 canvas with alpha compositing.
+
+A fourth landed while writing *this* entry: auditing `.dark` declarations
+against the **light** `@theme` values reported 11 mismatches, of which 9
+were false — `globals.css` deliberately flips the `cream-*`/`ink-*` names
+to the navy ramp inside `.dark`. **Compare a `.dark` rule against the
+`.dark` table, never the light one.**
+
+### Known broken — start here
+
+- **The homepage composition, not its tokens.** Tokens resolve correctly
+  (cream ground, navy ink). But the homepage band's `--text-dark-*` family
+  means *"ink for the dark hero"*, and the repaint turned that hero cream.
+  So `--text-dark-3` now paints 40%-navy ghosts on a light ground
+  (`.stat-lbl` 2.47:1) and gold floats on near-white with no navy mass to
+  anchor it. The page reads flat and cheap. **This is a composition
+  problem — re-establish a navy band, or retire the `--text-dark-*`
+  aliases; do not just raise the alphas.**
+- **Contrast suite: 8 passed / 6 failed.** All six are `/`, `/guides`,
+  `/company`. The `/guides` dark failures are fixed; what remains is the
+  homepage issue above plus `.brand-mark` ("L", 1.04:1).
+- **Decide before "fixing":** `.ps-*` is a 7–8px **mock phone screen** and
+  `.ls-item` a deliberately-ghosted marquee. These are pictures of a UI,
+  not UI. They likely want `aria-hidden` and an audit skip, not more
+  contrast — inflating them will wreck the mock.
+- **Visual baselines were never generated.** `e2e/visual.spec.ts` exists;
+  run `npx playwright test --update-snapshots` *after* the homepage is
+  fixed, or the baselines pin the broken look.
+- **Playwright is not wired into `.github/workflows/ci.yml`** yet.
+- `SUPABASE_ACCESS_TOKEN` / `SUPABASE_PROJECT_ID` repo secrets are unset,
+  so CI's schema-drift job **skips** rather than fails.
+
+### Near-miss worth keeping
+
+`app/api/` does not exist, and the leaderboard cron was nearly documented
+as 404ing. Route groups do not affect URLs — the handler is at
+`app/(app)/api/cron/refresh-leaderboard`, returns 401 unauthenticated, and
+its RPC is present. Verify a route by requesting it, not by reading paths.
+
 ## [2026-05-15] — Marketing → one React/MDX system
 
 Retired the hand-crafted static-HTML marketing system. Every marketing

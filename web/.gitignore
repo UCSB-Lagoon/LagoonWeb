@@ -7,3 +7,9 @@ node_modules
 *.tsbuildinfo
 next-env.d.ts
 .lighthouseci
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

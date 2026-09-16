@@ -15,48 +15,48 @@
      ──────────────────────────────────────────────────────────────────── */
 
   /* Surfaces — cream page, white cards */
-  --bg: var(--color-cream-50);
-  --bg-alt: var(--color-cream-100);
-  --panel: var(--color-panel);
-  --panel-elevated: var(--color-panel-elevated);
-  --panel-soft: var(--color-panel);
+  --bg: var(--color-cream-50, #f4f1ea);
+  --bg-alt: var(--color-cream-100, #ebe7dc);
+  --panel: var(--color-panel, #fbf9f3);
+  --panel-elevated: var(--color-panel-elevated, #ffffff);
+  --panel-soft: var(--color-panel, #fbf9f3);
 
   /* Dark surfaces — the navy the app is built on */
-  --night: var(--color-navy-900);
-  --night-mid: var(--color-navy-800);
+  --night: var(--color-navy-900, #001e30);
+  --night-mid: var(--color-navy-800, #002a42);
   --night-surface: var(--color-navy-700);
   --night-border: rgba(255, 255, 255, 0.10);
   --night-border-bright: rgba(255, 255, 255, 0.18);
 
   /* Text — light bg */
-  --ink: var(--color-ink-900);
-  --ink-soft: var(--color-ink-500);
-  --ink-muted: var(--color-ink-400);   /* 4.85:1 on cream — was 3.16 */
+  --ink: var(--color-ink-900, #001e30);
+  --ink-soft: var(--color-ink-500, #4a5d6b);
+  --ink-muted: var(--color-ink-400, #586c7a);   /* 4.85:1 on cream — was 3.16 */
 
   /* Text — dark bg */
-  --ink-light: var(--color-cream-50);
+  --ink-light: var(--color-ink-light, #f4f1ea);
   --ink-light-soft: rgba(244, 241, 234, 0.78);
   --ink-light-muted: rgba(244, 241, 234, 0.55);
 
   /* Borders */
-  --line: var(--color-cream-200);
-  --line-strong: var(--color-cream-200);
+  --line: var(--color-cream-200, #dfd9ca);
+  --line-strong: var(--color-cream-200, #dfd9ca);
 
   /* Brand */
-  --gold: var(--color-gold-500);              /* fills: buttons, badges, bars */
-  --gold-bright: var(--color-gold-300);
-  --gold-pressed: var(--color-gold-600);
+  --gold: var(--color-gold-500, #ffd200);              /* fills: buttons, badges, bars */
+  --gold-bright: var(--color-gold-300, #ffdd3d);
+  --gold-pressed: var(--color-gold-600, #e6bd00);
   --gold-dim: rgba(255, 210, 0, 0.16);
-  --gold-ink: var(--color-gold-ink);          /* gold you can READ on cream — 4.5:1 */
-  --on-accent: var(--color-ink-900);         /* ink that belongs on a gold/painted fill */
+  --gold-ink: var(--color-gold-ink, #8a6a00);          /* gold you can READ on cream — 4.5:1 */
+  --on-accent: var(--color-on-accent, #001e30);   /* does NOT flip — see globals.css */         /* ink that belongs on a gold/painted fill */
 
-  --pacific: var(--color-navy-500);           /* raised navy: painted blocks, plates */
-  --pacific-ink: var(--color-navy-500);       /* pacific you can read on cream */
+  --pacific: var(--color-navy-500, #003a60);           /* raised navy: painted blocks, plates */
+  --pacific-ink: var(--color-navy-500, #003a60);       /* pacific you can read on cream */
 
   /* Course-block hues — data, not decoration. Mirrors LagoonCourseColor. */
-  --teal: var(--color-teal-400);
-  --coral: var(--color-coral-400);
-  --violet: var(--color-violet-400);
+  --teal: var(--color-teal-400, #2bb3a3);
+  --coral: var(--color-coral-400, #e8734a);
+  --violet: var(--color-violet-400, #9b7bd8);
   --terracotta: var(--coral);
   --kelp: var(--teal);
   --seafoam: var(--teal);
@@ -95,22 +95,22 @@
      silently won over everything above it. That cost two rounds of the
      2026-09 repaint: editing the real tokens changed nothing visible.
      They are aliases now, resolved from the tokens above, in one place. */
-  --bg: var(--color-cream-50);
-  --bg-2: var(--color-cream-100);
-  --orange: var(--color-gold-500);
-  --orange-2: var(--color-gold-300);
-  --orange-deep: var(--color-gold-600);
+  --bg: var(--color-cream-50, #f4f1ea);
+  --bg-2: var(--color-cream-100, #ebe7dc);
+  --orange: var(--color-gold-500, #ffd200);
+  --orange-2: var(--color-gold-300, #ffdd3d);
+  --orange-deep: var(--color-gold-600, #e6bd00);
   --orange-mist: rgba(255,210,0,0.14);
-  --on-accent: var(--color-ink-900);
-  --warm-dark: var(--color-navy-900);
-  --warm-dark-2: var(--color-navy-800);
-  --text-dark: var(--color-ink-900);
+  --on-accent: var(--color-on-accent, #001e30);
+  --warm-dark: var(--color-navy-900, #001e30);
+  --warm-dark-2: var(--color-navy-800, #002a42);
+  --text-dark: var(--color-ink-900, #001e30);
   --text-dark-2: rgba(0,30,48,0.66);
   --text-dark-3: rgba(0,30,48,0.40);
-  --text-light: var(--color-cream-50);
+  --text-light: var(--color-ink-light, #f4f1ea);
   --text-light-2: rgba(244,241,234,0.76);
   --text-light-3: rgba(244,241,234,0.44);
-  --orange-ink: var(--color-gold-ink);
+  --orange-ink: var(--color-gold-ink, #8a6a00);
   --sys: var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --mono: var(--font-space-mono), 'Courier New', monospace;
 
@@ -247,7 +247,8 @@ h3 {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.75);
+  /* The announce bar is a gold fill — white here is 1:1. */
+  color: color-mix(in srgb, var(--on-accent) 75%, transparent);
   font-size: 22px;
   line-height: 1;
   cursor: pointer;
@@ -255,7 +256,7 @@ h3 {
 }
 
 .announce-close:hover {
-  color: var(--ink-light);
+  color: var(--on-accent);
 }
 
 /* Set by the boot script in app/layout.tsx for visitors who already
@@ -278,19 +279,21 @@ h3 {
   text-transform: uppercase;
   padding: 3px 8px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.22);
-  color: var(--ink-light);
+  /* The bar is a gold fill in BOTH themes, so its furniture wears --on-accent,
+     never --ink-light: cream on gold is 1.2:1. */
+  background: color-mix(in srgb, var(--on-accent) 16%, transparent);
+  color: var(--on-accent);
 }
 
 .announce-bar a {
-  color: var(--ink-light);
+  color: var(--on-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(255, 255, 255, 0.5);
+  text-decoration-color: color-mix(in srgb, var(--on-accent) 45%, transparent);
 }
 
-.announce-bar a:hover { text-decoration-color: var(--ink-light); }
+.announce-bar a:hover { text-decoration-color: var(--on-accent); }
 
 @media (max-width: 600px) {
   .announce-bar { font-size: 12px; padding: 10px 40px; }
@@ -1777,34 +1780,37 @@ h3 {
    the same mechanism as the app (globals.css). This keeps OS preference
    as the default AND makes the marketing theme toggle work. */
 .dark {
-  --bg: var(--color-cream-50);              /* app backgroundDark */
-  --bg-alt: var(--color-cream-100);          /* app secondaryBackgroundDark */
-  --panel: var(--color-panel);           /* app cardBackgroundDark */
-  --panel-elevated: var(--color-panel-elevated);  /* app cardBackgroundElevatedDark */
-  --panel-soft: var(--color-panel);
+  --bg: var(--color-cream-50, #001e30);              /* app backgroundDark */
+  --bg-alt: var(--color-cream-100, #002a42);          /* app secondaryBackgroundDark */
+  --panel: var(--color-panel, #00304c);           /* app cardBackgroundDark */
+  --panel-elevated: var(--color-panel-elevated, #003a5c);  /* app cardBackgroundElevatedDark */
+  --panel-soft: var(--color-panel, #00304c);
 
-  --ink: var(--color-ink-900);             /* cream */
-  --ink-soft: var(--color-ink-500);
-  --ink-muted: var(--color-ink-400);
+  --ink: var(--color-ink-900, #f4f1ea);             /* cream */
+  --ink-soft: var(--color-ink-500, #7e95a3);
+  --ink-muted: var(--color-ink-400, #7e95a3);
 
-  --line: var(--color-cream-200);
-  --line-strong: var(--color-cream-200);
+  --line: var(--color-cream-200, #14415e);
+  --line-strong: var(--color-cream-200, #14415e);
 
   /* Gold reads at ~11.8:1 on navy, so at night it needs no deepening —
      unlike on cream, where --gold-ink exists for exactly that reason. */
-  --gold-ink: var(--color-gold-ink);
-  --pacific-ink: var(--color-navy-500);
+  --gold-ink: var(--color-gold-ink, #ffd200);
+  /* On navy, pacific has to come UP, not down — #003a60 is the light-mode
+     value and reads as a hole at night. Nothing consumes this yet; it is kept
+     correct so the first consumer doesn't inherit a bug. */
+  --pacific-ink: var(--color-navy-300, #7fb0d8);
 
   /* Homepage aliases, dark. Merged from the second .dark block. */
-  --bg: var(--color-cream-50);
-  --bg-2: var(--color-cream-100);
-  --warm-dark: var(--color-navy-900);
-  --warm-dark-2: var(--color-navy-800);
-  --text-dark: var(--color-ink-900);
+  --bg: var(--color-cream-50, #001e30);
+  --bg-2: var(--color-cream-100, #002a42);
+  --warm-dark: var(--color-navy-900, #001e30);
+  --warm-dark-2: var(--color-navy-800, #002a42);
+  --text-dark: var(--color-ink-900, #f4f1ea);
   --text-dark-2: rgba(244, 241, 234,0.70);
   --text-dark-3: rgba(244, 241, 234,0.38);
   --orange-mist: rgba(255, 210, 0,0.13);
-  --orange-ink: var(--color-gold-ink);
+  --orange-ink: var(--color-gold-ink, #ffd200);
 
 }
 
@@ -1862,12 +1868,9 @@ h3 {
       font-size: 13.5px; font-weight: 600;
       position: relative; z-index: 500;
     }
-    .announce-close {
-      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: rgba(255,255,255,0.75);
-      font-size: 22px; line-height: 1; cursor: pointer; padding: 4px 8px;
-    }
-    .announce-close:hover { color: var(--ink-light); }
+    /* .announce-close is NOT redeclared here on purpose. The homepage band is
+       later in the file, so a copy would win over the canonical rule above and
+       reintroduce white-on-gold (1.31:1) — which is exactly what it did. */
 
     /* ── NAV ── */
     #nav {

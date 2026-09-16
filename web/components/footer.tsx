@@ -38,7 +38,7 @@ export function Footer() {
           <div className="flex items-center gap-2">
             <span
               aria-hidden="true"
-              className="grid place-items-center w-8 h-8 rounded-lg bg-gold-500 text-ink-900 font-display font-extrabold text-lg leading-none"
+              className="grid place-items-center w-8 h-8 rounded-lg bg-gold-500 text-on-accent font-display font-extrabold text-lg leading-none"
             >
               L
             </span>
