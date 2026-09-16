@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
+/** All internal; the App Store CTA below is the drawer's only outbound link. */
 const LINKS = [
   { href: "/#features", label: "Features" },
   { href: "/#classmates", label: "Community" },
@@ -43,9 +45,9 @@ export function MarketingMobileNav() {
       {open && (
         <div className="mnav-drawer" role="dialog" aria-label="Site menu">
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
               {l.label}
-            </a>
+            </Link>
           ))}
           <a
             className="mnav-cta"
