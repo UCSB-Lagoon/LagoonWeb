@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Space_Grotesk, Space_Mono } from "next/font/google";
+import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -29,10 +29,10 @@ export const metadata: Metadata = {
  * surfaces render it, and preloading it here made every marketing page
  * fetch two font files it never uses.
  */
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
 });
 
 const spaceMono = Space_Mono({
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${spaceMono.variable}`}
+      className={`${inter.variable} ${spaceMono.variable}`}
       suppressHydrationWarning
     >
       <head>

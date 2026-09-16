@@ -15,19 +15,42 @@
 
 ---
 
-## Color Palette (warm editorial light theme)
+## Color Palette (navy / cream / gold)
 
-Dark-on-cream, warm orange accent. Light-mode first; the app additionally
-supports a class-based dark mode (`globals.css` `.dark`) — marketing pages are
-light only.
+**Aligned to the iOS app's 2026-09 repaint.** This site used to carry its own
+warm-orange identity deliberately, and that was the right call while the app
+was Deep Pacific + terracotta with serif-italic mastheads — a genuinely
+different animal. The repaint changed the premise: the app's light mode is now
+cream-ground with navy ink and a gold accent, which is what this site already
+was in structure. They are one brand again.
 
-| Role | Token | Hex | Usage |
-|---|---|---|---|
-| Page background | `cream-50` | `#faf6ee` | Body / page background (all systems) |
-| Secondary surface | `cream-100` | `#f4ecdb` | Subtle fills, hover, code blocks |
-| Divider / border | `cream-200` | `#ead9bf` | Card borders, hairlines |
-| Card surface | `panel` | `#ffffff` | Cards, panels, elevated surfaces |
-| Heading ink | `ink-900` | `#1e1410` | Headings, primary text |
+Upstream source: `Lagoon/DESIGN_SYSTEM.md` in the app repo. Four decisions:
+
+1. Navy `#001E30` ground, cream `#F4F1EA` ink — inverted for light pages.
+2. Electric Gold `#FFD200` is the **only** accent, once per screen.
+3. Nothing is a gradient; nothing casts a shadow. Surfaces separate by a
+   lighter step plus a hairline.
+4. One tight grotesque (**Inter** on web, SF Pro in the app), negative
+   tracking at display sizes.
+
+### Fill vs. ink — the rule that bites most often
+
+Gold is a **fill**, not a text colour. `#FFD200` on the cream ground is
+**1.3:1**; it is invisible. Anything you actually read uses `--gold-ink`
+(`#8a6a00`, 4.5:1 on cream). At night gold sits at ~11.8:1 on navy, so
+`--gold-ink` resolves to `#FFD200` inside `.dark` and you can use the same
+token in both themes.
+
+The same trap runs the other way for navy: `--pacific` is a fill; as ink on
+the night page it is ~1.3:1, so read text uses `--pacific-ink`.
+
+| Role | Token | Light | Dark | Usage |
+|---|---|---|---|---|
+| Page background | `--bg` | `#f4f1ea` | `#001e30` | Body / page |
+| Secondary surface | `--bg-alt` | `#ebe7dc` | `#002a42` | Subtle fills, hover |
+| Card surface | `--panel` | `#fbf9f3` | `#00304c` | Cards, panels |
+| Divider | `--line` | `#dfd9ca` | `rgba(255,255,255,.10)` | Hairlines — the only separator |
+| Heading ink | `--ink` | `#001e30` | `#f4f1ea` | Headings, primary text |
 | Body ink | `ink-700` | `#2a1a0f` | Body copy |
 | Muted ink | `ink-500` | `#6b5b4a` | Secondary copy, captions |
 | Faint ink | `ink-400` | `#8c7a66` | Labels, metadata |
