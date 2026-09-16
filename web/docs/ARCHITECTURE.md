@@ -1,67 +1,187 @@
 # Architecture
 
-## High-level
+> Rewritten 2026-09-15. The previous version described a system that had
+> drifted: two sites on two domains, an `xp_events` table, and a `grant_xp()`
+> write path. None of those exist. Corrections are called out inline so the
+> drift is visible rather than quietly patched.
+
+## What this is, honestly
+
+One Next.js 15 app on Vercel, reading a Supabase Postgres that the **iOS app
+owns**. Roughly 130 signups. Nothing here is throughput-constrained and
+nothing needs to be: the binding constraint is **how fast one person can
+change it without breaking something**, and the design below is argued on that
+basis, not on load.
+
+If that changes — if a week-zero push lands thousands of students at once —
+the section "When scale actually arrives" says what to do and in what order.
+Doing any of it sooner is cost without benefit.
+
+## High level
 
 ```
-       ┌──────────────────────┐
-       │  lagoonucsb.com      │   ← static marketing site (root of repo)
-       └──────────────────────┘
-       ┌──────────────────────┐
-       │  app.lagoonucsb.com  │   ← Next.js 15 (this directory)
-       └─────────┬────────────┘
-                 │ supabase-js (anon key, RLS-gated)
-                 ▼
-       ┌──────────────────────┐        ┌──────────────────────┐
-       │  Supabase Postgres   │◄──────►│  Lagoon mobile app   │
-       │  + Auth + Realtime   │        └──────────────────────┘
-       └──────────────────────┘
+                      lagoonucsb.com  (one Vercel project, one domain)
+      ┌──────────────────────────────────────────────────────────────┐
+      │  app/(marketing)/         │  app/(app)/                      │
+      │  public, ISR              │  signed-in + public dashboards   │
+      │  / schedule guides go     │  /hub /stats /leaderboard        │
+      │  friends wrapped company  │  /captains /map /me /admin       │
+      │  styled by public/site.css│  styled by Tailwind @theme       │
+      └───────────┬──────────────────────────┬───────────────────────┘
+                  │ Server Components → lib/queries.ts
+                  │ supabase-js, anon key, RLS-gated
+                  ▼                          ▼
+      ┌────────────────────────┐   app/(app)/api/*  (route handlers)
+      │  Supabase Postgres     │   ├ cron/refresh-leaderboard  (service role)
+      │  Auth · RLS · Realtime │   ├ captains, feedback        (public writes)
+      └───────────┬────────────┘   └ admin/*                   (service role)
+                  │
+                  ▼
+      ┌────────────────────────┐
+      │  Lagoon iOS app        │  ← owns the schema (60+ migrations)
+      └────────────────────────┘
 ```
+
+**Correction.** The old diagram showed `lagoonucsb.com` as a static marketing
+site and `app.lagoonucsb.com` as a separate Next app. There is one app and one
+domain; marketing became React/MDX under `app/(marketing)/` and `home.html` is
+gone. Anything still written as if there are two deployables is stale.
+
+## The actual architectural problem: two styling systems
+
+This is the one worth fixing, and it is not in the data layer.
+
+| | lines | loaded by | consumed as |
+|---|---|---|---|
+| `public/site.css` | 2977 | `<link>` in the marketing layout | hand-written class names |
+| `app/globals.css` | 316 | imported by the root layout | Tailwind v4 `@theme` tokens |
+
+Both define the brand. They are supposed to be kept in sync by hand — the brand
+doc says "if you change a token, change it in **both** places in the same
+commit." That instruction is the smell: it is a consistency requirement with no
+mechanism behind it.
+
+What it cost in practice, during the 2026-09 repaint:
+
+1. `site.css` declares `:root` **three times** — top of file, a HOMEPAGE band
+   folded in from the old `home.html`, and a `.dark` block, plus a second
+   `.dark` inside the homepage band. Same specificity, so the last one wins.
+   Repainting the first block changed nothing visible and looked like a caching
+   problem for two rounds.
+2. Renaming the Tailwind scale from `orange-*` to `gold-*` did not repaint the
+   168 utility classes using it — it **detached** them. Tailwind v4 emits
+   `--color-orange-*` from its own default palette, so every `bg-orange-500`
+   silently fell through to Tailwind's orange. The build passed, typecheck
+   passed, and the app shell looked untouched while the tokens underneath had
+   moved. That is the worst failure mode available: green CI, wrong output.
+3. 162 colour values lived in neither system — literals in rules that never
+   went through a token at all.
+
+**Target:** one source of truth, `@theme` in `globals.css`, with `site.css`
+reduced to layout/component rules that reference those tokens and nothing else.
+
+**Sequence** (each step independently shippable, none of it a rewrite):
+
+1. Delete the duplicate `:root` blocks in `site.css`; keep one, at the top.
+   *Mechanical. Removes the class of bug that cost two rounds above.*
+2. Replace `site.css`'s own colour tokens with `var(--color-*)` from `@theme`.
+   One brand definition; `site.css` becomes a consumer.
+3. Add a CI grep that fails on a raw hex in `app/`, `components/` or
+   `site.css` outside the `@theme` block. This is what makes step 2 stay true —
+   without it the file drifts back, which is exactly how it got here.
+4. Only then, opportunistically, port marketing sections to Tailwind as they
+   are touched. **Not a big-bang migration** — there is no deadline pressure
+   and a 2977-line rewrite risks more than it fixes.
 
 ## Request flow
 
-1. **Read paths** are Server Components calling `lib/queries.ts`. Each page
-   declares an explicit `revalidate` window. Anything that needs a real socket
-   subscribes from a `"use client"` component on top of the SSR'd snapshot.
-2. **Write paths** call the `grant_xp(kind, ref_table, ref_id)` Postgres
-   function — never insert into `xp_events` directly. The function is
-   `security definer`, so it can enforce point values centrally and ignore
-   client-side tampering.
-3. **Cron paths** live under `/api/cron/*` and are invoked by Vercel Cron. They
-   use the **service-role key** (never exposed to the browser) and run
-   privileged maintenance like refreshing the materialized leaderboard.
+**Reads.** Server Components call `lib/queries.ts` (323 lines, the single data
+access layer — keep it that way). Each page declares an explicit cache window.
+Anything needing a live socket subscribes from a `"use client"` component
+layered on the SSR'd snapshot.
 
-## Caching strategy
+**Writes.** Route handlers under `app/(app)/api/`. Public writes (captain
+applications, feedback) use the anon key behind RLS; admin mutations and the
+cron use the service-role key, which never reaches the browser.
 
-| Page          | Strategy                              | Why                                |
-|---------------|---------------------------------------|------------------------------------|
-| `/`           | `revalidate: 30` + Realtime overlay   | Snapshot is fine, feed is live.    |
-| `/leaderboard`| `revalidate: 60` (mat. view = cron)   | Already pre-aggregated.            |
-| `/me`         | `dynamic = "force-dynamic"`           | Personal data, must be fresh.      |
-| `/challenges` | `revalidate: 60`                      | Changes once per week.             |
+> **Correction.** The old doc said writes call `grant_xp(kind, ref_table,
+> ref_id)` and "never insert into `xp_events` directly." Neither exists: the
+> table is `user_xp_events`, and `grant_xp` appears nowhere in either repo.
+> XP is written by the iOS app (app-repo migration `032_gamification_*`).
+> **The web does not write XP at all** — and that is the right boundary, so the
+> rule should be stated as one: *XP is the mobile app's to grant; the web
+> reads it.*
 
-## Realtime budget
+**Cron.** `vercel.json` schedules `/api/cron/refresh-leaderboard` daily at
+07:00 UTC, which calls the `refresh_leaderboard_weekly()` RPC to rebuild the
+`leaderboard_weekly` materialized view. Verified present and guarded (401
+without the secret). Route groups don't affect URLs, so a handler living at
+`app/(app)/api/...` still serves `/api/...` — worth knowing before concluding
+it's missing.
 
-We deliberately keep realtime small:
+## Caching
 
-- **Activity feed** — INSERT subscription on `xp_events`, last 30 events.
-- **(later) Leaderboard final hour** — same channel, only on the leaderboard page during weekly close-out.
-- **(later) Vibe meter** — could subscribe; today it's a server-rendered count.
+| Page | Strategy | Why |
+|---|---|---|
+| `/` and marketing | ISR | Content changes on deploy, not per request |
+| `/leaderboard` | `revalidate: 60` | Reads a matview the cron rebuilds daily |
+| `/challenges` | `revalidate: 60` | Changes about once a week |
+| `/hub`, `/stats` | ISR + realtime overlay | Snapshot is fine; the feed is live |
+| `/me`, `/admin/*`, `/map` | `force-dynamic` | Personal or privileged |
 
-Pages that don't need realtime do **not** open a channel. Channels are torn
-down on route change via `useEffect` cleanup.
+The one inconsistency worth naming: `/leaderboard` revalidates every 60s
+against a view refreshed every 24h. The 60s window buys nothing — it just
+re-serves the same rows. Either match the window to the matview (`revalidate:
+3600`) or move the refresh to a trigger. Neither is urgent at this size; the
+point is that the two numbers should be related, and right now they aren't.
 
-## Auth
+## The schema boundary — the real coupling risk
 
-Magic-link via Supabase. The mobile app and web share one `auth.users` table,
-so a student who signs up in either client gets a single profile row (created
-by the `on_auth_user_created` trigger).
+The iOS repo owns the schema (60+ migrations). This repo adds 6 "additive"
+migrations on top and otherwise **reads tables it does not own**.
 
-Server Components read the session from cookies via `@supabase/ssr`. The
-`middleware.ts` refreshes expired tokens on every request.
+That is a defensible split — one writer, one schema — but it has no
+enforcement. A rename in the app repo breaks the website at runtime, not at
+build time, and nothing tells you until a page 500s.
 
-## Why Next.js 15 (and not the static site)
+Cheap mitigations, in order of value per effort:
 
-The marketing site (`/index.html` etc.) lives at the root of the repo and ships
-to `lagoonucsb.com`. It's intentionally untouched. The web app lives in `web/`
-and ships to `app.lagoonucsb.com` as a **separate Vercel project** so the two
-can be deployed independently.
+1. **Run `npm run db:types` in CI** against the real database. The generated
+   types already exist; wiring them to fail the build turns a runtime 500 into
+   a red check. This is the single highest-value item in this document.
+2. Keep the list of app-owned tables the web reads in one place (`lib/queries.ts`
+   already is that place — document it as the contract).
+3. When a table the web depends on changes, treat it like an API change,
+   because it is one.
+
+## When scale actually arrives
+
+Not now. In rough order of when each becomes real:
+
+| Trigger | Move |
+|---|---|
+| Leaderboard reads dominate | The matview already exists — raise its refresh rate |
+| Realtime channels get expensive | Fan out through one channel, not one per widget |
+| Signups spike at week zero | Supabase connection pooling; nothing app-side |
+| Read latency by region | Vercel edge + a read replica |
+
+None of this is worth building ahead of the trigger. The cost of a premature
+queue or cache tier here is paid every time one person tries to change a page.
+
+## Trade-offs taken
+
+| Decision | Why | What it costs |
+|---|---|---|
+| One Next app, not two deployables | One router, one auth session, one deploy | Marketing carries the app's JS baseline |
+| Server Components + `lib/queries.ts` | No API layer to maintain for reads | Reads are coupled to Next's rendering model |
+| Supabase RLS instead of an API tier | One less service; the mobile app already relies on it | Authorisation lives in SQL, which is harder to test |
+| Schema owned by the iOS repo | One writer, no two-way migration conflicts | The web can break from a change in another repo |
+| Keeping `site.css` for now | A 2977-line rewrite risks more than it fixes | Two styling systems until the sequence above lands |
+
+## What I would revisit first
+
+1. **CI type generation against the live schema.** Highest value, lowest effort.
+2. **The duplicate `:root` blocks.** One afternoon; removes a whole bug class.
+3. **The hex-literal CI check.** What keeps step 2 from silently regressing.
+4. **`/leaderboard`'s revalidate window.** Small, but it is a number that
+   currently means nothing.
