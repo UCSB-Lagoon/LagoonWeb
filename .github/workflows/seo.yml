@@ -18,6 +18,15 @@ jobs:
     defaults:
       run:
         working-directory: web
+    env:
+      # The app reads these at request time; without them supabase-js throws
+      # and middleware 500s every route, which is why this job could not even
+      # start a server. Placeholders, not secrets: no CI job should talk to
+      # the production database. Queries fail at the network layer and the
+      # `?? []` fallbacks render empty states — real UI, worth measuring, and
+      # the same pixels a student with no data sees.
+      NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
     steps:
       - uses: actions/checkout@v4
 

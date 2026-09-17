@@ -168,13 +168,33 @@ async function contrastFailures(page: Page, opts: { nonText?: boolean } = {}): P
   }, { nonText: !!opts.nonText });
 }
 
+/**
+ * Navigate, and refuse to measure anything that is not a real 200.
+ *
+ * Without this the suite grades Next's error page and calls it a pass. That
+ * is not hypothetical: with no Supabase env — which is exactly what CI has —
+ * `/hub`, `/stats`, `/leaderboard` and `/captains` all return 500, and all
+ * eight of those tests passed anyway, because an error page is dark text on
+ * a white ground and clears AA comfortably.
+ *
+ * Same failure as the dev-server one this suite was built to fix: the
+ * measurement was fine, the thing being measured was not the app. A contrast
+ * suite has to assert what it is looking at.
+ */
+async function goto(page: Page, route: string) {
+  const res = await page.goto(route, { waitUntil: "networkidle" });
+  expect(res, `no response for ${route}`).not.toBeNull();
+  expect(res!.status(), `${route} did not render — measuring an error page proves nothing`)
+    .toBe(200);
+}
+
 for (const route of ROUTES) {
   for (const theme of ["light", "dark"] as const) {
     test(`contrast · ${route} · ${theme}`, async ({ page }) => {
       await page.addInitScript((t) => {
         try { localStorage.setItem("theme", t); } catch {}
       }, theme);
-      await page.goto(route, { waitUntil: "networkidle" });
+      await goto(page, route);
       await page.evaluate((t) => {
         document.documentElement.classList.toggle("dark", t === "dark");
       }, theme);
@@ -271,7 +291,7 @@ for (const theme of ["light", "dark"] as const) {
     await page.addInitScript((t) => {
       try { localStorage.setItem("theme", t); } catch {}
     }, theme);
-    await page.goto("/hub", { waitUntil: "networkidle" });
+    await goto(page, "/hub");
     await page.evaluate(({ t, html }) => {
       document.documentElement.classList.toggle("dark", t === "dark");
       document.body.innerHTML = html;
@@ -295,7 +315,7 @@ for (const theme of ["light", "dark"] as const) {
  * see them.
  */
 test("contrast · handbook tokens flip with the theme", async ({ page }) => {
-  await page.goto("/hub", { waitUntil: "networkidle" });
+  await goto(page, "/hub");
   const read = (dark: boolean) =>
     page.evaluate((d) => {
       document.documentElement.classList.toggle("dark", d);
