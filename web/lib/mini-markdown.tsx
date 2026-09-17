@@ -4,7 +4,53 @@ import React from "react";
  * Tiny, dependency-free Markdown renderer — just enough for the team handbook:
  * h1/h2/h3, paragraphs, ul/ol, GFM tables, fenced + inline code, bold, links,
  * task-list checkboxes, hr, blockquote. Not a general-purpose parser.
+ *
+ * ── On the accent used here ────────────────────────────────────────────────
+ * This file used stock Tailwind `orange-*`, almost certainly because
+ * public/site.css calls the brand gold `--orange` / `--orange-ink`. Those are
+ * aliases; the actual orange scale is not in the brand and three of its
+ * pairings failed AA. Measured against the `.card` this renders on
+ * (#ffffff light, --color-navy-700 #00304c dark), as Tailwind v4 paints them:
+ *
+ *   orange-600 link      3.58:1 light / 3.84:1 dark   (needs 4.5)
+ *   orange-700 hover     5.22:1 light / 2.63:1 dark
+ *   bg-orange-50/50      a LIGHT tint that never flips, so at night the cream
+ *                        ink composited over it landed at 1.64:1
+ *
+ * The replacements are ink for text and gold for the rule, which is the
+ * fill-vs-ink split @theme already encodes. The link is NOT gold: --gold-ink
+ * (#8a6a00) has no headroom in light mode — 5.07:1 on the white card, but
+ * 4.49:1 on the cream page and 4.10:1 on the `cream-100` used by the
+ * blockquote and the table head right here in this file. An ink step is
+ * chosen against the worst surface it lands on, and for a link inside this
+ * renderer that surface is cream-100, not the card. So gold carries the
+ * underline (a rule needs 3:1, and gold-700 clears it on every surface here:
+ * 4.10–5.07 light, 9.48–11.78 dark) while ink-900 carries the text
+ * (13.84–17.10 light, 12.19–15.16 dark, everywhere).
+ *
+ * e2e/contrast.spec.ts measures all of this after paint — /admin/handbook is
+ * behind an auth redirect, so the check is a synthetic fixture of these exact
+ * class strings on these exact surfaces.
  */
+/**
+ * The three pairings the note above turned over, named so e2e/contrast.spec.ts
+ * measures the strings that actually ship instead of a copy of them.
+ *
+ * /admin/handbook is behind an auth redirect, so the route sweep in that suite
+ * cannot reach this renderer at all — the check has to be a synthetic fixture,
+ * and a fixture holding its own copy of these class names would drift the
+ * first time someone edited one. Same reason public/site.css fallbacks are
+ * verified against @theme rather than trusted: a comment is not a mechanism.
+ */
+export const MD_CLASS = {
+  /* Ink carries the text, gold carries the rule. See the note above for why
+     the text is not gold: --gold-ink is 4.10:1 on the cream-100 that the
+     blockquote and the table head below both use. */
+  link: "text-ink-900 underline decoration-gold-700 decoration-2 underline-offset-2 hover:decoration-4",
+  blockquote: "border-l-4 border-gold-700 bg-cream-100 pl-4 py-2 my-4 text-ink-700 italic",
+  list: "list-disc pl-6 space-y-0.5 my-3 marker:text-gold-700",
+} as const;
+
 export function renderMarkdown(md: string): React.ReactElement {
   const lines = md.replace(/\r\n/g, "\n").split("\n");
   const blocks: React.ReactElement[] = [];
@@ -27,7 +73,10 @@ export function renderMarkdown(md: string): React.ReactElement {
         nodes.push(<strong key={idx++} className="font-bold text-ink-900">{tok.slice(2, -2)}</strong>);
       } else {
         const mm = /\[([^\]]+)\]\(([^)]+)\)/.exec(tok)!;
-        nodes.push(<a key={idx++} href={mm[2]} className="text-orange-600 hover:text-orange-700 underline underline-offset-2" target={mm[2].startsWith("http") ? "_blank" : undefined} rel="noreferrer">{mm[1]}</a>);
+        // Hover thickens the rule rather than recolouring the text: every
+        // colour that reads as "hovered gold" is under 4.5:1 on one of the
+        // surfaces a link lands on here. Weight can't fail a contrast check.
+        nodes.push(<a key={idx++} href={mm[2]} className={MD_CLASS.link} target={mm[2].startsWith("http") ? "_blank" : undefined} rel="noreferrer">{mm[1]}</a>);
       }
       last = m.index + tok.length;
     }
@@ -75,8 +124,12 @@ export function renderMarkdown(md: string): React.ReactElement {
     if (line.startsWith(">")) {
       const buf: string[] = [];
       while (i < lines.length && lines[i].startsWith(">")) { buf.push(lines[i].replace(/^>\s?/, "")); i++; }
+      // `cream-100` is the tint because it FLIPS — #ebe7dc by day, navy-800
+      // #002a42 at night. The old `bg-orange-50/50` did not, which is the
+      // whole bug: the fill stayed pale while the ink turned cream.
+      // ink-700 on it: 9.58:1 light, 7.67:1 dark.
       blocks.push(
-        <blockquote key={k()} className="border-l-4 border-orange-400 bg-orange-50/50 pl-4 py-2 my-4 text-ink-700 italic">
+        <blockquote key={k()} className={MD_CLASS.blockquote}>
           {inline(buf.join(" "))}
         </blockquote>
       );
@@ -135,7 +188,7 @@ export function renderMarkdown(md: string): React.ReactElement {
       blocks.push(
         ordered
           ? <ol key={k()} className="list-decimal pl-6 space-y-0.5 my-3">{items}</ol>
-          : <ul key={k()} className="list-disc pl-6 space-y-0.5 my-3 marker:text-orange-400">{items}</ul>
+          : <ul key={k()} className={MD_CLASS.list}>{items}</ul>
       );
       continue;
     }
