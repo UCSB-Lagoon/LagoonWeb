@@ -43,7 +43,14 @@ function walk(dir) {
     if (name === "node_modules" || name === ".next" || name.startsWith(".")) continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) walk(full);
-    else if (/\.(tsx?|css|mdx)$/.test(name)) check(full);
+    // .html is here because content/home-body.html is real, shipped markup —
+    // the homepage body is injected from it. It was outside this walk, and it
+    // had quietly kept a pocket of the retired identity alive: 34 literal
+    // colours, among them #F08A3C and #1E1410, the old orange-500 and
+    // warm-black. They rendered on the homepage every day while the guard
+    // reported the brand clean, because the guard was only ever shown the
+    // files the brand had already been migrated in.
+    else if (/\.(tsx?|css|mdx|html)$/.test(name)) check(full);
   }
 }
 

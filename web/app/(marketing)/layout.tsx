@@ -34,7 +34,10 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
     <>
       {/* The marketing design system. Still a public/ asset because the
           not-yet-ported static pages also link it; React 19 hoists this
-          <link> into <head>. */}
+          <link> into <head>. next/no-css-tags wants an `import` instead,
+          which would route site.css through Tailwind's pipeline and hash
+          its name — exactly what the line above needs to avoid. */}
+      {/* eslint-disable-next-line @next/next/no-css-tags */}
       <link rel="stylesheet" href="/site.css" precedence="default" />
       <a className="skip-link" href="#content">Skip to content</a>
       <AnnounceBar />

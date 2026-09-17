@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { MD_CLASS } from "../lib/mini-markdown";
 
 /**
  * WCAG AA contrast, measured on the rendered page.
@@ -22,8 +23,20 @@ const KNOWN: Array<{ route: string; text: string; why: string }> = [];
 
 type Fail = { text: string; ratio: number; need: number; selector: string };
 
-async function contrastFailures(page: Page, root = "body"): Promise<Fail[]> {
-  return page.evaluate((rootSel) => {
+/**
+ * `root` scopes the sweep to a subtree, for surfaces that have no reachable
+ * route and must be mounted instead of navigated to.
+ *
+ * `nonText` adds a second sweep for the two rules a text walk structurally
+ * cannot see: a `::marker` colour and a `text-decoration-color` are not text
+ * nodes, so `getComputedStyle(el).color` never reports them. It is opt-in
+ * because it is only wired up where the markup under test relies on them.
+ */
+async function contrastFailures(
+  page: Page,
+  opts: { root?: string; nonText?: boolean } = {},
+): Promise<Fail[]> {
+  return page.evaluate(({ root, nonText }) => {
     // Colours are normalised by painting them, not by parsing the string.
     //
     // Tailwind v4 emits `oklab(...)` and `oklch(...)`, and a naive
@@ -73,6 +86,15 @@ async function contrastFailures(page: Page, root = "body"): Promise<Fail[]> {
       while (p && p !== document.documentElement) {
         const cs = getComputedStyle(p);
         if (cs.display === "none" || cs.visibility === "hidden" || +cs.opacity === 0) return false;
+        // Not exposed to assistive tech, so the contrast rule does not apply —
+        // this is the same exclusion axe makes.
+        //
+        // It is also the one exclusion here that could be abused: anything can
+        // be silenced by hiding it. Treat a new aria-hidden over failing text
+        // as a fix only when the text is genuinely decorative AND still legible
+        // to a sighted reader. Both current users (the marquee, the phone
+        // mockup) had their colours corrected as well, not instead.
+        if (p.getAttribute("aria-hidden") === "true") return false;
         p = p.parentElement;
       }
       return true;
@@ -105,12 +127,17 @@ async function contrastFailures(page: Page, root = "body"): Promise<Fail[]> {
     };
 
     const out: Fail[] = [];
-    const scope = document.querySelector(rootSel) ?? document.body;
-    scope.querySelectorAll("a,button,span,p,div,h1,h2,h3,h4,li,td,th,label").forEach((el) => {
+    const scope = document.querySelector(root) ?? document.body;
+    scope.querySelectorAll("a,button,span,p,div,h1,h2,h3,h4,li,td,th,label,blockquote,code,strong,em").forEach((el) => {
       if (el.children.length) return;                  // leaf text only
       const text = el.textContent?.trim() ?? "";
       if (!text || text.length > 80) return;
       if (!visible(el)) return;
+      // An emoji paints from its own colour font; `color` does not apply to it.
+      // Measuring one compares a colour that was never used against the
+      // background and reports nonsense — a 🗓️ on a navy card came back at
+      // 1.01:1. Skip leaves that are entirely pictographic.
+      if (!/[\p{L}\p{N}]/u.test(text)) return;
 
       const cs = getComputedStyle(el);
       const bg = backdrop(el);
@@ -121,8 +148,51 @@ async function contrastFailures(page: Page, root = "body"): Promise<Fail[]> {
       const need = size >= 24 || (size >= 18.66 && bold) ? 3 : 4.5;
       if (r < need - 0.05) out.push({ text: text.slice(0, 40), ratio: r, need, selector: path(el) });
     });
+
+    // Non-text contrast (WCAG 1.4.11) — a rule that identifies a link, or a
+    // bullet that identifies a list, has to be visible against what it sits on.
+    if (nonText) {
+      const rule = (el: Element, colour: string, what: string) => {
+        const bg = backdrop(el);
+        const r = ratio(over(rgba(colour), bg), bg);
+        if (r < 3 - 0.05) out.push({ text: what, ratio: r, need: 3, selector: path(el) });
+      };
+      document.querySelectorAll("*").forEach((el) => {
+        if (!visible(el)) return;
+        const cs = getComputedStyle(el);
+        if (cs.listStyleType !== "none" && el.tagName === "LI") {
+          rule(el, getComputedStyle(el, "::marker").color, "::marker");
+        }
+        if (cs.textDecorationLine.includes("underline")) {
+          rule(el, cs.textDecorationColor, "underline rule");
+        }
+        if (cs.borderLeftStyle !== "none" && parseFloat(cs.borderLeftWidth) >= 3) {
+          rule(el, cs.borderLeftColor, "left rule");
+        }
+      });
+    }
     return out;
-  }, root);
+  }, { root: opts.root ?? "body", nonText: !!opts.nonText });
+}
+
+/**
+ * Navigate, and refuse to measure anything that is not a real 200.
+ *
+ * Without this the suite grades Next's error page and calls it a pass. That
+ * is not hypothetical: with no Supabase env — which is exactly what CI has —
+ * `/hub`, `/stats`, `/leaderboard` and `/captains` all return 500, and all
+ * eight of those tests passed anyway, because an error page is dark text on
+ * a white ground and clears AA comfortably.
+ *
+ * Same failure as the dev-server one this suite was built to fix: the
+ * measurement was fine, the thing being measured was not the app. A contrast
+ * suite has to assert what it is looking at.
+ */
+async function goto(page: Page, route: string) {
+  const res = await page.goto(route, { waitUntil: "networkidle" });
+  expect(res, `no response for ${route}`).not.toBeNull();
+  expect(res!.status(), `${route} did not render — measuring an error page proves nothing`)
+    .toBe(200);
 }
 
 for (const route of ROUTES) {
@@ -131,10 +201,42 @@ for (const route of ROUTES) {
       await page.addInitScript((t) => {
         try { localStorage.setItem("theme", t); } catch {}
       }, theme);
-      await page.goto(route, { waitUntil: "networkidle" });
+      await goto(page, route);
       await page.evaluate((t) => {
         document.documentElement.classList.toggle("dark", t === "dark");
       }, theme);
+
+      // Reveal the page before measuring it.
+      //
+      // The marketing pages enter on scroll: `.r/.rl/.rr` sit at `opacity: 0`
+      // until an IntersectionObserver adds `.on`. `visible()` — correctly —
+      // refuses to measure a transparent element, so at the default scroll
+      // position everything below the fold was silently skipped. The suite was
+      // only ever measuring the hero and the nav, on the one page with the most
+      // content. Three failing pairings on the navy guides band, one of them a
+      // 2.97:1 eyebrow, sat under that gap.
+      //
+      // Scrolling first drives the real observers; forcing `.on` afterwards
+      // catches anything whose observer did not fire in a headless viewport.
+      // Kill transitions FIRST. `.on` only starts a fade to opacity 1, and
+      // `visible()` skips anything still at 0 — so on a fast machine the
+      // sample landed mid-fade and those elements were quietly dropped from
+      // the run. That is a test that gets weaker the faster it goes: two
+      // consecutive runs of this file disagreed about a 4.34:1 map label,
+      // one measuring it and one skipping it. Frozen, the reveal is instant
+      // and every run measures the same set.
+      await page.addStyleTag({
+        content: `*,*::before,*::after{animation:none!important;transition:none!important}`,
+      });
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 600) {
+          window.scrollTo(0, y);
+          await new Promise((r) => requestAnimationFrame(() => r(null)));
+        }
+        window.scrollTo(0, 0);
+        document.querySelectorAll(".r,.rl,.rr").forEach((e) => e.classList.add("on"));
+      });
+      await page.waitForTimeout(250);
 
       const fails = (await contrastFailures(page)).filter(
         (f) => !KNOWN.some((k) => k.route === route && f.text.startsWith(k.text)),
@@ -147,6 +249,105 @@ for (const route of ROUTES) {
     });
   }
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * /admin/handbook — the route the sweep above cannot reach.
+ *
+ * It redirects to /login for anyone unauthenticated, so there is no rendered
+ * page to measure and no honest way to add it to ROUTES. What decides the
+ * answer is only two things, and both can be reconstructed: the class strings
+ * lib/mini-markdown.tsx ships, and the surfaces it puts them on. The strings
+ * are IMPORTED from the renderer, never copied — a copy would go stale the
+ * first time someone edited one, and this suite would then prove nothing while
+ * staying green.
+ *
+ * The fixture is injected into a real app route so @theme resolves through the
+ * same compiled stylesheet the handbook loads, and so `.card` is the real card
+ * — in `.dark` that is `--color-navy-700`, an override the token alone doesn't
+ * tell you about.
+ *
+ * Every nesting below exists because it changes the backdrop. A link is fine
+ * on the card and has to survive the `cream-100` under a blockquote and a
+ * table head, and the `cream-100/40` of an even row — `--gold-ink` is 5.07:1
+ * on the card but 4.10:1 on `cream-100`, which is exactly why the link text
+ * here is ink and only its underline is gold.
+ * ────────────────────────────────────────────────────────────────────────── */
+const HANDBOOK_FIXTURE = `
+  <div class="app-shell">
+    <article class="card p-6 sm:p-10">
+      <p class="my-3 text-ink-700 leading-relaxed">Body copy on the card surface.</p>
+      <p class="my-3 text-ink-700 leading-relaxed"><a class="${MD_CLASS.link}">Inline link on the card</a></p>
+      <blockquote class="${MD_CLASS.blockquote}">Quoted text on the tinted fill.</blockquote>
+      <blockquote class="${MD_CLASS.blockquote}"><a class="${MD_CLASS.link}">Inline link inside a blockquote</a></blockquote>
+      <ul class="${MD_CLASS.list}"><li class="my-1 text-ink-700">List item, gold marker</li></ul>
+      <table class="w-full text-sm border border-cream-200 rounded-xl overflow-hidden">
+        <thead class="bg-cream-100">
+          <tr><th class="text-left font-semibold text-ink-900 px-3 py-2 border-b border-cream-200"><a class="${MD_CLASS.link}">Link in a table head</a></th></tr>
+        </thead>
+        <tbody>
+          <tr class="even:bg-cream-100/40"><td class="px-3 py-2 border-b border-cream-200 text-ink-700 align-top">Odd row</td></tr>
+          <tr class="even:bg-cream-100/40"><td class="px-3 py-2 border-b border-cream-200 text-ink-700 align-top"><a class="${MD_CLASS.link}">Link in an even row</a></td></tr>
+        </tbody>
+      </table>
+    </article>
+  </div>`;
+
+for (const theme of ["light", "dark"] as const) {
+  test(`contrast · /admin/handbook markdown (synthetic) · ${theme}`, async ({ page }) => {
+    await page.addInitScript((t) => {
+      try { localStorage.setItem("theme", t); } catch {}
+    }, theme);
+    await goto(page, "/hub");
+    await page.evaluate(({ t, html }) => {
+      document.documentElement.classList.toggle("dark", t === "dark");
+      document.body.innerHTML = html;
+    }, { t: theme, html: HANDBOOK_FIXTURE });
+
+    const fails = await contrastFailures(page, { nonText: true });
+    expect(
+      fails,
+      fails.map((f) => `  ${f.ratio}:1 (needs ${f.need}) — "${f.text}"  ${f.selector}`).join("\n"),
+    ).toEqual([]);
+  });
+}
+
+/**
+ * The token half of the same question: the pairing above is only safe because
+ * both sides flip. `bg-orange-50/50` is the bug this guards — a fill that
+ * stays light while the ink turns cream, which read at 1.64:1 at night.
+ *
+ * Asserting "different in .dark" rather than a literal keeps @theme the single
+ * source of colour; the literals stay in globals.css where check-brand.mjs can
+ * see them.
+ */
+test("contrast · handbook tokens flip with the theme", async ({ page }) => {
+  await goto(page, "/hub");
+  const read = (dark: boolean) =>
+    page.evaluate((d) => {
+      document.documentElement.classList.toggle("dark", d);
+      const cs = getComputedStyle(document.documentElement);
+      const card = document.createElement("div");
+      card.className = "card";
+      document.body.appendChild(card);
+      const surface = getComputedStyle(card).backgroundColor;
+      card.remove();
+      return {
+        surface,
+        "--color-cream-100": cs.getPropertyValue("--color-cream-100").trim(),
+        "--color-gold-700": cs.getPropertyValue("--color-gold-700").trim(),
+        "--color-ink-900": cs.getPropertyValue("--color-ink-900").trim(),
+        "--color-ink-700": cs.getPropertyValue("--color-ink-700").trim(),
+      };
+    }, dark);
+
+  const light = await read(false);
+  const dark = await read(true);
+  for (const key of Object.keys(light) as Array<keyof typeof light>) {
+    expect(dark[key], `${key} is the same day and night — it cannot be carrying a themed surface`)
+      .not.toBe(light[key]);
+  }
+});
 
 /**
  * Semantic status tokens, measured on a real page.
@@ -192,7 +393,7 @@ for (const theme of ["light", "dark"] as const) {
       try { localStorage.setItem("theme", t); } catch {}
     }, theme);
     // Any app-shell route will do; the tokens live on :root / .dark.
-    await page.goto("/hub", { waitUntil: "networkidle" });
+    await goto(page, "/hub");
     await page.evaluate((t) => {
       document.documentElement.classList.toggle("dark", t === "dark");
     }, theme);
@@ -221,7 +422,7 @@ for (const theme of ["light", "dark"] as const) {
       { statuses: [...STATUS_TOKENS], grounds: STATUS_GROUNDS },
     );
 
-    const fails = await contrastFailures(page, "#status-token-matrix");
+    const fails = await contrastFailures(page, { root: "#status-token-matrix" });
 
     expect(
       fails,

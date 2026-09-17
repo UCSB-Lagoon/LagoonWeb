@@ -1,7 +1,17 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import type { GuideFrontmatter } from "@/components/seo/guide-jsonld";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+
+/**
+ * Related-guide hrefs come from guide frontmatter, so they're whatever an
+ * author typed. Every one today is a root-relative marketing path, but only
+ * those get client-side routing; anything else stays a plain anchor.
+ * `//host` is protocol-relative, i.e. off-site despite the leading slash.
+ */
+const isInternal = (href: string) =>
+  href.startsWith("/") && !href.startsWith("//");
 
 /**
  * Shared chrome for every guide page (page-hero + article wrapper +
@@ -21,9 +31,9 @@ export function GuideShell({
       <section className="page-hero">
         <div className="article-shell">
           <div className="breadcrumb">
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <span>/</span>
-            <a href="/guides">Guides</a>
+            <Link href="/guides">Guides</Link>
             <span>/</span>
             <span>{fm.breadcrumbName}</span>
           </div>
@@ -50,7 +60,13 @@ export function GuideShell({
         <ul className="related-guides-list">
           {fm.related.map((r) => (
             <li key={r.href}>
-              <a href={r.href}>{r.label}</a>
+              {isInternal(r.href) ? (
+                <Link href={r.href}>{r.label}</Link>
+              ) : (
+                <a href={r.href} rel="noreferrer">
+                  {r.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>

@@ -36,33 +36,58 @@ Upstream source: `Lagoon/DESIGN_SYSTEM.md` in the app repo. Four decisions:
 ### Fill vs. ink — the rule that bites most often
 
 Gold is a **fill**, not a text colour. `#FFD200` on the cream ground is
-**1.3:1**; it is invisible. Anything you actually read uses `--gold-ink`
-(`#8a6a00`, 4.5:1 on cream). At night gold sits at ~11.8:1 on navy, so
-`--gold-ink` resolves to `#FFD200` inside `.dark` and you can use the same
-token in both themes.
+**1.3:1**; it is invisible. The rule has a direction, and the direction is the
+part people get wrong:
+
+| You are painting text on… | Use | Light | Dark |
+|---|---|---|---|
+| the cream page, or a cream card | `--gold-ink` | `#7f6200` | `#ffd200` |
+| a **painted navy band** (a dark section on a light page) | `--gold-on-dark` | `#ffd200` | `#ffd200` |
+| a **painted gold plate** (a gold pill, the logo tile) | `--on-accent` | `#001e30` | `#001e30` |
+
+`--gold-ink` flips with the theme because its ground does. The other two do
+**not** flip, because their grounds do not: a navy band is navy at midnight
+and at noon, and so is a gold pill. Pointing either of them at a theme-aware
+name is the single most repeated bug in this codebase — it has produced a
+1.1:1 logo, a 1.3:1 rarity badge, a 2.43:1 pill and a 2.97:1 masthead word,
+all from tokens that were individually correct.
 
 The same trap runs the other way for navy: `--pacific` is a fill; as ink on
 the night page it is ~1.3:1, so read text uses `--pacific-ink`.
 
-| Role | Token | Light | Dark | Usage |
-|---|---|---|---|---|
-| Page background | `--bg` | `#f4f1ea` | `#001e30` | Body / page |
-| Secondary surface | `--bg-alt` | `#ebe7dc` | `#002a42` | Subtle fills, hover |
-| Card surface | `--panel` | `#fbf9f3` | `#00304c` | Cards, panels |
-| Divider | `--line` | `#dfd9ca` | `rgba(255,255,255,.10)` | Hairlines — the only separator |
-| Heading ink | `--ink` | `#001e30` | `#f4f1ea` | Headings, primary text |
-| Body ink | `ink-700` | `#2a1a0f` | Body copy |
-| Muted ink | `ink-500` | `#6b5b4a` | Secondary copy, captions |
-| Faint ink | `ink-400` | `#8c7a66` | Labels, metadata |
-| Accent / CTA | `orange-500` | `#f08a3c` | Primary buttons, links, highlights |
-| Accent deep | `orange-600` | `#d9701f` | Button hover, active links |
-| Accent light | `orange-300` | `#ff9f5c` | Gradients, glows |
-| Amber | `amber-400` | `#febc11` | Logo-mark gradient stop only |
-| Live green | — | `#2ecc71` | Live-data pulse dot only |
+### Tokens
 
-- **Accent is used sparingly** — buttons, links, key moments. Not large fills.
-- **Dark surfaces** (e.g. marketing `.value-card`, app phone mockups) use
-  `ink-900 #1e1410` as the base with `cream-50` text.
+Defined once in `web/app/globals.css` `@theme`, mirrored into
+`web/public/site.css` as `var(--color-x, #fallback)` pairs. `npm run check:brand`
+fails the build if a fallback drifts, if a colour is written anywhere else, or
+if a theme-invariant token is built from a name that flips.
+
+| Role | Token | Light | Dark |
+|---|---|---|---|
+| Page background | `--bg` | `#f4f1ea` | `#001e30` |
+| Secondary surface | `--bg-alt` | `#ebe7dc` | `#002a42` |
+| Card surface | `--panel` | `#fbf9f3` | `#00304c` |
+| Elevated card | `--panel-elevated` | `#ffffff` | `#003a5c` |
+| Divider | `--line` | `#dfd9ca` | `rgba(255,255,255,.10)` |
+| Heading ink | `ink-900` | `#001e30` | `#f4f1ea` |
+| Body ink | `ink-700` | `#003a60` | `#a9bdc9` |
+| Muted ink | `ink-500` | `#4a5d6b` | `#8ea5b3` |
+| Faint ink | `ink-400` | `#546876` | `#8ea5b3` |
+| Accent fill | `--gold` | `#ffd200` | `#ffd200` |
+| Accent pressed | `--gold-pressed` | `#e6bd00` | `#e6bd00` |
+| Live green | — | `#2ecc71` | `#2ecc71` (pulse dot only) |
+
+**Every ink step is chosen against the worst surface it lands on, not the
+page.** That is the discipline the table above encodes and the thing that
+keeps breaking when it is forgotten: `ink-400` measured 4.85:1 on the cream
+page and 4.42:1 on `cream-100`; at night `ink-500` was 5.47:1 on the navy
+page and 3.82:1 on an elevated navy card. Both shipped. Checking a colour
+against the background you designed it on proves nothing.
+
+- **Accent is used sparingly** — buttons, links, key moments; once per screen.
+- **Status colours do not exist yet.** Success/warning/danger badges in
+  `/admin` still use stock Tailwind `emerald`/`rose`/`sky`. They are the only
+  non-brand hues left in the product and they are on internal screens only.
 
 ---
 
@@ -70,49 +95,64 @@ the night page it is ~1.3:1, so read text uses `--pacific-ink`.
 
 | Role | Font | Treatment |
 |---|---|---|
-| Display / headings | Space Grotesk 700 | `letter-spacing: -0.03em`, `line-height: 1.0–1.1`, `text-wrap: balance` |
-| Body / UI | Space Grotesk 400–600 | `line-height: 1.65`, body copy max width ~60–66ch |
+| Display / headings | Inter 700–800 | `letter-spacing: -0.028em`, `line-height: 0.96–1.1`, `text-wrap: balance` |
+| Body / UI | Inter 400–600 | `line-height: 1.65`, body copy max width ~60–66ch |
 | Mono / eyebrows | Space Mono 700 | uppercase, `letter-spacing: 0.10–0.18em` |
-| Italic accent | Fraunces italic 600 | optional emphasis word in a headline (`.italic-accent`) |
+| Emphasis in a headline | Inter 800 + `--gold-ink` | **upright** — see below |
 
-Font stack: `"Space Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui, sans-serif`
+Font stack: `var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui, sans-serif`
 
-Type scale (fluid): h1 `clamp(2.8rem, 6vw, 5rem)` · h2 `clamp(2rem, 4vw, 3.4rem)`
+**There is no serif and no italic.** The 2026-09 repaint retired the
+Fraunces-italic voice: emphasis is weight and colour now, one tight grotesque
+throughout. The retirement was applied to the hero `h1 em` and missed four
+other `em` rules, so the homepage spent a while speaking in two voices at
+once — if you are adding an accent word, it is `font-style: normal;
+font-weight: 800; color: var(--gold-ink)`.
+
+Type scale (fluid): h1 `clamp(54px, 6.5vw, 88px)` · h2 `clamp(40px, 4.5vw, 60px)`
 · h3 `1.3rem` · body `1.0–1.08rem` · small `0.875rem`.
 
 ---
 
 ## UI Components
 
-- **Border radius:** cards/panels `1.25rem` (20px) · buttons & pills `9999px`
-  (fully round) · inputs/code `12px`.
-- **Primary button:** solid `orange-500` bg, white text, pill, subtle
-  inset highlight + warm drop shadow; hover → `orange-600`, `translateY(-1px)`.
-- **Secondary button:** white bg, `ink-900` text, `cream-200` border, pill;
-  hover → `cream-100` bg, orange-tinted border.
-- **Card:** white bg, `cream-200` border, `1.25rem` radius, soft warm shadow
-  `0 22px 40px -28px rgba(176,110,60,0.18)`; hover lifts `-2px` with
-  orange-tinted border.
-- **Pill / tag:** uppercase Space Mono, `orange-100` bg, `orange-700` text.
-- **Body texture:** fixed dotted radial grid
-  `radial-gradient(rgba(30,20,16,0.055) 1px, transparent 1px)` at `24px`,
-  masked to fade out toward the bottom. Present on every page.
+- **Border radius:** cards `22px` · tiles `20px` · inputs `14px` · buttons and
+  pills `9999px`.
+- **No gradients, no shadows.** Surfaces separate by a lighter step plus a
+  hairline. `--shadow*` still exists and resolves to a hairline so the ~49
+  legacy `box-shadow` call sites degrade to an edge; do not add more.
+- **Primary button:** `--gold` fill, `--on-accent` ink, pill. Never white ink
+  on gold — that is 1.4:1.
+- **Secondary button:** `--panel-elevated` bg, `ink-900` text, `--line`
+  border, pill.
+- **Card:** `--panel-elevated` bg, `--line` hairline, `22px` radius.
+  Use `--panel-elevated`, never a literal `bg-white`: white does not flip, so
+  at night it leaves theme-aware ink stranded on a white plate at 1.1–2.6:1.
+- **Pill / tag:** uppercase Space Mono, `--gold` plate, `--on-accent` ink.
+- **Body texture:** fixed dotted radial grid at `24px`, masked to fade toward
+  the bottom. Present on every page.
 
 ## Shared chrome
 
-- **Header:** sticky, `cream-50` at ~85% with `backdrop-blur`, hairline
-  `cream-200` border that appears on scroll. 64px tall. Brand = gradient
-  amber→orange rounded "L" tile + "Lagoon" wordmark + "UCSB" overline.
-- **Primary nav CTA:** orange primary button ("Get the App"), App Store link
+- **Header:** sticky, `--bg` at ~85% with `backdrop-blur`, hairline `--line`
+  border that appears on scroll. 64px tall. Brand = flat gold rounded "L" tile
+  with `--on-accent` ink + "Lagoon" wordmark + "UCSB" overline.
+- **Primary nav CTA:** gold primary button ("Get the App"), App Store link
   with `data-lagoon-cta` attribution.
-- **Footer:** tinted CTA strip (`card-tinted` gradient, soft orange/amber
-  blur blobs) → 4-column link grid on `cream-50` → legal bar with live dot.
+- **Footer:** tinted CTA strip → 4-column link grid → legal bar with live dot.
 
 ## Accessibility
 
-- Body/heading ink on cream meets WCAG AA (≥ 4.5:1). `ink-400` only for
-  large/decorative text.
-- Visible focus: `2px solid orange-500`, `2px` offset.
+- All text meets WCAG AA on the surface it actually sits on: 4.5:1 normal,
+  3:1 at ≥24px (or ≥18.66px bold).
+- **This is measured, not reviewed.** `web/e2e/contrast.spec.ts` walks every
+  visible text node on 7 routes × 2 themes against a production build and
+  fails CI on a single pairing. A brand linter cannot catch these — both
+  sides of a 1.3:1 pairing are legal tokens. Run it with `npm run test:contrast`.
+- Decorative imagery (the phone mockup, the "Guides" watermark, the feature
+  marquee) is `aria-hidden` and exempt from the contrast rule — but it is
+  still styled to be legible. `aria-hidden` is not a way to silence a failure.
+- Visible focus: `2px solid` `--gold`, `2px` offset.
 - Semantic heading order (one `h1` per page, no skipped levels).
 - All meaningful images have `alt`; decorative ones `alt=""`/`aria-hidden`.
 

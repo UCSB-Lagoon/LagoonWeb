@@ -129,7 +129,7 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300
+        className="w-full rounded-xl bg-panel-elevated border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-400
           focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition"
       />
     </label>
@@ -149,7 +149,7 @@ function Textarea({
         required={required}
         placeholder={placeholder}
         rows={4}
-        className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300
+        className="w-full rounded-xl bg-panel-elevated border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-400
           focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition resize-y"
       />
     </label>

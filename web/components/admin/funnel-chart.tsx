@@ -36,7 +36,7 @@ export function CaptainFunnelChart({ stages }: { stages: FunnelStage[] }) {
                 if (!active || !payload?.length) return null;
                 const p = payload[0].payload as { name: string; actual: number };
                 return (
-                  <div className="rounded-xl border border-cream-200 bg-white px-3 py-2 shadow-sm text-sm">
+                  <div className="rounded-xl border border-cream-200 bg-panel-elevated px-3 py-2 shadow-sm text-sm">
                     <p className="font-semibold text-ink-900">{p.name}</p>
                     <p className="text-gold-700 font-bold tabular-nums">{p.actual.toLocaleString()}</p>
                   </div>

@@ -100,7 +100,7 @@ export function Navbar() {
             onClick={() => setOpen(v => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="grid place-items-center w-10 h-10 rounded-full border border-cream-200 bg-white text-ink-900 hover:bg-cream-100 transition"
+            className="grid place-items-center w-10 h-10 rounded-full border border-cream-200 bg-panel-elevated text-ink-900 hover:bg-cream-100 transition"
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

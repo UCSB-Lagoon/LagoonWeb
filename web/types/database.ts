@@ -1027,6 +1027,57 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback: {
+        Row: {
+          admin_notes: string | null
+          app_version: string | null
+          email: string | null
+          id: string
+          ip: string | null
+          kind: string
+          message: string
+          page_path: string | null
+          pinned: boolean
+          status: string
+          submitted_at: string
+          triaged_at: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          app_version?: string | null
+          email?: string | null
+          id?: string
+          ip?: string | null
+          kind?: string
+          message: string
+          page_path?: string | null
+          pinned?: boolean
+          status?: string
+          submitted_at?: string
+          triaged_at?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          app_version?: string | null
+          email?: string | null
+          id?: string
+          ip?: string | null
+          kind?: string
+          message?: string
+          page_path?: string | null
+          pinned?: boolean
+          status?: string
+          submitted_at?: string
+          triaged_at?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       friendships: {
         Row: {
           created_at: string | null

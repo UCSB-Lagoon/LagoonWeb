@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {
@@ -129,10 +130,10 @@ export function CampusMap({ signedIn }: Props) {
       try {
         const { createClient } = await import("@/lib/supabase/client");
         const sb = createClient();
-        // RPC defined in iOS app's Supabase migration 067; cast to bypass narrow generated types.
-        const { data, error } = await (sb as unknown as {
-          rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: LiveLocation[] | null; error: { message: string } | null }>;
-        }).rpc("get_visible_user_locations", { within_minutes: 30 });
+        // RPC defined in the iOS app's Supabase migration 067.
+        const { data, error } = await sb.rpc("get_visible_user_locations", {
+          within_minutes: 30,
+        });
         if (cancelled) return;
         if (error) {
           setPeopleErr(error.message);
@@ -182,13 +183,13 @@ export function CampusMap({ signedIn }: Props) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search buildings, codes, dining halls…"
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-cream-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-gold-300"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-panel-elevated border border-cream-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-gold-300"
             />
           </div>
           <div className="mt-2.5 flex flex-wrap gap-1.5">
             <button
               onClick={() => setActiveCat(null)}
-              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-on-accent border-gold-500" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
+              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-on-accent border-gold-500" : "bg-panel-elevated border-cream-200 text-ink-500 hover:border-gold-300"}`}
             >
               All
             </button>
@@ -196,7 +197,7 @@ export function CampusMap({ signedIn }: Props) {
               <button
                 key={c}
                 onClick={() => setActiveCat(activeCat === c ? null : c)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${activeCat === c ? "text-white border-transparent" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
+                className={`text-xs px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${activeCat === c ? "text-white border-transparent" : "bg-panel-elevated border-cream-200 text-ink-500 hover:border-gold-300"}`}
                 style={activeCat === c ? { background: CATEGORY_META[c].color } : undefined}
               >
                 <span>{CATEGORY_META[c].emoji}</span>
@@ -230,13 +231,13 @@ export function CampusMap({ signedIn }: Props) {
       {!signedIn && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[400] max-w-sm w-[90%]">
           <div className="card p-4 backdrop-blur-md bg-cream-50/95 text-center">
-            <p className="text-sm text-ink-900 font-semibold">Sign in to see who's on campus</p>
+            <p className="text-sm text-ink-900 font-semibold">Sign in to see who’s on campus</p>
             <p className="mt-1 text-xs text-ink-500">
               Lagoon shows your friends as named pins and other Gauchos anonymously.
             </p>
-            <a href="/login" className="btn-primary mt-3 inline-flex !py-1.5 !px-3 text-xs">
+            <Link href="/login" className="btn-primary mt-3 inline-flex !py-1.5 !px-3 text-xs">
               Sign in
-            </a>
+            </Link>
           </div>
         </div>
       )}

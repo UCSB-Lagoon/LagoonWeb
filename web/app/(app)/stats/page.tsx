@@ -48,11 +48,28 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Rarity is ORDINAL, so it is one hue getting stronger — the same rule the
+ * level ramp follows. It used to be four unrelated decisions, and each was
+ * wrong in its own way:
+ *
+ *  - `text-gold-700` on `bg-gold-100`: gold-700 flips to #FFD200 inside
+ *    `.dark` (correct on a navy ground) while the gold-100 plate under it
+ *    does not flip at all, so at night this was bright gold on pale gold —
+ *    1.3:1. Ink on a painted brand plate is what `on-accent` is for: it is
+ *    deliberately theme-invariant, exactly like the plate.
+ *  - `text-ink-600`: there is no 600 step in the ink scale, so the class
+ *    generated nothing and the count silently inherited its parent's colour.
+ *  - `rose-*`: Tailwind's stock palette, not the brand's — the only
+ *    non-brand hue left in the app.
+ *  - epic sat on `gold-50`, a LIGHTER plate than rare's `gold-100`, so the
+ *    ramp ran backwards.
+ */
 const RARITY_COLORS: Record<string, string> = {
-  common:    "bg-cream-100 text-ink-700 border-cream-200",
-  rare:      "bg-gold-100 text-gold-700 border-gold-200",
-  epic:      "bg-gold-50  text-gold-700  border-gold-200",
-  legendary: "bg-danger-50 text-danger-ink border-danger-200",
+  common:    "bg-cream-100 text-ink-700   border-cream-200",
+  rare:      "bg-gold-100  text-on-accent border-gold-200",
+  epic:      "bg-gold-200  text-on-accent border-gold-300",
+  legendary: "bg-gold-400  text-on-accent border-gold-500",
 };
 
 export default async function StatsPage() {
@@ -251,7 +268,7 @@ export default async function StatsPage() {
           <span className="text-xs text-ink-400">{totalProfiles} declared profiles</span>
         </div>
         <p className="text-xs text-ink-400 mb-4">
-          Major codes are UCSB's, not friendly names — keeping them honest.
+          Major codes are UCSB’s, not friendly names — keeping them honest.
         </p>
         <BarRow items={majorBars} />
       </section>
@@ -474,7 +491,7 @@ export default async function StatsPage() {
       </section>
 
       <p className="text-xs text-ink-400 mt-10 text-center">
-        Aggregates only — Lagoon never exposes individual user activity outside the user's own session.
+        Aggregates only — Lagoon never exposes individual user activity outside the user’s own session.
       </p>
     </div>
   );

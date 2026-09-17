@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
 /**
@@ -10,7 +12,7 @@ export function MarketingFooter() {
     <footer className="site-footer">
       <div className="shell footer-grid">
         <div>
-          <a
+          <Link
             className="brand brand-footer"
             href="/"
             aria-label="Lagoon — UCSB campus app"
@@ -20,16 +22,16 @@ export function MarketingFooter() {
               <strong>Lagoon</strong>
               <span>Campus life, beautifully simple.</span>
             </span>
-          </a>
+          </Link>
           <p className="footer-copy">
             The UCSB campus app built for Gauchos — schedules, dining, grades,
             events, and a live campus map.
           </p>
         </div>
         <div className="footer-links">
-          <a href="/guides">Guides</a>
-          <a href="/company">Company</a>
-          <a href="/ucsb-dining-menu">Dining menu</a>
+          <Link href="/guides">Guides</Link>
+          <Link href="/company">Company</Link>
+          <Link href="/ucsb-dining-menu">Dining menu</Link>
           <a href={APP_STORE} rel="noreferrer" data-lagoon-cta="footer">
             Download Lagoon
           </a>

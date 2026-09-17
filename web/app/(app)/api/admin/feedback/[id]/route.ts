@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
+import type { Database } from "@/types/database";
 
 const STATUSES = ["new", "triaged", "planned", "shipped", "declined"] as const;
 
@@ -26,7 +27,7 @@ export async function PATCH(
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const patch: Record<string, unknown> = {};
+  const patch: Database["public"]["Tables"]["feedback"]["Update"] = {};
   if (body.status !== undefined) {
     if (!STATUSES.includes(body.status as (typeof STATUSES)[number])) {
       return NextResponse.json({ error: "Invalid status" }, { status: 400 });
@@ -40,7 +41,7 @@ export async function PATCH(
   }
 
   const admin = createAdminClient();
-  const { error } = await admin.from("feedback").update(patch as never).eq("id", id);
+  const { error } = await admin.from("feedback").update(patch).eq("id", id);
   if (error) {
     console.error("[admin.feedback.patch]", error);
     return NextResponse.json({ error: error.message }, { status: 500 });

@@ -22,8 +22,13 @@
       </div>
     </div>
 
-    <div class="phone-col hrr d2">
-      <div class="phone-body">
+    <!-- Decorative product shot: a hand-built picture of the app's Today
+         view. Its contents duplicate copy that appears as real text further
+         down the page, and at 7-8px it is imagery, not reading matter, so it
+         is announced as one labelled image rather than read out line by line. -->
+    <div class="phone-col hrr d2" role="img"
+         aria-label="The Lagoon app's Today view: next class CHEM 1A at 9:30 AM in Buchanan 1910, a schedule summary, three friends in CHEM 1A, and tonight's dining and events.">
+      <div class="phone-body" aria-hidden="true">
         <div class="phone-screen">
           <div class="phone-island"></div>
           <div class="ps">
@@ -257,15 +262,15 @@
         <div class="cm-sub">12 Gauchos across your classes</div>
         <div class="cm-row">
           <div><div class="cm-cn">CS 162</div><div class="cm-cs">Computer Organization</div></div>
-          <div class="avs"><div class="av" style="background:#D9701F">AJ</div><div class="av" style="background:#C9761A">MP</div><div class="av" style="background:#8A5A40">SR</div><div class="av-n">+4</div></div>
+          <div class="avs"><div class="av" style="background:var(--gold)">AJ</div><div class="av" style="background:var(--teal)">MP</div><div class="av" style="background:var(--violet)">SR</div><div class="av-n">+4</div></div>
         </div>
         <div class="cm-row">
           <div><div class="cm-cn">MATH 3B</div><div class="cm-cs">Calculus II</div></div>
-          <div class="avs"><div class="av" style="background:#A85A3F">KL</div><div class="av" style="background:#E8A04A">TN</div><div class="av-n">+2</div></div>
+          <div class="avs"><div class="av" style="background:var(--coral)">KL</div><div class="av" style="background:var(--gold)">TN</div><div class="av-n">+2</div></div>
         </div>
         <div class="cm-row">
           <div><div class="cm-cn">ECON 1</div><div class="cm-cs">Intro Microeconomics</div></div>
-          <div class="avs"><div class="av" style="background:#B26A2C">BW</div><div class="av" style="background:#D97706">RL</div><div class="av-n">+1</div></div>
+          <div class="avs"><div class="av" style="background:var(--teal)">BW</div><div class="av" style="background:var(--coral)">RL</div><div class="av-n">+1</div></div>
         </div>
       </div>
     </div>
@@ -290,11 +295,14 @@
       <p class="s-lead">Real grade distribution data for thousands of UCSB courses. See average GPA, A-rate, and D/F-rate before you sign up — so you choose smarter.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;">
         <div style="background:var(--orange-mist);border-radius:13px;padding:14px 18px;">
-          <div style="font-size:28px;font-weight:700;color:var(--orange-deep);letter-spacing:-1.5px;">3.7</div>
+          <div style="font-size:28px;font-weight:700;color:var(--orange-ink);letter-spacing:-1.5px;">3.7</div>
           <div style="font-size:11.5px;color:var(--text-dark-3);margin-top:2px;font-weight:500;">avg GPA tracked</div>
         </div>
-        <div style="background:rgba(240,138,60,0.08);border-radius:13px;padding:14px 18px;">
-          <div style="font-size:28px;font-weight:700;color:var(--orange);letter-spacing:-1.5px;">500+</div>
+        <!-- The tint here was rgba(240,138,60,.08) — terracotta, the last
+             literal left over from the pre-repaint identity. The figure used
+             var(--orange), the gold FILL, as 28px text: 1.21:1. -->
+        <div style="background:var(--orange-mist);border-radius:13px;padding:14px 18px;">
+          <div style="font-size:28px;font-weight:700;color:var(--orange-ink);letter-spacing:-1.5px;">500+</div>
           <div style="font-size:11.5px;color:var(--text-dark-3);margin-top:2px;font-weight:500;">courses tracked</div>
         </div>
       </div>
@@ -304,9 +312,9 @@
         <div class="gd-c">PSTAT 120A</div>
         <div class="gd-chip">Avg GPA: 3.41</div>
         <div class="gd-row"><div class="gd-lbl">A</div><div class="gd-track"><div class="gd-fill" style="width:62%;background:var(--orange);"></div></div><div class="gd-pct">62%</div></div>
-        <div class="gd-row"><div class="gd-lbl">B</div><div class="gd-track"><div class="gd-fill" style="width:24%;background:rgba(240,138,60,0.55);"></div></div><div class="gd-pct">24%</div></div>
-        <div class="gd-row"><div class="gd-lbl">C</div><div class="gd-track"><div class="gd-fill" style="width:9%;background:#E8A04A;"></div></div><div class="gd-pct">9%</div></div>
-        <div class="gd-row"><div class="gd-lbl">D/F</div><div class="gd-track"><div class="gd-fill" style="width:5%;background:#C44E2D;"></div></div><div class="gd-pct">5%</div></div>
+        <div class="gd-row"><div class="gd-lbl">B</div><div class="gd-track"><div class="gd-fill" style="width:24%;background:var(--orange);"></div></div><div class="gd-pct">24%</div></div>
+        <div class="gd-row"><div class="gd-lbl">C</div><div class="gd-track"><div class="gd-fill" style="width:9%;background:var(--orange);"></div></div><div class="gd-pct">9%</div></div>
+        <div class="gd-row"><div class="gd-lbl">D/F</div><div class="gd-track"><div class="gd-fill" style="width:5%;background:var(--orange);"></div></div><div class="gd-pct">5%</div></div>
         <div class="gd-note">Based on 2,400+ students · 18 sections</div>
       </div>
     </div>
@@ -373,19 +381,19 @@
       <div class="cm-vis" style="position:relative;overflow:hidden;">
         <div class="cm-head">UCSB · Live</div>
         <div class="cm-sub">12 friends nearby · 84 on campus</div>
-        <div style="position:relative;margin-top:14px;height:220px;border-radius:13px;background:linear-gradient(135deg,#3f5d3a 0%,#5a7a52 50%,#8aa07c 100%);overflow:hidden;">
-          <div style="position:absolute;top:38%;left:22%;width:14px;height:14px;border-radius:50%;background:#F08A3C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
-          <div style="position:absolute;top:55%;left:48%;width:14px;height:14px;border-radius:50%;background:#F08A3C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
-          <div style="position:absolute;top:30%;left:70%;width:14px;height:14px;border-radius:50%;background:#F08A3C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
-          <div style="position:absolute;top:62%;left:32%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
-          <div style="position:absolute;top:42%;left:58%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
-          <div style="position:absolute;top:72%;left:62%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
-          <div style="position:absolute;top:24%;left:42%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
-          <div style="position:absolute;top:50%;left:78%;width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid #fff;"></div>
-          <div style="position:absolute;top:18%;left:60%;width:18px;height:18px;border-radius:50%;background:#1F4E79;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">📘</div>
-          <div style="position:absolute;top:48%;left:28%;width:18px;height:18px;border-radius:50%;background:#3A8C5A;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">🍽</div>
-          <div style="position:absolute;top:65%;left:75%;width:18px;height:18px;border-radius:50%;background:#E0A50C;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">🏃</div>
-          <div style="position:absolute;bottom:8px;right:8px;font-size:9px;color:rgba(255,255,255,.6);font-family:var(--mono);letter-spacing:.05em;">UCSB · 34.41°N</div>
+        <div style="position:relative;margin-top:14px;height:220px;border-radius:13px;background:var(--pacific);overflow:hidden;">
+          <div style="position:absolute;top:38%;left:22%;width:14px;height:14px;border-radius:50%;background:var(--gold);border:2px solid var(--text-light);box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+          <div style="position:absolute;top:55%;left:48%;width:14px;height:14px;border-radius:50%;background:var(--gold);border:2px solid var(--text-light);box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+          <div style="position:absolute;top:30%;left:70%;width:14px;height:14px;border-radius:50%;background:var(--gold);border:2px solid var(--text-light);box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>
+          <div style="position:absolute;top:62%;left:32%;width:8px;height:8px;border-radius:50%;background:var(--text-light-2);border:1px solid var(--text-light);"></div>
+          <div style="position:absolute;top:42%;left:58%;width:8px;height:8px;border-radius:50%;background:var(--text-light-2);border:1px solid var(--text-light);"></div>
+          <div style="position:absolute;top:72%;left:62%;width:8px;height:8px;border-radius:50%;background:var(--text-light-2);border:1px solid var(--text-light);"></div>
+          <div style="position:absolute;top:24%;left:42%;width:8px;height:8px;border-radius:50%;background:var(--text-light-2);border:1px solid var(--text-light);"></div>
+          <div style="position:absolute;top:50%;left:78%;width:8px;height:8px;border-radius:50%;background:var(--text-light-2);border:1px solid var(--text-light);"></div>
+          <div style="position:absolute;top:18%;left:60%;width:18px;height:18px;border-radius:50%;background:var(--violet);border:2px solid var(--text-light);box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">📘</div>
+          <div style="position:absolute;top:48%;left:28%;width:18px;height:18px;border-radius:50%;background:var(--teal);border:2px solid var(--text-light);box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">🍽</div>
+          <div style="position:absolute;top:65%;left:75%;width:18px;height:18px;border-radius:50%;background:var(--coral);border:2px solid var(--text-light);box-shadow:0 2px 6px rgba(0,0,0,.3);display:grid;place-items:center;font-size:9px;">🏃</div>
+          <div style="position:absolute;bottom:8px;right:8px;font-size:9px;color:var(--text-light-3);font-family:var(--mono);letter-spacing:.05em;">UCSB · 34.41°N</div>
         </div>
       </div>
     </div>
@@ -393,7 +401,7 @@
 </div>
 
 <section id="guides">
-  <div class="guides-watermark">Guides</div>
+  <div class="guides-watermark" aria-hidden="true">Guides</div>
   <div class="guides-inner">
     <div class="guides-top r">
       <div class="guides-hed">
@@ -407,7 +415,7 @@
         <div class="gi-num">01</div>
         <div>
           <div class="gi-tags">
-            <div class="gi-tag" style="background:var(--orange);color:#FFF8EE;">Fall 2026</div>
+            <div class="gi-tag">Fall 2026</div>
             <div class="gi-read">4 min read</div>
           </div>
           <div class="gi-title">When Does UCSB Start? <strong>Fall 2026 Dates,</strong> Explained</div>
@@ -419,7 +427,7 @@
         <div class="gi-num">02</div>
         <div>
           <div class="gi-tags">
-            <div class="gi-tag" style="background:#A85A3F;color:#FFF8EE;">New Student</div>
+            <div class="gi-tag">New Student</div>
             <div class="gi-read">5 min read</div>
           </div>
           <div class="gi-title">The <strong>Ultimate First-Quarter Survival Guide</strong> for Incoming Gauchos</div>
@@ -430,7 +438,7 @@
         <div class="gi-num">03</div>
         <div>
           <div class="gi-tags">
-            <div class="gi-tag" style="background:#E8A04A;color:#1E1410;">Dining</div>
+            <div class="gi-tag">Dining</div>
             <div class="gi-read">3 min read</div>
           </div>
           <div class="gi-title">The <strong>Honest Ranking</strong> of Every UCSB Dining Hall</div>
@@ -441,7 +449,7 @@
         <div class="gi-num">04</div>
         <div>
           <div class="gi-tags">
-            <div class="gi-tag" style="background:var(--orange);color:#FFF8EE;">GE Tips</div>
+            <div class="gi-tag">GE Tips</div>
             <div class="gi-read">6 min read</div>
           </div>
           <div class="gi-title">How to <strong>Knock Out All Your GEs</strong> Without Wrecking Your GPA</div>
@@ -452,7 +460,7 @@
         <div class="gi-num">05</div>
         <div>
           <div class="gi-tags">
-            <div class="gi-tag" style="background:#C0502A;color:#FFF8EE;">IV Life</div>
+            <div class="gi-tag">IV Life</div>
             <div class="gi-read">4 min read</div>
           </div>
           <div class="gi-title">Moving to <strong>Isla Vista:</strong> The New Student Checklist</div>

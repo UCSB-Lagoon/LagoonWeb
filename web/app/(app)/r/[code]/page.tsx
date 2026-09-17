@@ -113,7 +113,6 @@ export default async function ReferralRedirect(
     const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() || null;
     const country = h.get("x-vercel-ip-country") || null;
     const supa = await createClient();
-    // Cast: Insert typing requires the shared client to carry the PostgrestVersion type param.
     await supa.from("referral_clicks").insert({
       referral_code: code,
       user_agent: ua,
@@ -121,7 +120,7 @@ export default async function ReferralRedirect(
       country,
       is_bot: isBot,
       page_path: `/r/${code}`,
-    } as unknown as never);
+    });
   } catch (e) {
     console.warn("[r/code] click log failed", e);
   }
