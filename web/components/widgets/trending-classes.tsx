@@ -2,11 +2,11 @@ import { BookOpen } from "lucide-react";
 import type { TrendingClass } from "@/lib/queries";
 
 const MOOD_STYLES: Record<string, string> = {
-  Loved:   "bg-kelp-400/15 text-emerald-700 border-emerald-200",
+  Loved:   "bg-success-100 text-success-ink border-success-200",
   Solid:   "bg-gold-100 text-gold-700 border-gold-200",
   Steady:  "bg-cream-100 text-ink-500 border-cream-200",
   Heavy:   "bg-gold-50 text-gold-700 border-gold-200",
-  Brutal:  "bg-rose-50 text-rose-700 border-rose-200",
+  Brutal:  "bg-danger-50 text-danger-ink border-danger-200",
 };
 
 export function TrendingClassesCard({ rows }: { rows: TrendingClass[] }) {

@@ -53,6 +53,69 @@
   --color-ink-400: #586c7a;   /* 4.85:1 on cream — was 3.16 */
   --color-ink-300: #a9bdc9;
 
+  /* ── Semantic status ──
+     Status was the one thing the system never named, so badges fell back to
+     stock Tailwind (emerald / rose / sky / stone) — the last non-brand hues in
+     the product. These are the brand's own replacements.
+
+     Same fill-vs-ink split as gold, and for the same reason: the plate is a
+     FILL and the ink is chosen against the WORST surface it lands on.
+       -50   softest plate
+       -100  soft plate — the badge default, and the hover step above -50
+       -200  hairline on either plate
+       -ink  anything you READ: label text, icons
+
+     The ladder INVERTS at night, exactly like `cream-*`: the names keep their
+     meaning (-50 = closest to the ground, -200 = furthest from it) while the
+     lightness flips, so `bg-x-50 hover:bg-x-100` still reads as "one step more
+     prominent" in both themes.
+
+     Plates carry ONE SHARED chroma per step across all four hues, set by the
+     narrowest hue's sRGB headroom at that lightness (light: red, 22°; dark:
+     green, 163°). Per-hue chroma was tried first and is wrong — green has ~3x
+     red's headroom at L 0.9, so `success-200` came out electric mint next to
+     three pastels. Ink keeps per-hue chroma: a red muted to green's chroma
+     reads brown.
+
+     Ink is measured against both plates AND every card/page ground it can sit
+     bare on — `.card-tinted` (cream-100) binds in light, the elevated card
+     (navy-600) binds at night. Worst case of 48 pairings is 4.80:1; badge text
+     is 10-12px, so all of it needs 4.5. Light / dark worst:
+       success  4.84 on cream-100   / 4.80 on success-100
+       warning  4.81 on cream-100   / 4.82 on navy-600
+       danger   4.80 on cream-100   / 4.81 on navy-600
+       info     4.84 on cream-100   / 4.83 on navy-600
+
+     NOT a chart palette. These four fail the categorical validator the
+     `--chart-*` set passes: warning/danger sit at ΔE 4.1 protan and
+     success/info at ΔE 1.9 tritan. That is fine here because a status badge
+     always carries its own word ("shipped", "bug", "declined") so the hue is
+     redundant encoding — and disqualifying for a bar, which carries meaning by
+     colour alone. Reach for `--chart-*` there.
+
+     `warning` has no consumer yet — gold already covers "pending". It is
+     defined and measured so the first consumer doesn't inherit a bug, the same
+     reason site.css keeps `--pacific-ink` correct. */
+  --color-success-50:  #eff8f3;
+  --color-success-100: #e0f2e9;
+  --color-success-200: #c2e7d4;
+  --color-success-ink: #237052;
+
+  --color-warning-50:  #fcf4ee;
+  --color-warning-100: #f9eade;
+  --color-warning-200: #f4d6be;
+  --color-warning-ink: #8e5720;
+
+  --color-danger-50:   #fef3f2;
+  --color-danger-100:  #fce8e6;
+  --color-danger-200:  #fad1cf;
+  --color-danger-ink:  #bc2b37;
+
+  --color-info-50:     #eff7fd;
+  --color-info-100:    #e1effc;
+  --color-info-200:    #c3e1fa;
+  --color-info-ink:    #22689a;
+
   /* ── Chart series ──
      The brand FILLS are surface colours and fail as chart marks: #FFD200 is
      1.29:1 on cream and #003A60 reads grey. These are the same five hues
@@ -298,6 +361,31 @@ body::before {
   /* Gold is ~11.8:1 on navy; no deepening needed at night. */
   --color-gold-700: #ffd200;
   --color-gold-ink: #ffd200;
+
+  /* Semantic status, night ladder. Not a flip of the light set: -50 becomes the
+     plate CLOSEST to the navy ground and -200 the furthest, so the names keep
+     their meaning while the lightness inverts. Plates sit in the
+     navy-700/600 band (L 0.28 / 0.33 / 0.43) so a status badge reads as a
+     raised surface rather than a hole, and share one chroma per step. */
+  --color-success-50:  #0a3021;
+  --color-success-100: #10402d;
+  --color-success-200: #1b5d43;
+  --color-success-ink: #40ba89;
+
+  --color-warning-50:  #3a220a;
+  --color-warning-100: #4c2e10;
+  --color-warning-200: #6e451c;
+  --color-warning-ink: #e6913a;
+
+  --color-danger-50:   #3e1d1d;
+  --color-danger-100:  #512827;
+  --color-danger-200:  #753d3c;
+  --color-danger-ink:  #f48482;
+
+  --color-info-50:     #0f2b40;
+  --color-info-100:    #163953;
+  --color-info-200:    #245478;
+  --color-info-ink:    #4eacf2;
 }
 
 .dark html,

@@ -31,9 +31,9 @@ const STATUSES = ["new", "reviewing", "accepted", "rejected", "withdrawn"] as co
 const STATUS_STYLES: Record<string, string> = {
   new:        "bg-gold-100 text-gold-700 border-gold-200",
   reviewing:  "bg-gold-100 text-gold-700 border-gold-200",
-  accepted:   "bg-emerald-100 text-emerald-700 border-emerald-200",
-  rejected:   "bg-rose-100 text-rose-700 border-rose-200",
-  withdrawn:  "bg-stone-100 text-stone-600 border-stone-200",
+  accepted:   "bg-success-100 text-success-ink border-success-200",
+  rejected:   "bg-danger-100 text-danger-ink border-danger-200",
+  withdrawn:  "bg-cream-100 text-ink-700 border-cream-200",
 };
 
 export default async function AdminCaptainsPage(
@@ -111,7 +111,7 @@ export default async function AdminCaptainsPage(
       </div>
 
       {error && (
-        <div className="card p-4 mb-6 border-rose-200 bg-rose-50 text-rose-700 text-sm">
+        <div className="card p-4 mb-6 border-danger-200 bg-danger-50 text-danger-ink text-sm">
           {error.message}
         </div>
       )}
@@ -152,7 +152,7 @@ export default async function AdminCaptainsPage(
                     )}
                     {a.status === "accepted" && a.accepted_email_sent_at && (
                       <span title={`Acceptance email sent ${new Date(a.accepted_email_sent_at).toLocaleString()}`}
-                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-emerald-100 text-emerald-700 border-emerald-200">
+                        className="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border bg-success-100 text-success-ink border-success-200">
                         ✓ emailed
                       </span>
                     )}

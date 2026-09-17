@@ -53,7 +53,7 @@ export default function LoginPage() {
                 className="mt-1.5 w-full bg-cream-50 border border-cream-200 rounded-xl px-3.5 py-2.5 text-ink-900 outline-none focus:border-gold-400 focus:ring-2 focus:ring-gold-200"
               />
             </label>
-            {error && <p className="text-sm text-rose-600">{error}</p>}
+            {error && <p className="text-sm text-danger-ink">{error}</p>}
             <button type="submit" disabled={loading} className="btn-primary w-full justify-center">
               {loading ? "Sending…" : "Send magic link"}
             </button>

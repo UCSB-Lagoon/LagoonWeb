@@ -24,17 +24,17 @@ type Row = {
 const STATUSES = ["new", "triaged", "planned", "shipped", "declined"] as const;
 const KIND_META: Record<string, { icon: typeof Bug; cls: string }> = {
   idea:     { icon: Lightbulb,   cls: "bg-gold-100 text-gold-700 border-gold-200" },
-  bug:      { icon: Bug,         cls: "bg-rose-100 text-rose-700 border-rose-200" },
-  praise:   { icon: Heart,       cls: "bg-emerald-100 text-emerald-700 border-emerald-200" },
-  question: { icon: HelpCircle,  cls: "bg-sky-100 text-sky-700 border-sky-200" },
-  other:    { icon: MessageSquare, cls: "bg-stone-100 text-stone-600 border-stone-200" },
+  bug:      { icon: Bug,         cls: "bg-danger-100 text-danger-ink border-danger-200" },
+  praise:   { icon: Heart,       cls: "bg-success-100 text-success-ink border-success-200" },
+  question: { icon: HelpCircle,  cls: "bg-info-100 text-info-ink border-info-200" },
+  other:    { icon: MessageSquare, cls: "bg-cream-100 text-ink-700 border-cream-200" },
 };
 const STATUS_CLS: Record<string, string> = {
   new:      "bg-gold-100 text-gold-700 border-gold-200",
   triaged:  "bg-gold-100 text-gold-700 border-gold-200",
-  planned:  "bg-sky-100 text-sky-700 border-sky-200",
-  shipped:  "bg-emerald-100 text-emerald-700 border-emerald-200",
-  declined: "bg-stone-100 text-stone-600 border-stone-200",
+  planned:  "bg-info-100 text-info-ink border-info-200",
+  shipped:  "bg-success-100 text-success-ink border-success-200",
+  declined: "bg-cream-100 text-ink-700 border-cream-200",
 };
 
 export default async function AdminFeedbackPage(
@@ -120,7 +120,7 @@ export default async function AdminFeedbackPage(
           </a>
         </div>
       ) : error ? (
-        <div className="card p-4 mb-6 border-rose-200 bg-rose-50 text-rose-700 text-sm">{error.message}</div>
+        <div className="card p-4 mb-6 border-danger-200 bg-danger-50 text-danger-ink text-sm">{error.message}</div>
       ) : rows.length === 0 ? (
         <div className="card p-12 text-center text-ink-500">No feedback {statusFilter ? `with status "${statusFilter}"` : "yet"}.</div>
       ) : (

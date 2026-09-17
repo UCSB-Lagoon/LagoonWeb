@@ -107,7 +107,7 @@ export function CaptainForm() {
       </div>
 
       {status === "error" && error && (
-        <div className="flex items-start gap-2 text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl p-3">
+        <div className="flex items-start gap-2 text-sm text-danger-ink bg-danger-50 border border-danger-200 rounded-xl p-3">
           <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
           <p>{error}</p>
         </div>

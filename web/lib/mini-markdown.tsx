@@ -121,7 +121,7 @@ export function renderMarkdown(md: string): React.ReactElement {
         if (task) {
           items.push(
             <li key={items.length} className="flex items-start gap-2 my-1">
-              <span className={`mt-0.5 inline-grid place-items-center w-4 h-4 rounded border ${task[1].toLowerCase() === "x" ? "bg-emerald-500 border-emerald-500 text-white" : "border-cream-200 bg-white"}`}>
+              <span className={`mt-0.5 inline-grid place-items-center w-4 h-4 rounded border ${task[1].toLowerCase() === "x" ? "bg-success-100 border-success-200 text-success-ink" : "border-cream-200 bg-panel-elevated"}`}>
                 {task[1].toLowerCase() === "x" ? "✓" : ""}
               </span>
               <span className="text-ink-700">{inline(task[2])}</span>

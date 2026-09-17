@@ -501,9 +501,9 @@ function StatusChip({ status }: { status: string }) {
   const map: Record<string, string> = {
     new:        "bg-gold-100 text-gold-700 border-gold-200",
     reviewing:  "bg-gold-100 text-gold-700 border-gold-200",
-    accepted:   "bg-emerald-100 text-emerald-700 border-emerald-200",
-    rejected:   "bg-rose-100 text-rose-700 border-rose-200",
-    withdrawn:  "bg-stone-100 text-stone-600 border-stone-200",
+    accepted:   "bg-success-100 text-success-ink border-success-200",
+    rejected:   "bg-danger-100 text-danger-ink border-danger-200",
+    withdrawn:  "bg-cream-100 text-ink-700 border-cream-200",
   };
   return (
     <span className={[

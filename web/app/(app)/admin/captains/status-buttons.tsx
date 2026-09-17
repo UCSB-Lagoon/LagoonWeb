@@ -97,7 +97,7 @@ export function StatusButtons({ id, current, captainCode, emailedAt }: Props) {
             onClick={markEmailed}
             disabled={busyValue === "mark-emailed"}
             title="Record that you've sent the welcome email"
-            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 transition disabled:opacity-60"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border bg-success-50 text-success-ink border-success-200 hover:bg-success-100 transition disabled:opacity-60"
           >
             {busyValue === "mark-emailed" ? <Loader2 className="w-3 h-3 animate-spin" /> : <MailCheck className="w-3 h-3" />}
             Mark sent
@@ -137,9 +137,9 @@ export function StatusButtons({ id, current, captainCode, emailedAt }: Props) {
           );
         })}
       </div>
-      {error && <p className="text-xs text-rose-600">{error}</p>}
+      {error && <p className="text-xs text-danger-ink">{error}</p>}
       {notice && (
-        <p className="text-xs text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-md px-2 py-1">
+        <p className="text-xs text-success-ink bg-success-50 border border-success-200 rounded-md px-2 py-1">
           {notice}
         </p>
       )}

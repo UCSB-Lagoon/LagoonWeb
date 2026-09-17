@@ -68,7 +68,7 @@ export function FeedbackActions({
           </button>
         ))}
       </div>
-      {err && <p className="text-xs text-rose-600">{err}</p>}
+      {err && <p className="text-xs text-danger-ink">{err}</p>}
     </div>
   );
 }

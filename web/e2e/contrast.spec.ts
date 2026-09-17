@@ -22,8 +22,8 @@ const KNOWN: Array<{ route: string; text: string; why: string }> = [];
 
 type Fail = { text: string; ratio: number; need: number; selector: string };
 
-async function contrastFailures(page: Page): Promise<Fail[]> {
-  return page.evaluate(() => {
+async function contrastFailures(page: Page, root = "body"): Promise<Fail[]> {
+  return page.evaluate((rootSel) => {
     // Colours are normalised by painting them, not by parsing the string.
     //
     // Tailwind v4 emits `oklab(...)` and `oklch(...)`, and a naive
@@ -105,7 +105,8 @@ async function contrastFailures(page: Page): Promise<Fail[]> {
     };
 
     const out: Fail[] = [];
-    document.querySelectorAll("a,button,span,p,div,h1,h2,h3,h4,li,td,th,label").forEach((el) => {
+    const scope = document.querySelector(rootSel) ?? document.body;
+    scope.querySelectorAll("a,button,span,p,div,h1,h2,h3,h4,li,td,th,label").forEach((el) => {
       if (el.children.length) return;                  // leaf text only
       const text = el.textContent?.trim() ?? "";
       if (!text || text.length > 80) return;
@@ -121,7 +122,7 @@ async function contrastFailures(page: Page): Promise<Fail[]> {
       if (r < need - 0.05) out.push({ text: text.slice(0, 40), ratio: r, need, selector: path(el) });
     });
     return out;
-  });
+  }, root);
 }
 
 for (const route of ROUTES) {
@@ -145,4 +146,86 @@ for (const route of ROUTES) {
       ).toEqual([]);
     });
   }
+}
+
+/**
+ * Semantic status tokens, measured on a real page.
+ *
+ * These four ladders have no route this suite can reach. Every consumer is
+ * either behind the /admin auth redirect — all four admin paths answer 307 to
+ * /login, so adding them to ROUTES would measure the login page four more
+ * times, not a single badge — or inside a data-dependent branch: an empty
+ * database renders the empty state instead of the badges, and the error boxes
+ * need a failed submit. `warning` has no consumer at all yet. Confirmed by
+ * grepping the rendered HTML of every reachable route for a status class:
+ * zero hits.
+ *
+ * So the surfaces are mounted instead of navigated to. That keeps the lesson
+ * the route tests are built on — measure in the real page, never a detached
+ * iframe — because this IS the real page: real stylesheet, real cascade, real
+ * `.dark` toggle on <html>. Only the markup is synthetic; nothing about how
+ * the colour resolves is.
+ *
+ * Inline `var(--color-*)` rather than utility classes, deliberately. Tailwind
+ * only emits a utility that some source file references, so `bg-warning-100`
+ * is genuinely absent from the bundle while `--color-warning-100` is present
+ * (`@theme static` emits every variable). The tokens are what is under test,
+ * so the tokens are what this references — and it therefore also fails if a
+ * token is deleted or misnamed, which a utility class would mask by silently
+ * resolving to nothing.
+ */
+const STATUS_TOKENS = ["success", "warning", "danger", "info"] as const;
+
+/** Every ground a status ink can land on. Worst case is a plate or cream-100. */
+const STATUS_GROUNDS: Array<[string, string]> = [
+  ["plate-50", "--color-{}-50"],
+  ["plate-100", "--color-{}-100"],
+  ["card-tinted", "--color-cream-100"],
+  ["page", "--color-cream-50"],
+  ["panel", "--color-panel"],
+  ["card", "--color-panel-elevated"],
+];
+
+for (const theme of ["light", "dark"] as const) {
+  test(`contrast · status tokens · ${theme}`, async ({ page }) => {
+    await page.addInitScript((t) => {
+      try { localStorage.setItem("theme", t); } catch {}
+    }, theme);
+    // Any app-shell route will do; the tokens live on :root / .dark.
+    await page.goto("/hub", { waitUntil: "networkidle" });
+    await page.evaluate((t) => {
+      document.documentElement.classList.toggle("dark", t === "dark");
+    }, theme);
+
+    await page.evaluate(
+      ({ statuses, grounds }) => {
+        const host = document.createElement("div");
+        host.id = "status-token-matrix";
+        for (const s of statuses) {
+          for (const [label, groundVar] of grounds) {
+            const cell = document.createElement("div");
+            cell.style.background = `var(${groundVar.replace("{}", s)})`;
+            cell.style.padding = "8px";
+            const leaf = document.createElement("span");
+            // The real badge: 10px, 700. Under 18.66px, so it needs 4.5:1.
+            leaf.style.color = `var(--color-${s}-ink)`;
+            leaf.style.fontSize = "10px";
+            leaf.style.fontWeight = "700";
+            leaf.textContent = `${s} on ${label}`;
+            cell.appendChild(leaf);
+            host.appendChild(cell);
+          }
+        }
+        document.body.appendChild(host);
+      },
+      { statuses: [...STATUS_TOKENS], grounds: STATUS_GROUNDS },
+    );
+
+    const fails = await contrastFailures(page, "#status-token-matrix");
+
+    expect(
+      fails,
+      fails.map((f) => `  ${f.ratio}:1 (needs ${f.need}) — "${f.text}"`).join("\n"),
+    ).toEqual([]);
+  });
 }

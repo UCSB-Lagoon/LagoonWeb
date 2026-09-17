@@ -49,10 +49,10 @@ export const metadata: Metadata = {
 };
 
 const RARITY_COLORS: Record<string, string> = {
-  common:    "bg-cream-100 text-ink-600 border-cream-200",
+  common:    "bg-cream-100 text-ink-700 border-cream-200",
   rare:      "bg-gold-100 text-gold-700 border-gold-200",
   epic:      "bg-gold-50  text-gold-700  border-gold-200",
-  legendary: "bg-rose-50   text-rose-700   border-rose-200",
+  legendary: "bg-danger-50 text-danger-ink border-danger-200",
 };
 
 export default async function StatsPage() {

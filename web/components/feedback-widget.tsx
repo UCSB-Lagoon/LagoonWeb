@@ -140,7 +140,7 @@ export function FeedbackWidget() {
                   className="w-full rounded-xl bg-white border border-cream-200 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition"
                 />
                 {status === "error" && error && (
-                  <p className="text-sm text-rose-600">{error}</p>
+                  <p className="text-sm text-danger-ink">{error}</p>
                 )}
                 <button
                   type="submit"
