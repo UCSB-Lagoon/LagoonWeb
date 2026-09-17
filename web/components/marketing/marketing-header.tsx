@@ -28,6 +28,7 @@ export function MarketingHeader() {
         <nav className="nav-mid" aria-label="Primary">
           <Link href="/#features">Features</Link>
           <Link href="/#classmates">Community</Link>
+          <Link href="/stats">Live data</Link>
           <Link href="/guides">Guides</Link>
           <Link href="/company">Company</Link>
         </nav>

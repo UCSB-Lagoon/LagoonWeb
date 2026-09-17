@@ -1,6 +1,11 @@
 /**
- * Approx UCSB Fall '25 enrollment, sourced from UCSB Office of Budget &
- * Planning (rounded). Update when new figures publish.
+ * UCSB Fall '25 enrollment, from the UCSB Office of Budget & Planning.
+ *
+ * Still the most recent PUBLISHED census: official figures land a few weeks
+ * after each fall census date, so Fall '26 is not available until well after
+ * classes start on 24 September. The /stats copy says "~" and names the year
+ * for that reason — it is a real published number, just not this term's.
+ * Update when Fall '26 publishes.
  */
 export const UCSB_UNDERGRAD_ENROLLMENT = 23196;
 export const UCSB_TOTAL_ENROLLMENT     = 26420;

@@ -23,8 +23,8 @@ export const revalidate = 120;
 
 /**
  * Public, indexable, and listed in sitemap.ts — so it needs more than a
- * title. It is no longer linked from the marketing nav, which makes the
- * canonical + description the only things telling a crawler what it is.
+ * title. Linked again from the marketing nav ("Live data"), the app navbar
+ * and both footers, so it is reachable by crawl and not only by sitemap.
  */
 export const metadata: Metadata = {
   title: "Stats for nerds",
@@ -170,7 +170,7 @@ export default async function StatsPage() {
     },
     {
       title: `Lagoon has reached ${adoptionPct.toFixed(2)}% of UCSB undergrads`,
-      body: `${ov?.total_users ?? 0} sign-ups out of ~${UCSB_UNDERGRAD_ENROLLMENT.toLocaleString()} undergraduates enrolled. Plenty of lagoon to fill.`,
+      body: `${ov?.total_users ?? 0} sign-ups out of the ${UCSB_UNDERGRAD_ENROLLMENT.toLocaleString()} undergraduates in UCSB’s most recent published census (Fall 2025). Plenty of lagoon to fill.`,
       icon: GraduationCap,
     },
     {
