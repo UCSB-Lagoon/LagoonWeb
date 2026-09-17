@@ -5,6 +5,15 @@ import type { GuideFrontmatter } from "@/components/seo/guide-jsonld";
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
 /**
+ * Related-guide hrefs come from guide frontmatter, so they're whatever an
+ * author typed. Every one today is a root-relative marketing path, but only
+ * those get client-side routing; anything else stays a plain anchor.
+ * `//host` is protocol-relative, i.e. off-site despite the leading slash.
+ */
+const isInternal = (href: string) =>
+  href.startsWith("/") && !href.startsWith("//");
+
+/**
  * Shared chrome for every guide page (page-hero + article wrapper +
  * related-guides). All guides share this exactly; the MDX file only
  * carries the article prose. Markup mirrors the old static guides so
@@ -51,7 +60,13 @@ export function GuideShell({
         <ul className="related-guides-list">
           {fm.related.map((r) => (
             <li key={r.href}>
-              <a href={r.href}>{r.label}</a>
+              {isInternal(r.href) ? (
+                <Link href={r.href}>{r.label}</Link>
+              ) : (
+                <a href={r.href} rel="noreferrer">
+                  {r.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>
