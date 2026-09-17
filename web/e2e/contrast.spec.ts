@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { MD_CLASS } from "../lib/mini-markdown";
 
 /**
  * WCAG AA contrast, measured on the rendered page.
@@ -22,8 +23,14 @@ const KNOWN: Array<{ route: string; text: string; why: string }> = [];
 
 type Fail = { text: string; ratio: number; need: number; selector: string };
 
-async function contrastFailures(page: Page): Promise<Fail[]> {
-  return page.evaluate(() => {
+/**
+ * `nonText` adds a second sweep for the two rules a text walk structurally
+ * cannot see: a `::marker` colour and a `text-decoration-color` are not text
+ * nodes, so `getComputedStyle(el).color` never reports them. It is opt-in
+ * because it is only wired up where the markup under test relies on them.
+ */
+async function contrastFailures(page: Page, opts: { nonText?: boolean } = {}): Promise<Fail[]> {
+  return page.evaluate(({ nonText }) => {
     // Colours are normalised by painting them, not by parsing the string.
     //
     // Tailwind v4 emits `oklab(...)` and `oklch(...)`, and a naive
@@ -114,7 +121,7 @@ async function contrastFailures(page: Page): Promise<Fail[]> {
     };
 
     const out: Fail[] = [];
-    document.querySelectorAll("a,button,span,p,div,h1,h2,h3,h4,li,td,th,label").forEach((el) => {
+    document.querySelectorAll("a,button,span,p,div,h1,h2,h3,h4,li,td,th,label,blockquote,code,strong,em").forEach((el) => {
       if (el.children.length) return;                  // leaf text only
       const text = el.textContent?.trim() ?? "";
       if (!text || text.length > 80) return;
@@ -134,8 +141,31 @@ async function contrastFailures(page: Page): Promise<Fail[]> {
       const need = size >= 24 || (size >= 18.66 && bold) ? 3 : 4.5;
       if (r < need - 0.05) out.push({ text: text.slice(0, 40), ratio: r, need, selector: path(el) });
     });
+
+    // Non-text contrast (WCAG 1.4.11) — a rule that identifies a link, or a
+    // bullet that identifies a list, has to be visible against what it sits on.
+    if (nonText) {
+      const rule = (el: Element, colour: string, what: string) => {
+        const bg = backdrop(el);
+        const r = ratio(over(rgba(colour), bg), bg);
+        if (r < 3 - 0.05) out.push({ text: what, ratio: r, need: 3, selector: path(el) });
+      };
+      document.querySelectorAll("*").forEach((el) => {
+        if (!visible(el)) return;
+        const cs = getComputedStyle(el);
+        if (cs.listStyleType !== "none" && el.tagName === "LI") {
+          rule(el, getComputedStyle(el, "::marker").color, "::marker");
+        }
+        if (cs.textDecorationLine.includes("underline")) {
+          rule(el, cs.textDecorationColor, "underline rule");
+        }
+        if (cs.borderLeftStyle !== "none" && parseFloat(cs.borderLeftWidth) >= 3) {
+          rule(el, cs.borderLeftColor, "left rule");
+        }
+      });
+    }
     return out;
-  });
+  }, { nonText: !!opts.nonText });
 }
 
 for (const route of ROUTES) {
@@ -192,3 +222,102 @@ for (const route of ROUTES) {
     });
   }
 }
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * /admin/handbook — the route the sweep above cannot reach.
+ *
+ * It redirects to /login for anyone unauthenticated, so there is no rendered
+ * page to measure and no honest way to add it to ROUTES. What decides the
+ * answer is only two things, and both can be reconstructed: the class strings
+ * lib/mini-markdown.tsx ships, and the surfaces it puts them on. The strings
+ * are IMPORTED from the renderer, never copied — a copy would go stale the
+ * first time someone edited one, and this suite would then prove nothing while
+ * staying green.
+ *
+ * The fixture is injected into a real app route so @theme resolves through the
+ * same compiled stylesheet the handbook loads, and so `.card` is the real card
+ * — in `.dark` that is `--color-navy-700`, an override the token alone doesn't
+ * tell you about.
+ *
+ * Every nesting below exists because it changes the backdrop. A link is fine
+ * on the card and has to survive the `cream-100` under a blockquote and a
+ * table head, and the `cream-100/40` of an even row — `--gold-ink` is 5.07:1
+ * on the card but 4.10:1 on `cream-100`, which is exactly why the link text
+ * here is ink and only its underline is gold.
+ * ────────────────────────────────────────────────────────────────────────── */
+const HANDBOOK_FIXTURE = `
+  <div class="app-shell">
+    <article class="card p-6 sm:p-10">
+      <p class="my-3 text-ink-700 leading-relaxed">Body copy on the card surface.</p>
+      <p class="my-3 text-ink-700 leading-relaxed"><a class="${MD_CLASS.link}">Inline link on the card</a></p>
+      <blockquote class="${MD_CLASS.blockquote}">Quoted text on the tinted fill.</blockquote>
+      <blockquote class="${MD_CLASS.blockquote}"><a class="${MD_CLASS.link}">Inline link inside a blockquote</a></blockquote>
+      <ul class="${MD_CLASS.list}"><li class="my-1 text-ink-700">List item, gold marker</li></ul>
+      <table class="w-full text-sm border border-cream-200 rounded-xl overflow-hidden">
+        <thead class="bg-cream-100">
+          <tr><th class="text-left font-semibold text-ink-900 px-3 py-2 border-b border-cream-200"><a class="${MD_CLASS.link}">Link in a table head</a></th></tr>
+        </thead>
+        <tbody>
+          <tr class="even:bg-cream-100/40"><td class="px-3 py-2 border-b border-cream-200 text-ink-700 align-top">Odd row</td></tr>
+          <tr class="even:bg-cream-100/40"><td class="px-3 py-2 border-b border-cream-200 text-ink-700 align-top"><a class="${MD_CLASS.link}">Link in an even row</a></td></tr>
+        </tbody>
+      </table>
+    </article>
+  </div>`;
+
+for (const theme of ["light", "dark"] as const) {
+  test(`contrast · /admin/handbook markdown (synthetic) · ${theme}`, async ({ page }) => {
+    await page.addInitScript((t) => {
+      try { localStorage.setItem("theme", t); } catch {}
+    }, theme);
+    await page.goto("/hub", { waitUntil: "networkidle" });
+    await page.evaluate(({ t, html }) => {
+      document.documentElement.classList.toggle("dark", t === "dark");
+      document.body.innerHTML = html;
+    }, { t: theme, html: HANDBOOK_FIXTURE });
+
+    const fails = await contrastFailures(page, { nonText: true });
+    expect(
+      fails,
+      fails.map((f) => `  ${f.ratio}:1 (needs ${f.need}) — "${f.text}"  ${f.selector}`).join("\n"),
+    ).toEqual([]);
+  });
+}
+
+/**
+ * The token half of the same question: the pairing above is only safe because
+ * both sides flip. `bg-orange-50/50` is the bug this guards — a fill that
+ * stays light while the ink turns cream, which read at 1.64:1 at night.
+ *
+ * Asserting "different in .dark" rather than a literal keeps @theme the single
+ * source of colour; the literals stay in globals.css where check-brand.mjs can
+ * see them.
+ */
+test("contrast · handbook tokens flip with the theme", async ({ page }) => {
+  await page.goto("/hub", { waitUntil: "networkidle" });
+  const read = (dark: boolean) =>
+    page.evaluate((d) => {
+      document.documentElement.classList.toggle("dark", d);
+      const cs = getComputedStyle(document.documentElement);
+      const card = document.createElement("div");
+      card.className = "card";
+      document.body.appendChild(card);
+      const surface = getComputedStyle(card).backgroundColor;
+      card.remove();
+      return {
+        surface,
+        "--color-cream-100": cs.getPropertyValue("--color-cream-100").trim(),
+        "--color-gold-700": cs.getPropertyValue("--color-gold-700").trim(),
+        "--color-ink-900": cs.getPropertyValue("--color-ink-900").trim(),
+        "--color-ink-700": cs.getPropertyValue("--color-ink-700").trim(),
+      };
+    }, dark);
+
+  const light = await read(false);
+  const dark = await read(true);
+  for (const key of Object.keys(light) as Array<keyof typeof light>) {
+    expect(dark[key], `${key} is the same day and night — it cannot be carrying a themed surface`)
+      .not.toBe(light[key]);
+  }
+});
