@@ -182,13 +182,13 @@ export function CampusMap({ signedIn }: Props) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search buildings, codes, dining halls…"
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-cream-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-gold-300"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-panel-elevated border border-cream-200 text-sm text-ink-900 focus:outline-none focus:ring-2 focus:ring-gold-300"
             />
           </div>
           <div className="mt-2.5 flex flex-wrap gap-1.5">
             <button
               onClick={() => setActiveCat(null)}
-              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-on-accent border-gold-500" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
+              className={`text-xs px-2.5 py-1 rounded-full border transition ${activeCat === null ? "bg-gold-500 text-on-accent border-gold-500" : "bg-panel-elevated border-cream-200 text-ink-500 hover:border-gold-300"}`}
             >
               All
             </button>
@@ -196,7 +196,7 @@ export function CampusMap({ signedIn }: Props) {
               <button
                 key={c}
                 onClick={() => setActiveCat(activeCat === c ? null : c)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${activeCat === c ? "text-white border-transparent" : "bg-white border-cream-200 text-ink-500 hover:border-gold-300"}`}
+                className={`text-xs px-2.5 py-1 rounded-full border transition flex items-center gap-1 ${activeCat === c ? "text-white border-transparent" : "bg-panel-elevated border-cream-200 text-ink-500 hover:border-gold-300"}`}
                 style={activeCat === c ? { background: CATEGORY_META[c].color } : undefined}
               >
                 <span>{CATEGORY_META[c].emoji}</span>

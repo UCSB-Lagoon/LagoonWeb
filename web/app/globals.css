@@ -16,14 +16,26 @@
   --color-gold-400: #ffd200;
   --color-gold-500: #ffd200;     /* the accent */
   --color-gold-600: #e6bd00;     /* pressed */
-  --color-gold-700: #8a6a00;     /* gold you can read on cream — 4.5:1 */
-  --color-gold-ink: #8a6a00;
+  --color-gold-700: #7f6200;     /* gold you can read — 5.1:1 on the cream page */
+  --color-gold-ink: #7f6200;
 
   /* Ink for text sitting on a PAINTED brand fill (a gold plate, a gold pill).
      Deliberately does NOT flip with the theme: `ink-900` is correct on a page
      surface and wrong here, because it becomes cream at night while the gold
      underneath stays gold — 1.29:1. This is the web's --on-accent. */
   --color-on-accent: #001e30;
+
+  /* Readable gold on a PAINTED DARK ground — the mirror of --color-gold-ink,
+     and the single most-repeated mistake in this codebase. `gold-ink` is the
+     gold deepened until it reads on CREAM; put it on a navy band and it runs
+     2.2-3.0:1. The fill is already the readable one there (8.6-11.8:1), so
+     this is simply the fill under a name that says where it belongs.
+
+     Like --color-on-accent it does NOT flip: a painted navy band is navy in
+     both themes, so its ink must not change when the page around it does.
+     Six call sites had `gold-ink` on navy before this existed — a guides
+     eyebrow at 2.97:1, a pill at 2.43:1, a 60px masthead word at 2.97:1. */
+  --color-gold-on-dark: #ffd200;
 
   /* Cream ink for text on a DARK or painted ground. Like --color-on-accent
      this deliberately does NOT flip: a navy band stays navy at night, so the
@@ -46,11 +58,18 @@
   --color-panel: #fbf9f3;          /* card surface on the cream page */
   --color-panel-elevated: #ffffff;  /* elevated card on the cream page */
 
-  /* Ink */
+  /* Ink.
+     Each step is picked against the WORST surface it lands on, not the page
+     ground. That distinction is the whole bug class: a muted ink chosen on
+     the page (`ink-400` at 4.85:1 on cream-50) drops to 4.42:1 the moment it
+     sits on `cream-100`, and every card, header tint and alt band is a
+     different ground. Same story at night, where `ink-500` measured 5.47:1
+     on the navy page and 3.82:1 on an elevated navy card. e2e/contrast.spec
+     measures the rendered pairing, which is the only way to see it. */
   --color-ink-900: #001e30;
   --color-ink-700: #003a60;
   --color-ink-500: #4a5d6b;
-  --color-ink-400: #586c7a;   /* 4.85:1 on cream — was 3.16 */
+  --color-ink-400: #546876;   /* 4.7:1 on cream-100, the worst ground it lands on */
   --color-ink-300: #a9bdc9;
 
   /* ── Chart series ──
@@ -282,8 +301,8 @@ body::before {
 
   --color-ink-900: #f4f1ea;
   --color-ink-700: #a9bdc9;
-  --color-ink-500: #7e95a3;
-  --color-ink-400: #7e95a3;
+  --color-ink-500: #8ea5b3;
+  --color-ink-400: #8ea5b3;
   --color-ink-300: #4a5d6b;
 
   /* Chart series, selected for the navy surface — see the light set above. */

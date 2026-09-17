@@ -47,7 +47,7 @@ export function InstallsChart({ data, totalLabel }: { data: InstallsPoint[]; tot
                 if (!active || !payload?.length) return null;
                 const p = payload[0].payload as InstallsPoint;
                 return (
-                  <div className="rounded-xl border border-cream-200 bg-white px-3 py-2 shadow-sm text-sm">
+                  <div className="rounded-xl border border-cream-200 bg-panel-elevated px-3 py-2 shadow-sm text-sm">
                     <p className="font-semibold text-ink-900">{formatDay(p.day, true)}</p>
                     <p className="text-gold-700 font-bold tabular-nums">{p.count.toLocaleString()} clicks</p>
                   </div>

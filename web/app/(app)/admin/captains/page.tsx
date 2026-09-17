@@ -203,7 +203,7 @@ function FilterChip({ href, label, active }: { href: string; label: string; acti
         "px-3 py-1.5 rounded-full text-xs font-semibold border transition",
         active
           ? "bg-gold-500 text-on-accent border-gold-500"
-          : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100",
+          : "bg-panel-elevated text-ink-700 border-cream-200 hover:bg-cream-100",
       ].join(" ")}
     >
       {label}

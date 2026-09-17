@@ -73,6 +73,15 @@ async function contrastFailures(page: Page): Promise<Fail[]> {
       while (p && p !== document.documentElement) {
         const cs = getComputedStyle(p);
         if (cs.display === "none" || cs.visibility === "hidden" || +cs.opacity === 0) return false;
+        // Not exposed to assistive tech, so the contrast rule does not apply —
+        // this is the same exclusion axe makes.
+        //
+        // It is also the one exclusion here that could be abused: anything can
+        // be silenced by hiding it. Treat a new aria-hidden over failing text
+        // as a fix only when the text is genuinely decorative AND still legible
+        // to a sighted reader. Both current users (the marquee, the phone
+        // mockup) had their colours corrected as well, not instead.
+        if (p.getAttribute("aria-hidden") === "true") return false;
         p = p.parentElement;
       }
       return true;
@@ -110,6 +119,11 @@ async function contrastFailures(page: Page): Promise<Fail[]> {
       const text = el.textContent?.trim() ?? "";
       if (!text || text.length > 80) return;
       if (!visible(el)) return;
+      // An emoji paints from its own colour font; `color` does not apply to it.
+      // Measuring one compares a colour that was never used against the
+      // background and reports nonsense — a 🗓️ on a navy card came back at
+      // 1.01:1. Skip leaves that are entirely pictographic.
+      if (!/[\p{L}\p{N}]/u.test(text)) return;
 
       const cs = getComputedStyle(el);
       const bg = backdrop(el);
@@ -134,6 +148,38 @@ for (const route of ROUTES) {
       await page.evaluate((t) => {
         document.documentElement.classList.toggle("dark", t === "dark");
       }, theme);
+
+      // Reveal the page before measuring it.
+      //
+      // The marketing pages enter on scroll: `.r/.rl/.rr` sit at `opacity: 0`
+      // until an IntersectionObserver adds `.on`. `visible()` — correctly —
+      // refuses to measure a transparent element, so at the default scroll
+      // position everything below the fold was silently skipped. The suite was
+      // only ever measuring the hero and the nav, on the one page with the most
+      // content. Three failing pairings on the navy guides band, one of them a
+      // 2.97:1 eyebrow, sat under that gap.
+      //
+      // Scrolling first drives the real observers; forcing `.on` afterwards
+      // catches anything whose observer did not fire in a headless viewport.
+      // Kill transitions FIRST. `.on` only starts a fade to opacity 1, and
+      // `visible()` skips anything still at 0 — so on a fast machine the
+      // sample landed mid-fade and those elements were quietly dropped from
+      // the run. That is a test that gets weaker the faster it goes: two
+      // consecutive runs of this file disagreed about a 4.34:1 map label,
+      // one measuring it and one skipping it. Frozen, the reveal is instant
+      // and every run measures the same set.
+      await page.addStyleTag({
+        content: `*,*::before,*::after{animation:none!important;transition:none!important}`,
+      });
+      await page.evaluate(async () => {
+        for (let y = 0; y < document.body.scrollHeight; y += 600) {
+          window.scrollTo(0, y);
+          await new Promise((r) => requestAnimationFrame(() => r(null)));
+        }
+        window.scrollTo(0, 0);
+        document.querySelectorAll(".r,.rl,.rr").forEach((e) => e.classList.add("on"));
+      });
+      await page.waitForTimeout(250);
 
       const fails = (await contrastFailures(page)).filter(
         (f) => !KNOWN.some((k) => k.route === route && f.text.startsWith(k.text)),

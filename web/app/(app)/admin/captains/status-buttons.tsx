@@ -110,7 +110,7 @@ export function StatusButtons({ id, current, captainCode, emailedAt }: Props) {
               if (res?.mailto_url) window.location.href = res.mailto_url;
             }}
             title="Open the welcome email in your default mail client"
-            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border bg-white text-ink-700 border-cream-200 hover:bg-cream-100 transition"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border bg-panel-elevated text-ink-700 border-cream-200 hover:bg-cream-100 transition"
           >
             <Mail className="w-3 h-3" /> Open email
           </button>
@@ -127,7 +127,7 @@ export function StatusButtons({ id, current, captainCode, emailedAt }: Props) {
                 "inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition",
                 isCurrent
                   ? "bg-cream-100 text-ink-400 border-cream-200 cursor-default"
-                  : "bg-white text-ink-700 border-cream-200 hover:bg-cream-100 hover:border-gold-300",
+                  : "bg-panel-elevated text-ink-700 border-cream-200 hover:bg-cream-100 hover:border-gold-300",
                 isBusy ? "opacity-60 cursor-wait" : "",
               ].join(" ")}
             >

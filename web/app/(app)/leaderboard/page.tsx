@@ -72,7 +72,7 @@ function Tab({ href, active, label }: { href: string; active: boolean; label: st
       className={[
         "px-4 py-1.5 rounded-full text-sm font-semibold transition",
         active
-          ? "bg-white text-ink-900 shadow-sm border border-cream-200"
+          ? "bg-panel-elevated text-ink-900 shadow-sm border border-cream-200"
           : "text-ink-500 hover:text-ink-900",
       ].join(" ")}
     >

@@ -31,7 +31,7 @@
   /* Text — light bg */
   --ink: var(--color-ink-900, #001e30);
   --ink-soft: var(--color-ink-500, #4a5d6b);
-  --ink-muted: var(--color-ink-400, #586c7a);   /* 4.85:1 on cream — was 3.16 */
+  --ink-muted: var(--color-ink-400, #546876);   /* 4.7:1 on cream-100, its worst ground */
 
   /* Text — dark bg */
   --ink-light: var(--color-ink-light, #f4f1ea);
@@ -47,7 +47,8 @@
   --gold-bright: var(--color-gold-300, #ffdd3d);
   --gold-pressed: var(--color-gold-600, #e6bd00);
   --gold-dim: rgba(255, 210, 0, 0.16);
-  --gold-ink: var(--color-gold-ink, #8a6a00);          /* gold you can READ on cream — 4.5:1 */
+  --gold-ink: var(--color-gold-ink, #7f6200);          /* gold you can READ on cream — 5.1:1 */
+  --gold-on-dark: var(--color-gold-on-dark, #ffd200);  /* gold you can READ on a painted navy band */
   --on-accent: var(--color-on-accent, #001e30);   /* does NOT flip — see globals.css */         /* ink that belongs on a gold/painted fill */
 
   --pacific: var(--color-navy-500, #003a60);           /* raised navy: painted blocks, plates */
@@ -106,11 +107,21 @@
   --warm-dark-2: var(--color-navy-800, #002a42);
   --text-dark: var(--color-ink-900, #001e30);
   --text-dark-2: rgba(0,30,48,0.66);
-  --text-dark-3: rgba(0,30,48,0.40);
+  /* 0.40 composited to 2.46:1 on the cream page. This alias carries real
+     text in ~12 places (stat labels, card meta, grade-bar figures), so the
+     alpha is set where the faintest of them still reaches AA: 4.70:1 on
+     cream-50, 4.56:1 on cream-100. Still a clear step below --text-dark-2. */
+  --text-dark-3: rgba(0,30,48,0.62);
   --text-light: var(--color-ink-light, #f4f1ea);
   --text-light-2: rgba(244,241,234,0.76);
-  --text-light-3: rgba(244,241,234,0.44);
-  --orange-ink: var(--color-gold-ink, #8a6a00);
+  /* 0.44 composited to 3.6-3.9:1 on the navy bands and their translucent
+     cards. 0.56 clears 4.5:1 on the lightest of them. Sibling of the
+     --text-dark-3 fix above; both were set against one ground and used on
+     four. 0.64, not 0.56: the lightest ground it lands on is --pacific
+     (#003a60, the map mockup), where 0.56 is 4.34:1. */
+  --text-light-3: rgba(244,241,234,0.64);
+  --orange-ink: var(--color-gold-ink, #7f6200);
+  --orange-ink-dark: var(--color-gold-on-dark, #ffd200);
   --sys: var(--font-inter), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --mono: var(--font-space-mono), 'Courier New', monospace;
 
@@ -328,20 +339,28 @@ h3 {
   gap: 10px;
 }
 
-/* Gradient "L" tile — identical to the app navbar brand mark */
+/* The "L" tile — identical to the app navbar brand mark.
+
+   Three leftovers from the pre-repaint orange identity lived here. The fill
+   was a `linear-gradient` between gold and the SAME gold — a flat colour
+   written as a gradient, left behind when the amber→orange ramp was
+   collapsed. The letter was `--ink-light` (cream) on that gold: 1.1:1, i.e.
+   the wordmark's initial was effectively invisible in the header of every
+   marketing page. `--on-accent` is the token that exists for exactly this —
+   ink on a painted brand fill — and it is navy, 12.6:1 here. The glow is
+   gone too; the system casts no shadows. */
 .brand-mark {
   display: grid;
   place-items: center;
   width: 32px;
   height: 32px;
   border-radius: 9px;
-  background: linear-gradient(135deg, var(--gold), var(--gold));
-  color: var(--ink-light);
+  background: var(--gold);
+  color: var(--on-accent);
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 18px;
   line-height: 1;
-  box-shadow: 0 6px 18px -8px rgba(255, 210, 0, 0.7);
 }
 
 .brand-copy { display: flex; flex-direction: column; gap: 1px; }
@@ -487,6 +506,10 @@ h3 {
   background-clip: text;
 }
 
+/* Section eyebrows are READ text, so they take the readable gold, not the
+   fill. `--gold` here measured 1.19–1.29:1 on the cream ground — the exact
+   trap the token pair exists to prevent. Inside a painted navy band the
+   override below puts the bright fill back, where it is ~10:1. */
 .eyebrow {
   margin: 0 0 14px;
   font-size: 11.5px;
@@ -494,7 +517,7 @@ h3 {
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-ink);
 }
 
 /* Was an inline style on every guide's "Updated: …" stamp; classed so
@@ -917,11 +940,22 @@ h3 {
    DARK SECTION
    ===================== */
 
+/* Painted navy band.
+
+   Was three stacked gradients — two coloured radial glows over a navy ramp —
+   which broke the system's third rule (nothing is a gradient) and carried a
+   `rgba(255,159,92,…)` glow, the last orange left on the site.
+
+   It had a second cost. The band painted its navy through `background-image`
+   with no `background-color` underneath, so anything walking the ancestor
+   chain for a resolved ground — a contrast checker, a reader-mode heuristic,
+   a print stylesheet — saw `transparent` all the way up to the cream page and
+   concluded the cream ink here was cream-on-cream. That is why five separate
+   1:1 readings on /company pointed at text that is, on screen, perfectly
+   legible. A flat `background-color` is both the correct brand answer and the
+   one that can be measured. */
 .section-dark {
-  background:
-    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(255, 210, 0, 0.08), transparent),
-    radial-gradient(ellipse 50% 40% at 85% 75%, rgba(255, 159, 92, 0.07), transparent),
-    linear-gradient(165deg, var(--night-mid) 0%, var(--night) 100%);
+  background-color: var(--night);
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
@@ -945,7 +979,7 @@ h3 {
 
 .section-dark .glass-panel,
 .section-dark .metric-panel {
-  background: linear-gradient(160deg, var(--night-mid), var(--night));
+  background-color: var(--night-mid);
   border-color: var(--night-border-bright);
 }
 
@@ -1418,8 +1452,9 @@ h3 {
   gap: 14px;
 }
 
+/* Read text on cream — the fill gold measured 1.38:1 here. */
 .resource-row span {
-  color: var(--gold);
+  color: var(--gold-ink);
   font-size: 11px;
   font-family: var(--font-accent);
   font-weight: 800;
@@ -1787,8 +1822,8 @@ h3 {
   --panel-soft: var(--color-panel, #00304c);
 
   --ink: var(--color-ink-900, #f4f1ea);             /* cream */
-  --ink-soft: var(--color-ink-500, #7e95a3);
-  --ink-muted: var(--color-ink-400, #7e95a3);
+  --ink-soft: var(--color-ink-500, #8ea5b3);
+  --ink-muted: var(--color-ink-400, #8ea5b3);
 
   --line: var(--color-cream-200, #14415e);
   --line-strong: var(--color-cream-200, #14415e);
@@ -1808,7 +1843,7 @@ h3 {
   --warm-dark-2: var(--color-navy-800, #002a42);
   --text-dark: var(--color-ink-900, #f4f1ea);
   --text-dark-2: rgba(244, 241, 234,0.70);
-  --text-dark-3: rgba(244, 241, 234,0.38);
+  --text-dark-3: rgba(244, 241, 234,0.60);   /* 0.38 was 3.23:1; 0.60 holds 4.5:1 on the lightest night card */
   --orange-mist: rgba(255, 210, 0,0.13);
   --orange-ink: var(--color-gold-ink, #ffd200);
 
@@ -2032,16 +2067,22 @@ h3 {
     .ps-hi { font-size: 10px; font-weight: 700; color: rgba(244, 241, 234,0.9); }
     .ps-hi span { color: var(--orange-2); }
     .ps-card { background: rgba(255,255,255,0.06); border: 0.5px solid rgba(255, 210, 0,0.15); border-radius: 12px; padding: 10px 12px; }
-    .ps-lbl { font-size: 7.5px; font-weight: 700; color: rgba(244, 241, 234,0.4); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 3px; }
+    /* The phone is a product shot: its ground is navy in both themes, so these
+       take fixed cream alphas rather than a flipping alias. Raised from
+       0.40/0.45 (3.4:1 / 3.8:1), which read as muddy at this size. */
+    .ps-lbl { font-size: 7.5px; font-weight: 700; color: rgba(244, 241, 234,0.62); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 3px; }
     .ps-val { font-size: 14px; font-weight: 800; color: var(--text-light); letter-spacing: -0.4px; }
     .ps-val span { color: var(--orange-2); }
-    .ps-sub { font-size: 8px; color: rgba(244, 241, 234,0.45); margin-top: 2px; }
+    .ps-sub { font-size: 8px; color: rgba(244, 241, 234,0.62); margin-top: 2px; }
     .ps-bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 100px; margin-top: 6px; overflow: hidden; }
     .ps-bar-fill { height: 100%; width: 72%; border-radius: 100px; background: linear-gradient(90deg, var(--orange), var(--orange-2)); }
     .ps-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
     .ps-pill { font-size: 7px; font-weight: 700; padding: 3px 8px; border-radius: 100px; }
     .ps-pill.t { background: rgba(255, 210, 0,0.18); color: var(--orange-2); }
-    .ps-pill.a { background: var(--gold-dim); color: var(--gold-ink); }
+    /* --gold-ink is the gold that reads on CREAM; on the phone's navy it was
+       1.99:1. Inside a painted dark surface the bright fill is the readable
+       one (~9:1), which is the same asymmetry --on-accent exists for. */
+    .ps-pill.a { background: var(--gold-dim); color: var(--gold-bright); }
 
     /* ── LOGO STRIP ── */
     .logo-strip {
@@ -2058,10 +2099,14 @@ h3 {
       flex-shrink: 0;
     }
     @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    /* The marquee is aria-hidden (it repeats links the nav already has), but
+       it is still text a sighted reader is meant to read — 0.32 alpha put it
+       at 2.02:1. It follows the faint-ink alias now instead of carrying its
+       own literal. */
     .ls-item {
       white-space: nowrap;
       font-size: 13.5px; font-weight: 700;
-      color: rgba(0, 30, 48,0.32);
+      color: var(--text-dark-3);
       padding: 0 28px;
       letter-spacing: -0.01em;
     }
@@ -2094,7 +2139,7 @@ h3 {
       line-height: 1.42; font-weight: 500;
       color: rgba(244, 241, 234,0.86); letter-spacing: -0.5px;
     }
-    .vc-brand { color: var(--orange-ink); font-weight: 700; }
+    .vc-brand { color: var(--orange-ink-dark); font-weight: 700; }
     .vc-vis { flex-shrink: 0; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
     .vc-notif {
       display: flex; align-items: center; gap: 12px;
@@ -2122,7 +2167,7 @@ h3 {
       letter-spacing: -2.5px; line-height: 0.96;
       color: var(--text-dark);
     }
-    .feat-hed em { color: var(--orange-ink); font-style: italic; }
+    .feat-hed em { color: var(--orange-ink); font-style: normal; font-weight: 800; }
     .feat-sub { font-size: 15px; color: var(--text-dark-2); max-width: 300px; line-height: 1.6; text-align: right; }
 
     .feat-cards {
@@ -2167,7 +2212,7 @@ h3 {
       font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--text-dark-3); margin-bottom: 10px;
     }
-    .fc-dark .fc-lbl { color: rgba(244, 241, 234,0.32); }
+    .fc-dark .fc-lbl { color: var(--text-light-3); }
     /* ── LIVE DATA STRIP ── */
     .live-strip {
       max-width: 1160px; margin: 0 auto; padding: 56px 40px 0;
@@ -2198,7 +2243,7 @@ h3 {
       font-size: clamp(28px, 3.2vw, 40px); font-weight: 700;
       letter-spacing: -1.2px; line-height: 1.05; color: var(--text-light);
     }
-    .live-h em { color: var(--orange-ink); font-style: italic; }
+    .live-h em { color: var(--orange-ink); font-style: normal; font-weight: 800; }
     .live-sub {
       font-size: 14px; color: var(--text-light-2);
       margin: 14px 0 22px; line-height: 1.55; max-width: 420px;
@@ -2279,7 +2324,7 @@ h3 {
     }
     .fc-dark .fc-pill {
       background: rgba(255, 210, 0,0.10);
-      color: var(--orange-ink);
+      color: var(--orange-ink-dark);
       border-color: rgba(255, 210, 0,0.18);
     }
 
@@ -2408,11 +2453,14 @@ h3 {
     .cm-cs { font-size: 11px; color: var(--text-light-3); }
     .split-section.light .cm-cs, .split-section.light-2 .cm-cs { color: var(--text-dark-3); }
     .avs { display: flex; }
-    .av { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--warm-dark-2); margin-left: -6px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: white; }
+    /* Initials sit on a painted course hue, so they take --on-accent like any
+       other ink on a brand fill. White ran 1.45:1 on the gold avatar and
+       2.6:1 on the teal; navy is 5.1-11.8:1 across all four. */
+    .av { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--warm-dark-2); margin-left: -6px; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 800; color: var(--on-accent); }
     .av:first-child { margin-left: 0; }
-    .av-n { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--warm-dark-2); background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: var(--text-light-3); margin-left: -6px; }
+    .av-n { width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--warm-dark-2); background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: var(--text-light-2); margin-left: -6px; }
     .split-section.light .av, .split-section.light-2 .av { border-color: var(--ink-light); }
-    .split-section.light .av-n, .split-section.light-2 .av-n { border-color: var(--ink-light); background: var(--bg-2); color: var(--text-dark-3); }
+    .split-section.light .av-n, .split-section.light-2 .av-n { border-color: var(--ink-light); background: var(--bg-2); color: var(--text-dark-2); }
 
     /* grades vis */
     .gd-vis { padding: 24px; }
@@ -2451,7 +2499,7 @@ h3 {
     }
     .guides-watermark {
       position: absolute; top: -40px; right: -20px;
-      font-style: italic; font-weight: 600;
+      font-weight: 800;
       font-size: clamp(120px, 16vw, 220px); letter-spacing: -4px;
       color: rgba(255, 210, 0,0.05); pointer-events: none; user-select: none;
       line-height: 1; z-index: 0;
@@ -2459,10 +2507,10 @@ h3 {
     .guides-inner { max-width: 1160px; margin: 0 auto; position: relative; z-index: 1; }
     .guides-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px; }
     .guides-hed h2 { color: var(--text-light); margin-bottom: 0; font-size: clamp(40px, 4.5vw, 60px); }
-    .guides-hed h2 strong { color: var(--orange-ink); }
+    .guides-hed h2 strong { color: var(--orange-ink-dark); }
     .g-eyebrow {
       font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--orange-ink); margin-bottom: 10px; display: block;
+      text-transform: uppercase; color: var(--orange-ink-dark); margin-bottom: 10px; display: block;
       font-family: var(--mono);
     }
     .see-all {
@@ -2482,19 +2530,28 @@ h3 {
       border-radius: 2px;
     }
     .guide-item:first-child { border-top: 0.5px solid rgba(244, 241, 234,0.10); }
-    .guide-item:hover .gi-num { color: var(--orange-ink); }
-    .guide-item:hover .gi-title { color: var(--orange-ink); }
+    .guide-item:hover .gi-num { color: var(--orange-ink-dark); }
+    .guide-item:hover .gi-title { color: var(--orange-ink-dark); }
     .gi-num {
       font-family: var(--mono); font-weight: 700;
-      font-size: 22px; color: rgba(244, 241, 234,0.20);
+      font-size: 22px; color: rgba(244, 241, 234,0.45);
       line-height: 1; transition: color 0.2s;
       text-align: center; letter-spacing: -0.5px;
     }
     .gi-tags { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    /* One pill, not five.
+
+       Each tag used to carry its own inline background and text colour —
+       var(--orange) and four terracotta literals left over from the retired
+       identity, all with near-white ink on top. That ran 1.38:1, and it spent
+       five colours on a distinction (guide category) the reader gains nothing
+       from. One gold plate with --on-accent ink is the system's own pill, at
+       11.8:1. */
     .gi-tag {
       font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
       text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
-      color: var(--warm-dark);
+      background: var(--gold);
+      color: var(--on-accent);
     }
     .gi-read { font-size: 11px; color: var(--text-light-3); font-weight: 500; }
     .gi-title {
@@ -2512,7 +2569,7 @@ h3 {
       transition: border-color 0.2s, color 0.2s, transform 0.2s;
       flex-shrink: 0;
     }
-    .guide-item:hover .gi-arrow { border-color: var(--orange-ink); color: var(--orange-ink); transform: translateX(4px); }
+    .guide-item:hover .gi-arrow { border-color: var(--orange-ink-dark); color: var(--orange-ink-dark); transform: translateX(4px); }
 
     /* ── CREDITS ── */
     #credits {
@@ -2796,7 +2853,7 @@ h3 {
     .dark .btn-outline:hover { border-color: rgba(244, 241, 234,0.32); background: rgba(244, 241, 234,0.05); }
     .dark .hero-stats { border-top-color: rgba(244, 241, 234,0.09); }
     .dark .logo-strip { border-top-color: rgba(244, 241, 234,0.07); border-bottom-color: rgba(244, 241, 234,0.07); }
-    .dark .ls-item { color: rgba(244, 241, 234,0.28); }
+    .dark .ls-item { color: var(--text-dark-3); }
     .dark .ls-dot { background: rgba(244, 241, 234,0.14); }
     .dark .fc { background: var(--panel); border-color: rgba(244, 241, 234,0.08); }
     .dark .fc:hover { box-shadow: 0 18px 40px -22px rgba(0,0,0,0.55); }
@@ -2875,7 +2932,8 @@ h3 {
     }
 
     .close-h em {
-      font-style: italic;
+      font-style: normal;
+      font-weight: 800;
       color: var(--orange-ink);
     }
 

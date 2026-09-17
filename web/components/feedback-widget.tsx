@@ -131,13 +131,13 @@ export function FeedbackWidget() {
                         ? "What would make Lagoon better for you?"
                         : "Tell us anything…"
                   }
-                  className="w-full rounded-xl bg-white border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition resize-y"
+                  className="w-full rounded-xl bg-panel-elevated border border-cream-200 px-4 py-3 text-ink-900 placeholder:text-ink-400 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition resize-y"
                 />
                 <input
                   type="email"
                   name="email"
                   placeholder="Email (optional — only if you want a reply)"
-                  className="w-full rounded-xl bg-white border border-cream-200 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-300 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition"
+                  className="w-full rounded-xl bg-panel-elevated border border-cream-200 px-4 py-2.5 text-sm text-ink-900 placeholder:text-ink-400 focus:outline-none focus:border-gold-400 focus:ring-4 focus:ring-gold-100 transition"
                 />
                 {status === "error" && error && (
                   <p className="text-sm text-rose-600">{error}</p>

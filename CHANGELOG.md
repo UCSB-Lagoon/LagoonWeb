@@ -1,5 +1,117 @@
 # Lagoon Web — Changelog
 
+## [2026-09-16] — Finish the repaint, and make the guard that was supposed to catch it actually run
+
+The previous entry closed with a "Known broken" list and a contrast suite
+reporting **8 passed / 6 failed**. That figure was wrong, and the reason it
+was wrong is the most important thing in this entry.
+
+### The suite was measuring a dev server
+
+`playwright.config.ts` pointed at `:3000` with `reuseExistingServer`, so run
+by hand it silently adopted whatever `next dev` was already running. Turbopack
+serves the Tailwind layer as a ~2KB stub in dev: `@theme` is absent, so every
+token falls back, `--font-inter` is undefined, and the entire marketing site
+renders in **Times** with no brand colours at all. That is the page the suite
+was grading. Nothing ran it in CI either.
+
+Pointed at a production build, the same commit had **56** failing pairings,
+not 6 — including five where text was painted the exact colour of its own
+background. The config now uses a dedicated port it always builds and starts
+itself, and `ci.yml` runs it.
+
+Two further blind spots, both of which had been hiding real faults:
+
+- **Scroll-reveal.** The marketing pages enter at `opacity: 0` until an
+  observer adds `.on`. `visible()` correctly refuses to measure a transparent
+  element, so everything below the fold on the homepage was never measured —
+  on the page with the most content. Revealed, it had 27 more faults.
+- **The reveal has a transition**, so a fast run sampled mid-fade and skipped
+  elements a slow run caught. Two consecutive runs disagreed about a 4.34:1
+  label. Animations are frozen before measuring now, so the set is the same
+  every run.
+
+Also excluded, deliberately: `aria-hidden` subtrees (not exposed to assistive
+tech) and emoji-only leaves (an emoji paints from its own colour font, so
+comparing `color` to the background reported a 🗓️ at 1.01:1).
+
+### One systematic error behind most of the 56
+
+Muted ink was picked against the **page ground** and then used on **cards**.
+`ink-400` was 4.85:1 on the cream page and 4.42:1 on `cream-100`; at night
+`ink-500` was 5.47:1 on the navy page and 3.82:1 on an elevated navy card.
+Same story for `--text-dark-3` (0.40 alpha → 2.46:1) and `--text-light-3`
+(0.44 → 3.6:1). Every ink step is now chosen against the worst surface it
+lands on, and `globals.css` says so.
+
+### The fill-vs-ink split had a missing third case
+
+`--gold-ink` is gold deepened until it reads on **cream**. Put on a painted
+navy band it runs 2.2–3.0:1, and it was on six of them. Added
+`--color-gold-on-dark` (the fill, under a name that says where it belongs),
+theme-invariant for the same reason `--on-accent` is: a navy band is navy in
+both themes. `--gold-ink` itself was 4.49:1, not the 4.5 it claimed; now
+`#7f6200`, 5.1:1.
+
+The mirror of that bug: ink that flips on a plate that does not. 18 `bg-white`
+literals left theme-aware ink stranded on a white plate at 1.1–2.6:1 at night
+— all now `--panel-elevated`, which is the same `#ffffff` in light. The
+`rare`/`epic` rarity badges put `gold-700` (which flips to `#FFD200`) on
+`gold-100` (which does not): 1.3:1.
+
+### The guard could not see the homepage
+
+`scripts/check-brand.mjs` walked `.tsx/.css/.mdx`. The homepage body is
+`content/home-body.html`, which it never opened — and which still held **34
+literal colours**, among them `#F08A3C` and `#1E1410`, the retired
+orange-500 and warm-black. They shipped on the homepage every day while the
+guard reported the brand clean. It walks `.html` now, and the pocket is gone:
+classmate avatars and map pins use the brand hues, the grade histogram is one
+series in one colour instead of four retired ones, and the five guide tags are
+one gold pill instead of five terracottas at 1.38:1.
+
+### Repaint leftovers, now finished
+
+- The retirement of the serif italic had been applied to `h1 em` and missed
+  `.feat-hed em`, `.live-h em`, `.close-h em` and the guides watermark — the
+  homepage was speaking in two voices. One voice now.
+- `.brand-mark` was `linear-gradient(gold, gold)` — a flat colour written as a
+  gradient — with cream ink on it. The wordmark's "L" was **1.1:1** in the
+  header of every marketing page.
+- `.section-dark` painted its navy with three stacked gradients and no
+  `background-color`, breaking the "nothing is a gradient" rule and making the
+  band invisible to anything resolving a ground by walking ancestors. That is
+  where five 1:1 readings came from.
+
+### Result
+
+**0 failing pairings**, 14/14 green, three consecutive runs against a fresh
+production build. `docs/brand-guidelines.md` — which described Space Grotesk,
+Fraunces italic and an orange accent, none of which had been true since the
+repaint — is rewritten against what the code does.
+
+### Known broken — start here
+
+- **`npm run lint` exits 1**, and CI runs it. `next lint` is removed in Next
+  15.5 and there is no `eslint.config.*`, so it drops into an interactive
+  prompt and fails non-interactively. Pre-existing and unrelated to colour;
+  CI is red on `main` because of it.
+- **`--text-dark-*` / `--text-light-*` are still misnamed.** They mean "ink
+  for a dark band" and "ink for a light band", but read as theme names, and
+  `--text-dark-3` is now defined in both `:root` and the homepage `.dark`
+  block with opposite senses. The values are correct; the names invite the
+  next bug. ~40 call sites.
+- **Status colours are not in the system.** `/admin` still uses stock
+  Tailwind `emerald`/`rose`/`sky`/`stone` — 56 call sites, internal screens
+  only, no contrast failures. Needs semantic tokens before it is worth
+  touching.
+- **Visual baselines still not generated.** `e2e/visual.spec.ts` has **zero**
+  committed snapshots despite its docstring saying they are committed, so it
+  passes by writing new ones. Generate them in CI's Linux container — macOS
+  baselines will not match.
+- `SUPABASE_ACCESS_TOKEN` / `SUPABASE_PROJECT_ID` repo secrets are still
+  unset, so CI's schema-drift job **skips** rather than fails.
+
 ## [2026-09-15] — Align the site to the app's navy / cream / gold, and build the guards that keep it there
 
 Repainted LagoonWeb onto the iOS app's 2026-09 system (navy `#001E30`,
