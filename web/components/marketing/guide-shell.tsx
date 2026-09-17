@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import type { GuideFrontmatter } from "@/components/seo/guide-jsonld";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
@@ -21,9 +22,9 @@ export function GuideShell({
       <section className="page-hero">
         <div className="article-shell">
           <div className="breadcrumb">
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <span>/</span>
-            <a href="/guides">Guides</a>
+            <Link href="/guides">Guides</Link>
             <span>/</span>
             <span>{fm.breadcrumbName}</span>
           </div>

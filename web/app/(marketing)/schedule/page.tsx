@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Link from "next/link";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
@@ -74,7 +75,7 @@ export default function SchedulePage() {
           </a>
         </div>
         <p className="go-meta">
-          iPhone · UCSB students only · <a href="/">explore Lagoon →</a>
+          iPhone · UCSB students only · <Link href="/">explore Lagoon →</Link>
         </p>
       </div>
     </section>

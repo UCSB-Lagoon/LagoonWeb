@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const KEY = "lagoon_announce_dismissed";
 
@@ -24,7 +25,7 @@ export function AnnounceBar() {
       <span className="announce-copy">
         <span className="announce-tag">Fall 2026</span>
         Classes start Thursday, September 24 —{" "}
-        <a href="/ucsb-fall-2026-start-date">see every key date</a>
+        <Link href="/ucsb-fall-2026-start-date">see every key date</Link>
       </span>
       <button
         className="announce-close"

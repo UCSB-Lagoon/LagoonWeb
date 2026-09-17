@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     const { data: { user } } = await supa.auth.getUser();
     const { error } = await supa
       .from("feedback")
-      .insert({ ...record, user_id: user?.id ?? null } as unknown as never);
+      .insert({ ...record, user_id: user?.id ?? null });
     if (error) throw error;
   } catch (e) {
     console.warn("[feedback.submit] insert failed", e);

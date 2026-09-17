@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MarketingMobileNav } from "@/components/marketing/marketing-mobile-nav";
 
@@ -17,22 +18,22 @@ export function MarketingHeader() {
   return (
     <header className="site-header">
       <div className="nav-shell">
-        <a className="brand" href="/" aria-label="Lagoon — UCSB campus app">
+        <Link className="brand" href="/" aria-label="Lagoon — UCSB campus app">
           <span className="brand-mark" aria-hidden="true">L</span>
           <span className="brand-copy">
             <strong>Lagoon</strong>
             <span>UCSB</span>
           </span>
-        </a>
+        </Link>
         <nav className="nav-mid" aria-label="Primary">
-          <a href="/#features">Features</a>
-          <a href="/#classmates">Community</a>
-          <a href="/guides">Guides</a>
-          <a href="/company">Company</a>
+          <Link href="/#features">Features</Link>
+          <Link href="/#classmates">Community</Link>
+          <Link href="/guides">Guides</Link>
+          <Link href="/company">Company</Link>
         </nav>
         <div className="nav-right">
           <ThemeToggle />
-          <a className="nav-explore" href="/guides">Explore</a>
+          <Link className="nav-explore" href="/guides">Explore</Link>
           <a
             className="nav-cta"
             href={APP_STORE}
