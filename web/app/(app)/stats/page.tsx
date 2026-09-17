@@ -251,7 +251,7 @@ export default async function StatsPage() {
           <span className="text-xs text-ink-400">{totalProfiles} declared profiles</span>
         </div>
         <p className="text-xs text-ink-400 mb-4">
-          Major codes are UCSB's, not friendly names — keeping them honest.
+          Major codes are UCSB’s, not friendly names — keeping them honest.
         </p>
         <BarRow items={majorBars} />
       </section>
@@ -474,7 +474,7 @@ export default async function StatsPage() {
       </section>
 
       <p className="text-xs text-ink-400 mt-10 text-center">
-        Aggregates only — Lagoon never exposes individual user activity outside the user's own session.
+        Aggregates only — Lagoon never exposes individual user activity outside the user’s own session.
       </p>
     </div>
   );

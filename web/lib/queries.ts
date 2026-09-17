@@ -2,6 +2,20 @@ import { createClient } from "@/lib/supabase/server";
 import { weekStart } from "@/lib/utils";
 import type { LeaderRow } from "@/components/gamification/leaderboard-table";
 
+/**
+ * A note on the `as` casts left in this file.
+ *
+ * Row types now come straight from `types/database.ts` — nothing here casts
+ * the client away any more. What remains is one narrow, deliberate pattern:
+ * Postgres cannot prove NOT NULL through a view, so the generator types every
+ * column of `activity_feed`, `leaderboard_weekly` and the `stats_*` views as
+ * nullable even where the underlying table column is NOT NULL. The casts below
+ * narrow those back to what the view actually returns.
+ *
+ * They are load-bearing: delete one and the typecheck fails. A cast against a
+ * plain table, by contrast, is now always redundant — infer instead.
+ */
+
 type ActivityFeedRow = {
   id: string;
   user_id: string;
@@ -13,39 +27,13 @@ type ActivityFeedRow = {
   avatar_url: string | null;
 };
 
-type WeeklyChallenge = {
-  id: number;
-  week_start: string;
-  slug: string;
-  title: string;
-  description: string;
-  target_source: string;
-  target_count: number;
-  xp_reward: number;
-};
 
-type ProfileRow = {
-  id: string;
-  display_name: string | null;
-  full_name: string | null;
-  avatar_url: string | null;
-  major_code: string | null;
-};
 
-type GamificationRow = {
-  user_id: string;
-  xp_total: number;
-  level: number;
-  streak_days: number;
-};
 
-type WeekXpRow = {
-  created_at: string;
-  xp_awarded: number;
-};
+
 
 export async function getActivityFeed(limit = 20) {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data } = await sb
     .from("activity_feed")
     .select("*")
@@ -55,7 +43,7 @@ export async function getActivityFeed(limit = 20) {
 }
 
 export async function getWeeklyLeaderboard(limit = 10): Promise<LeaderRow[]> {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const week = weekStart();
   const { data: lb } = await sb
     .from("leaderboard_weekly")
@@ -77,8 +65,8 @@ export async function getWeeklyLeaderboard(limit = 10): Promise<LeaderRow[]> {
       .in("user_id", ids),
   ]);
 
-  const pMap = new Map((profiles as ProfileRow[] | null)?.map((p) => [p.id, p]));
-  const sMap = new Map((stats as GamificationRow[] | null)?.map((s) => [s.user_id, s]));
+  const pMap = new Map(profiles?.map((p) => [p.id, p]));
+  const sMap = new Map(stats?.map((s) => [s.user_id, s]));
 
   return rows.map((r) => {
     const p = pMap.get(r.user_id);
@@ -97,14 +85,14 @@ export async function getWeeklyLeaderboard(limit = 10): Promise<LeaderRow[]> {
 }
 
 export async function getAllTimeLeaderboard(limit = 50): Promise<LeaderRow[]> {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data: stats } = await sb
     .from("user_gamification_profiles")
     .select("user_id, xp_total, level")
     .order("xp_total", { ascending: false })
     .limit(limit);
 
-  const rows = (stats ?? []) as Array<{ user_id: string; xp_total: number; level: number }>;
+  const rows = stats ?? [];
   if (rows.length === 0) return [];
 
   const ids = rows.map((r) => r.user_id);
@@ -112,7 +100,7 @@ export async function getAllTimeLeaderboard(limit = 50): Promise<LeaderRow[]> {
     .from("user_profiles")
     .select("id, display_name, full_name, avatar_url, major_code")
     .in("id", ids);
-  const pMap = new Map((profiles as ProfileRow[] | null)?.map((p) => [p.id, p]));
+  const pMap = new Map(profiles?.map((p) => [p.id, p]));
 
   return rows.map((r, i) => {
     const p = pMap.get(r.user_id);
@@ -130,7 +118,7 @@ export async function getAllTimeLeaderboard(limit = 50): Promise<LeaderRow[]> {
 }
 
 export async function getVibeScore(): Promise<number> {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const since1h  = new Date(Date.now() - 3600_000).toISOString();
   const [{ count: hour }, { count: day }] = await Promise.all([
     sb.from("activity_feed").select("*", { count: "exact", head: true }).gte("created_at", since1h),
@@ -143,18 +131,18 @@ export async function getVibeScore(): Promise<number> {
 }
 
 export async function getActiveChallenges() {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const week = weekStart();
   const { data } = await sb
     .from("weekly_challenges")
     .select("*")
     .eq("week_start", week)
     .order("xp_reward", { ascending: false });
-  return (data ?? []) as WeeklyChallenge[];
+  return data ?? [];
 }
 
 export async function getMe() {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return null;
   const [{ data: profile }, { data: stats }, { data: badges }, { data: weekXp }] = await Promise.all([
@@ -171,15 +159,15 @@ export async function getMe() {
   ]);
   return {
     user,
-    profile: profile as (ProfileRow & { email?: string }) | null,
-    stats: stats as GamificationRow | null,
+    profile,
+    stats,
     badges: badges ?? [],
-    weekXp: (weekXp ?? []) as WeekXpRow[],
+    weekXp: weekXp ?? [],
   };
 }
 
 export async function getXpStats() {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const week = weekStart();
   // Use the (anon-readable) matview + activity_feed view — bare user_xp_events
   // is RLS-locked to the owner, so anon counts return 0.
@@ -188,7 +176,7 @@ export async function getXpStats() {
     sb.from("activity_feed").select("id"),
     sb.from("user_gamification_profiles").select("*", { count: "exact", head: true }),
   ]);
-  const leaderboardRows = (lb ?? []) as Array<{ xp: number | null }>;
+  const leaderboardRows = lb ?? [];
   return {
     xpThisWeek: leaderboardRows.reduce((sum: number, row) => sum + (row.xp ?? 0), 0),
     weekEvents: feed24h?.length ?? 0,    // last-24h actions; closest public proxy
@@ -203,11 +191,11 @@ const MOOD_TO_SCORE: Record<string, number> = { great: 5, good: 4, okay: 3, meh:
 const SCORE_TO_LABEL = ["", "Brutal", "Heavy", "Steady", "Solid", "Loved"];
 
 export async function getTrendingClasses(limit = 5): Promise<TrendingClass[]> {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data } = await sb
     .from("class_vibes")
     .select("course_key, rating");
-  const rows = (data ?? []) as Array<{ course_key: string; rating: string }>;
+  const rows = data ?? [];
   const agg = new Map<string, { n: number; sum: number }>();
   for (const r of rows) {
     const score = MOOD_TO_SCORE[r.rating] ?? 3;
@@ -232,7 +220,7 @@ export type StatsOverview = {
 };
 
 export async function getStatsBundle() {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const [overview, sources, daily, majors, classLevels, badgeRarity, topBadges] =
     await Promise.all([
       sb.from("stats_overview").select("*").single(),
@@ -262,11 +250,11 @@ export async function getStatsBundle() {
 }
 
 export async function getStreakDistribution(): Promise<Array<{ bucket: string; users: number }>> {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data } = await sb
     .from("user_gamification_profiles")
     .select("streak_days");
-  const rows = (data ?? []) as Array<{ streak_days: number | null }>;
+  const rows = data ?? [];
   const buckets = [
     { label: "0",       min: 0,  max: 0   },
     { label: "1–2",     min: 1,  max: 2   },
@@ -285,20 +273,20 @@ export async function getStreakDistribution(): Promise<Array<{ bucket: string; u
 }
 
 export async function getTopStreaks(limit = 5): Promise<Array<{ user_id: string; streak_days: number; display_name: string | null; level: number; major: string | null; }>> {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data: tops } = await sb
     .from("user_gamification_profiles")
     .select("user_id, streak_days, level")
     .order("streak_days", { ascending: false })
     .limit(limit);
-  const rows = (tops ?? []) as Array<{ user_id: string; streak_days: number; level: number }>;
+  const rows = tops ?? [];
   if (rows.length === 0) return [];
   const ids = rows.map((r) => r.user_id);
   const { data: profiles } = await sb
     .from("user_profiles")
     .select("id, display_name, full_name, major_code")
     .in("id", ids);
-  const pMap = new Map((profiles as ProfileRow[] | null)?.map((p) => [p.id, p]));
+  const pMap = new Map(profiles?.map((p) => [p.id, p]));
   return rows.map((r) => {
     const p = pMap.get(r.user_id);
     return {
@@ -312,7 +300,7 @@ export async function getTopStreaks(limit = 5): Promise<Array<{ user_id: string;
 }
 
 export async function getTopStreak() {
-  const sb = (await createClient()) as any;
+  const sb = await createClient();
   const { data } = await sb
     .from("user_gamification_profiles")
     .select("streak_days")
