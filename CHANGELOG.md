@@ -92,10 +92,16 @@ repaint — is rewritten against what the code does.
 
 ### Known broken — start here
 
-- **`npm run lint` exits 1**, and CI runs it. `next lint` is removed in Next
-  15.5 and there is no `eslint.config.*`, so it drops into an interactive
-  prompt and fails non-interactively. Pre-existing and unrelated to colour;
-  CI is red on `main` because of it.
+- ~~**`npm run lint` exits 1**~~ — fixed the same day. `eslint.config.mjs`
+  now drives the ESLint CLI. Chasing the 15 `no-explicit-any` it reported
+  turned up the reason: `@supabase/ssr` 0.5.2 collapsed every row type to
+  `never`, so `types/database.ts` was protecting nothing at any call site.
+  Bumped to 0.7.0, the minimum version that fixes it.
+- **The `seo` workflow has failed on every run since 9 August.** It starts a
+  production server with no Supabase env, so middleware throws on every
+  request and `wait-on` times out — meaning the SEO golden diff and the
+  Lighthouse seo/accessibility gates have never actually executed. The same
+  shape as the problem above: a guard with no working mechanism behind it.
 - **`--text-dark-*` / `--text-light-*` are still misnamed.** They mean "ink
   for a dark band" and "ink for a light band", but read as theme names, and
   `--text-dark-3` is now defined in both `:root` and the homepage `.dark`
