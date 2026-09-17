@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import {
@@ -129,10 +130,10 @@ export function CampusMap({ signedIn }: Props) {
       try {
         const { createClient } = await import("@/lib/supabase/client");
         const sb = createClient();
-        // RPC defined in iOS app's Supabase migration 067; cast to bypass narrow generated types.
-        const { data, error } = await (sb as unknown as {
-          rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: LiveLocation[] | null; error: { message: string } | null }>;
-        }).rpc("get_visible_user_locations", { within_minutes: 30 });
+        // RPC defined in the iOS app's Supabase migration 067.
+        const { data, error } = await sb.rpc("get_visible_user_locations", {
+          within_minutes: 30,
+        });
         if (cancelled) return;
         if (error) {
           setPeopleErr(error.message);
@@ -230,13 +231,13 @@ export function CampusMap({ signedIn }: Props) {
       {!signedIn && (
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[400] max-w-sm w-[90%]">
           <div className="card p-4 backdrop-blur-md bg-cream-50/95 text-center">
-            <p className="text-sm text-ink-900 font-semibold">Sign in to see who's on campus</p>
+            <p className="text-sm text-ink-900 font-semibold">Sign in to see who’s on campus</p>
             <p className="mt-1 text-xs text-ink-500">
               Lagoon shows your friends as named pins and other Gauchos anonymously.
             </p>
-            <a href="/login" className="btn-primary mt-3 inline-flex !py-1.5 !px-3 text-xs">
+            <Link href="/login" className="btn-primary mt-3 inline-flex !py-1.5 !px-3 text-xs">
               Sign in
-            </a>
+            </Link>
           </div>
         </div>
       )}

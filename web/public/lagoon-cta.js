@@ -52,7 +52,7 @@
   if (isHome) return;
 
   // Skip if already dismissed this session
-  try { if (sessionStorage.getItem('lagoon_sticky_dismissed')) return; } catch (e) {}
+  try { if (sessionStorage.getItem('lagoon_sticky_dismissed')) return; } catch {}
 
   function init() {
     var style = document.createElement('style');
@@ -99,7 +99,7 @@
     setTimeout(maybeShow, 4000);
 
     bar.querySelector('.lc-close').addEventListener('click', function () {
-      try { sessionStorage.setItem('lagoon_sticky_dismissed', '1'); } catch (e) {}
+      try { sessionStorage.setItem('lagoon_sticky_dismissed', '1'); } catch {}
       bar.classList.remove('visible');
       setTimeout(function () { bar.remove(); }, 350);
       if (typeof window.gtag === 'function') {

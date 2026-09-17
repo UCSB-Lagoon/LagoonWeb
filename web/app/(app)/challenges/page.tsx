@@ -21,7 +21,7 @@ export default async function ChallengesPage() {
           <Target className="w-5 h-5" />
         </span>
         <div>
-          <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">This week's challenges</h1>
+          <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">This week’s challenges</h1>
           <p className="text-sm text-ink-500 mt-0.5">Complete to claim bonus XP</p>
         </div>
       </header>

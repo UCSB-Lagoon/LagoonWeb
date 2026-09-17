@@ -31,9 +31,9 @@ export function GuideShell({
       <section className="page-hero">
         <div className="article-shell">
           <div className="breadcrumb">
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
             <span>/</span>
-            <a href="/guides">Guides</a>
+            <Link href="/guides">Guides</Link>
             <span>/</span>
             <span>{fm.breadcrumbName}</span>
           </div>

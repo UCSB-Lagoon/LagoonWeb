@@ -21,7 +21,7 @@ export async function OPTIONS() {
 
 export async function GET() {
   try {
-    const sb = (await createClient()) as any;
+    const sb = await createClient();
     const { data } = await sb.from("stats_overview").select("*").single();
     const body = {
       total_users:       data?.total_users      ?? 0,

@@ -65,12 +65,9 @@ export async function POST(req: Request) {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       const { createClient } = await import("@/lib/supabase/server");
       const supa = await createClient();
-      // Generated Database type loses Insert typing because the shared server
-      // client doesn't pass the PostgrestVersion type param. Cast scoped to
-      // just this call site.
       const { error } = await supa
         .from("captain_applications")
-        .insert(record as unknown as never);
+        .insert(record);
       if (error) throw error;
     }
   } catch (e) {

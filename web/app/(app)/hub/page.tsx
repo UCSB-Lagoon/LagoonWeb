@@ -122,7 +122,7 @@ export default async function HomePage() {
 
           <div className="card p-5">
             <div className="flex items-baseline justify-between mb-3">
-              <h2 className="font-display text-lg font-bold text-ink-900">This week's leaderboard</h2>
+              <h2 className="font-display text-lg font-bold text-ink-900">This week’s leaderboard</h2>
               <Link href="/leaderboard" className="text-sm font-semibold text-gold-700 hover:text-gold-700">
                 Full board →
               </Link>

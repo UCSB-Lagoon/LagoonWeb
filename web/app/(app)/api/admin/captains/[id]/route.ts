@@ -3,18 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
 import { uniqueCaptainCode } from "@/lib/captain-code";
 import { sendEmail, captainAcceptedEmail } from "@/lib/email";
+import type { Database } from "@/types/database";
 
 const ALLOWED = ["new", "reviewing", "accepted", "rejected", "withdrawn"] as const;
 type Status = (typeof ALLOWED)[number];
-
-type ApplicationRow = {
-  id: string;
-  name: string;
-  email: string;
-  status: Status;
-  captain_code: string | null;
-  accepted_email_sent_at: string | null;
-};
 
 /**
  * PATCH /api/admin/captains/[id]
@@ -64,9 +56,9 @@ export async function PATCH(
   if (loadErr || !existing) {
     return NextResponse.json({ error: loadErr?.message || "Not found" }, { status: 404 });
   }
-  const row = existing as unknown as ApplicationRow;
+  const row = existing;
 
-  const patch: Record<string, unknown> = { status: nextStatus };
+  const patch: Database["public"]["Tables"]["captain_applications"]["Update"] = { status: nextStatus };
   if (typeof body.reviewer_notes === "string") {
     patch.reviewer_notes = body.reviewer_notes.slice(0, 4000);
   }
@@ -129,7 +121,7 @@ export async function PATCH(
 
   const { error } = await admin
     .from("captain_applications")
-    .update(patch as never)
+    .update(patch)
     .eq("id", id);
 
   if (error) {
@@ -166,7 +158,7 @@ export async function POST(
   const admin = createAdminClient();
   const { error } = await admin
     .from("captain_applications")
-    .update({ accepted_email_sent_at: new Date().toISOString() } as never)
+    .update({ accepted_email_sent_at: new Date().toISOString() })
     .eq("id", id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ ok: true });

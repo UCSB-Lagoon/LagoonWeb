@@ -70,7 +70,7 @@ export default async function MePage() {
           <p className="text-ink-400 text-sm">No badges yet — earn one in the mobile app.</p>
         ) : (
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {me.badges.map((b: any) => {
+            {me.badges.map((b) => {
               const cat = b.badge_catalog;
               return (
                 <li key={b.badge_id} className="rounded-xl p-4 bg-cream-100 border border-cream-200 text-center">

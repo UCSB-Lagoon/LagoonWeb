@@ -42,7 +42,7 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
   const [rows, setRows] = useState<ActivityRow[]>(initial);
 
   useEffect(() => {
-    const sb = createClient() as any;
+    const sb = createClient();
     const channel = sb
       .channel("activity-feed")
       .on(
