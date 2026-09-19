@@ -1,5 +1,132 @@
 # Lagoon Web — Changelog
 
+## [2026-09-19] — Every guard in the repo now actually runs
+
+Three CI guards existed on 16 September. One was red for an unrelated
+reason, one had never run, and one was about to pass against the wrong
+page. All three run and pass now, and two of them found real faults on
+the way.
+
+### The lint failure was a typing failure wearing a hat
+
+`next lint` is gone in Next 15.5, so with no `eslint.config.*` it dropped
+into an interactive prompt and exited 1 — CI was red on `main` for that
+alone. The ESLint CLI drives it now, over 102 files, wider than `next
+lint` defaulted to.
+
+It reported 47 problems. 32 were ordinary and are fixed. The other 15
+were one bug: **`@supabase/ssr` 0.5.2 pins supabase-js `^2.43` against an
+installed 2.105**, and across that gap it passed a third `Schema` generic
+computed from a deep-import `GenericSchema`. When supabase-js changed that
+type the constraint stopped matching and **every row type collapsed to
+`never`** — so `types/database.ts` bought the app nothing at any call
+site, and the schema-drift job was guarding a file nothing consumed.
+supabase-js's own `createClient` typed rows correctly the whole time.
+
+0.7.0 is the fix and the minimum one; 0.6.1 is still broken. Not the
+latest, which peers on supabase-js `^2.114` and would move the auth
+library eleven minors a week out from launch. Cookie API is byte-identical
+between the two, so nothing in `server.ts`/`client.ts`/`middleware.ts`
+changed.
+
+With inference restored, one error surfaced: the feedback route writes to
+a table absent from `types/database.ts`. The table is real — this repo's
+migration created it, it exists live — so nothing was failing at runtime.
+Then 14 client casts, 5 redundant row types and 4 workaround casts came
+out. Nine casts stay, documented: Postgres cannot prove NOT NULL through a
+view, so `activity_feed`, `leaderboard_weekly` and `stats_*` are typed
+nullable where the column is not. `createAdminClient()` was never typed at
+all; it is now, at zero cost.
+
+### One absent env var took down every request
+
+The contrast job failed the first time it ran, and it was the same cause
+that had kept `seo.yml` red since 9 August. Both start a production server
+with no Supabase env; middleware calls `createServerClient`, supabase-js
+**throws** rather than returning a client, and the matcher covers every
+non-static path — so marketing pages that never touch the database 500'd
+too. `wait-on` then waited out its timeout on a server that was up and
+failing everything. `updateSession` returns early without credentials now,
+gated on the env itself and never on `NODE_ENV`.
+
+That fix alone was not enough, and the rest is the serious half. With the
+server up but no env, `/hub`, `/stats`, `/leaderboard` and `/captains`
+return 500 — and **all eight of those tests passed**, because an error
+page is dark text on white and clears AA comfortably. The suite built to
+stop us grading a dev server was about to grade an error page instead.
+Same failure, one layer up: the measurement was right, the thing measured
+was not the app.
+
+Navigation asserts a 200 now. Verified it fires: strip the env and the
+suite fails 11 and names every route, where before it passed 17. Both jobs
+get placeholder credentials — queries fail at the network layer, the
+`?? []` fallbacks render empty states, which is real UI and what a student
+with no data sees.
+
+### The SEO guard, running for the first time since August
+
+Past the startup fix, the snapshot diff executed and reported 32 pages
+drifted. No title, canonical or description among them — three keys only,
+and all three were stale goldens rather than regressions:
+
+- `next-size-adjust` on all 32: Next's own injected tag, which cannot
+  appear in a golden captured from the pre-migration static site. Ignored
+  via the mechanism already there for `viewport`, not blessed into the
+  goldens — nothing we write controls it.
+- `theme-color` on `/`: the golden still held `#F08A3C`, the **retired
+  orange**. The code was right; the golden predated the repaint.
+- `jsonld` on `/guides`: the page adds an `ItemList` of all 29 guides, which
+  is why `next.config.ts` traces every guide's frontmatter. A deliberate
+  improvement the golden predated.
+
+Goldens regenerated and every file inspected: exactly two changed, the
+other 30 byte-identical, which is what confirms nothing else had drifted.
+
+The Lighthouse gates then ran for the first time ever, and pass: **SEO 100
+on all four URLs**, accessibility 96–100, best-practices 96, performance
+93–100.
+
+### Status has tokens, and /stats is reachable again
+
+`success` / `warning` / `danger` / `info`, same fill-vs-ink split as gold,
+ladder inverting at night like `cream-*`. Plates share one chroma per step
+set by the narrowest hue's headroom — per-hue chroma was tried and made
+`success-200` electric mint beside three pastels. Worst of 48 measured
+pairings is 4.80:1. Not a chart palette, and it says so: these fail the
+categorical validator `--chart-*` passes, which is fine when a badge
+carries its own word and disqualifying for a bar.
+
+`/stats` was unlinked in August, never removed — sitemap was the only way
+in. All four entries are back. Its numbers were already honest, with no
+presentation floor anywhere; the one figure that was not live was the
+denominator, a Fall '25 census shown undated in Fall '26. It is still the
+most recent published one, so it is dated rather than changed.
+
+The homepage "Real numbers" band is back too, with every figure
+re-checked against the source: grade data is **10,498 distinct courses
+across 95 subjects and 65 quarters**, not the "500+" it claimed — a 20x
+understatement — and the guides count is 29, not "25+". Buildings (30) and
+dining commons (4) were already right.
+
+### Known broken — start here
+
+- **`--text-dark-*` / `--text-light-*` are still misnamed.** They mean "ink
+  for a dark band" and "ink for a light band", but read as theme names, and
+  `--text-dark-3` is defined in both `:root` and the homepage `.dark` block
+  with opposite senses. The values are correct; the names invite the next
+  bug. ~40 call sites.
+- **Visual baselines still not generated.** `e2e/visual.spec.ts` has **zero**
+  committed snapshots despite its docstring saying they are committed, so it
+  passes by writing new ones. Generate them in CI's Linux container — macOS
+  baselines will not match.
+- **`grade_distributions` looks duplicated.** 206,422 rows over 10,498
+  distinct courses, and sampling returns identical (course, quarter,
+  total_students, avg_gpa) pairs twice. Nothing user-facing is wrong — the
+  app reads distributions per course — but any row count taken from that
+  table is roughly double what it should be. The iOS repo owns the schema.
+- `SUPABASE_ACCESS_TOKEN` / `SUPABASE_PROJECT_ID` repo secrets are still
+  unset, so CI's schema-drift job **skips** rather than fails.
+
 ## [2026-09-16] — Finish the repaint, and make the guard that was supposed to catch it actually run
 
 The previous entry closed with a "Known broken" list and a contrast suite
@@ -92,25 +219,21 @@ repaint — is rewritten against what the code does.
 
 ### Known broken — start here
 
-- ~~**`npm run lint` exits 1**~~ — fixed the same day. `eslint.config.mjs`
-  now drives the ESLint CLI. Chasing the 15 `no-explicit-any` it reported
-  turned up the reason: `@supabase/ssr` 0.5.2 collapsed every row type to
-  `never`, so `types/database.ts` was protecting nothing at any call site.
-  Bumped to 0.7.0, the minimum version that fixes it.
-- **The `seo` workflow has failed on every run since 9 August.** It starts a
-  production server with no Supabase env, so middleware throws on every
-  request and `wait-on` times out — meaning the SEO golden diff and the
-  Lighthouse seo/accessibility gates have never actually executed. The same
-  shape as the problem above: a guard with no working mechanism behind it.
+*Struck entries were fixed on 19 September; see the entry above. The rest
+still stand.*
+
+- ~~**`npm run lint` exits 1**~~
+- ~~**The `seo` workflow has failed on every run since 9 August.**~~ — it had
+  not, in fact, been noticed until this list was written; it then turned out
+  to share a cause with the contrast job.
 - **`--text-dark-*` / `--text-light-*` are still misnamed.** They mean "ink
   for a dark band" and "ink for a light band", but read as theme names, and
   `--text-dark-3` is now defined in both `:root` and the homepage `.dark`
   block with opposite senses. The values are correct; the names invite the
   next bug. ~40 call sites.
-- **Status colours are not in the system.** `/admin` still uses stock
-  Tailwind `emerald`/`rose`/`sky`/`stone` — 56 call sites, internal screens
-  only, no contrast failures. Needs semantic tokens before it is worth
-  touching.
+- ~~**Status colours are not in the system.**~~ `/admin` used stock Tailwind
+  `emerald`/`rose`/`sky`/`stone` across 56 call sites. Replaced with measured
+  semantic tokens.
 - **Visual baselines still not generated.** `e2e/visual.spec.ts` has **zero**
   committed snapshots despite its docstring saying they are committed, so it
   passes by writing new ones. Generate them in CI's Linux container — macOS

@@ -52,6 +52,190 @@
       },
       "name": "Lagoon UCSB Guides",
       "url": "https://lagoonucsb.com/guides"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "name": "UCSB Dining Menu Guide",
+          "position": 1,
+          "url": "https://lagoonucsb.com/ucsb-dining-menu"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Best Apps for UCSB Students",
+          "position": 2,
+          "url": "https://lagoonucsb.com/best-apps-for-ucsb-students"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Best Dorms at UCSB",
+          "position": 3,
+          "url": "https://lagoonucsb.com/best-dorms-at-ucsb"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Best Study Spots at UCSB",
+          "position": 4,
+          "url": "https://lagoonucsb.com/best-study-spots-at-ucsb"
+        },
+        {
+          "@type": "ListItem",
+          "name": "How Lagoon Dining Works",
+          "position": 5,
+          "url": "https://lagoonucsb.com/how-lagoon-dining-works"
+        },
+        {
+          "@type": "ListItem",
+          "name": "How Lagoon Schedule Works",
+          "position": 6,
+          "url": "https://lagoonucsb.com/how-lagoon-schedule-works"
+        },
+        {
+          "@type": "ListItem",
+          "name": "How to Choose Classes at UCSB",
+          "position": 7,
+          "url": "https://lagoonucsb.com/how-to-choose-classes-at-ucsb"
+        },
+        {
+          "@type": "ListItem",
+          "name": "How to Meet People at UCSB",
+          "position": 8,
+          "url": "https://lagoonucsb.com/how-to-meet-people-at-ucsb"
+        },
+        {
+          "@type": "ListItem",
+          "name": "How to Plan Your UCSB Schedule",
+          "position": 9,
+          "url": "https://lagoonucsb.com/how-to-plan-your-ucsb-schedule"
+        },
+        {
+          "@type": "ListItem",
+          "name": "How to Use GOLD at UCSB",
+          "position": 10,
+          "url": "https://lagoonucsb.com/how-to-use-gold-at-ucsb"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Isla Vista Guide for Students",
+          "position": 11,
+          "url": "https://lagoonucsb.com/isla-vista-guide-for-students"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Campus Events Guide",
+          "position": 12,
+          "url": "https://lagoonucsb.com/ucsb-campus-events-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Dining Hours",
+          "position": 13,
+          "url": "https://lagoonucsb.com/ucsb-dining-commons-hours"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Dorm FAQ",
+          "position": 14,
+          "url": "https://lagoonucsb.com/ucsb-dorm-faq"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Fall 2026 Start Date",
+          "position": 15,
+          "url": "https://lagoonucsb.com/ucsb-fall-2026-start-date"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Finals Week Guide",
+          "position": 16,
+          "url": "https://lagoonucsb.com/ucsb-finals-week-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB First Week Guide",
+          "position": 17,
+          "url": "https://lagoonucsb.com/ucsb-first-week-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Freshman FAQ",
+          "position": 18,
+          "url": "https://lagoonucsb.com/ucsb-freshman-faq"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB GE Requirements Guide",
+          "position": 19,
+          "url": "https://lagoonucsb.com/ucsb-ge-requirements-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Grade Distributions Guide",
+          "position": 20,
+          "url": "https://lagoonucsb.com/ucsb-grade-distributions-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Meal Plan Guide",
+          "position": 21,
+          "url": "https://lagoonucsb.com/ucsb-meal-plan-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Move-In Checklist",
+          "position": 22,
+          "url": "https://lagoonucsb.com/ucsb-move-in-checklist"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Orientation Checklist",
+          "position": 23,
+          "url": "https://lagoonucsb.com/ucsb-orientation-checklist"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Pass Times",
+          "position": 24,
+          "url": "https://lagoonucsb.com/ucsb-pass-times-explained"
+        },
+        {
+          "@type": "ListItem",
+          "name": "UCSB Registration Guide",
+          "position": 25,
+          "url": "https://lagoonucsb.com/ucsb-registration-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Transfer Student Guide",
+          "position": 26,
+          "url": "https://lagoonucsb.com/ucsb-transfer-student-guide"
+        },
+        {
+          "@type": "ListItem",
+          "name": "What to Bring to a UCSB Dorm",
+          "position": 27,
+          "url": "https://lagoonucsb.com/what-to-bring-to-ucsb-dorm"
+        },
+        {
+          "@type": "ListItem",
+          "name": "What to Do Between Classes at UCSB",
+          "position": 28,
+          "url": "https://lagoonucsb.com/what-to-do-between-classes-at-ucsb"
+        },
+        {
+          "@type": "ListItem",
+          "name": "Who's in My Class",
+          "position": 29,
+          "url": "https://lagoonucsb.com/whos-in-my-class-ucsb"
+        }
+      ],
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "name": "Lagoon UCSB Guides",
+      "numberOfItems": 29,
+      "url": "https://lagoonucsb.com/guides"
     }
   ]
 }

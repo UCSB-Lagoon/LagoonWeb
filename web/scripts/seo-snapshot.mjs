@@ -79,7 +79,14 @@ function sortKeys(v) {
 // Non-SEO metas that legitimately differ between hand-written HTML and
 // Next's generated head (e.g. "initial-scale=1.0" vs "1"). Dropped from
 // BOTH golden and actual before diffing — not SEO-load-bearing.
-const IGNORE_METAS = new Set(["viewport"]);
+//
+// `next-size-adjust` is Next's own injected tag. It cannot appear in a
+// golden captured from the pre-migration static site, and it appears on
+// every page Next renders, so it drifted all 32 of them at once the first
+// time this check actually ran. It carries no SEO meaning and nothing we
+// write controls it — baking it into the goldens would just be recording
+// the framework's version, so it is ignored rather than blessed.
+const IGNORE_METAS = new Set(["viewport", "next-size-adjust"]);
 
 function extract(html) {
   const head = (html.match(/<head[\s\S]*?<\/head>/i) || [html])[0];
