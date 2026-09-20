@@ -13,7 +13,7 @@
     "check": "npm run typecheck && npm run check:brand && npm run lint",
     "test:e2e": "playwright test",
     "test:contrast": "playwright test e2e/contrast.spec.ts",
-    "test:visual": "playwright test e2e/visual.spec.ts"
+    "test:visual": "playwright test --config playwright.visual.config.ts"
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.1",

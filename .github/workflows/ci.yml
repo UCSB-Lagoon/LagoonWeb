@@ -70,6 +70,40 @@ jobs:
       - name: Contrast
         run: npm run test:contrast
 
+      # e2e/visual.spec.ts compares committed screenshots.
+      #
+      # It had never run here, and could not have: its baselines were shot on
+      # a developer machine against the real database, and this job renders
+      # empty states from the placeholders above. Different pixels, guaranteed
+      # red. So the suite stayed local, nothing enforced it, and four
+      # baselines went stale in the half hour between two runs without anyone
+      # noticing.
+      #
+      # playwright.visual.config.ts now pins the same placeholder credentials
+      # this job sets, so the shot is identical here and on a laptop, and the
+      # thing under test is the empty state every student saw on day one.
+      #
+      # Linux renders text differently from macOS, so this needs its own
+      # committed baselines (…-chromium-linux.png) before it can be required.
+      # Until a Linux run has produced them, a failure here is informational.
+      - name: Visual
+        continue-on-error: true
+        run: npm run test:visual
+
+      # The Linux baselines the step above needs, produced by the step above:
+      # Playwright writes a missing snapshot to disk and then fails the test,
+      # so a red first run still leaves the files here. The artifact carries
+      # the committed *-darwin.png too — take only the *-chromium-linux.png
+      # ones, commit them to web/e2e/visual.spec.ts-snapshots/ after looking
+      # at them, then drop the continue-on-error above.
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: visual-snapshots-linux
+          path: web/e2e/visual.spec.ts-snapshots/
+          retention-days: 7
+          if-no-files-found: ignore
+
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

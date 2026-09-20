@@ -8,8 +8,31 @@ import { test, expect } from "@playwright/test";
  * from the brand. Renaming the Tailwind scale did exactly that to 168 utility
  * classes, and nothing but looking at it would have caught it.
  *
- * Baselines are committed. Update deliberately with:
- *   npx playwright test --update-snapshots
+ * Runs against a FIXED dataset, not the live one. playwright.visual.config.ts
+ * forces the same placeholder Supabase credentials CI uses, so every query
+ * fails, the `?? []` fallbacks render empty states, and the shot is identical
+ * on every machine with no database in the loop. Run it with
+ * `npm run test:visual`; running `npx playwright test e2e/visual.spec.ts`
+ * directly picks up the sibling config and the live database, and will drift.
+ *
+ * That is deliberate, and it is the fix for a real failure: four baselines
+ * went stale in the thirty minutes between two runs with no code change at
+ * all, because the leaderboard gained rows and `fullPage` captured the height
+ * shift. Masking live values was never going to catch that — a row count is
+ * not a value.
+ *
+ * It also means the empty states are the thing under test. They are worth
+ * testing: they were the only part of the UI nothing looked at, and they are
+ * what every student saw on day one. The populated layouts are covered by
+ * e2e/contrast.spec.ts, which still runs against real local data.
+ *
+ * Baselines are committed, and macOS ones exist today. Playwright names them
+ * per platform (…-chromium-darwin.png vs …-chromium-linux.png), so the CI job
+ * is informational until someone commits Linux baselines — ci.yml uploads
+ * them as an artifact on the first run for exactly that.
+ *
+ * Update deliberately with:
+ *   npm run test:visual -- --update-snapshots
  * and eyeball the diff in the PR — an updated baseline is a design decision,
  * not a chore.
  */
@@ -74,3 +97,25 @@ for (const route of ROUTES) {
     });
   }
 }
+
+/**
+ * The guarantee this whole suite rests on, asserted rather than assumed.
+ *
+ * Everything above is only deterministic while the pinned placeholder
+ * credentials are actually in effect. If they ever stop being — a stray
+ * export, a changed config, someone running `npx playwright test
+ * e2e/visual.spec.ts` against the sibling config and the live database — the
+ * ten tests above would still fail, but they would fail as ten inscrutable
+ * pixel diffs and send the reader looking for a CSS regression that isn't
+ * there. That is exactly the half hour this suite already cost once.
+ *
+ * So: fail here first, and say why.
+ */
+test("fixture · running against the pinned empty dataset", async ({ page }) => {
+  await page.goto("/leaderboard");
+  await expect(
+    page.getByText("No XP earned this week yet"),
+    "the leaderboard returned rows, so this run is hitting a real database — " +
+      "run it with `npm run test:visual`, which pins the placeholder credentials",
+  ).toBeVisible();
+});
