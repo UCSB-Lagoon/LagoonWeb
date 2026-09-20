@@ -133,6 +133,34 @@ export default async function StatsPage() {
     tone: (i === streakDist.length - 1 ? "primary" : "muted") as "primary" | "muted",
   }));
 
+  /* ---------- XP per action, by source ----------
+     `event_count` and `avg_xp` come back in the bundle and nothing rendered
+     them. Total XP answers "where does XP come from"; this answers "what is
+     each action worth", which is the one a player actually acts on. */
+  const rateBars = s.sources
+    .filter((src) => src.event_count > 0)
+    .map((src) => ({
+      label: prettifySource(src.source),
+      value: Math.round(src.total_xp / src.event_count),
+      sub: `${src.event_count.toLocaleString()} logged`,
+    }))
+    .sort((a, b) => b.value - a.value);
+
+  /* ---------- Busiest single day ----------
+     `daily.active_users` was also fetched and unused. */
+  const busiest = s.daily.reduce<(typeof s.daily)[number] | null>(
+    (best, d) => (!best || (d.total_xp ?? 0) > (best.total_xp ?? 0) ? d : best),
+    null,
+  );
+  const dailyAvg = s.daily.length
+    ? Math.round(s.daily.reduce((a, d) => a + (d.total_xp ?? 0), 0) / s.daily.length)
+    : 0;
+  const busiestDate = busiest
+    ? new Date(busiest.day).toLocaleDateString("en-US", {
+        month: "long", day: "numeric", timeZone: "UTC",
+      })
+    : null;
+
   /* ---------- Smart insights ---------- */
   const ov = s.overview;
   const adoptionPct = ov ? pct(ov.total_users, UCSB_UNDERGRAD_ENROLLMENT) : 0;
@@ -184,9 +212,91 @@ export default async function StatsPage() {
     },
   ];
 
+  /* ---------- Stats that made us laugh ----------
+     Every one of these is computed from the same live rows as the charts
+     above — the joke is always the real number, never a number invented to
+     land a joke. Each entry is conditional, so a fact disappears the moment
+     the data stops supporting it rather than quietly becoming false. */
+  const undeclared = s.majors.find((m) => m.major_code === "Undeclared")?.users ?? 0;
+  const topDeclared = s.majors.find((m) => m.major_code !== "Undeclared");
+  const emptyRarity = s.badgeRarity.filter((r) => r.available > 0 && r.earned === 0);
+  const zeroStreak = streakDist.find((b) => b.bucket === "0")?.users ?? 0;
+  const tiedAtTop =
+    topStreaks.length > 1 && topStreaks[0].streak_days > 0
+      ? topStreaks.filter((u) => u.streak_days === topStreaks[0].streak_days).length
+      : 0;
+  const quietest = [...s.sources]
+    .filter((x) => x.event_count > 0)
+    .sort((a, b) => a.event_count - b.event_count)[0];
+  const weekendPeak = peakDow.label === "Sat" || peakDow.label === "Sun";
+
+  const funFacts: { emoji: string; title: string; body: string }[] = [];
+
+  if (undeclared > 0 && (!topDeclared || undeclared > topDeclared.users)) {
+    funFacts.push({
+      emoji: "🤷",
+      title: "“Undeclared” is the most popular major",
+      body: `${undeclared} Gauchos, against ${topDeclared?.users ?? 0} for ${topDeclared ? prettifyMajor(topDeclared.major_code) : "the runner-up"}. The single largest academic cohort on Lagoon has not picked one.`,
+    });
+  }
+
+  if (emptyRarity.length) {
+    // The rarity column is lowercase in the database; it is a proper tier
+    // name in prose.
+    const names = emptyRarity
+      .map((r) => r.rarity.charAt(0).toUpperCase() + r.rarity.slice(1))
+      .join(" or ");
+    const count = emptyRarity.reduce((a, r) => a + r.available, 0);
+    funFacts.push({
+      emoji: "🫥",
+      title: `Nobody has earned a single ${names} badge`,
+      body: `${count} of them exist. They have been sitting there, unclaimed, since launch. Someone is going to be first.`,
+    });
+  }
+
+  if (streakDistTotal > 0 && zeroStreak > 0) {
+    funFacts.push({
+      emoji: "💤",
+      title: `${pct(zeroStreak, streakDistTotal).toFixed(0)}% of Gauchos are on a zero-day streak`,
+      body: `${zeroStreak} of ${streakDistTotal} signed up, earned something, and have not been back today. We are publishing this anyway.`,
+    });
+  }
+
+  if (tiedAtTop > 1) {
+    funFacts.push({
+      emoji: "🤝",
+      title: `${tiedAtTop}-way tie for the longest streak`,
+      body: `All of them at ${topStreaks[0].streak_days} days. Nobody has blinked yet, and the tiebreak is simply who opens the app tomorrow.`,
+    });
+  }
+
+  if (topSource && topSourceShare >= 40) {
+    funFacts.push({
+      emoji: "👋",
+      title: `${topSourceShare}% of all XP is just showing up`,
+      body: `${prettifySource(topSource.source)} out-earns every other action on Lagoon combined. Attendance really is most of it.`,
+    });
+  }
+
+  if (quietest && s.sources.length > 2) {
+    funFacts.push({
+      emoji: "🦗",
+      title: `${prettifySource(quietest.source)} has been used ${quietest.event_count} time${quietest.event_count === 1 ? "" : "s"}`,
+      body: `Total XP earned from it, ever: ${quietest.total_xp.toLocaleString()}. Every app has one of these. This is ours.`,
+    });
+  }
+
+  if (weekendPeak && s.daily.length > 7) {
+    funFacts.push({
+      emoji: "📚",
+      title: `${peakDow.label === "Sat" ? "Saturday" : "Sunday"} is the single biggest XP day`,
+      body: `${peakDow.value} XP on an average ${peakDow.label}, ahead of every weekday. Draw your own conclusions about how UCSB spends its weekends.`,
+    });
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-5 py-12">
-      <header className="mb-8 flex items-center gap-3">
+      <header className="mb-6 flex items-center gap-3">
         <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
           <BarChart3 className="w-5 h-5" />
         </span>
@@ -199,6 +309,32 @@ export default async function StatsPage() {
           </p>
         </div>
       </header>
+
+      {/* The lead.
+          A page of twelve charts has no first sentence, so people skim it and
+          leave with nothing. This says the whole state of Lagoon in one line,
+          in the page's own display face, before any chart asks for attention.
+          It is the same three figures as the strip below, which is the point —
+          the strip is the reference, this is the read. */}
+      <section className="card-tinted p-6 sm:p-8 mb-4">
+        <p className="text-[11px] uppercase tracking-[0.18em] text-ink-400 font-semibold">
+          Where Lagoon stands today
+        </p>
+        <p className="font-display text-[1.75rem] sm:text-4xl font-bold tracking-[-0.03em] leading-[1.15] mt-3 text-ink-900">
+          <span data-live className="tabular-nums">{(ov?.total_users ?? 0).toLocaleString()}</span> Gauchos have
+          signed up,{" "}
+          <span data-live className="tabular-nums">{(ov?.active_users_14d ?? 0).toLocaleString()}</span> were here
+          this fortnight, and together they have earned{" "}
+          <span data-live className="tabular-nums">{(ov?.lifetime_xp ?? 0).toLocaleString()}</span> XP.
+        </p>
+        <p className="text-sm text-ink-500 mt-4 max-w-2xl leading-relaxed">
+          That is{" "}
+          <span data-live className="tabular-nums font-semibold text-ink-700">{adoptionPct.toFixed(2)}%</span> of
+          UCSB&apos;s undergraduates. Small, early, and — unlike most launch
+          numbers — exactly what the database says. Nothing on this page is
+          rounded up, padded, or projected.
+        </p>
+      </section>
 
       {/* Headline strip */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -258,6 +394,59 @@ export default async function StatsPage() {
                 />
                 <DonutLegend data={classDonut} />
               </>}
+        </div>
+      </section>
+
+      {/* What an action is worth + the shape of the month.
+          Both are built from fields the bundle already returned and nothing
+          rendered: `event_count` on each source, and `active_users` on each
+          daily row. */}
+      <section className="grid lg:grid-cols-2 gap-4 mt-4">
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-1">
+            <h2 className="font-display text-lg font-bold text-ink-900">What each action is worth</h2>
+            <span className="text-xs text-ink-400">XP per action</span>
+          </div>
+          <p className="text-xs text-ink-400 mb-4">
+            The chart above says where XP comes from. This says which single
+            action pays best — the one worth doing on purpose.
+          </p>
+          {rateBars.length === 0
+            ? <p className="text-sm text-ink-400">No actions logged yet.</p>
+            : <BarRow items={rateBars} unit=" XP" />}
+        </div>
+
+        <div className="card p-5">
+          <div className="flex items-baseline justify-between mb-1">
+            <h2 className="font-display text-lg font-bold text-ink-900">The month in three numbers</h2>
+            <span className="text-xs text-ink-400">last 30 days</span>
+          </div>
+          <p className="text-xs text-ink-400 mb-4">
+            The peaks in the chart above, named.
+          </p>
+          {busiest && busiestDate ? (
+            <dl className="space-y-4">
+              <Figure
+                label="Busiest day"
+                value={busiestDate}
+                foot={`${(busiest.total_xp ?? 0).toLocaleString()} XP from ${busiest.active_users ?? 0} Gauchos — ${
+                  dailyAvg ? `${(busiest.total_xp / dailyAvg).toFixed(1)}×` : "well above"
+                } a normal day`}
+              />
+              <Figure
+                label="Typical day"
+                value={`${dailyAvg.toLocaleString()} XP`}
+                foot={`averaged across all ${s.daily.length} days with activity`}
+              />
+              <Figure
+                label="Best day of the week"
+                value={peakDow.label}
+                foot={`${peakDow.value} XP on an average ${peakDow.label}`}
+              />
+            </dl>
+          ) : (
+            <p className="text-sm text-ink-400">Not enough activity yet.</p>
+          )}
         </div>
       </section>
 
@@ -466,6 +655,37 @@ export default async function StatsPage() {
         />
       </section>
 
+      {/* Stats that made us laugh.
+          The counterweight to "Smart insights": same rows, read for what is
+          funny about them rather than what is impressive. It earns its place
+          by being the section that admits things — the zero-day streaks and
+          the unused feature are in here precisely because a stats page that
+          only flatters itself is not worth reading. */}
+      {funFacts.length > 0 && (
+        <section className="mt-8">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink-900 mb-1">
+            Stats that made us laugh{" "}
+            <span className="italic-accent text-lg">— all of them true.</span>
+          </h2>
+          <p className="text-sm text-ink-500 mb-3 max-w-2xl leading-relaxed">
+            Same database as everything above. We went looking for the numbers
+            that are funny rather than the ones that are flattering, and left in
+            the ones that are both.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {funFacts.map((f) => (
+              <div key={f.title} className="card p-5 flex gap-3">
+                <span aria-hidden className="text-2xl leading-none shrink-0 mt-0.5">{f.emoji}</span>
+                <div className="min-w-0">
+                  <p className="font-display font-bold text-ink-900 text-base leading-snug">{f.title}</p>
+                  <p className="text-sm text-ink-500 mt-2 leading-relaxed">{f.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Smart insights */}
       <section className="mt-8">
         <h2 className="font-display text-2xl font-bold tracking-tight text-ink-900 mb-3">
@@ -493,6 +713,25 @@ export default async function StatsPage() {
       <p className="text-xs text-ink-400 mt-10 text-center">
         Aggregates only — Lagoon never exposes individual user activity outside the user’s own session.
       </p>
+    </div>
+  );
+}
+
+/**
+ * A labelled figure for "The month in three numbers".
+ *
+ * `data-live` sits on the value and the footnote, not the label: the label is
+ * design and belongs under the visual baselines, the number underneath it
+ * changes every day and would drift them.
+ */
+function Figure({ label, value, foot }: { label: string; value: string; foot: string }) {
+  return (
+    <div>
+      <dt className="text-[10px] uppercase tracking-[0.18em] text-ink-400 font-semibold">{label}</dt>
+      <dd data-live className="font-display text-2xl font-bold text-ink-900 tabular-nums leading-tight mt-1">
+        {value}
+      </dd>
+      <dd data-live className="text-xs text-ink-400 mt-1 leading-snug">{foot}</dd>
     </div>
   );
 }
