@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
-export const viewport: Viewport = { themeColor: "#FFD200" };
+export const viewport: Viewport = { themeColor: "#ffd76a" };
 
 /**
  * Web fallback for Gaucho Wrapped shares (https://lagoonucsb.com/wrapped).

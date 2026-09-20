@@ -3,7 +3,7 @@ import Script from "next/script";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
-export const viewport: Viewport = { themeColor: "#FFD200" };
+export const viewport: Viewport = { themeColor: "#ffd76a" };
 
 /**
  * /go — the QR-code landing for printed flyers, orientation tabling, and

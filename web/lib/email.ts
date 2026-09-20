@@ -97,7 +97,7 @@ Reply to this email if you have questions — we read every one ourselves.
 https://lagoonucsb.com`;
 
   const html = `<!doctype html>
-<html><body style="margin:0;background:#FBF7F0;font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,sans-serif;color:#001e30;line-height:1.5">
+<html><body style="margin:0;background:#f7f4ef;font-family:'Space Grotesk',-apple-system,BlinkMacSystemFont,system-ui,Segoe UI,sans-serif;color:#273847;line-height:1.5">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" width="600" style="max-width:600px;margin:0 auto;padding:32px 24px">
   <tr><td>
     <div style="display:inline-block;padding:6px 14px;border-radius:9999px;background:#FFE6D1;color:#8a6a00;font-size:11px;letter-spacing:.18em;font-weight:700;text-transform:uppercase">You're in</div>
@@ -110,10 +110,10 @@ https://lagoonucsb.com`;
 
     <div style="background:#FFFCF7;border:1px solid #E2D2BF;border-radius:18px;padding:24px;text-align:center">
       <div style="font-size:11px;letter-spacing:.18em;color:#8c7a66;text-transform:uppercase;font-weight:700;margin-bottom:8px">Your captain link</div>
-      <div style="font-family:'Space Mono',ui-monospace,SFMono-Regular,monospace;font-size:18px;font-weight:700;color:#001e30;word-break:break-all">
+      <div style="font-family:'Space Mono',ui-monospace,SFMono-Regular,monospace;font-size:18px;font-weight:700;color:#273847;word-break:break-all">
         ${escapeHtml(link)}
       </div>
-      <a href="${escapeHtml(link)}" style="display:inline-block;margin-top:18px;background:#FFD200;color:white;font-weight:700;padding:14px 26px;border-radius:9999px;text-decoration:none;font-size:15px">
+      <a href="${escapeHtml(link)}" style="display:inline-block;margin-top:18px;background:#ffd76a;color:#20303f;font-weight:700;padding:14px 26px;border-radius:9999px;text-decoration:none;font-size:15px">
         Test your link
       </a>
     </div>

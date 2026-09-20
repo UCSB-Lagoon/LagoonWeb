@@ -53,7 +53,7 @@ export const metadata: Metadata = {
  * level ramp follows. It used to be four unrelated decisions, and each was
  * wrong in its own way:
  *
- *  - `text-gold-700` on `bg-gold-100`: gold-700 flips to #FFD200 inside
+ *  - `text-gold-700` on `bg-gold-100`: gold-700 flips to the gold fill inside
  *    `.dark` (correct on a navy ground) while the gold-100 plate under it
  *    does not flip at all, so at night this was bright gold on pale gold —
  *    1.3:1. Ink on a painted brand plate is what `on-accent` is for: it is

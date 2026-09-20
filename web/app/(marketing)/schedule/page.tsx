@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
 
-export const viewport: Viewport = { themeColor: "#FFD200" };
+export const viewport: Viewport = { themeColor: "#ffd76a" };
 
 /**
  * Web fallback for the app's most-shared link: the invite sheet and
