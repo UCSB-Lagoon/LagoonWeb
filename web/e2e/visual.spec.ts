@@ -29,8 +29,38 @@ for (const route of ROUTES) {
 
       // Freeze anything that would make the shot differ run to run: the live
       // pulse animations, and the counts that come from a live database.
+      //
+      // The height pin is the important half. Masking alone paints over a
+      // live region but does NOT fix its size, so a leaderboard that gained
+      // two rows overnight grew the page and shifted every pixel below it —
+      // four baselines went stale between two runs half an hour apart with no
+      // code change at all. Pinning `[data-live]` to a fixed box makes the
+      // shot independent of how many rows the database returns, and of
+      // whether it returns any: the empty state is pinned to the same size.
+      //
+      // `[data-live]` was already the mask selector here and matched nothing —
+      // the attribute had never been added to the markup, so the mask was a
+      // no-op and this was only ever measuring unmasked live data. It is now
+      // on the shared primitives that render database rows (StatCard's value,
+      // BarRow, Donut, ActivityArea) and on each list that maps over query
+      // results.
+      //
+      // What this gives up: the interior design of those lists is no longer
+      // pixel-checked. That is covered instead by e2e/contrast.spec.ts, which
+      // measures the real rendered colours of that same live text on every
+      // route. Layout, chrome, cards, headers, footers and CTAs — the "half
+      // the page silently detached from the brand" case this suite exists for
+      // — stay fully under test.
       await page.addStyleTag({
-        content: `*,*::before,*::after{animation:none!important;transition:none!important}`,
+        content: [
+          `*,*::before,*::after{animation:none!important;transition:none!important}`,
+          `[data-live]{height:var(--vr-pin)!important;min-height:var(--vr-pin)!important;`,
+          `max-height:var(--vr-pin)!important;overflow:hidden!important}`,
+          `ol[data-live],ul[data-live]{--vr-pin:22rem}`,
+          `div[data-live]{--vr-pin:3rem}`,
+          `.h-72[data-live]{--vr-pin:18rem}`,
+          `.h-56[data-live]{--vr-pin:14rem}`,
+        ].join(""),
       });
       await page.waitForTimeout(250);
 

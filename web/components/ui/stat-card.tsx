@@ -24,7 +24,7 @@ export function StatCard({
         )}
         <span className="leading-none">{label}</span>
       </div>
-      <div className="mt-3 font-display text-[2.4rem] leading-none font-bold tabular-nums tracking-[-0.03em] text-ink-900">
+      <div data-live className="mt-3 font-display text-[2.4rem] leading-none font-bold tabular-nums tracking-[-0.03em] text-ink-900">
         {typeof value === "number" ? value.toLocaleString() : value}
       </div>
       {hint && <div className="mt-2 text-xs text-ink-400 leading-snug">{hint}</div>}

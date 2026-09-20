@@ -16,13 +16,13 @@ const MEDAL = ["🥇", "🥈", "🥉"];
 export function LeaderboardTable({ rows }: { rows: LeaderRow[] }) {
   if (rows.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-cream-200 p-8 text-center text-ink-400 text-sm">
+      <div data-live className="rounded-2xl border border-dashed border-cream-200 p-8 text-center text-ink-400 text-sm">
         No XP earned this week yet — the leaderboard will fill up fast.
       </div>
     );
   }
   return (
-    <ol className="divide-y divide-cream-200">
+    <ol data-live className="divide-y divide-cream-200">
       {rows.map((r) => (
         <li
           key={r.user_id}

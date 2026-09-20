@@ -278,7 +278,7 @@ export default async function StatsPage() {
         <div className="card p-5">
           <h2 className="font-display text-lg font-bold text-ink-900 mb-1">Badge earnings by rarity</h2>
           <p className="text-xs text-ink-400 mb-4">Earned vs. how many badges of that tier exist.</p>
-          <ul className="space-y-3">
+          <ul data-live className="space-y-3">
             {s.badgeRarity.map((r) => {
               const ratio = r.available ? Math.min(1, r.earned / (r.available * Math.max(1, ov?.total_users ?? 1))) : 0;
               return (
@@ -315,7 +315,7 @@ export default async function StatsPage() {
         <div className="card p-5">
           <h2 className="font-display text-lg font-bold text-ink-900 mb-1">Most-earned badges</h2>
           <p className="text-xs text-ink-400 mb-4">What Gauchos are actually unlocking.</p>
-          <ul className="space-y-2">
+          <ul data-live className="space-y-2">
             {s.topBadges.filter(b => b.earned_count > 0).slice(0, 6).map((b) => (
               <li
                 key={b.badge_id}
@@ -366,7 +366,7 @@ export default async function StatsPage() {
           {topStreaks.length === 0 ? (
             <p className="text-sm text-ink-400">No streaks yet.</p>
           ) : (
-            <ol className="space-y-2">
+            <ol data-live className="space-y-2">
               {topStreaks.map((u, i) => (
                 <li
                   key={u.user_id}
@@ -421,7 +421,7 @@ export default async function StatsPage() {
           {trending.length === 0 ? (
             <p className="text-sm text-ink-400">No vibes logged yet.</p>
           ) : (
-            <ul className="space-y-2">
+            <ul data-live className="space-y-2">
               {trending.map((t, i) => (
                 <li
                   key={t.course_key}
