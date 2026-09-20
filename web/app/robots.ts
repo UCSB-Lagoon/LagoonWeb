@@ -14,7 +14,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/auth/", "/me", "/login"],
+        // /lab is the design lab. It already 404s in production and carries
+        // noindex, and app/sitemap.ts is an allowlist that omits it — this is
+        // the third guard, not the only one.
+        disallow: ["/api/", "/auth/", "/me", "/login", "/lab"],
       },
     ],
     sitemap: "https://lagoonucsb.com/sitemap.xml",
