@@ -1,5 +1,29 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+/**
+ * The marketing design system. Imported here rather than linked from public/,
+ * so the bundler fingerprints it and it is only fetched on marketing routes.
+ *
+ * It used to be `<link rel="stylesheet" href="/site.css" precedence="default">`
+ * against a `next/no-css-tags` disable, justified by static pages that also
+ * linked it — those are gone, every marketing URL is a real route now, and
+ * nothing references the literal `/site.css` URL any more.
+ *
+ * Two things this import must NOT change, both load-bearing:
+ *
+ *  - It stays on THIS layout, not globals.css. An `@import` from globals.css
+ *    would pin the layer order in one stylesheet, but globals.css loads on
+ *    every route, so all ~3000 lines would ship to the app shell that has no
+ *    use for them.
+ *  - The file's `@layer marketing` wrapper still decides the cascade. Its
+ *    order is fixed by the `@layer` statement at the top of globals.css, which
+ *    the root layout loads first. That is what keeps site.css below Tailwind's
+ *    utilities — and it has to keep working after a soft navigation OUT of
+ *    this group, because the stylesheet is not removed when the layout
+ *    unmounts. Bundled or linked, it lingers; the layer is what makes that
+ *    harmless.
+ */
+import "./site.css";
 import { SiteAnalytics } from "@/components/site-analytics";
 import { AnnounceBar } from "@/components/marketing/announce-bar";
 import { MarketingHeader } from "@/components/marketing/marketing-header";
@@ -32,13 +56,6 @@ export const metadata: Metadata = {
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {/* The marketing design system. Still a public/ asset because the
-          not-yet-ported static pages also link it; React 19 hoists this
-          <link> into <head>. next/no-css-tags wants an `import` instead,
-          which would route site.css through Tailwind's pipeline and hash
-          its name — exactly what the line above needs to avoid. */}
-      {/* eslint-disable-next-line @next/next/no-css-tags */}
-      <link rel="stylesheet" href="/site.css" precedence="default" />
       <a className="skip-link" href="#content">Skip to content</a>
       <AnnounceBar />
       <MarketingHeader />

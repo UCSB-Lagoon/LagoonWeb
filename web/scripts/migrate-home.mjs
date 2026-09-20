@@ -13,7 +13,12 @@
  *                                   announce/footer removed (layout owns
  *                                   those), HTML comments stripped
  *   content/home.jsonld.json      — the 4 JSON-LD blocks, verbatim
- *   public/site.css  (appended)   — the inline <style>, under a HOME band
+ *   app/(marketing)/site.css      — the inline <style>, appended under a
+ *     (appended)                    HOME band
+ *
+ * Already run, and kept only as the record of how that band got there. Its
+ * input (public/marketing/home.html) was deleted once the extraction landed,
+ * so this will now fail at the first read rather than re-emit anything.
  */
 import { readFile, writeFile } from "node:fs/promises";
 import { join, dirname } from "node:path";
@@ -22,7 +27,7 @@ import { fileURLToPath } from "node:url";
 const __dir = dirname(fileURLToPath(import.meta.url));
 const SRC = join(__dir, "..", "public", "marketing", "home.html");
 const OUT = join(__dir, "..", "content");
-const SITECSS = join(__dir, "..", "public", "site.css");
+const SITECSS = join(__dir, "..", "app", "(marketing)", "site.css");
 
 const html = await readFile(SRC, "utf8");
 

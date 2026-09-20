@@ -24,7 +24,7 @@ export function TrendingClassesCard({ rows }: { rows: TrendingClass[] }) {
       {rows.length === 0 ? (
         <p className="text-sm text-ink-400">No class vibes dropped yet this week.</p>
       ) : (
-        <ul className="space-y-2">
+        <ul data-live className="space-y-2">
           {rows.map((c) => (
             <li
               key={c.course_key}

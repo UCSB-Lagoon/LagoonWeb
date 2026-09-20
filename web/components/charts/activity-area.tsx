@@ -12,7 +12,7 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
     label: new Date(d.day).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
   }));
   return (
-    <div className="h-72">
+    <div data-live className="h-72">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart data={formatted} margin={{ left: 0, right: 8, top: 12, bottom: 0 }}>
           <defs>

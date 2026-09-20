@@ -74,7 +74,7 @@ export function ActivityFeed({ initial }: { initial: ActivityRow[] }) {
   }, []);
 
   return (
-    <ul className="space-y-1.5">
+    <ul data-live className="space-y-1.5">
       <AnimatePresence initial={false}>
         {rows.map((r) => (
           <motion.li

@@ -4,7 +4,7 @@
  * be defined.
  *
  * This exists because of a specific, expensive failure. The brand used to be
- * defined in two files kept in sync by hand, `public/site.css` declared its
+ * defined in two files kept in sync by hand, the marketing stylesheet declared its
  * tokens FOUR times (the last one silently winning), and 162 colour values
  * lived in neither system. Repainting the site took four passes, and one of
  * them shipped a scale rename that detached 168 utility classes while the
@@ -15,13 +15,21 @@
  *
  * Allowed:
  *   - `@theme` in app/globals.css — the single source of colour truth
- *   - the two token blocks in public/site.css, which may only hold var()
+ *   - the two token blocks in the marketing stylesheet, which may only hold var()
  *   - the allowlist below, each entry with a reason
  *
  * Run: node scripts/check-brand.mjs
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
+
+/**
+ * The marketing design system, relative to web/. It moved out of public/ and
+ * into the (marketing) route group when it stopped being a raw asset — it is
+ * now a bundled `import` in that layout. Declared once because four separate
+ * places below need to agree on it.
+ */
+const SITE_CSS = "app/(marketing)/site.css";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 
@@ -60,7 +68,7 @@ function check(file) {
 
   const lines = readFileSync(file, "utf8").split("\n");
   const isGlobals = rel === "app/globals.css";
-  const isSiteCss = rel === "public/site.css";
+  const isSiteCss = rel === SITE_CSS;
   let depth = 0, inTheme = false, inTokens = false, inComment = false;
 
   lines.forEach((line, i) => {
@@ -171,7 +179,7 @@ function checkFallbacks() {
   const theme = resolveIn(themeRaw, ":root");
   const dark = resolveIn(darkRaw, ".dark");
 
-  const css = readFileSync(join(ROOT, "public/site.css"), "utf8");
+  const css = readFileSync(join(ROOT, SITE_CSS), "utf8");
   const blocks = [[":root", theme], [".dark", dark]];
   for (const [sel, table] of blocks) {
     const at = css.indexOf(`\n${sel} {`) + 1 || css.indexOf(`${sel} {`);
@@ -185,7 +193,7 @@ function checkFallbacks() {
       const [, name, ref, fallback] = m;
       const want = table[ref];
       if (want && want !== fallback.toLowerCase()) {
-        failures.push(["public/site.css", 0, `${name}: var(${ref}, ${fallback})`,
+        failures.push([SITE_CSS, 0, `${name}: var(${ref}, ${fallback})`,
           `fallback drifted from @theme ${ref} (${want})`]);
       }
     }
@@ -209,7 +217,7 @@ function checkInvariantTokens() {
   if (!dm) return;
   const flips = new Set([...dm[1].matchAll(/(--[\w-]+)\s*:/g)].map((m) => m[1]));
 
-  const css = readFileSync(join(ROOT, "public/site.css"), "utf8");
+  const css = readFileSync(join(ROOT, SITE_CSS), "utf8");
   const blockAfter = (sel) => {
     const at = css.indexOf(sel);
     if (at < 0) return "";
@@ -229,7 +237,7 @@ function checkInvariantTokens() {
     if (overridden.has(name)) continue;          // genuinely flips; .dark says so
     for (const r of val.matchAll(/var\((--[\w-]+)/g)) {
       if (flips.has(r[1])) {
-        failures.push(["public/site.css", 0, `${name}: ${val.trim()}`,
+        failures.push([SITE_CSS, 0, `${name}: ${val.trim()}`,
           `theme-invariant token references ${r[1]}, which globals.css flips in .dark` +
           ` — it will change colour at night while its ground does not`]);
       }
@@ -237,10 +245,11 @@ function checkInvariantTokens() {
   }
 }
 
+// SITE_CSS lives under app/ now, so the walk below reaches it. It used to
+// need an explicit check() because public/ is not walked.
 for (const dir of ["app", "components", "lib", "content"]) {
   try { walk(join(ROOT, dir)); } catch {}
 }
-check(join(ROOT, "public/site.css"));
 checkFallbacks();
 checkInvariantTokens();
 

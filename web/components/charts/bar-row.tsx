@@ -13,7 +13,7 @@ export function BarRow({
 }) {
   const top = max ?? Math.max(1, ...items.map((i) => i.value));
   return (
-    <ol className={`space-y-2.5 ${className ?? ""}`}>
+    <ol data-live className={`space-y-2.5 ${className ?? ""}`}>
       {items.map((it, i) => {
         const pct = (it.value / top) * 100;
         const tone = it.tone ?? (i === 0 ? "primary" : "muted");
