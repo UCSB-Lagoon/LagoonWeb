@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 /**
  * Fonts are self-hosted by next/font and preloaded from our own origin.
  * They used to be an `@import url(fonts.googleapis.com)` at the top of
- * BOTH globals.css and public/site.css, which made the critical path
+ * BOTH globals.css and app/(marketing)/site.css, which made the critical path
  * HTML → our CSS → Google's CSS → the font files — three serial round
  * trips, two of them cross-origin, before any text could paint. Both
  * stylesheets now read the variables declared here.
@@ -48,7 +48,7 @@ const spaceMono = Space_Mono({
  *  - `js`        — marks that JavaScript is alive. The marketing
  *                  scroll-reveal only hides content behind this class, so
  *                  a no-JS visitor gets the full page instead of a blank
- *                  one (see the REVEAL block in public/site.css).
+ *                  one (see the REVEAL block in app/(marketing)/site.css).
  *  - `announce-dismissed` — hides the announce strip for repeat visitors
  *                  without the post-hydration layout shift.
  */

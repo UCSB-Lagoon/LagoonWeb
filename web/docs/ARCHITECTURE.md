@@ -26,7 +26,7 @@ Doing any of it sooner is cost without benefit.
       │  public, ISR              │  signed-in + public dashboards   │
       │  / schedule guides go     │  /hub /stats /leaderboard        │
       │  friends wrapped company  │  /captains /map /me /admin       │
-      │  styled by public/site.css│  styled by Tailwind @theme       │
+      │  styled by site.css       │  styled by Tailwind @theme       │
       └───────────┬──────────────────────────┬───────────────────────┘
                   │ Server Components → lib/queries.ts
                   │ supabase-js, anon key, RLS-gated
@@ -53,8 +53,8 @@ This is the one worth fixing, and it is not in the data layer.
 
 | | lines | loaded by | consumed as |
 |---|---|---|---|
-| `public/site.css` | 2977 | `<link>` in the marketing layout | hand-written class names |
-| `app/globals.css` | 316 | imported by the root layout | Tailwind v4 `@theme` tokens |
+| `app/(marketing)/site.css` | 3074 | imported by the marketing layout | hand-written class names |
+| `app/globals.css` | 482 | imported by the root layout | Tailwind v4 `@theme` tokens |
 
 Both define the brand. They are supposed to be kept in sync by hand — the brand
 doc says "if you change a token, change it in **both** places in the same
@@ -106,7 +106,7 @@ What it also surfaced, which no colour sweep would have:
   hides the ordering. It is one gold hue getting brighter now.
 
 Porting marketing sections from `site.css` to Tailwind stays opportunistic —
-do it when a section is touched. A 2977-line rewrite still risks more than it
+do it when a section is touched. A 3074-line rewrite still risks more than it
 fixes, and the guard means the file can no longer drift while it waits.
 
 ## Request flow
@@ -192,7 +192,7 @@ queue or cache tier here is paid every time one person tries to change a page.
 | Server Components + `lib/queries.ts` | No API layer to maintain for reads | Reads are coupled to Next's rendering model |
 | Supabase RLS instead of an API tier | One less service; the mobile app already relies on it | Authorisation lives in SQL, which is harder to test |
 | Schema owned by the iOS repo | One writer, no two-way migration conflicts | The web can break from a change in another repo |
-| Keeping `site.css` for now | A 2977-line rewrite risks more than it fixes | Two styling systems until the sequence above lands |
+| Keeping `site.css` for now | A 3074-line rewrite risks more than it fixes | Two styling systems until the sequence above lands |
 
 ## What I would revisit first
 

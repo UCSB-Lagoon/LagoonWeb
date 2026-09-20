@@ -4,8 +4,8 @@
  * fixes the order, and Tailwind's own `@layer theme, base, components,
  * utilities` further down then slots into it instead of establishing it.
  *
- * `marketing` is public/site.css, which the (marketing) layout links as a
- * plain <link> (see app/(marketing)/layout.tsx). It sits ABOVE base — so
+ * `marketing` is app/(marketing)/site.css, which that route group's layout
+ * imports (see app/(marketing)/layout.tsx). It sits ABOVE base — so
  * Tailwind's preflight still can't touch the marketing design system — and
  * BELOW utilities, which is the entire point:
  *
@@ -23,7 +23,7 @@
 
 @theme static {
   /* ── Navy / cream / gold — aligned to the iOS app's 2026-09 repaint ──
-     Mirrors public/site.css :root. Change a token here and there in the same
+     Mirrors app/(marketing)/site.css :root. Change a token here and there in the same
      commit; a user moving marketing → /captains → /hub should feel one
      product. See ../../docs/brand-guidelines.md. */
 

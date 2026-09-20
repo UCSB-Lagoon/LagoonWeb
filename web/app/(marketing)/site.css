@@ -1,10 +1,12 @@
 /*
  * The whole marketing design system lives in one cascade layer.
  *
- * Why: this file is linked as a plain <link rel="stylesheet" href="/site.css">
- * by app/(marketing)/layout.tsx, and React 19 hoists that link into <head> and
- * never takes it back out. Soft-navigate from the homepage to /stats and this
- * stylesheet is still attached to an app-shell page it was never written for.
+ * Why: app/(marketing)/layout.tsx imports this file, and a stylesheet a layout
+ * pulls in is not dropped when that layout unmounts. Soft-navigate from the
+ * homepage to /stats and it is still attached to an app-shell page it was never
+ * written for. That was true when it was a hoisted <link rel="stylesheet"> out
+ * of public/, and it stayed true when it became a bundled import — which is the
+ * point: the fix below never depended on how the file is loaded.
  *
  * Unlayered CSS beats layered CSS regardless of specificity, and app routes are
  * styled by Tailwind utilities (which live in `@layer utilities`). So the

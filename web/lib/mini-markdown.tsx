@@ -7,7 +7,7 @@ import React from "react";
  *
  * ── On the accent used here ────────────────────────────────────────────────
  * This file used stock Tailwind `orange-*`, almost certainly because
- * public/site.css calls the brand gold `--orange` / `--orange-ink`. Those are
+ * app/(marketing)/site.css calls the brand gold `--orange` / `--orange-ink`. Those are
  * aliases; the actual orange scale is not in the brand and three of its
  * pairings failed AA. Measured against the `.card` this renders on
  * (#ffffff light, --color-navy-700 #00304c dark), as Tailwind v4 paints them:
@@ -39,7 +39,7 @@ import React from "react";
  * /admin/handbook is behind an auth redirect, so the route sweep in that suite
  * cannot reach this renderer at all — the check has to be a synthetic fixture,
  * and a fixture holding its own copy of these class names would drift the
- * first time someone edited one. Same reason public/site.css fallbacks are
+ * first time someone edited one. Same reason app/(marketing)/site.css fallbacks are
  * verified against @theme rather than trusted: a comment is not a mechanism.
  */
 export const MD_CLASS = {
