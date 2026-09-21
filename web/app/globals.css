@@ -336,7 +336,7 @@ body::before {
   padding: 0.85rem 1.4rem;
   border-radius: 9999px;
   background: var(--color-gold-500);
-  color: var(--color-ink-900);   /* navy — white on gold is 1.4:1 */
+  color: var(--color-on-accent); /* Painted gold needs invariant dark ink in both themes. */
   font-weight: 700;
   letter-spacing: -0.005em;
   box-shadow:
@@ -479,4 +479,590 @@ body::before {
 /* Dotted background — lighter in dark mode */
 .dark body::before {
   background-image: radial-gradient(rgba(242, 239, 232, 0.045) 1px, transparent 1px);
+}
+
+/* Shared campus edition: one navigation and one visual rhythm on every route. */
+.lagoon-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-cream-50);
+  border-bottom: 1px solid var(--color-cream-200);
+  color: var(--color-ink-900);
+}
+.lagoon-nav {
+  max-width: 1440px;
+  height: 78px;
+  margin: auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.lagoon-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-ink-900);
+}
+.lagoon-brand > span {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--color-gold-500);
+  color: var(--color-on-accent);
+  font-size: 22px;
+  font-weight: 800;
+}
+.lagoon-brand strong {
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+.lagoon-brand small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  margin-top: 5px;
+  color: var(--color-ink-500);
+}
+.lagoon-nav-links {
+  display: flex;
+  gap: 35px;
+  font-size: 13px;
+  font-weight: 650;
+}
+.lagoon-nav-links a {
+  padding: 10px 0;
+  color: var(--color-ink-500);
+}
+.lagoon-nav-links a:hover,
+.lagoon-nav-links a[aria-current] {
+  color: var(--color-ink-900);
+  text-decoration: underline;
+  text-underline-offset: 7px;
+}
+.lagoon-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.lagoon-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 20px;
+  border-radius: 7px;
+  background: var(--color-gold-500);
+  color: var(--color-on-accent);
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.lagoon-button:hover {
+  background: var(--color-gold-600);
+}
+.lagoon-menu-toggle {
+  display: none;
+  width: 34px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-900);
+}
+.lagoon-mobile-menu {
+  padding: 12px 24px 28px;
+  background: var(--color-cream-50);
+  max-height: 75vh;
+  overflow: auto;
+}
+.lagoon-mobile-menu a {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-cream-200);
+  padding: 20px 0;
+  font-size: 22px;
+  font-weight: 650;
+}
+.lagoon-footer {
+  padding: 55px 48px 20px;
+  border-top: 1px solid var(--color-cream-200);
+  margin-top: 70px;
+  color: var(--color-ink-900);
+  background: var(--color-cream-50);
+}
+.lagoon-footer-top,
+.lagoon-footer-bottom {
+  max-width: 1344px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+.lagoon-footer-wordmark {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+.lagoon-footer-top p {
+  color: var(--color-ink-500);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.lagoon-footer-top nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 36px;
+  font-size: 12px;
+}
+.lagoon-footer-top nav a:hover {
+  text-decoration: underline;
+}
+.lagoon-footer-bottom {
+  border-top: 1px solid var(--color-cream-200);
+  margin-top: 40px;
+  padding-top: 20px;
+  font-size: 10px;
+  color: var(--color-ink-500);
+}
+.lagoon-skip {
+  position: fixed;
+  top: -100px;
+  left: 20px;
+  z-index: 100;
+  padding: 14px;
+  background: var(--color-gold-500);
+  color: var(--color-on-accent);
+}
+.lagoon-skip:focus {
+  top: 12px;
+}
+.campus-page {
+  max-width: 1344px;
+  padding: 0 48px 25px;
+  margin: auto;
+}
+.campus-page-heading {
+  padding: 65px 0 40px;
+  max-width: 950px;
+}
+.campus-page-heading > p {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-500);
+  margin-bottom: 25px;
+}
+.campus-page-heading h1 {
+  font-size: clamp(44px, 5.2vw, 76px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  font-weight: 800;
+  color: var(--color-ink-900);
+}
+.campus-page-heading > div {
+  color: var(--color-ink-500);
+  font-size: 17px;
+  line-height: 1.65;
+  margin-top: 24px;
+  max-width: 630px;
+}
+.campus-subnav {
+  display: flex;
+  gap: 28px;
+  border-top: 1px solid var(--color-cream-200);
+  border-bottom: 1px solid var(--color-cream-200);
+  padding: 19px 0;
+  margin-bottom: 36px;
+  overflow-x: auto;
+  font-size: 12px;
+  color: var(--color-ink-500);
+}
+.campus-subnav a {
+  white-space: nowrap;
+}
+.campus-subnav a[aria-current] {
+  color: var(--color-ink-900);
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 8px;
+}
+.campus-directory {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid var(--color-cream-200);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.campus-directory > a {
+  padding: 32px;
+  background: var(--color-cream-100);
+  position: relative;
+  border-right: 1px solid var(--color-cream-200);
+}
+.campus-directory > a:last-child {
+  border: 0;
+}
+.campus-directory > a:hover {
+  background: var(--color-panel-elevated);
+}
+.campus-directory span,
+.campus-data-note > span {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-500);
+}
+.campus-directory h2 {
+  font-size: 30px;
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  margin: 32px 0 8px;
+  color: var(--color-ink-900);
+}
+.campus-directory p {
+  font-size: 13px;
+  color: var(--color-ink-500);
+}
+.campus-directory b {
+  position: absolute;
+  top: 27px;
+  right: 26px;
+  font-size: 20px;
+}
+.campus-data-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 24px;
+  margin-top: 30px;
+  align-items: start;
+}
+.campus-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.campus-card-heading h2 {
+  font-size: 21px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  color: var(--color-ink-900);
+}
+.campus-card-heading a,
+.campus-card-heading > span {
+  font-size: 11px;
+  color: var(--color-ink-500);
+}
+.campus-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.campus-stat-strip .card {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--color-cream-200);
+  border-radius: 0;
+  padding-left: 20px;
+}
+.campus-data-note {
+  padding: 32px;
+  background: var(--color-cream-100);
+  border-radius: 8px;
+}
+.campus-data-note h2 {
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 750;
+  color: var(--color-ink-900);
+  margin: 25px 0 20px;
+}
+.campus-data-note p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-ink-500);
+  margin-bottom: 25px;
+}
+.campus-inline-cta {
+  margin-top: 48px;
+  padding: 32px 0;
+  border-top: 1px solid var(--color-cream-200);
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: center;
+}
+.campus-inline-cta h2 {
+  font-size: 26px;
+  letter-spacing: -0.03em;
+  font-weight: 750;
+  color: var(--color-ink-900);
+}
+.campus-inline-cta p {
+  color: var(--color-ink-500);
+  font-size: 14px;
+  margin-top: 8px;
+}
+.campus-methodology {
+  font-size: 12px;
+  color: var(--color-ink-500);
+  line-height: 1.7;
+  margin-top: 35px;
+  max-width: 700px;
+}
+.app-shell .card,
+.app-shell .card-tinted {
+  border-radius: 8px;
+  box-shadow: none;
+  background: var(--color-panel-elevated);
+}
+.app-shell .card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--color-cream-200);
+}
+.app-shell .btn-primary,
+.app-shell .btn-secondary {
+  border-radius: 7px;
+  box-shadow: none;
+}
+.app-shell .blur-3xl {
+  display: none;
+}
+.lagoon-header a:focus-visible,
+.lagoon-header button:focus-visible,
+.lagoon-footer a:focus-visible,
+.campus-page a:focus-visible {
+  outline: 2px solid var(--color-gold-ink);
+  outline-offset: 5px;
+}
+@media (max-width: 900px) {
+  .lagoon-nav {
+    padding: 0 24px;
+    gap: 16px;
+  }
+  .lagoon-nav-links {
+    gap: 22px;
+  }
+  .campus-page {
+    padding: 0 24px 20px;
+  }
+  .campus-directory > a {
+    padding: 24px;
+  }
+  .campus-directory h2 {
+    font-size: 25px;
+  }
+  .lagoon-footer {
+    padding: 40px 24px 20px;
+  }
+  .lagoon-footer-top {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 759px) {
+  .lagoon-nav {
+    height: 68px;
+    padding: 0 18px;
+    gap: 10px;
+  }
+  .lagoon-nav-links {
+    display: none;
+  }
+  .lagoon-menu-toggle {
+    display: flex;
+  }
+  .lagoon-nav-actions {
+    gap: 8px;
+  }
+  .lagoon-nav-actions .lagoon-button {
+    padding: 12px;
+    gap: 10px;
+    font-size: 12px;
+  }
+  .lagoon-brand strong {
+    font-size: 19px;
+  }
+  .lagoon-brand small {
+    font-size: 6px;
+  }
+  .lagoon-brand > span {
+    width: 28px;
+    height: 28px;
+  }
+  .campus-page-heading {
+    padding: 42px 0 30px;
+  }
+  .campus-page-heading h1 {
+    font-size: 46px;
+  }
+  .campus-page-heading > div {
+    font-size: 15px;
+  }
+  .campus-subnav {
+    gap: 24px;
+  }
+  .campus-directory,
+  .campus-data-grid {
+    grid-template-columns: 1fr;
+  }
+  .campus-directory > a {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-cream-200);
+  }
+  .campus-directory h2 {
+    margin-top: 18px;
+  }
+  .campus-stat-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 10px;
+  }
+  .campus-inline-cta {
+    align-items: start;
+    flex-direction: column;
+  }
+  .lagoon-footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lagoon-footer-top {
+    gap: 28px;
+  }
+  .lagoon-footer-top nav {
+    width: 100%;
+  }
+  .lagoon-footer-wordmark {
+    font-size: 42px;
+  }
+}
+@media (max-width: 360px) {
+  .lagoon-nav {
+    padding: 0 12px;
+  }
+  .lagoon-brand small {
+    display: none;
+  }
+  .lagoon-brand {
+    gap: 6px;
+  }
+  .lagoon-nav-actions {
+    gap: 3px;
+  }
+  .lagoon-nav-actions .lagoon-button {
+    font-size: 11px;
+    padding: 10px;
+    gap: 6px;
+  }
+  .campus-page-heading h1 {
+    font-size: 40px;
+  }
+}
+.captain-section {
+  padding: 48px 0;
+  border-top: 1px solid var(--color-cream-200);
+  margin-top: 36px;
+}
+.captain-section > h2,
+.captain-application h2 {
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 750;
+  letter-spacing: -0.045em;
+  color: var(--color-ink-900);
+}
+.captain-section > p {
+  max-width: 650px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--color-ink-500);
+  margin-top: 20px;
+}
+.captain-perks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin-top: 36px;
+}
+.captain-perks h3,
+.captain-steps h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-ink-900);
+}
+.captain-perks p,
+.captain-steps p {
+  font-size: 14px;
+  line-height: 1.75;
+  margin-top: 10px;
+  color: var(--color-ink-500);
+}
+.captain-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin-top: 36px;
+}
+.captain-steps span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin-bottom: 18px;
+  color: var(--color-ink-500);
+}
+.captain-application {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 70px;
+  padding: 45px 0;
+  border-top: 1px solid var(--color-cream-200);
+  scroll-margin-top: 95px;
+}
+.captain-application h2 {
+  margin: 20px 0;
+}
+.captain-application p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-ink-500);
+  margin-bottom: 20px;
+}
+@media (max-width: 759px) {
+  .captain-perks,
+  .captain-steps,
+  .captain-application {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+  .captain-section {
+    padding: 35px 0;
+  }
+  .captain-section > h2,
+  .captain-application h2 {
+    font-size: 34px;
+  }
+}
+.captain-application > * {
+  min-width: 0;
+}
+.captain-application input,
+.captain-application textarea,
+.captain-application select {
+  min-width: 0;
+  max-width: 100%;
+}
+.lagoon-footer {
+  display: block;
 }

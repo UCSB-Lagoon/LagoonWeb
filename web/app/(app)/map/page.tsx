@@ -1,8 +1,8 @@
-import { Map as MapIcon } from "lucide-react";
+import { CampusHeading, CampusNav } from "@/components/campus-heading";
 import { CampusMap } from "@/components/map/campus-map-loader";
 import { createClient } from "@/lib/supabase/server";
 
-export const metadata = { title: "Campus map" };
+export const metadata = { title: "Campus map", alternates: { canonical: "/map" } };
 export const dynamic = "force-dynamic";
 
 export default async function MapPage() {
@@ -10,22 +10,9 @@ export default async function MapPage() {
   const { data: { user } } = await sb.auth.getUser();
 
   return (
-    <div className="max-w-7xl mx-auto px-5 py-6">
-      <header className="mb-4 flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-3">
-          <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
-            <MapIcon className="w-5 h-5" />
-          </span>
-          <div>
-            <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
-              Campus map
-            </h1>
-            <p className="text-sm text-ink-500 mt-0.5">
-              {user ? "Live UCSB — friends, classmates, and 30 buildings." : "30 UCSB buildings. Sign in for live people on campus."}
-            </p>
-          </div>
-        </div>
-      </header>
+    <div className="campus-page">
+      <CampusHeading eyebrow="FIND YOUR NEXT STOP" title="Campus map" description="Find campus buildings. Sign in to see friends and classmates." />
+      <CampusNav current="/map" />
       <CampusMap signedIn={!!user} />
     </div>
   );

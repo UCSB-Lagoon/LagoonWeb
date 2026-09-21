@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from "next";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { GuideJsonLd } from "@/components/seo/guide-jsonld";
-import { HomeClient } from "@/components/marketing/home-client";
+import "./campus-home.css";
 
 const URL = "https://lagoonucsb.com/";
 
-export const viewport: Viewport = { themeColor: "#ffd76a" };
+export const viewport: Viewport = { themeColor: "#FFD200" };
 
 export const metadata: Metadata = {
   title: { absolute: "Lagoon — UCSB Campus App: Your GOLD Schedule in 30 Seconds" },
@@ -71,10 +71,9 @@ export default async function HomePage() {
   return (
     <>
       <GuideJsonLd blocks={blocks} />
-      {/* Trusted first-party presentational markup (our own home.html
-          body). Kept as-is for pixel parity; styled by site.css. */}
+      {/* Trusted first-party homepage markup; all content renders on the server. */}
       <div dangerouslySetInnerHTML={{ __html: body }} />
-      <HomeClient />
+
     </>
   );
 }

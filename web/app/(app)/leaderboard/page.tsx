@@ -1,10 +1,10 @@
+import { CampusHeading, CampusNav } from "@/components/campus-heading";
 import Link from "next/link";
-import { Trophy } from "lucide-react";
 import { LeaderboardTable } from "@/components/gamification/leaderboard-table";
 import { getWeeklyLeaderboard, getAllTimeLeaderboard } from "@/lib/queries";
 
 export const revalidate = 60;
-export const metadata = { title: "Leaderboard" };
+export const metadata = { title: "Leaderboard", alternates: { canonical: "/leaderboard" } };
 
 type Period = "weekly" | "all-time";
 
@@ -28,21 +28,12 @@ export default async function LeaderboardPage({
       : "Resets every Monday · Earn XP across the Lagoon mobile app";
 
   return (
-    <div className="max-w-3xl mx-auto px-5 py-12">
-      <header className="mb-6 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
-          <Trophy className="w-5 h-5" />
-        </span>
-        <div>
-          <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">
-            {heading}
-          </h1>
-          <p className="text-sm text-ink-500 mt-0.5">{sub}</p>
-        </div>
-      </header>
+    <div className="campus-page">
+      <CampusHeading eyebrow="THE CAMPUS COMMUNITY" title={heading} description={sub} />
+      <CampusNav current="/leaderboard" />
 
       <div
-        role="tablist"
+        role="navigation"
         aria-label="Leaderboard period"
         className="inline-flex items-center gap-1 mb-4 p-1 rounded-full border border-cream-200 bg-cream-100/60"
       >
@@ -67,8 +58,7 @@ function Tab({ href, active, label }: { href: string; active: boolean; label: st
   return (
     <Link
       href={href}
-      role="tab"
-      aria-selected={active}
+      aria-current={active ? "page" : undefined}
       className={[
         "px-4 py-1.5 rounded-full text-sm font-semibold transition",
         active

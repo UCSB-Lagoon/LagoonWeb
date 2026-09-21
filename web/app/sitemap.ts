@@ -12,8 +12,6 @@ type Entry = {
 };
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
-
   const interactive: Entry[] = [
     { path: "/",            priority: 1.0,  change: "daily"   },   // marketing homepage
     { path: "/hub",         priority: 0.9,  change: "daily"   },   // live dashboard
@@ -43,7 +41,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...interactive, ...marketing].map((r) => ({
     url: `${BASE}${r.path}`,
-    lastModified: r.lastModified ?? now,
+    // Do not claim unchanged pages were updated on every build.
+    ...(r.lastModified ? { lastModified: r.lastModified } : {}),
     changeFrequency: r.change,
     priority: r.priority,
   }));

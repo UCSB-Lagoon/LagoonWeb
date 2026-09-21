@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 /**
  * The marketing design system. Imported here rather than linked from public/,
  * so the bundler fingerprints it and it is only fetched on marketing routes.
@@ -24,8 +23,8 @@ import Script from "next/script";
  *    harmless.
  */
 import "./site.css";
+import "./editorial.css";
 import { SiteAnalytics } from "@/components/site-analytics";
-import { AnnounceBar } from "@/components/marketing/announce-bar";
 import { MarketingHeader } from "@/components/marketing/marketing-header";
 import { MarketingFooter } from "@/components/marketing/marketing-footer";
 
@@ -57,12 +56,10 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   return (
     <>
       <a className="skip-link" href="#content">Skip to content</a>
-      <AnnounceBar />
       <MarketingHeader />
       <main className="flex-1" id="content">{children}</main>
       <MarketingFooter />
       <SiteAnalytics gaId="G-2F8CTN4DNP" />
-      <Script src="/lagoon-cta.js" strategy="afterInteractive" />
     </>
   );
 }

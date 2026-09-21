@@ -1,180 +1,67 @@
 import Link from "next/link";
-import { Trophy, Sparkles, Users, Flame, ArrowRight, Activity } from "lucide-react";
-import { ActivityFeed } from "@/components/gamification/activity-feed";
+import { CampusHeading, CampusNav } from "@/components/campus-heading";
 import { LeaderboardTable } from "@/components/gamification/leaderboard-table";
-import { VibeMeter } from "@/components/gamification/vibe-meter";
-import { StatCard } from "@/components/ui/stat-card";
 import { TrendingClassesCard } from "@/components/widgets/trending-classes";
-import {
-  getActivityFeed,
-  getVibeScore,
-  getWeeklyLeaderboard,
-  getXpStats,
-  getTopStreak,
-  getTrendingClasses,
-} from "@/lib/queries";
+import { getWeeklyLeaderboard, getTrendingClasses } from "@/lib/queries";
 
 export const revalidate = 30;
+export const metadata = {
+  title: "Your campus",
+  description:
+    "Explore UCSB dining, student guides, the campus map and Lagoon’s student community.",
+  alternates: { canonical: "/hub" },
+};
 
 export default async function HomePage() {
-  const [feed, top, vibe, stats, topStreak, classes] = await Promise.all([
-    getActivityFeed(20),
+  const [top, classes] = await Promise.all([
     getWeeklyLeaderboard(5),
-    getVibeScore(),
-    getXpStats(),
-    getTopStreak(),
     getTrendingClasses(5),
   ]);
-
   return (
-    <div className="max-w-7xl mx-auto px-5">
-      {/* Hero */}
-      <section className="pt-12 pb-10 sm:pt-20 sm:pb-14">
-        <div className="grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7">
-            <span className="pill mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold-500" />
-              Live across UCSB
-            </span>
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[0.98] text-ink-900">
-              The student hub<br />
-              UCSB <span className="italic-accent">deserves.</span>
-            </h1>
-            <p className="mt-6 text-lg text-ink-500 max-w-xl leading-relaxed">
-              Real-time leaderboards, class vibes, and gamified daily
-              life — built on the same data powering the Lagoon mobile app.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
-                rel="noreferrer"
-                data-lagoon-cta="home-hero"
-                className="btn-primary"
-              >
-                Download Lagoon free <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link href="/leaderboard" className="btn-secondary">
-                <Trophy className="w-4 h-4 text-gold-700" /> See the leaderboard
-              </Link>
-            </div>
-            <p className="mt-5 flex items-center gap-2 text-sm text-ink-400">
-              <span className="live-dot" aria-hidden="true" />
-              Free · Made by Gauchos · iOS 16+
-            </p>
-            <div className="mt-7 flex flex-wrap gap-2 text-xs">
-              {["Grades", "Schedules", "Live map", "Classmates", "Dining", "Events"].map((t) => (
-                <span key={t} className="rounded-full border border-cream-200 bg-panel-elevated px-3 py-1.5 text-ink-500 font-medium">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Hero side card — live vibe + top race */}
-          <div className="lg:col-span-5">
-            <div className="card p-6 relative overflow-hidden">
-              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full bg-gold-200/50 blur-3xl" />
-              <div className="relative">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs uppercase tracking-[0.18em] text-ink-400 font-semibold">Right now</span>
-                  <span className="flex items-center gap-1.5 text-xs text-gold-700 font-semibold">
-                    <span className="w-2 h-2 rounded-full bg-gold-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
-                    live
-                  </span>
-                </div>
-                <p className="text-3xl font-extrabold tracking-tight text-ink-900 leading-tight">
-                  {stats.activeUsers} Gauchos<br />
-                  <span className="text-gold-700">earning XP</span>
-                </p>
-                <p className="mt-3 text-sm text-ink-500">
-                  {stats.weekEvents.toLocaleString()} actions in the last 24h · top streak {topStreak} days
-                </p>
-                <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-xl bg-cream-100 border border-cream-200 px-3 py-2.5">
-                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">Vibe</p>
-                    <p className="font-bold text-ink-900">
-                      {vibe > 0.65 ? "Buzzing" : vibe > 0.4 ? "Steady" : vibe > 0.2 ? "Mellow" : "Quiet"}
-                    </p>
-                  </div>
-                  <div className="rounded-xl bg-cream-100 border border-cream-200 px-3 py-2.5">
-                    <p className="text-[10px] uppercase tracking-wider text-ink-400 font-semibold">XP This Week</p>
-                    <p className="font-bold text-ink-900 tabular-nums">{stats.xpThisWeek?.toLocaleString() ?? "—"}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="campus-page">
+      <CampusHeading
+        eyebrow="THE UCSB EDITION"
+        title="What’s happening, Gaucho?"
+        description="The useful stuff, all in one place. Find your next stop."
+      />
+      <CampusNav current="/hub" />
+      <section className="campus-directory" aria-label="Campus essentials">
+        {[
+          ["01", "Dining", "Know before you bike over.", "/ucsb-dining-menu"],
+          ["02", "Campus map", "Find your way around.", "/map"],
+          ["03", "Student guides", "A little local knowledge.", "/guides"],
+        ].map(([n, title, sub, href]) => (
+          <Link key={href} href={href}>
+            <span>{n} / CAMPUS ESSENTIALS</span>
+            <h2>{title}</h2>
+            <p>{sub}</p>
+            <b aria-hidden="true">↗</b>
+          </Link>
+        ))}
       </section>
-
-      {/* Stat strip */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <StatCard label="XP earners"     value={stats.activeUsers}  icon={Users}    hint="Gauchos with any XP" />
-        <StatCard label="XP this week"   value={stats.xpThisWeek}   icon={Sparkles} hint="resets every Monday" />
-        <StatCard label="Actions (24h)"  value={stats.weekEvents}   icon={Activity} hint="across the whole app" />
-        <StatCard label="Top streak"     value={`${topStreak}d`}    icon={Flame}    hint="current record" />
-      </section>
-
-      {/* Two-column main grid */}
-      <section className="grid lg:grid-cols-3 gap-4 mt-6">
-        <div className="lg:col-span-2 space-y-4">
-          <VibeMeter score={vibe} />
-
-          <div className="card p-5">
-            <div className="flex items-baseline justify-between mb-3">
-              <h2 className="font-display text-lg font-bold text-ink-900">This week’s leaderboard</h2>
-              <Link href="/leaderboard" className="text-sm font-semibold text-gold-700 hover:text-gold-700">
-                Full board →
-              </Link>
-            </div>
-            <LeaderboardTable rows={top} />
+      <section className="campus-data-grid">
+        <div className="card p-6">
+          <div className="campus-card-heading">
+            <h2>This week’s leaderboard</h2>
+            <Link href="/leaderboard">Full board ↗</Link>
           </div>
-
+          <LeaderboardTable rows={top} />
         </div>
-
-        <div className="space-y-4">
-          <div className="card p-5">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="font-display text-lg font-bold text-ink-900">Live activity</h2>
-              <span className="flex items-center gap-1.5 text-xs text-gold-700 font-semibold">
-                <span className="w-2 h-2 rounded-full bg-gold-500 animate-[pulse-soft_2s_ease-in-out_infinite]" />
-                live
-              </span>
-            </div>
-            <ActivityFeed initial={feed} />
-          </div>
-
-          <TrendingClassesCard rows={classes} />
-        </div>
+        <TrendingClassesCard rows={classes} />
       </section>
-
-      {/* Closing band */}
-      <section className="card-tinted mt-10 mb-12 px-6 sm:px-10 py-10 sm:py-14 text-center relative overflow-hidden">
-        <div className="absolute -left-12 -top-12 h-44 w-44 rounded-full bg-gold-300/50 blur-3xl" />
-        <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-gold-500/40 blur-3xl" />
-        <div className="relative">
-          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-ink-900">
-            Everything Gaucho. <span className="italic-accent">In one tide.</span>
-          </h2>
-          <p className="mt-3 text-ink-500 max-w-xl mx-auto">
-            Same account as the mobile app. Sign in to see your XP, badges, friends,
-            and your spot on the weekly board.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
-              rel="noreferrer"
-              data-lagoon-cta="home-closing"
-              className="btn-primary"
-            >
-              Download Lagoon <ArrowRight className="w-4 h-4" />
-            </a>
-            <Link href="/captains" className="btn-secondary">
-              <Sparkles className="w-4 h-4 text-gold-700" /> Become a captain
-            </Link>
-          </div>
+      <div className="campus-inline-cta">
+        <div>
+          <h2>Your schedule and your people.</h2>
+          <p>Keep them with you. Get Lagoon for iPhone.</p>
         </div>
-      </section>
+        <a
+          className="lagoon-button"
+          href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+          data-lagoon-cta="campus"
+        >
+          Download free ↗
+        </a>
+      </div>
     </div>
   );
 }

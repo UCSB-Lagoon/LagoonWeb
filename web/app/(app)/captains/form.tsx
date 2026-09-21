@@ -36,7 +36,7 @@ export function CaptainForm() {
       setStatus("ok");
       if (typeof window !== "undefined" && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
         (window as unknown as { gtag: (...a: unknown[]) => void }).gtag(
-          "event", "form_submit", { form_name: "captains_apply", page_path: location.pathname }
+          "event", "form_submit", { form_name: "captains_apply", page_path: location.pathname, send_to: "G-5HY7LBXP8G" }
         );
       }
       form.reset();
@@ -88,7 +88,7 @@ export function CaptainForm() {
       <Textarea
         name="why"
         label="Why do you want to do this? One sentence is fine."
-        placeholder="The official UCSB apps suck and I want to fix that."
+        placeholder="I’d love to help my classmates find useful campus tools."
       />
 
       <div className="flex items-center gap-3 pt-2">

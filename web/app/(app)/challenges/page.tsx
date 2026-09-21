@@ -1,8 +1,8 @@
-import { Target } from "lucide-react";
+import { CampusHeading, CampusNav } from "@/components/campus-heading";
 import { getActiveChallenges } from "@/lib/queries";
 
 export const revalidate = 60;
-export const metadata = { title: "Weekly challenges" };
+export const metadata = { title: "Weekly challenges", alternates: { canonical: "/challenges" } };
 
 const SOURCE_LABEL: Record<string, string> = {
   daily_check_in:   "daily check-ins",
@@ -15,16 +15,9 @@ const SOURCE_LABEL: Record<string, string> = {
 export default async function ChallengesPage() {
   const challenges = await getActiveChallenges();
   return (
-    <div className="max-w-3xl mx-auto px-5 py-12">
-      <header className="mb-8 flex items-center gap-3">
-        <span className="grid h-11 w-11 place-items-center rounded-2xl bg-gold-100 border border-gold-200 text-gold-700">
-          <Target className="w-5 h-5" />
-        </span>
-        <div>
-          <h1 className="font-display text-4xl font-bold tracking-tight text-ink-900">This week’s challenges</h1>
-          <p className="text-sm text-ink-500 mt-0.5">Complete to claim bonus XP</p>
-        </div>
-      </header>
+    <div className="campus-page">
+      <CampusHeading eyebrow="A LITTLE EXTRA MOTIVATION" title="This week’s challenges" description="Complete challenges in Lagoon to earn bonus XP." />
+      <CampusNav current="/challenges" />
       {challenges.length === 0 ? (
         <div className="card p-10 text-center text-ink-400">
           No challenges configured for this week. Check back Monday.

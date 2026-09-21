@@ -49,10 +49,8 @@ const spaceMono = Space_Mono({
  *                  scroll-reveal only hides content behind this class, so
  *                  a no-JS visitor gets the full page instead of a blank
  *                  one (see the REVEAL block in app/(marketing)/site.css).
- *  - `announce-dismissed` — hides the announce strip for repeat visitors
- *                  without the post-hydration layout shift.
  */
-const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){d.classList.add('dark');}if(localStorage.getItem('lagoon_announce_dismissed')==='1'){d.classList.add('announce-dismissed');}}catch(e){}})();`;
+const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){d.classList.add('dark');}}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

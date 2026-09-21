@@ -66,7 +66,7 @@ export default function GoPage() {
     src = src.replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 32);
     var a = document.getElementById('go-cta');
     if (a && src) a.setAttribute('data-lagoon-cta', 'go-' + src);
-    if (window.gtag && src) gtag('event', 'go_landing', { go_source: src });
+    if (window.gtag && src) gtag('event', 'go_landing', { go_source: src, send_to: 'G-2F8CTN4DNP' });
   }
 } catch (e) {}`}
       </Script>

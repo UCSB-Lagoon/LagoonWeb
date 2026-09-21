@@ -41,13 +41,6 @@ export function GuideShell({
           <h1>{fm.h1}</h1>
           <p className="updated-stamp">{fm.updatedStamp}</p>
           <p>{fm.intro}</p>
-          <div className="article-meta">
-            {fm.metaPills.map((p) => (
-              <span className="meta-pill" key={p}>
-                {p}
-              </span>
-            ))}
-          </div>
         </div>
       </section>
 

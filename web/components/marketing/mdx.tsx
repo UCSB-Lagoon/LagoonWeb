@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
 /** Callout box used in guide bodies. */
 export function Callout({
@@ -43,5 +43,9 @@ export function FaqItem({
   );
 }
 
+function GuideTable(props: ComponentPropsWithoutRef<"table">) {
+  return <div className="guide-table-scroll" role="region" aria-label="Guide comparison table" tabIndex={0}><table {...props} /></div>;
+}
+
 /** Components made available to every guide MDX file. */
-export const mdxComponents = { Callout, ArticleLinks, FaqList, FaqItem };
+export const mdxComponents = { Callout, ArticleLinks, FaqList, FaqItem, table: GuideTable };

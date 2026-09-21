@@ -3074,3 +3074,19 @@ h3 {
 }
 }
 /* end @layer marketing */
+
+@layer marketing {
+  @media (max-width: 380px) {
+    .nav-shell { padding-left: 12px; padding-right: 12px; gap: 8px; }
+    .nav-right { gap: 4px; }
+    .nav-cta { padding: 10px 12px; }
+    .brand { gap: 6px; }
+  }
+}
+@layer marketing {
+  @media (max-width: 360px) {
+    .nav-shell .nav-cta { font-size: 11px; gap: 0; padding: 10px; }
+    .nav-shell .nav-cta svg { display: none; }
+    .nav-shell .brand-copy strong { font-size: 15px; }
+  }
+}

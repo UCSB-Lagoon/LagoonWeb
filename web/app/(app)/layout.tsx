@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Fraunces } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { AdminBar } from "@/components/admin-bar";
-import { FeedbackWidget } from "@/components/feedback-widget";
 import { SiteAnalytics } from "@/components/site-analytics";
 
 /**
@@ -56,26 +54,14 @@ export const metadata: Metadata = {
   },
 };
 
-/**
- * Display serif for the `.italic-accent` flourish. Declared here rather
- * than in the root layout so marketing pages — which never render it —
- * don't preload two font files they have no use for.
- */
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  display: "swap",
-  variable: "--font-fraunces",
-});
-
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={`${fraunces.variable} app-shell flex flex-1 flex-col`}>
+    <div className="app-shell flex flex-1 flex-col">
       <AdminBar />
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <a className="lagoon-skip" href="#app-content">Skip to content</a>
+      <main id="app-content" className="flex-1">{children}</main>
       <Footer />
-      <FeedbackWidget />
       <SiteAnalytics gaId="G-5HY7LBXP8G" />
     </div>
   );
