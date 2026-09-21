@@ -1,28 +1,17 @@
 "use client";
 
 import {
-  Area, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
+  Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from "recharts";
 import { formatIsoDate } from "@/lib/stats-helpers";
 
-export type DailyPoint = {
-  day: string;
-  total_xp: number;
-  event_count: number;
-  active_users: number;
-};
-
-function compact(n: number) {
-  if (Math.abs(n) >= 10000) return `${Math.round(n / 1000)}k`;
-  if (Math.abs(n) >= 1000) return `${(n / 1000).toFixed(1)}k`;
-  return String(Math.round(n));
-}
+export type SignupPoint = { day: string; signups: number; cumulative: number };
 
 /**
- * XP and active Gauchos on separate axes. They used to share one scale, so
- * the action line sat on the floor and looked like a flat zero.
+ * Daily signups (bars) and the running total across the same window (line).
+ * The running total is this window only — it is not lifetime signups.
  */
-export function ActivityArea({ data }: { data: DailyPoint[] }) {
+export function SignupTrend({ data }: { data: SignupPoint[] }) {
   const formatted = data.map((d) => ({
     ...d,
     label: formatIsoDate(d.day, { month: "short", day: "numeric" }),
@@ -31,19 +20,12 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
     <div data-live className="h-72">
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={formatted} margin={{ left: 0, right: 0, top: 12, bottom: 0 }}>
-          <defs>
-            <linearGradient id="actGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%"   stopColor="var(--chart-2)" stopOpacity={0.45} />
-              <stop offset="100%" stopColor="var(--chart-2)" stopOpacity={0}    />
-            </linearGradient>
-          </defs>
           <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 4" vertical={false} />
           <XAxis dataKey="label" tickLine={false} axisLine={false}
                  tick={{ fill: "var(--color-ink-400)", fontSize: 11 }} interval="preserveStartEnd" />
-          <YAxis yAxisId="xp" tickLine={false} axisLine={false} width={40}
-                 tickFormatter={compact}
+          <YAxis yAxisId="day" tickLine={false} axisLine={false} width={32} allowDecimals={false}
                  tick={{ fill: "var(--color-ink-400)", fontSize: 11 }} />
-          <YAxis yAxisId="people" orientation="right" tickLine={false} axisLine={false} width={32}
+          <YAxis yAxisId="run" orientation="right" tickLine={false} axisLine={false} width={36}
                  allowDecimals={false}
                  tick={{ fill: "var(--color-ink-400)", fontSize: 11 }} />
           <Tooltip
@@ -54,13 +36,12 @@ export function ActivityArea({ data }: { data: DailyPoint[] }) {
             labelStyle={{ color: "var(--color-ink-500)", fontWeight: 600 }}
             formatter={(v, n) => {
               const value = typeof v === "number" ? v : Number(v ?? 0);
-              const label = n === "total_xp" ? "XP" : n === "active_users" ? "Active Gauchos" : "Actions";
+              const label = n === "signups" ? "New that day" : "Running total";
               return [value.toLocaleString(), label];
             }}
           />
-          <Area yAxisId="xp" type="monotone" dataKey="total_xp" stroke="var(--chart-2)" strokeWidth={2.5}
-                fill="url(#actGrad)" />
-          <Line yAxisId="people" type="monotone" dataKey="active_users" stroke="var(--chart-1)"
+          <Bar yAxisId="day" dataKey="signups" fill="var(--chart-1)" radius={[3, 3, 0, 0]} maxBarSize={14} />
+          <Line yAxisId="run" type="monotone" dataKey="cumulative" stroke="var(--chart-2)"
                 strokeWidth={2} dot={false} />
         </ComposedChart>
       </ResponsiveContainer>

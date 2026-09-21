@@ -6,13 +6,15 @@ import { createClient } from "@/lib/supabase/server";
 // Real numbers only — no presentation floor, no synthetic baselines.
 
 export const runtime = "nodejs";
-export const revalidate = 60;
+// Keep equal to STATS_REVALIDATE_SECONDS in lib/stats-helpers.ts and
+// `revalidate` on /stats. Next requires this export to be a literal.
+export const revalidate = 30;
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
-  "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+  "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120",
 };
 
 export async function OPTIONS() {

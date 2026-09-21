@@ -2,7 +2,15 @@
 
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
-const PALETTE = ["var(--chart-2)", "var(--chart-2)", "var(--chart-4)", "var(--chart-4)", "var(--chart-4)", "var(--chart-5)", "var(--chart-other)"];
+/** Fixed series order. A 6th slice uses "other" rather than a generated hue. */
+const PALETTE = [
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+  "var(--chart-other)",
+];
 
 export function Donut({
   data,

@@ -1,6 +1,8 @@
+import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { weekStart } from "@/lib/utils";
 import type { LeaderRow } from "@/components/gamification/leaderboard-table";
+import { laDateString, laMidnightIso, rarityRank, shiftIsoDate } from "@/lib/stats-helpers";
 
 /**
  * A note on the `as` casts left in this file.
@@ -190,12 +192,34 @@ export type TrendingClass = { course_key: string; vibes: number; mood: string };
 const MOOD_TO_SCORE: Record<string, number> = { great: 5, good: 4, okay: 3, meh: 2, bad: 1 };
 const SCORE_TO_LABEL = ["", "Brutal", "Heavy", "Steady", "Solid", "Loved"];
 
-export async function getTrendingClasses(limit = 5): Promise<TrendingClass[]> {
-  const sb = await createClient();
-  const { data } = await sb
-    .from("class_vibes")
-    .select("course_key, rating");
-  const rows = data ?? [];
+function moodLabel(avg: number) {
+  return SCORE_TO_LABEL[Math.round(avg)] ?? "Steady";
+}
+
+/**
+ * PostgREST caps a response at 1,000 rows and does not follow a view's
+ * ORDER BY. Aggregates belong in SQL; this walks pages only when that view
+ * is not deployed yet.
+ */
+async function eachPage<T>(
+  fetch: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>,
+): Promise<T[] | null> {
+  const page = 1000;
+  const all: T[] = [];
+  for (let from = 0; from < 50_000; from += page) {
+    const { data, error } = await fetch(from, from + page - 1);
+    if (error) return null;
+    if (!data?.length) break;
+    all.push(...data);
+    if (data.length < page) break;
+  }
+  return all;
+}
+
+function trendingFromRows(
+  rows: Array<{ course_key: string; rating: string }>,
+  limit: number,
+): TrendingClass[] {
   const agg = new Map<string, { n: number; sum: number }>();
   for (const r of rows) {
     const score = MOOD_TO_SCORE[r.rating] ?? 3;
@@ -208,8 +232,89 @@ export async function getTrendingClasses(limit = 5): Promise<TrendingClass[]> {
     .map(([course_key, v]) => ({
       course_key,
       vibes: v.n,
-      mood: SCORE_TO_LABEL[Math.round(v.sum / v.n)] ?? "Steady",
+      mood: moodLabel(v.sum / v.n),
     }));
+}
+
+/**
+ * `class_vibes` is not readable by anon, while `stats_overview.class_vibes`
+ * counts it through the view owner. Prefer the public aggregate view; until
+ * that migration is applied, aggregate on the server with the service role
+ * and return only course totals — never a user id.
+ */
+async function vibeRowsAsOwner(): Promise<Array<{ course_key: string; rating: string }> | null> {
+  if (!process.env.SUPABASE_SERVICE_ROLE_KEY) return null;
+  try {
+    const admin = createAdminClient();
+    return eachPage((from, to) =>
+      admin.from("class_vibes").select("course_key, rating").range(from, to),
+    );
+  } catch {
+    return null;
+  }
+}
+
+export async function getTrendingClasses(limit = 5): Promise<TrendingClass[]> {
+  const sb = await createClient();
+  const view = await sb
+    .from("stats_class_vibe_totals")
+    .select("course_key, vibes, avg_score")
+    .order("vibes", { ascending: false })
+    .limit(limit);
+  if (!view.error && view.data) {
+    return view.data
+      .filter((r) => r.course_key && (r.vibes ?? 0) > 0)
+      .map((r) => ({
+        course_key: r.course_key as string,
+        vibes: r.vibes ?? 0,
+        mood: moodLabel(Number(r.avg_score ?? 3)),
+      }));
+  }
+
+  const owned = await vibeRowsAsOwner();
+  if (owned && owned.length > 0) return trendingFromRows(owned, limit);
+
+  const rows = await eachPage<{ course_key: string; rating: string }>((from, to) =>
+    sb.from("class_vibes").select("course_key, rating").range(from, to),
+  );
+  return trendingFromRows(rows ?? [], limit);
+}
+
+export type SignupDay = { day: string; signups: number };
+
+/**
+ * Daily signups on the Pacific calendar. Null when neither the aggregate
+ * view nor a direct read succeeded — the page then omits the chart instead
+ * of drawing a false zero.
+ */
+export async function getSignupSeries(days: string[]): Promise<SignupDay[] | null> {
+  if (days.length === 0) return [];
+  const sb = await createClient();
+  const view = await sb
+    .from("stats_signups_daily")
+    .select("day, signups")
+    .order("day", { ascending: true });
+  if (!view.error && view.data) {
+    const map = new Map(view.data.map((r) => [String(r.day).slice(0, 10), r.signups ?? 0]));
+    return days.map((day) => ({ day, signups: map.get(day) ?? 0 }));
+  }
+
+  const start = laMidnightIso(shiftIsoDate(days[0], -1));
+  const rows = await eachPage<{ created_at: string | null }>((from, to) =>
+    sb.from("user_profiles")
+      .select("created_at")
+      .gte("created_at", start)
+      .order("created_at", { ascending: true })
+      .range(from, to),
+  );
+  if (!rows) return null;
+  const counts = new Map(days.map((d) => [d, 0]));
+  for (const r of rows) {
+    if (!r.created_at) continue;
+    const key = laDateString(new Date(r.created_at));
+    if (counts.has(key)) counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  return days.map((day) => ({ day, signups: counts.get(day) ?? 0 }));
 }
 
 export type StatsOverview = {
@@ -223,20 +328,33 @@ export async function getStatsBundle() {
   const sb = await createClient();
   const [overview, sources, daily, majors, classLevels, badgeRarity, topBadges] =
     await Promise.all([
-      sb.from("stats_overview").select("*").single(),
-      sb.from("stats_xp_by_source").select("*"),
-      sb.from("stats_xp_daily").select("*"),
-      sb.from("stats_majors").select("*"),
-      sb.from("stats_class_levels").select("*"),
+      sb.from("stats_overview").select("*").limit(1).maybeSingle(),
+      // A view's ORDER BY is not preserved through PostgREST. Order here,
+      // or "the top source" is whichever row came back first.
+      sb.from("stats_xp_by_source").select("*").order("total_xp", { ascending: false }),
+      sb.from("stats_xp_daily").select("*").order("day", { ascending: true }),
+      sb.from("stats_majors").select("*").order("users", { ascending: false }),
+      sb.from("stats_class_levels").select("*").order("users", { ascending: false }),
       sb.from("stats_badges_by_rarity").select("*"),
-      sb.from("stats_top_badges").select("*").limit(8),
+      sb.from("stats_top_badges").select("*").order("earned_count", { ascending: false }).limit(8),
     ]);
-  const sourcesArr = (sources.data ?? []) as Array<{ source: string; event_count: number; total_xp: number; avg_xp: number }>;
-  const dailyArr   = (daily.data ?? []) as Array<{ day: string; event_count: number; active_users: number; total_xp: number }>;
-  const majorsArr  = (majors.data ?? []) as Array<{ major_code: string; users: number }>;
-  const classArr   = (classLevels.data ?? []) as Array<{ class_level: string; users: number }>;
-  const rarityArr  = (badgeRarity.data ?? []) as Array<{ rarity: string; available: number; earned: number }>;
-  const topBadgeArr = (topBadges.data ?? []) as Array<{ badge_id: string; title: string; icon: string; rarity: string; earned_count: number }>;
+  const sourcesArr = ((sources.data ?? []) as Array<{ source: string; event_count: number; total_xp: number; avg_xp: number }>)
+    .filter((r) => r.source)
+    .sort((a, b) => b.total_xp - a.total_xp);
+  const dailyArr   = ((daily.data ?? []) as Array<{ day: string; event_count: number; active_users: number; total_xp: number }>)
+    .filter((r) => r.day)
+    .sort((a, b) => a.day.localeCompare(b.day));
+  const majorsArr  = ((majors.data ?? []) as Array<{ major_code: string; users: number }>)
+    .filter((r) => r.major_code)
+    .sort((a, b) => b.users - a.users);
+  const classArr   = ((classLevels.data ?? []) as Array<{ class_level: string; users: number }>)
+    .filter((r) => r.class_level);
+  const rarityArr  = ((badgeRarity.data ?? []) as Array<{ rarity: string; available: number; earned: number }>)
+    .filter((r) => r.rarity)
+    .sort((a, b) => rarityRank(a.rarity) - rarityRank(b.rarity));
+  const topBadgeArr = ((topBadges.data ?? []) as Array<{ badge_id: string; title: string; icon: string; rarity: string; earned_count: number }>)
+    .filter((r) => r.badge_id)
+    .sort((a, b) => b.earned_count - a.earned_count);
 
   return {
     overview: (overview.data ?? null) as StatsOverview | null,
@@ -251,28 +369,30 @@ export async function getStatsBundle() {
 
 export async function getStreakDistribution(): Promise<Array<{ bucket: string; users: number }>> {
   const sb = await createClient();
-  const { data } = await sb
-    .from("user_gamification_profiles")
-    .select("streak_days");
-  const rows = data ?? [];
+  // Count in the database. Selecting every streak_days row silently stops
+  // at PostgREST's 1,000-row cap, so the buckets were wrong past that.
+  const base = () =>
+    sb.from("user_gamification_profiles").select("user_id", { count: "exact", head: true });
   const buckets = [
-    { label: "0",       min: 0,  max: 0   },
-    { label: "1–2",     min: 1,  max: 2   },
-    { label: "3–6",     min: 3,  max: 6   },
-    { label: "7–13",    min: 7,  max: 13  },
-    { label: "14–29",   min: 14, max: 29  },
-    { label: "30+",     min: 30, max: 1e9 },
+    { label: "0",     query: base().or("streak_days.lte.0,streak_days.is.null") },
+    { label: "1–2",   query: base().gte("streak_days", 1).lte("streak_days", 2) },
+    { label: "3–6",   query: base().gte("streak_days", 3).lte("streak_days", 6) },
+    { label: "7–13",  query: base().gte("streak_days", 7).lte("streak_days", 13) },
+    { label: "14–29", query: base().gte("streak_days", 14).lte("streak_days", 29) },
+    { label: "30+",   query: base().gte("streak_days", 30) },
   ];
-  return buckets.map((b) => ({
-    bucket: b.label,
-    users: rows.filter((r) => {
-      const s = r.streak_days ?? 0;
-      return s >= b.min && s <= b.max;
-    }).length,
+  const counts = await Promise.all(buckets.map(async (b) => {
+    const { count } = await b.query;
+    return { bucket: b.label, users: count ?? 0 };
   }));
+  return counts;
 }
 
-export async function getTopStreaks(limit = 5): Promise<Array<{ user_id: string; streak_days: number; display_name: string | null; level: number; major: string | null; }>> {
+export async function getTopStreaks(limit = 5): Promise<{
+  leaders: Array<{ user_id: string; streak_days: number; display_name: string | null; level: number; major: string | null; }>;
+  /** Everyone tied at the longest current streak, not just the rows we list. */
+  tiedAtTop: number;
+}> {
   const sb = await createClient();
   const { data: tops } = await sb
     .from("user_gamification_profiles")
@@ -280,23 +400,33 @@ export async function getTopStreaks(limit = 5): Promise<Array<{ user_id: string;
     .order("streak_days", { ascending: false })
     .limit(limit);
   const rows = tops ?? [];
-  if (rows.length === 0) return [];
+  if (rows.length === 0) return { leaders: [], tiedAtTop: 0 };
   const ids = rows.map((r) => r.user_id);
-  const { data: profiles } = await sb
-    .from("user_profiles")
-    .select("id, display_name, full_name, major_code")
-    .in("id", ids);
+  const topDays = rows[0].streak_days;
+  const [{ data: profiles }, { count: tied }] = await Promise.all([
+    sb.from("user_profiles")
+      .select("id, display_name, full_name, major_code")
+      .in("id", ids),
+    topDays > 0
+      ? sb.from("user_gamification_profiles")
+          .select("user_id", { count: "exact", head: true })
+          .eq("streak_days", topDays)
+      : Promise.resolve({ count: 0 }),
+  ]);
   const pMap = new Map(profiles?.map((p) => [p.id, p]));
-  return rows.map((r) => {
-    const p = pMap.get(r.user_id);
-    return {
-      user_id: r.user_id,
-      streak_days: r.streak_days,
-      display_name: p?.display_name ?? p?.full_name ?? null,
-      level: r.level ?? 1,
-      major: p?.major_code ?? null,
-    };
-  });
+  return {
+    tiedAtTop: tied ?? 0,
+    leaders: rows.map((r) => {
+      const p = pMap.get(r.user_id);
+      return {
+        user_id: r.user_id,
+        streak_days: r.streak_days,
+        display_name: p?.display_name ?? p?.full_name ?? null,
+        level: r.level ?? 1,
+        major: p?.major_code ?? null,
+      };
+    }),
+  };
 }
 
 export async function getTopStreak() {

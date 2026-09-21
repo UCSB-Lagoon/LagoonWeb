@@ -2621,6 +2621,14 @@ export type Database = {
         }
         Relationships: []
       }
+      stats_class_vibe_totals: {
+        Row: {
+          avg_score: number | null
+          course_key: string | null
+          vibes: number | null
+        }
+        Relationships: []
+      }
       stats_election_turnout: {
         Row: {
           distinct_voters: number | null
@@ -2647,6 +2655,13 @@ export type Database = {
           lifetime_xp: number | null
           top_streak: number | null
           total_users: number | null
+        }
+        Relationships: []
+      }
+      stats_signups_daily: {
+        Row: {
+          day: string | null
+          signups: number | null
         }
         Relationships: []
       }

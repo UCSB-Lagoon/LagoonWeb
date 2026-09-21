@@ -15,7 +15,7 @@ export function BarRow({
   return (
     <ol data-live className={`space-y-2.5 ${className ?? ""}`}>
       {items.map((it, i) => {
-        const pct = (it.value / top) * 100;
+        const pct = it.value <= 0 ? 0 : Math.max(1.5, (it.value / top) * 100);
         const tone = it.tone ?? (i === 0 ? "primary" : "muted");
         return (
           <li key={it.label}>

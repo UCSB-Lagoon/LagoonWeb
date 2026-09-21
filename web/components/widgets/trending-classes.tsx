@@ -22,7 +22,7 @@ export function TrendingClassesCard({ rows }: { rows: TrendingClass[] }) {
         </div>
       </div>
       {rows.length === 0 ? (
-        <p className="text-sm text-ink-400">No class vibes dropped yet this week.</p>
+        <p className="text-sm text-ink-400">No class vibes logged yet.</p>
       ) : (
         <ul data-live className="space-y-2">
           {rows.map((c) => (
@@ -33,7 +33,7 @@ export function TrendingClassesCard({ rows }: { rows: TrendingClass[] }) {
               <div className="min-w-0">
                 <p className="font-display font-bold text-ink-900 tabular-nums">{c.course_key}</p>
                 <p className="text-xs text-ink-400">
-                  {c.vibes} {c.vibes === 1 ? "vibe" : "vibes"} this week
+                  {c.vibes} {c.vibes === 1 ? "vibe" : "vibes"} logged
                 </p>
               </div>
               <span
