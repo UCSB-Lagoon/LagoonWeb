@@ -98,9 +98,9 @@ export function CaptainForm() {
           className="btn-primary disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "submitting" ? (
-            <><Loader2 className="w-4 h-4 animate-spin" /> Sending…</>
+            <><Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" /> <span>Sending…</span></>
           ) : (
-            <>Send application <Send className="w-4 h-4" /></>
+            <><span>Send application</span> <Send className="w-4 h-4" aria-hidden="true" /></>
           )}
         </button>
         <p className="text-xs text-ink-400">No spam. We&apos;ll only email about your application.</p>

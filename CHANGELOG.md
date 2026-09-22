@@ -1,5 +1,92 @@
 # Lagoon Web — Changelog
 
+## [2026-09-21] — One document, one analytics stream
+
+The campus redesign shipped clean: typecheck, ESLint and the brand guard all
+green, every route 200, the mobile menu's focus trap and breakpoint correct to
+the pixel (JS closes at 760, CSS hides at 759). The analytics rewrite that
+came with it was the part that needed work, and only a running browser could
+show why.
+
+### Both streams were live at once
+
+Marketing reports to `G-2F8CTN4DNP` and the app to `G-5HY7LBXP8G`, and that
+split is deliberate. Loading `/` and clicking "Campus" put **both** ids in one
+`dataLayer`, with both gtag.js libraries loaded. Every event we emit carries
+an explicit `send_to`, so page_views were landing correctly — the redesign got
+that right, and the old code had not. What neither version could address is
+GA4's enhanced measurement: outbound clicks, scroll, downloads and form
+interactions come from gtag.js itself, once per configured stream, with no
+`send_to` to aim them. Two streams configured, and marketing starts absorbing
+app sessions.
+
+Worth recording that the previous code avoided this by accident rather than
+design. Both layouts rendered `<Script id="ga4-init">`, next/script dedupes by
+`id`, so the second group's config silently never ran and app pages reported
+to the *marketing* stream. Different bug, same root cause: a soft navigation
+does not discard the group it left.
+
+GA4 has no un-configure. So the fix is to deny the navigation — `GroupLink`
+renders a plain `<a>` across the group boundary and a `next/link` within it.
+Three top-nav links now cost a full page load. The campus sub-nav and the 29
+guides do not, because they never leave their group. `lib/routes.ts` holds the
+segment list this turns on, in one place, next to the campus tool list that
+the sub-nav and the nav highlight were each keeping their own copy of.
+
+### And it re-configured on every route change
+
+`pathname` was an effect dependency, so `/` → `/hub` → `/stats` pushed three
+`gtag('js')` and three `gtag('config')` calls. Re-configuring a live stream
+re-initialises it and can restart the session. Config is a mount-only effect
+now, guarded by a module-scoped Set whose lifetime is exactly right: it
+survives a layout remount, and resets on a real page load.
+
+Measured after: one gtag.js tag, one `config`, one `js`, and a page_view per
+route on the correct id — across a same-group soft navigation and a
+cross-group full load.
+
+### The test could not have caught either
+
+`e2e/navigation.spec.ts` aborts `googletagmanager.com`, so only the local stub
+writes to `dataLayer`. That still proves `send_to` targeting, which is worth
+keeping. It cannot see a second `config` or a second script tag, which is what
+was actually wrong. It now counts both, before and after each kind of
+navigation, and marks the document to prove which links reload. Written by
+defeating the fix and watching the assertion fail, then restoring it.
+
+### Smaller things the redesign left
+
+- The docblock stating the two-stream invariant had been deleted. It is back,
+  and now says what keeping it true actually requires. Also in ONBOARDING §5
+  and a new ARCHITECTURE section on what else is scoped to a route group.
+- The mobile menu traps focus and locks background scroll but claimed no
+  dialog semantics, so assistive tech was offered a page the keyboard could
+  not reach. It is `role="dialog"` `aria-modal="true"` now — the panel pushes
+  the page down rather than covering it, but the *interaction* is modal and
+  the ARIA should say so.
+- `campusActive` compared the pathname by exact match, so `/me/settings` and
+  any other sub-route dropped the "Campus" highlight. Prefix match now.
+- The footer wordmark rendered a literal `↗` inside the link text, read aloud
+  as "Lagoon north east arrow". The nav had this right; the footer did not.
+- `/stats` had dropped out of the footer — still reachable from the campus
+  sub-nav, but two clicks from the homepage. Back as "Campus stats".
+- `marketing-header.tsx` and `marketing-footer.tsx` had become one-line
+  re-exports of `Navbar`/`Footer` and are gone; the marketing layout imports
+  them directly. Its docblock still claimed a "MARKETING-specific
+  header/footer (the app's Navbar/Footer are not used here)", which stopped
+  being true when the redesign unified them.
+
+Visual baselines regenerated for the one real change: the footer nav went from
+four links to five, which reflows it and makes every page ~30px taller.
+Nothing above the footer moved.
+
+### Known, not fixed
+
+`lib/ga4.ts` — 160 lines of GA4 Data API reader, service-account JWT and all —
+is imported by nothing. It reads like it was built for the `/admin` dashboard
+and never wired up. Left alone rather than deleted; that call is not a
+side-effect of an analytics fix.
+
 ## [2026-09-19] — Every guard in the repo now actually runs
 
 Three CI guards existed on 16 September. One was red for an unrelated

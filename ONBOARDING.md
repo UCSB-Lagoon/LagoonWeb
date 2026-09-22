@@ -83,6 +83,15 @@ Push to `main` → Vercel auto-deploys. That's it. There is one Vercel project;
    sidecar holding the structured data verbatim. Home/guides/company bodies:
    `content/*-body.html`. Marketing reports to GA `G-2F8CTN4DNP` (the
    `(marketing)` layout) — the app uses `G-5HY7LBXP8G`; don't merge them.
+   Keeping them apart takes more than two ids: GA4 cannot un-configure a
+   stream, so a soft navigation from `/` to `/hub` would leave BOTH live in
+   one document, and GA4's enhanced measurement (outbound clicks, scroll,
+   downloads) is emitted per stream with no `send_to` to aim it. Links that
+   leave the route group are therefore full page loads — use `GroupLink`
+   (`web/components/group-link.tsx`), not `next/link`, in any shared header,
+   footer or nav. `web/lib/routes.ts` holds the segment list that decides
+   which group a path is in; add new `app/(app)/` segments there.
+   `e2e/navigation.spec.ts` fails if a document ever configures two streams.
    Before shipping any marketing change run `cd web && node
    scripts/seo-snapshot.mjs check <url>` — it diffs title/meta/canonical/
    JSON-LD against captured goldens and must stay green.

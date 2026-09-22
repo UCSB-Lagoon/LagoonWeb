@@ -135,6 +135,52 @@ without the secret). Route groups don't affect URLs, so a handler living at
 `app/(app)/api/...` still serves `/api/...` — worth knowing before concluding
 it's missing.
 
+## The route-group boundary is load-bearing
+
+`(marketing)` and `(app)` are not just two folders with two layouts. Three
+things are scoped to the group and survive a soft navigation out of it,
+because Next does not tear them down when a layout unmounts:
+
+| Scoped to the group | What lingers after a soft nav out |
+|---|---|
+| `site.css` (marketing) | the stylesheet stays in the document |
+| GA4 `config` (both) | the stream stays configured — permanently |
+| Default metadata (both) | nothing; metadata is recomputed per route |
+
+The stylesheet is handled: `site.css` is wrapped in `@layer marketing`, whose
+order is fixed by globals.css, so lingering is harmless.
+
+GA4 is not so forgiving, and this is the one to know about. **The two streams
+— marketing `G-2F8CTN4DNP`, app `G-5HY7LBXP8G` — must never both be
+configured in one document.** GA4 has no API to un-configure a stream, so a
+soft navigation from `/` to `/hub` leaves the marketing stream live and adds
+the app's alongside it. Our own events survive that (every one carries an
+explicit `send_to`), but GA4's *enhanced measurement* — outbound clicks,
+scroll, file downloads, form interactions — is emitted by gtag.js per
+configured stream with no `send_to` at all. Two streams, and every one of
+those cross-reports into both properties.
+
+The fix is to deny the soft navigation: `components/group-link.tsx` renders a
+plain `<a>` when a link leaves the group, and an ordinary `next/link` when it
+does not. The cost is a full page load on three top-nav links; the campus
+sub-nav and the 29 guides are unaffected because they stay inside one group.
+`lib/routes.ts` owns the segment list that decides which group a path is in —
+**adding a segment under `app/(app)/` means adding it there**, or its links
+silently become soft navigations again.
+
+Two things keep this from rotting: the `configured` Set in
+`site-analytics.tsx` makes a leak cost one `config` rather than one per
+navigation, and `e2e/navigation.spec.ts` asserts that a document holds exactly
+one gtag.js tag and one `config`, before and after both a same-group and a
+cross-group navigation. That test was written by defeating the fix and
+watching it fail.
+
+> **Correction.** An earlier version of this component re-ran `gtag('js')` and
+> `gtag('config')` on every route change, because `pathname` was an effect
+> dependency — `/` → `/hub` → `/stats` pushed three of each. Re-configuring a
+> live stream re-initialises it and can restart the session. Config is now a
+> mount-only effect; only `page_view` tracks the route.
+
 ## Caching
 
 | Page | Strategy | Why |

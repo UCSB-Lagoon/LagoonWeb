@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
+import { GroupLink } from "./group-link";
+import { isCampusPath } from "@/lib/routes";
 
 const links = [
   { href: "/hub", label: "Campus" },
@@ -55,18 +56,11 @@ export function Navbar() {
       window.removeEventListener("resize", onResize);
     };
   }, [open]);
-  const campusActive = [
-    "/hub",
-    "/stats",
-    "/map",
-    "/leaderboard",
-    "/challenges",
-    "/me",
-  ].includes(pathname);
+  const campusActive = isCampusPath(pathname);
   return (
     <header className="lagoon-header">
       <nav className="lagoon-nav" aria-label="Primary">
-        <Link
+        <GroupLink
           href="/"
           className="lagoon-brand"
           onClick={() => setOpen(false)}
@@ -76,10 +70,10 @@ export function Navbar() {
           <strong>
             Lagoon<small>UC SANTA BARBARA</small>
           </strong>
-        </Link>
+        </GroupLink>
         <div className="lagoon-nav-links">
           {links.map(({ href, label }) => (
-            <Link
+            <GroupLink
               key={href}
               href={href}
               aria-current={
@@ -89,7 +83,7 @@ export function Navbar() {
               }
             >
               {label}
-            </Link>
+            </GroupLink>
           ))}
         </div>
         <div className="lagoon-nav-actions">
@@ -110,14 +104,25 @@ export function Navbar() {
         </div>
       </nav>
       {open && (
-        <div ref={menu} id="lagoon-menu" className="lagoon-mobile-menu">
+        // Focus is trapped here and the page behind cannot scroll, so the
+        // panel is modal in behaviour even though it pushes the page down
+        // rather than covering it. The dialog semantics say so, instead of
+        // leaving assistive tech to read a page the keyboard cannot reach.
+        <div
+          ref={menu}
+          id="lagoon-menu"
+          className="lagoon-mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site menu"
+        >
           <nav aria-label="Mobile navigation">
             {[...links, { href: "/me", label: "Your account" }].map(
               ({ href, label }) => (
-                <Link key={href} href={href} onClick={() => setOpen(false)}>
+                <GroupLink key={href} href={href} onClick={() => setOpen(false)}>
                   {label}
                   <span aria-hidden="true">↗</span>
-                </Link>
+                </GroupLink>
               ),
             )}
           </nav>

@@ -25,16 +25,22 @@ import type { Metadata } from "next";
 import "./site.css";
 import "./editorial.css";
 import { SiteAnalytics } from "@/components/site-analytics";
-import { MarketingHeader } from "@/components/marketing/marketing-header";
-import { MarketingFooter } from "@/components/marketing/marketing-footer";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 /**
  * Marketing + guides shell — the 29 SEO guides, /guides, /company, the
- * homepage. Reports to the MARKETING GA4 stream (G-2F8CTN4DNP). Uses a
- * MARKETING-specific header/footer (its own nav); the app's
- * Navbar/Footer are not used here. Dark mode is class-based (.dark on
- * <html>, set by the boot script in the root layout) and toggleable from
- * the header.
+ * homepage. Reports to the MARKETING GA4 stream (G-2F8CTN4DNP).
+ *
+ * Header and footer are the SAME components the app shell renders. They
+ * were separate until the campus redesign, then became one-line
+ * re-exports of Navbar/Footer that only obscured where the markup lived;
+ * the indirection is gone. Links that leave this group are full page
+ * loads (components/group-link.tsx) so only one GA4 stream is ever live
+ * in a document.
+ *
+ * Dark mode is class-based (.dark on <html>, set by the boot script in
+ * the root layout) and toggleable from the header.
  *
  * Default metadata mirrors what every static guide carried (author,
  * robots, Apple smart-banner). Per-page title/description/canonical/
@@ -56,9 +62,9 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
   return (
     <>
       <a className="skip-link" href="#content">Skip to content</a>
-      <MarketingHeader />
+      <Navbar />
       <main className="flex-1" id="content">{children}</main>
-      <MarketingFooter />
+      <Footer />
       <SiteAnalytics gaId="G-2F8CTN4DNP" />
     </>
   );

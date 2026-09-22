@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CAMPUS_TOOLS } from "@/lib/routes";
 
 export function CampusHeading({
   eyebrow,
@@ -17,16 +18,14 @@ export function CampusHeading({
     </header>
   );
 }
+/**
+ * Every campus tool lives in the (app) group, so these stay soft
+ * navigations — see components/group-link.tsx for when they would not.
+ */
 export function CampusNav({ current }: { current: string }) {
   return (
     <nav className="campus-subnav" aria-label="Campus tools">
-      {[
-        ["/hub", "Overview"],
-        ["/stats", "By the numbers"],
-        ["/map", "Campus map"],
-        ["/leaderboard", "Leaderboard"],
-        ["/challenges", "Challenges"],
-      ].map(([href, label]) => (
+      {CAMPUS_TOOLS.map(({ href, label }) => (
         <Link
           key={href}
           href={href}

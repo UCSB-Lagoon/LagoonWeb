@@ -1,22 +1,23 @@
-import Link from "next/link";
+import { GroupLink } from "./group-link";
 
 export function Footer() {
   return (
     <footer className="lagoon-footer">
       <div className="lagoon-footer-top">
-        <Link href="/" className="lagoon-footer-wordmark">
-          Lagoon↗
-        </Link>
+        <GroupLink href="/" className="lagoon-footer-wordmark">
+          Lagoon<span aria-hidden="true">↗</span>
+        </GroupLink>
         <p>
           Made for here.
           <br />
           Built by Gauchos, for Gauchos.
         </p>
         <nav aria-label="Footer">
-          <Link href="/guides">Student guides</Link>
-          <Link href="/company">About Lagoon</Link>
-          <Link href="/captains">Become a captain</Link>
-          <Link href="/me">Your account</Link>
+          <GroupLink href="/guides">Student guides</GroupLink>
+          <GroupLink href="/stats">Campus stats</GroupLink>
+          <GroupLink href="/company">About Lagoon</GroupLink>
+          <GroupLink href="/captains">Become a captain</GroupLink>
+          <GroupLink href="/me">Your account</GroupLink>
         </nav>
       </div>
       <div className="lagoon-footer-bottom">
