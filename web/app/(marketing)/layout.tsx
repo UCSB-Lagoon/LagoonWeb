@@ -25,6 +25,8 @@ import type { Metadata } from "next";
 import "./site.css";
 import "./editorial.css";
 import { SiteAnalytics } from "@/components/site-analytics";
+import { MetaPixel } from "@/components/meta-pixel";
+import { AppStoreCampaignLinks } from "@/components/app-store-campaign";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
@@ -66,6 +68,8 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
       <main className="flex-1" id="content">{children}</main>
       <Footer />
       <SiteAnalytics gaId="G-2F8CTN4DNP" />
+      <MetaPixel />
+      <AppStoreCampaignLinks />
     </>
   );
 }

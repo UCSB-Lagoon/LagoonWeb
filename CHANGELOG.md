@@ -1,5 +1,31 @@
 # Lagoon Web — Changelog
 
+## [2026-09-22] — Instagram ad measurement, App Store campaign links, and a privacy page
+
+Groundwork for Instagram ads. Everything that talks to Meta or Apple is inert
+until its env var is set in Vercel. Full write-up, including the analytics
+review and what to do next: `docs/growth-analytics-2026-09.md`.
+
+### Added
+- **Meta Pixel** (`components/meta-pixel.tsx`, `NEXT_PUBLIC_META_PIXEL_ID`):
+  PageView per route; Lead + AppStoreClick on App Store taps. Skips
+  /admin, /auth, /login, /me. Uses Meta's own stub shape — a stub without
+  `callMethod` keeps queueing forever after fbevents.js loads.
+- **App Store campaign links** (`components/app-store-campaign.tsx`,
+  `NEXT_PUBLIC_APPSTORE_PROVIDER_TOKEN`): adds `pt`/`ct`/`mt` to App Store
+  links at tap time, `ct` from the landing visit's UTM tags, so App Store
+  Connect can count installs per ad.
+- **/privacy**, linked in the footer and sitemap. The site had no privacy
+  page (404). Covers the website only and says so: the app's "no ad
+  tracking" promise still holds. Opt-out button sets `lagoon_ads_optout`;
+  Global Privacy Control is honoured without it (CCPA/CPRA "sharing").
+
+### Verified
+Production build with placeholder IDs: PageView/Lead/AppStoreClick reach
+Meta; an ad URL (`utm_source=instagram&utm_campaign=Fall Launch`) turns the
+App Store link into `…&ct=instagram-fall_launch`; opting out stops the script
+loading. Typecheck and ESLint clean.
+
 ## [2026-09-21] — One document, one analytics stream
 
 The campus redesign shipped clean: typecheck, ESLint and the brand guard all

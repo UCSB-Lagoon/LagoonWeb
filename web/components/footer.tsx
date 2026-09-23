@@ -18,6 +18,7 @@ export function Footer() {
           <GroupLink href="/company">About Lagoon</GroupLink>
           <GroupLink href="/captains">Become a captain</GroupLink>
           <GroupLink href="/me">Your account</GroupLink>
+          <GroupLink href="/privacy">Privacy</GroupLink>
         </nav>
       </div>
       <div className="lagoon-footer-bottom">

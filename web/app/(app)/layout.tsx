@@ -3,6 +3,8 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { AdminBar } from "@/components/admin-bar";
 import { SiteAnalytics } from "@/components/site-analytics";
+import { MetaPixel } from "@/components/meta-pixel";
+import { AppStoreCampaignLinks } from "@/components/app-store-campaign";
 
 /**
  * The live web app shell — /hub, /leaderboard, /stats, /map, /me,
@@ -63,6 +65,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <main id="app-content" className="flex-1">{children}</main>
       <Footer />
       <SiteAnalytics gaId="G-5HY7LBXP8G" />
+      <MetaPixel />
+      <AppStoreCampaignLinks />
     </div>
   );
 }
