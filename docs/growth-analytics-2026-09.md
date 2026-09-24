@@ -205,7 +205,77 @@ ships the new setup.
 
 ---
 
-## 5. Google Analytics — still to do
+## 5. Google Analytics — what it says (read 23 Sep, last 28 days)
+
+Property `a367194108p503605474` (named "gauchogains-app", account
+"lagoonucsb"), under the second Google account in Chrome.
+
+| | |
+|---|---|
+| "Active users" | 1,527 |
+| Users with any engagement (`user_engagement`) | **58** |
+| App Store taps (`app_store_click`) | **34 taps, 16 people** |
+| Key events | **0 — nothing is marked as a key event** |
+
+**Most of the traffic is automated.** By browser: Chrome 1,479 users at 6.7%
+engagement and 2s average; Safari (iPhones) 30 users at 63% engagement and
+46s. It starts abruptly in the week of 13 Sep and geolocates to data-center
+cities (Cheyenne, Des Moines, Phoenix, Chicago, San Jose). Orcutt (721) may be
+Santa Barbara-area carrier IPs or a crawler; Goleta (180) is real.
+
+**What that means:** the website gets roughly 50 real visitors a month, and
+about a third of them tap through to the App Store. The site converts well,
+but it is not where students find Lagoon — Instagram and the App Store are.
+Spend on ads that go straight to the App Store, not on web traffic.
+
+**To fix in GA** (Admin, 2 minutes): mark `app_store_click` as a key event;
+optionally add a data filter or comparison excluding Chrome sessions with 0
+engagement time so reports show students, not crawlers.
+
+---
+
+## 6. Week 1 Instagram campaign (draft in Ads Manager, 23 Sep)
+
+Why **Traffic**, not App promotion: Meta's iOS app-install ads need the Meta
+SDK (or a paid attribution partner) in the app to count installs. The SDK
+would put ad tracking in the app — against its privacy policy and App Store
+labels, and it needs the tracking permission prompt. Traffic to the App Store
+link with an App Store Connect campaign token measures installs without any
+of that.
+
+**Draft already created** (not published, nothing spent):
+- Campaign `Lagoon · Fall Week 1 · App Store traffic` — Traffic, ad set budget
+- Ad set `UCSB · 18–24 · Instagram only` — Website, *Maximize link clicks*,
+  $10/day, Isla Vista + 10 mi, end date 1 Oct (check it saved), original
+  audience options (hard limits)
+
+**Still to set:**
+- Ad set → Audience: age **18–24**. Placements: **Manual → Instagram only**
+  (Feed, Stories, Reels, Explore).
+- Ad → Identity: Instagram account @ucsblagoon. Format: single image, add the
+  four feed images and four story images (`Lagoon/AppStoreMedia/ads/output/`)
+  so Meta rotates them.
+- Website URL:
+  `https://apps.apple.com/app/apple-store/id6760681142?pt=123978416&ct=ig_ads_w1&mt=8`
+- Call to action: **Download** (or Learn more if Download isn't offered).
+- Primary text (add all three; Meta tests them):
+  1. Screenshot your GOLD schedule. Lagoon turns it into a color-coded week in 30 seconds — and shows you who's in your classes.
+  2. Classes start this week. Your schedule, dining hours and what's happening on campus, in one free app built by Gauchos.
+  3. Find out who's in your classes before the first lecture. Free, made at UCSB.
+- Headlines: "Your week, sorted in 30 seconds" · "See who's in your classes" · "Free for UCSB students"
+- Meta may ignore the ad-account "Act now — verification" banner for a while,
+  but finish it before scaling spend.
+
+**Reading results after 3–4 days:** Ads Manager shows link clicks and cost per
+click (~$0.30–$1.00 is normal for a local student audience). Installs appear
+in App Store Connect → Analytics → Acquisition → Campaigns → `ig_ads_w1`
+(Apple needs a few days and hides very small numbers). Keep the image with the
+lowest cost per click; pause the rest. The boosted "50 Gauchos" post is
+optimizing for profile visits — fine for followers, not installs.
+
+---
+
+## 7. Google Analytics — original to-do (superseded by §5)
 
 GA4 is installed and correct (two streams: marketing `G-2F8CTN4DNP`, app
 `G-5HY7LBXP8G`; page views, `app_store_click`, `conversion`, scroll depth).
