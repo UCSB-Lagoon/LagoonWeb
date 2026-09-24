@@ -63,7 +63,9 @@ URL: `utm_source` + `utm_campaign` (e.g. `instagram-fall_launch`), else
   That check also sent one test `Lead`/`AppStoreClick` to the pixel and one
   `app_store_click` to GA — ignore campaign `verify_test` in reports.
 - **Instagram bio link:** `https://apps.apple.com/app/apple-store/id6760681142?pt=123978416&ct=ig_bio&mt=8`
-- **Domain verification:** DNS is at **Namecheap** (nameservers
+- **23 Sep — lagoonucsb.com verified in Meta** (TXT record added at Namecheap,
+  confirmed on Namecheap, Google and Cloudflare resolvers).
+- **Domain verification (how it was done):** DNS is at **Namecheap** (nameservers
   `dns1/dns2.registrar-servers.com`), not Vercel, so the record goes in
   Namecheap → Domain List → lagoonucsb.com → Advanced DNS: TXT, host `@`,
   value `facebook-domain-verification=ds5oh5wsg1yywk6nvl613kqisf05wu`. Keep
