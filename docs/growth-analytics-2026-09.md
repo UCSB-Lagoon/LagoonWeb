@@ -57,8 +57,17 @@ URL: `utm_source` + `utm_campaign` (e.g. `instagram-fall_launch`), else
   Set as `NEXT_PUBLIC_META_PIXEL_ID` (Production) on the Vercel project
   **lagoon-web-app** (the one serving lagoonucsb.com); PageView confirmed
   firing on the live site.
-- App Store provider token: not set yet.
-- Domain verification in Meta: not done yet.
+- **23 Sep — App Store campaign links live.** Provider token `123978416` set
+  as `NEXT_PUBLIC_APPSTORE_PROVIDER_TOKEN` (Production); confirmed on the live
+  site (`?utm_source=instagram&utm_campaign=verify_test` → `ct=instagram-verify_test`).
+  That check also sent one test `Lead`/`AppStoreClick` to the pixel and one
+  `app_store_click` to GA — ignore campaign `verify_test` in reports.
+- **Instagram bio link:** `https://apps.apple.com/app/apple-store/id6760681142?pt=123978416&ct=ig_bio&mt=8`
+- **Domain verification:** DNS is at **Namecheap** (nameservers
+  `dns1/dns2.registrar-servers.com`), not Vercel, so the record goes in
+  Namecheap → Domain List → lagoonucsb.com → Advanced DNS: TXT, host `@`,
+  value `facebook-domain-verification=ds5oh5wsg1yywk6nvl613kqisf05wu`. Keep
+  the existing `google-site-verification` TXT record alongside it.
 
 ### Turning it on
 
