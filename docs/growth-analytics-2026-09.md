@@ -50,6 +50,16 @@ Acquisition → Campaigns, and that needs two parameters on the App Store URL:
 URL: `utm_source` + `utm_campaign` (e.g. `instagram-fall_launch`), else
 `meta` if there's an `fbclid`, else the referring site, else `web`.
 
+### Status
+
+- **23 Sep — Meta Pixel live.** Dataset "Lagoon website", ID
+  `1790273445326801`, in the "Lagoon — UCSB Campus App" business portfolio.
+  Set as `NEXT_PUBLIC_META_PIXEL_ID` (Production) on the Vercel project
+  **lagoon-web-app** (the one serving lagoonucsb.com); PageView confirmed
+  firing on the live site.
+- App Store provider token: not set yet.
+- Domain verification in Meta: not done yet.
+
 ### Turning it on
 
 1. **Meta Pixel** — Meta Business Suite → Events Manager → Connect data
