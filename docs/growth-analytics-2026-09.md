@@ -326,3 +326,14 @@ Also in this update:
 current screenshots, in that order.
 
 **Keywords** — leave as is (99/100, no words repeated from name/subtitle).
+
+---
+
+## 8. Instagram manager bot (30 Sep)
+
+Standing prompt for the Grok bot that drafts daily posts and weekly reports:
+[`docs/grok-instagram-prompt.md`](grok-instagram-prompt.md). Its asset library is
+[`marketing/instagram/`](../marketing/instagram/README.md) in this public repo
+(copies of the demo-data ad creative and App Store screenshots; the originals
+and generators live in the private app repo under `AppStoreMedia/`). The bot
+drafts; publishing and any spend stay with a person.
