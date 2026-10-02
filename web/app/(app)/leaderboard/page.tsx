@@ -1,7 +1,7 @@
 import { CampusHeading, CampusNav } from "@/components/campus-heading";
 import Link from "next/link";
 import { LeaderboardTable } from "@/components/gamification/leaderboard-table";
-import { getWeeklyLeaderboard, getAllTimeLeaderboard } from "@/lib/queries";
+import { getLeaderboard } from "@/lib/queries";
 
 export const revalidate = 60;
 export const metadata = { title: "Leaderboard", alternates: { canonical: "/leaderboard" } };
@@ -16,16 +16,13 @@ export default async function LeaderboardPage({
   const sp = await searchParams;
   const period: Period = sp?.period === "all-time" ? "all-time" : "weekly";
 
-  const rows =
-    period === "all-time"
-      ? await getAllTimeLeaderboard(50)
-      : await getWeeklyLeaderboard(50);
+  const rows = await getLeaderboard(period === "all-time" ? "all" : "week", 50);
 
   const heading = period === "all-time" ? "All-time leaderboard" : "Weekly leaderboard";
   const sub =
     period === "all-time"
-      ? "Top XP earners since Lagoon launched · Earn XP across the mobile app"
-      : "Resets every Monday · Earn XP across the Lagoon mobile app";
+      ? "The Gauchos who've opened Lagoon on the most days since May 2026."
+      : "Who's opened Lagoon on the most days this week. Resets every Monday, Pacific time.";
 
   return (
     <div className="campus-page">
@@ -42,8 +39,13 @@ export default async function LeaderboardPage({
       </div>
 
       <div className="card p-4 sm:p-5">
-        <LeaderboardTable rows={rows} />
+        <LeaderboardTable rows={rows} period={period === "all-time" ? "all" : "week"} />
       </div>
+
+      <p className="text-xs text-ink-400 mt-4 max-w-xl">
+        Ranked by days you opened Lagoon, then by how often. Test accounts are left out, and so is anyone
+        who turns off Profile Discoverability (You → Account &amp; preferences → Privacy in the app).
+      </p>
 
       {period === "weekly" && (
         <p className="text-xs text-ink-400 mt-4 text-center">

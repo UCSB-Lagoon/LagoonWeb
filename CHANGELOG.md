@@ -1,5 +1,22 @@
 # Lagoon Web — Changelog
 
+## [2026-10-01] — Leaderboard ranks real usage, not XP
+
+### Changed
+- **/leaderboard and the /hub top five** rank by the days someone opened
+  Lagoon (this week, Monday-reset Pacific; or all time since May 2026), then
+  by how often. Rows show days, plus a seven-dot week on the weekly board.
+  Data: `public_leaderboard()` (iOS repo, migration 086); only `days` is
+  published, the open count is just the tie-break. The level badge and XP
+  column are gone.
+
+### Fixed
+- The weekly XP board was a six-way tie for first on 40 XP — XP mostly counts
+  adding classes.
+- It showed a student who had turned off Profile Discoverability, and the
+  all-time board included an internal test account. Both are excluded now;
+  the page says how to opt out.
+
 ## [2026-10-01] — /stats rebuilt: "Campus by the numbers"
 
 ### Changed

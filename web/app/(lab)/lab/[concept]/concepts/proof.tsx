@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Flame } from "lucide-react";
-import { getStatsBundle, getWeeklyLeaderboard } from "@/lib/queries";
+import { getLeaderboard, getStatsBundle } from "@/lib/queries";
 import { UCSB_UNDERGRAD_ENROLLMENT, prettifySource, pct } from "@/lib/stats-helpers";
 
 /**
@@ -17,7 +17,7 @@ import { UCSB_UNDERGRAD_ENROLLMENT, prettifySource, pct } from "@/lib/stats-help
  * wrong and should be killed here rather than after it ships.
  */
 export async function ProofConcept() {
-  const [s, top] = await Promise.all([getStatsBundle(), getWeeklyLeaderboard(5)]);
+  const [s, top] = await Promise.all([getStatsBundle(), getLeaderboard("week", 5)]);
   const ov = s.overview;
   const reach = ov ? pct(ov.total_users, UCSB_UNDERGRAD_ENROLLMENT) : 0;
   const totalSourceXp = s.sources.reduce((a, b) => a + b.total_xp, 0);
@@ -78,7 +78,7 @@ export async function ProofConcept() {
           </Link>
         </div>
         {top.length === 0 ? (
-          <p className="text-sm text-ink-400">No XP earned yet this week.</p>
+          <p className="text-sm text-ink-400">Nobody on the board yet this week.</p>
         ) : (
           <ol data-live className="divide-y divide-cream-200">
             {top.map((r, i) => (
@@ -88,7 +88,7 @@ export async function ProofConcept() {
                   {r.display_name ?? "Anonymous Gaucho"}
                 </span>
                 <span className="text-sm font-bold text-gold-700 tabular-nums">
-                  {r.xp.toLocaleString()} XP
+                  {r.days} {r.days === 1 ? "day" : "days"}
                 </span>
               </li>
             ))}
