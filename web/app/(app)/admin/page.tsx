@@ -214,8 +214,11 @@ export default async function AdminHomePage() {
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">
-          <Link href="/admin/captains" className="btn-primary !py-2 !px-4 text-sm">
-            <Inbox className="w-4 h-4" /> Captains
+          <Link href="/admin/analytics" className="btn-primary !py-2 !px-4 text-sm">
+            <BarChart3 className="w-4 h-4" /> Analytics
+          </Link>
+          <Link href="/admin/captains" className="btn-secondary !py-2 !px-4 text-sm">
+            <Inbox className="w-4 h-4 text-gold-700" /> Captains
           </Link>
           <Link href="/admin/feedback" className="btn-secondary !py-2 !px-4 text-sm">
             <Inbox className="w-4 h-4 text-gold-700" /> Feedback
