@@ -13,6 +13,27 @@ const BOT_RE = /bot|crawler|spider|preview|facebookexternalhit|slackbot|discordb
 const sanitizeCode = (raw: string) =>
   (raw || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 32);
 
+/** `?s=` on links the iOS app shares: schedule, class_invite, invite, week… */
+const sanitizeKind = (raw: string | undefined) =>
+  (raw || "").toLowerCase().replace(/[^a-z_]/g, "").slice(0, 24);
+
+/**
+ * The App Store link, tagged so App Store Connect → Campaigns counts installs
+ * per share type (`share-schedule`, `share-invite`, …) or `referral` for a
+ * captain code. Apple ignores `ct` without the provider token, so untagged
+ * until NEXT_PUBLIC_APPSTORE_PROVIDER_TOKEN is set (it is in production —
+ * the site's own "web" campaign uses it).
+ */
+function appStoreURL(kind: string): string {
+  const pt = process.env.NEXT_PUBLIC_APPSTORE_PROVIDER_TOKEN;
+  if (!pt) return APP_STORE;
+  const url = new URL(APP_STORE);
+  url.searchParams.set("pt", pt);
+  url.searchParams.set("ct", kind ? `share-${kind}`.slice(0, 40) : "referral");
+  url.searchParams.set("mt", "8");
+  return url.toString();
+}
+
 /**
  * Referral links get shared in iMessage / Instagram DMs, so the unfurl is
  * the first impression. Link-preview crawlers get this metadata (they're
@@ -74,12 +95,14 @@ export async function generateMetadata(
 export default async function ReferralRedirect(
   { params, searchParams }: {
     params: Promise<{ code: string }>;
-    searchParams: Promise<{ noredirect?: string }>;
+    searchParams: Promise<{ noredirect?: string; s?: string }>;
   }
 ) {
   const { code: raw } = await params;
-  const { noredirect } = await searchParams;
+  const { noredirect, s } = await searchParams;
   const code = sanitizeCode(raw);
+  // Present on links students share from the app; absent on captain links.
+  const kind = sanitizeKind(s);
 
   if (!code) redirect("/");
 
@@ -119,13 +142,34 @@ export default async function ReferralRedirect(
       ip,
       country,
       is_bot: isBot,
-      page_path: `/r/${code}`,
+      // The dashboard reads `?s=` back out of this to count clicks per share type.
+      page_path: kind ? `/r/${code}?s=${kind}` : `/r/${code}`,
     });
   } catch (e) {
     console.warn("[r/code] click log failed", e);
   }
 
   // SEO / preview surface — for link-preview crawlers and explicit requests
+  if ((noredirect === "1" || isBot) && kind) {
+    // A student's share, not a captain referral: their code is an opaque
+    // token, so "invited by k3x9q" would read as noise.
+    return (
+      <div className="max-w-3xl mx-auto px-5 py-24 text-center">
+        <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-ink-900">
+          A friend invited you to <span className="italic-accent">Lagoon</span>.
+        </h1>
+        <p className="mt-5 text-lg text-ink-500">
+          Your GOLD schedule in 30 seconds, who&apos;s in your classes, dining and the campus map. Free, built at UCSB.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <a href={appStoreURL(kind)} rel="noreferrer" data-lagoon-cta={`share-${kind}`} className="btn-primary">
+            Download Lagoon free
+          </a>
+          <Link href="/" className="btn-secondary">Explore Lagoon</Link>
+        </div>
+      </div>
+    );
+  }
   if (noredirect === "1" || isBot) {
     return (
       <div className="max-w-3xl mx-auto px-5 py-24 text-center">
@@ -149,7 +193,7 @@ export default async function ReferralRedirect(
     );
   }
 
-  redirect(APP_STORE);
+  redirect(appStoreURL(kind));
 }
 
 // Cache hint — these are personalized and short-lived, but a 5-min edge cache

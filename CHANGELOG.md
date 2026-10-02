@@ -1,5 +1,36 @@
 # Lagoon Web — Changelog
 
+## [2026-10-01] — Product analytics dashboard and attributed share links
+
+### Added
+- **/admin/analytics** (admin-gated like the rest of /admin): who uses Lagoon,
+  when and for what — active today/7d/30d, signups, opens per person, typical
+  visit, stickiness; active-people and signup charts; a weekday × hour usage
+  heatmap; the activation funnel and week-N retention by signup cohort;
+  feature, tab and launch-source breakdowns; builds in use; schedule-import
+  success by build and method with failure reasons; sharing and probable
+  referrals; MetricKit crashes and hangs; and a searchable table of everyone
+  active in the window. 7/30/90-day ranges. Everything comes from one RPC,
+  `admin_analytics_dashboard` (iOS repo, Supabase migration 084), which only
+  the service role can call — the Monday Discord report reads the same SQL.
+
+### Changed
+- **/r/[code]** now records the share type (`?s=`) with each click and tags
+  the App Store redirect with campaign `share-{type}` (or `referral` for a
+  captain code), so App Store Connect → Campaigns counts installs per share
+  type. A student's share gets "A friend invited you" landing copy instead of
+  the captain wording; captain links are unchanged.
+
+### Fixed (via the database, no code change here)
+- **/stats "active Gauchos"** counted people who earned XP, and XP has been
+  off since July — it showed 2–4 a day while ~38 people opened the app.
+  `stats_overview` and `stats_xp_daily` now count app opens.
+
+### Verified
+Rendered against production data with a temporary dev-only auth bypass
+(removed before commit): all sections populate; production build, typecheck,
+ESLint and the brand check pass.
+
 ## [2026-09-22] — Instagram ad measurement, App Store campaign links, and a privacy page
 
 Groundwork for Instagram ads. Everything that talks to Meta or Apple is inert
