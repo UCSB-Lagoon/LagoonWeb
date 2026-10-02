@@ -45,79 +45,18 @@ export async function getActivityFeed(limit = 20) {
   return (data ?? []) as ActivityFeedRow[];
 }
 
-export async function getWeeklyLeaderboard(limit = 10): Promise<LeaderRow[]> {
+/**
+ * Public leaderboard: days people opened Lagoon, Monday-reset ("week") or
+ * since analytics began ("all"). `public_leaderboard()` (iOS repo, migration
+ * 086) leaves out internal accounts and anyone who turned off Profile
+ * Discoverability. It replaced the XP boards — XP mostly counts schedule
+ * edits, and six people tied for first on 40.
+ */
+export async function getLeaderboard(period: "week" | "all", limit = 50): Promise<LeaderRow[]> {
   const sb = await createClient();
-  const week = weekStart();
-  const { data: lb } = await sb
-    .from("leaderboard_weekly")
-    .select("user_id, rank, xp")
-    .eq("week_start", week)
-    .order("rank", { ascending: true })
-    .limit(limit);
-
-  if (!lb || lb.length === 0) return [];
-
-  const rows = lb as Array<{ user_id: string; rank: number; xp: number }>;
-  const ids = rows.map((r) => r.user_id);
-  const [{ data: profiles }, { data: stats }] = await Promise.all([
-    sb.from("user_profiles")
-      .select("id, display_name, full_name, avatar_url, major_code")
-      .in("id", ids),
-    sb.from("user_gamification_profiles")
-      .select("user_id, xp_total, level")
-      .in("user_id", ids),
-  ]);
-
-  const pMap = new Map(profiles?.map((p) => [p.id, p]));
-  const sMap = new Map(stats?.map((s) => [s.user_id, s]));
-
-  return rows.map((r) => {
-    const p = pMap.get(r.user_id);
-    const s = sMap.get(r.user_id);
-    return {
-      user_id: r.user_id,
-      rank: r.rank,
-      xp: r.xp,
-      total_xp: s?.xp_total ?? 0,
-      level: s?.level ?? 1,
-      display_name: p?.display_name ?? p?.full_name ?? null,
-      avatar_url: p?.avatar_url ?? null,
-      tagline: p?.major_code ?? null,
-    };
-  });
-}
-
-export async function getAllTimeLeaderboard(limit = 50): Promise<LeaderRow[]> {
-  const sb = await createClient();
-  const { data: stats } = await sb
-    .from("user_gamification_profiles")
-    .select("user_id, xp_total, level")
-    .order("xp_total", { ascending: false })
-    .limit(limit);
-
-  const rows = stats ?? [];
-  if (rows.length === 0) return [];
-
-  const ids = rows.map((r) => r.user_id);
-  const { data: profiles } = await sb
-    .from("user_profiles")
-    .select("id, display_name, full_name, avatar_url, major_code")
-    .in("id", ids);
-  const pMap = new Map(profiles?.map((p) => [p.id, p]));
-
-  return rows.map((r, i) => {
-    const p = pMap.get(r.user_id);
-    return {
-      user_id: r.user_id,
-      rank: i + 1,
-      xp: r.xp_total,
-      total_xp: r.xp_total,
-      level: r.level ?? 1,
-      display_name: p?.display_name ?? p?.full_name ?? null,
-      avatar_url: p?.avatar_url ?? null,
-      tagline: p?.major_code ?? null,
-    };
-  });
+  const { data, error } = await sb.rpc("public_leaderboard" as never, { p_period: period, p_limit: limit } as never);
+  if (error || !data) return [];
+  return data as unknown as LeaderRow[];
 }
 
 export async function getVibeScore(): Promise<number> {

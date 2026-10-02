@@ -2,7 +2,7 @@ import Link from "next/link";
 import { CampusHeading, CampusNav } from "@/components/campus-heading";
 import { LeaderboardTable } from "@/components/gamification/leaderboard-table";
 import { TrendingClassesCard } from "@/components/widgets/trending-classes";
-import { getWeeklyLeaderboard, getTrendingClasses } from "@/lib/queries";
+import { getLeaderboard, getTrendingClasses } from "@/lib/queries";
 
 export const revalidate = 30;
 export const metadata = {
@@ -14,7 +14,7 @@ export const metadata = {
 
 export default async function HomePage() {
   const [top, classes] = await Promise.all([
-    getWeeklyLeaderboard(5),
+    getLeaderboard("week", 5),
     getTrendingClasses(5),
   ]);
   return (

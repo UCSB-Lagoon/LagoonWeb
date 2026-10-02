@@ -363,7 +363,7 @@ export default async function AdminHomePage() {
             <ul className="grid sm:grid-cols-2 gap-2 text-sm">
               <QuickRow href="/admin/captains?status=new" icon={Inbox} title="Triage new apps" hint="status=new" />
               <QuickRow href="/stats" icon={Activity} title="Live stats" hint="public dashboard" />
-              <QuickRow href="/leaderboard" icon={Trophy} title="Weekly leaderboard" hint="user XP race" />
+              <QuickRow href="/leaderboard" icon={Trophy} title="Weekly leaderboard" hint="most days on Lagoon" />
               <QuickRow href="/" icon={Users} title="Front of house" hint="see what users see" />
               <QuickRow href="https://supabase.com/dashboard/project/qecthmyzcicllttplhjq" icon={ExternalLink} title="Supabase dashboard" hint="schema + auth" external />
               <QuickRow href="https://analytics.google.com/analytics/web/" icon={BarChart3} title="GA4 reports" hint="conversion + traffic" external />
