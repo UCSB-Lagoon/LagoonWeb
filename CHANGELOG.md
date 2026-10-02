@@ -1,5 +1,26 @@
 # Lagoon Web — Changelog
 
+## [2026-10-02] — Magic-link sign-in lands you signed in
+
+### Fixed
+- **Signing in dropped you on the homepage, signed out.** Supabase didn't
+  recognise `/auth/callback` as a redirect, so it fell back to the bare Site
+  URL: the link's one-time code arrived at `/?code=…`, which nothing read. The
+  token was spent, so clicking the link again showed `otp_expired`. The
+  middleware now forwards any stray `?code=` to `/auth/callback`, and turns a
+  Supabase `?error_code=` into the login page with a plain explanation (or
+  straight through, if you're already signed in).
+- **`?next=` was ignored.** /admin pages sent you to `/login?next=/admin/…`
+  and the login page dropped it. It now rides in the link and in a one-hour
+  `lagoon_next` cookie, so it survives the fallback too. Only same-site paths
+  are accepted (`//evil.com` → `/me`).
+- **A failed code exchange** redirected to /me as if it had worked. It now
+  says so on the login page.
+
+### Changed
+- The login page says to open the link in the same browser (PKCE needs it),
+  offers "send another", and skips the form if you're already signed in.
+
 ## [2026-10-01] — Leaderboard ranks real usage, not XP
 
 ### Changed
