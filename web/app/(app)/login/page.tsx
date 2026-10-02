@@ -1,23 +1,47 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Waves } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { NEXT_COOKIE, safeNext } from "@/lib/auth-next";
+
+const ERRORS: Record<string, string> = {
+  otp_expired: "That link has expired or was already used. Each link works once — send yourself a new one.",
+  exchange_failed: "That link couldn't sign you in here. Open it in the same browser you requested it from, or send a new one.",
+};
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [next, setNext] = useState("/me");
+
+  // Read on mount rather than with useSearchParams, which would need a
+  // Suspense boundary for a page this small.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const target = safeNext(params.get("next"));
+    setNext(target);
+    const code = params.get("error");
+    if (code) setError(ERRORS[code] ?? "That sign-in link didn't work. Send yourself a new one.");
+    // Already signed in (say, a second click on a used link): go on through.
+    createClient().auth.getUser().then(({ data }) => {
+      if (data.user) window.location.replace(target);
+    });
+  }, []);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    // If Supabase drops the redirect path, the middleware still knows where
+    // this sign-in was headed. One hour, the life of the link.
+    document.cookie = `${NEXT_COOKIE}=${encodeURIComponent(next)}; path=/; max-age=3600; samesite=lax; secure`;
     const sb = createClient();
     const { error } = await sb.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}` },
     });
     setLoading(false);
     if (error) setError(error.message);
@@ -37,9 +61,15 @@ export default function LoginPage() {
           </div>
         </div>
         {sent ? (
-          <p className="text-ink-700">
-            Magic link sent to <span className="font-semibold text-ink-900">{email}</span>. Check your inbox.
-          </p>
+          <div className="space-y-3">
+            <p className="text-ink-700">
+              Magic link sent to <span className="font-semibold text-ink-900">{email}</span>. Open it in this
+              browser — it works once.
+            </p>
+            <button type="button" onClick={() => setSent(false)} className="text-sm font-semibold text-gold-700 hover:underline">
+              Didn&apos;t get it? Send another
+            </button>
+          </div>
         ) : (
           <form onSubmit={submit} className="space-y-4">
             <label className="block">
