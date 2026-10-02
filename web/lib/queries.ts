@@ -2,6 +2,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { weekStart } from "@/lib/utils";
 import type { LeaderRow } from "@/components/gamification/leaderboard-table";
+import type { CampusStats } from "@/lib/campus-stats";
 import { laDateString, laMidnightIso, rarityRank, shiftIsoDate } from "@/lib/stats-helpers";
 
 /**
@@ -438,4 +439,12 @@ export async function getTopStreak() {
     .limit(1)
     .maybeSingle();
   return data?.streak_days ?? 0;
+}
+
+/** Public "Campus by the numbers" aggregates for /stats. See lib/campus-stats.ts. */
+export async function getCampusStats(): Promise<CampusStats | null> {
+  const sb = await createClient();
+  const { data, error } = await sb.rpc("public_campus_stats" as never);
+  if (error || !data) return null;
+  return data as unknown as CampusStats;
 }

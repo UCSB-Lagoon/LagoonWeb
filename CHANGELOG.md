@@ -1,5 +1,53 @@
 # Lagoon Web — Changelog
 
+## [2026-10-01] — /stats rebuilt: "Campus by the numbers"
+
+### Changed
+- **/stats** is a new page with its own look: a navy poster with the live
+  Gaucho count, then eight hand-drawn charts (components/stats/), each led by
+  the sentence it proves:
+  1. **The climb** — every sign-up since March, with milestone markers and a
+     new-per-day strip ("the first 100 took 6 months, the next 100 took 3 weeks").
+  2. **Daily pulse** — people opening Lagoon each day, 30 days, with average,
+     best day and week-over-week change.
+  3. **When campus checks in** — a 24-hour radial heatmap, one ring per weekday.
+  4. **The class clock** — a Mon–Fri ridgeline of how many students are in
+     class at every 15 minutes; the busiest day in gold.
+  5. **Schedules, decoded** — Friday-free, 8 AM club, evening class (waffles),
+     most common start time, busiest day, hours a week in class.
+  6. **Most-shared classes** — one dot per student.
+  7. **Where class happens** — a building bubble map with a ranked legend.
+  8. **Who's here** — majors by full name, and class year.
+  Every chart has a hover/tap readout, a text alternative, a dark-mode
+  palette and entrance motion that respects reduced-motion.
+- Data comes from one anon-callable RPC, `public_campus_stats()` (iOS repo,
+  Supabase migration 085), instead of seven XP-era views. It floors anything
+  that could single someone out (3+ students per class/building/major, 20+
+  schedules before any schedule fact) and excludes internal accounts.
+
+### Fixed
+- **The XP chart is gone.** It plotted XP earned against active people on two
+  y-axes. XP is still awarded for a handful of actions (mostly adding a class)
+  even though the gamification UI is hidden, so it tracked how often people
+  edited schedules, not usage.
+- **"Actions this week"** was the count of XP events. Removed.
+- **"Friendships"** counted pending requests (24); it now counts accepted
+  ones (10).
+- **Buildings** were split across spellings — "GIRV" and "Girvetz Hall"
+  counted separately. The RPC normalizes through a `campus_buildings` alias
+  table generated from the app's building list.
+- **Majors** showed raw codes ("ECONACC · BA"); they now use the requirement
+  catalog's names.
+
+### Correction
+- The previous entry says XP "has been off since July". It hasn't: XP is
+  still awarded; only the UI that shows it is hidden. The fix it describes
+  (counting app opens) stands.
+
+### Removed
+- `components/charts/{activity-area,bar-row,donut,signup-trend}.tsx` and the
+  stats helpers only the old page used.
+
 ## [2026-10-01] — Product analytics dashboard and attributed share links
 
 ### Added
