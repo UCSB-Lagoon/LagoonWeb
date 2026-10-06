@@ -4,31 +4,32 @@ import { AdOptOut } from "./opt-out";
 export const metadata: Metadata = {
   title: { absolute: "Privacy · Lagoon" },
   description:
-    "What lagoonucsb.com measures, what it shares with Google and Meta, and how to opt out. The Lagoon app itself runs no ad trackers.",
+    "What lagoonucsb.com and the Lagoon app measure, what they share with Google and Meta, and how to opt out.",
   alternates: { canonical: "https://lagoonucsb.com/privacy" },
   robots: { index: true, follow: true },
 };
 
 /**
- * Website privacy notice.
+ * Privacy notice for the website, plus the one thing the app shares with an
+ * advertiser.
  *
- * Scoped to the website on purpose. The app's policy (PrivacyPolicyView in
- * the iOS repo) promises no third-party ad tracking, and that stays true:
- * the Meta Pixel runs here, on the marketing site, and nowhere in the app.
- * If that ever changes, the App Store privacy labels change with it.
+ * From 1.20 the app includes Meta's SDK for ad measurement: install and
+ * app-open events only, no advertising identifier, no tracking prompt (see
+ * MetaAdMeasurement in the iOS repo). PrivacyPolicyView in the app and the
+ * App Store privacy label say the same thing; change all three together.
  */
 export default function PrivacyPage() {
   return (
     <div className="article-shell">
       <header className="page-hero">
         <h1>Privacy</h1>
-        <p>For lagoonucsb.com. Last updated 22 September 2026.</p>
+        <p>For lagoonucsb.com and the Lagoon app. Last updated 5 October 2026.</p>
       </header>
 
       <article className="article-card">
         <h2>The short version</h2>
         <ul>
-          <li>The Lagoon <strong>app</strong> has no ad trackers and does not share your data with advertisers.</li>
+          <li>The Lagoon <strong>app</strong> tells Meta when it&apos;s installed or opened, so we can see which ads work. Nothing you put into the app goes to Meta.</li>
           <li>This <strong>website</strong> uses Google Analytics to count visits, and may use the Meta Pixel to measure Instagram ads.</li>
           <li>We never sell your information for money. You can switch off the Meta Pixel below, and your browser&apos;s Global Privacy Control signal does it automatically.</li>
         </ul>
@@ -50,6 +51,19 @@ export default function PrivacyPage() {
           When you arrive from an ad, we also add a campaign label (like <code>instagram-fall_launch</code>) to the
           App Store link so Apple can tell us how many installs a campaign produced. Apple reports those as totals,
           not per person.
+        </p>
+
+        <h2>What the app shares with Meta</h2>
+        <p>
+          From version 1.20, the Lagoon app includes Meta&apos;s SDK. It tells Meta when the app is installed or
+          opened, with device information such as model, iOS version, language, time zone and an app-generated
+          identifier, so we can see which Instagram and Facebook ads led to installs.
+        </p>
+        <p>
+          That is all it sends. Your name, email, classes, friends and messages never go to Meta or any other
+          advertiser. The app never reads your device&apos;s advertising identifier and never shows the iOS
+          &ldquo;Allow tracking&rdquo; prompt, so Meta measures our ads through Apple&apos;s privacy-preserving
+          attribution rather than by following you across apps. There are no ads inside Lagoon.
         </p>
 
         <h2>Opt out</h2>
