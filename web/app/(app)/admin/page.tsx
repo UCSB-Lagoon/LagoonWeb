@@ -228,6 +228,12 @@ export default async function AdminHomePage() {
               </span>
             )}
           </Link>
+          <Link href="/admin/orgs" className="btn-secondary !py-2 !px-4 text-sm">
+            <Shield className="w-4 h-4 text-gold-700" /> Chapters
+          </Link>
+          <Link href="/admin/events" className="btn-secondary !py-2 !px-4 text-sm">
+            <Flame className="w-4 h-4 text-gold-700" /> Events
+          </Link>
           <Link href="/admin/handbook" className="btn-secondary !py-2 !px-4 text-sm">
             <Sparkles className="w-4 h-4 text-gold-700" /> Handbook
           </Link>
