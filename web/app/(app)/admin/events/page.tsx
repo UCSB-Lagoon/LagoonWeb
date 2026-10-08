@@ -29,9 +29,9 @@ const when = (iso: string) =>
 
 /**
  * Hosted events (migration 090). Nothing is visible in the app until it's
- * approved here. Reject parties and anything with alcohol (the app has no
- * category for them, so they arrive as "other" or "recruitment"), anything
- * at a private house that isn't plausibly the chapter's, and anything vague.
+ * approved here. Reject parties (the app has no category for them, so they
+ * arrive as "other" or "recruitment"), anything at a private house that
+ * isn't plausibly the chapter's, and anything vague.
  * A rejection reason is sent to the officer as-is.
  */
 export default async function AdminEventsPage() {
@@ -105,7 +105,7 @@ export default async function AdminEventsPage() {
                     <RpcActionButton endpoint={endpoint} tone="good" icon={Check} label="Approve"
                       body={{ action: "review", event_id: e.id, approve: true }} />
                     <RpcActionButton endpoint={endpoint} tone="bad" icon={X} label="Reject"
-                      promptReason="Why? The officer sees this, e.g. “Events with alcohol aren't allowed.”"
+                      promptReason="Why? The officer sees this, e.g. “Add where on campus it is.”"
                       body={{ action: "review", event_id: e.id, approve: false }} />
                   </div>
                 </div>
