@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Check, X, EyeOff, Eye, MapPin } from "lucide-react";
+import { Check, X, EyeOff, Eye, MapPin, Pause, Play } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, isAdminEmail } from "@/lib/supabase/admin";
 import { RpcActionButton } from "@/components/admin/rpc-action-button";
@@ -21,6 +21,7 @@ type Reported = {
 };
 type Upcoming = { id: string; title: string; starts_at: string; venue_label: string; org_name: string; rsvps: number };
 type Queue = { pending: Pending[]; reported: Reported[]; upcoming: Upcoming[] };
+type Posting = { paused: boolean; note: string | null };
 
 const when = (iso: string) =>
   new Date(iso).toLocaleString("en-US", {
@@ -33,6 +34,10 @@ const when = (iso: string) =>
  * arrive as "other" or "recruitment"), anything at a private house that
  * isn't plausibly the chapter's, and anything vague.
  * A rejection reason is sent to the officer as-is.
+ *
+ * Pause posting (092) for any week nobody can review the same day: a rush
+ * event approved after rush is worse than none. Officers see the note in
+ * the composer; events already live stay up, and cancelling still works.
  */
 export default async function AdminEventsPage() {
   const supa = await createClient();
@@ -51,6 +56,8 @@ export default async function AdminEventsPage() {
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("admin_org_events_queue" as never);
   const queue = (data as Queue | null) ?? { pending: [], reported: [], upcoming: [] };
+  const { data: postingData } = await admin.rpc("org_event_posting" as never);
+  const posting = (postingData as Posting | null) ?? { paused: false, note: null };
   const endpoint = "/api/admin/events";
 
   return (
@@ -69,6 +76,27 @@ export default async function AdminEventsPage() {
           {error.message} — has migration 090 been applied?
         </div>
       )}
+
+      <section className="card p-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 className="font-display text-lg font-bold text-ink-900">
+            Posting is {posting.paused ? "paused" : "open"}
+          </h2>
+          <p className="text-sm text-ink-500">
+            {posting.paused
+              ? `Officers can't submit or edit events. They see: “${posting.note ?? "Lagoon isn't reviewing new events for a few days."}”`
+              : "Officers can submit events. Pause it for any week nobody can review the same day."}
+          </p>
+        </div>
+        {posting.paused ? (
+          <RpcActionButton endpoint={endpoint} tone="good" icon={Play} label="Reopen posting"
+            body={{ action: "posting", paused: false }} />
+        ) : (
+          <RpcActionButton endpoint={endpoint} tone="bad" icon={Pause} label="Pause posting"
+            promptReason="Note officers see (optional), e.g. “Posting reopens Jan 4.”"
+            body={{ action: "posting", paused: true }} />
+        )}
+      </section>
 
       <section>
         <h2 className="font-display text-xl font-bold text-ink-900 mb-3">Waiting for review</h2>

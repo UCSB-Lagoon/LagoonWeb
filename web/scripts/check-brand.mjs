@@ -42,6 +42,8 @@ const ALLOW = [
   ["lib/share.ts",                 "BRAND pins the iOS app's share-card palette for next/og images, which can't resolve var()"],
   ["app/(app)/f/[id]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
   ["app/(app)/w/[id]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
+  ["app/(app)/org/[slug]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
+  ["app/(app)/event/[id]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
 ];
 /** Metadata keys that take a literal colour by spec. */
 const ALLOWED_KEYS = /themeColor|theme_color|background_color/;
