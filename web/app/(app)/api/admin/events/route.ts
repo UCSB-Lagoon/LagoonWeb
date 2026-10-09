@@ -5,6 +5,7 @@ import { callAdminRpc, requireAdmin, UUID_RE } from "@/lib/admin-rpc";
  * POST /api/admin/events
  *   { action: "review", event_id, approve: boolean, reason? }
  *   { action: "status", event_id, status: approved|hidden }   (after reports)
+ *   { action: "posting", paused: boolean, reason? }           (092: the note officers see)
  */
 export async function POST(req: Request) {
   const denied = await requireAdmin();
@@ -14,6 +15,11 @@ export async function POST(req: Request) {
   try { body = await req.json(); } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
+  if (body.action === "posting" && typeof body.paused === "boolean") {
+    const note = typeof body.reason === "string" ? body.reason.slice(0, 140) : null;
+    return callAdminRpc("admin_org_event_set_posting", { p_paused: body.paused, p_note: note });
+  }
+
   const eventId = typeof body.event_id === "string" && UUID_RE.test(body.event_id) ? body.event_id : null;
   if (!eventId) return NextResponse.json({ error: "Bad event_id" }, { status: 400 });
 

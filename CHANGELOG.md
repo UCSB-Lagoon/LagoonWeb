@@ -1,5 +1,34 @@
 # Lagoon Web — Changelog
 
+## [2026-10-08] — Chapter and event links show the chapter
+
+### Added
+- **/org/{slug}: a chapter's page** for people without the app. It shows the
+  letters and name, the officers' recruitment note, upcoming approved events,
+  about, philanthropy and links, then "RSVP in Lagoon". Unclaimed chapters
+  tell officers how to claim. Nothing is ranked or rated. Data:
+  `public_org_card()` (iOS repo, migration 092).
+- **/event/{id}: one approved event.** It shows the host, title, when (on the
+  highlighter), where, how many are going, and the details. A private-house
+  event shows only its block, plus "the address is shown to people who RSVP in
+  the app"; the RSVP that reveals it happens in the app, where hosts see who's
+  coming. Ended events point to what the chapter has next. Data:
+  `public_org_event_card()`.
+- Link previews for both: the letters on gold with the next event, or the
+  event with its date plate.
+- **Pause posting** on `/admin/events` (`admin_org_event_set_posting`), with
+  the note officers see in the composer. Use it in any week nobody can review
+  the same day. Live events stay up, and cancelling still works.
+- AASA claims `/org/*` and `/event/*`. The app has routed both since
+  Lagoon#35, and its invite and event shares now link here instead of `/r/`.
+- Clicks are logged like `/f/` and `/w/` (`page_path` `/org/…`, `/event/…`).
+- Dev fixtures: `/org/demo-chapter`, `/event/demo`, `/event/demo-2`.
+
+### Why
+An officer's "Invite your chapter" link, posted in a group chat or an
+Instagram bio during recruitment, went straight to the App Store, so the
+person tapping it never saw the chapter or its rush events.
+
 ## [2026-10-08] — Share links land on what was shared
 
 ### Added

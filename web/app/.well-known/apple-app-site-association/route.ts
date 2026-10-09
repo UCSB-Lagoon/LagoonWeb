@@ -26,6 +26,11 @@ const CLAIMED = [
   // have real web pages for people without the app.
   "/f/*",
   "/w/*",
+  // Chapters and their events (iOS migration 092). DeepLinkRouter has
+  // routed `org/{slug}` and `event/{id}` since Lagoon#35; these pages are
+  // the fallback for everyone without the app.
+  "/org/*",
+  "/event/*",
 ];
 
 const AASA = {
