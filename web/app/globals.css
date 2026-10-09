@@ -209,6 +209,15 @@
   --color-violet-400: #b099e0;
   --color-kelp-400:   #5cc0b3;
 
+  /* The iOS app's four course-block hues (LagoonCourseColor), exactly. A
+     shared week paints a student's classes in the colours they see in the
+     app, so these don't follow the site's own teal/coral. Navy ink on all. */
+  --color-course-teal:   #86cbb6;
+  --color-course-gold:   #efdc7b;
+  --color-course-coral:  #e9a196;
+  --color-course-violet: #b2a2e0;
+  --color-course-ink:    #001e30;
+
   /* ── Type stack ──
      Inter is the face the launch comps are set in. The iOS app ships SF Pro
      because it can't justify a custom face in the binary; the web has no such

@@ -1,5 +1,30 @@
 # Lagoon Web — Changelog
 
+## [2026-10-08] — Share links land on what was shared
+
+### Added
+- **/f/{id} — "When are we free?" groups.** No account needed: who's in, the
+  times everyone with a schedule is free (45+ minutes, longest first), and a
+  Mon–Fri heatmap of the week. "Add my schedule" goes to the App Store (tagged
+  `share-free_group`), with a `lagoon://` link for people who already have
+  the app. Data: `free_group_view()` (iOS repo, migration 091).
+- **/w/{id} — a shared week or next quarter's plan** as a week grid in the
+  app's course colours, then "See when you're both free" / "Taking any of
+  these?". Data: `get_shared_week()`.
+- **Link previews that show the content.** Each route has an
+  `opengraph-image`: the group's answer and heatmap, or the week itself, in
+  the app's pinned share-card brand with Inter loaded for the heavy weights
+  (`lib/og-font.ts`; Satori ships only Noto Sans Regular).
+- Clicks go into `referral_clicks` like `/r/` (`page_path` `/f/…`, `/w/…`),
+  with the sharer's code from `?r=`.
+- AASA claims `/f/*` and `/w/*`; the iOS app routes both.
+- `--color-course-{teal,gold,coral,violet,ink}`: the app's four block hues,
+  exactly. The older `--color-teal-400` etc. had drifted from them.
+
+### Why
+A link shared from the app 302'd straight to the App Store, so a friend sent
+"here's my week, when are we free?" never saw the week.
+
 ## [2026-10-02] — Magic-link sign-in lands you signed in
 
 ### Fixed

@@ -22,6 +22,10 @@ const CLAIMED = [
   "/compare/*",
   "/wrapped",
   "/r/*",
+  // "When are we free?" groups and shared weeks (iOS migration 091). Both
+  // have real web pages for people without the app.
+  "/f/*",
+  "/w/*",
 ];
 
 const AASA = {
