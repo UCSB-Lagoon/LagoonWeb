@@ -33,6 +33,18 @@ type AnalyticsWindow = Window & {
  *    navigation, if a link ever slips through.
  */
 const configured = new Set<string>();
+const pendingEvents: Array<{ gaId: string; name: string; fields: Record<string, unknown> }> = [];
+
+/** Page children can mount before the layout's analytics bootstrap. Queue
+ * their events until the addressed stream has received its config command. */
+export function trackSiteEvent(gaId: string, name: string, fields: Record<string, unknown>) {
+  const win = window as AnalyticsWindow;
+  if (!configured.has(gaId) || !win.gtag) {
+    pendingEvents.push({ gaId, name, fields });
+    return;
+  }
+  win.gtag("event", name, { ...fields, send_to: gaId });
+}
 
 /** Route-scoped listeners keep each visit on its own analytics stream. */
 function RouteAnalytics({ gaId }: { gaId: string }) {
@@ -53,6 +65,12 @@ function RouteAnalytics({ gaId }: { gaId: string }) {
     };
     win.gtag("js", new Date());
     win.gtag("config", gaId, { send_page_view: false });
+    for (let i = 0; i < pendingEvents.length;) {
+      const event = pendingEvents[i];
+      if (event.gaId !== gaId) { i++; continue; }
+      pendingEvents.splice(i, 1);
+      trackSiteEvent(event.gaId, event.name, event.fields);
+    }
   }, [gaId]);
 
   // One page_view per route, addressed so it lands on this stream only.

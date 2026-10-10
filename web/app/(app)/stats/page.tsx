@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     title: "Campus by the numbers — Lagoon",
     description: "When UCSB is in class, which classes everyone's taking, and how fast the community is growing. Live and anonymized.",
     url: "https://www.lagoonucsb.com/stats",
-    images: [{ url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
+    images: [{ url: "https://www.lagoonucsb.com/stats/opengraph-image", width: 1200, height: 630, alt: "Campus by the numbers — live, anonymized Lagoon community growth" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Campus by the numbers — Lagoon",
     description: "When UCSB is in class, which classes everyone's taking, and how fast the community is growing. Live and anonymized.",
-    images: [{ url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
+    images: [{ url: "https://www.lagoonucsb.com/stats/opengraph-image", width: 1200, height: 630, alt: "Campus by the numbers — live, anonymized Lagoon community growth" }],
   },
 };
 

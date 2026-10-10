@@ -13,6 +13,7 @@ export function Footer() {
           Built by Gauchos, for Gauchos.
         </p>
         <nav aria-label="Footer">
+          <GroupLink href="/courses">Explore courses</GroupLink>
           <GroupLink href="/guides">Student guides</GroupLink>
           <GroupLink href="/stats">Campus stats</GroupLink>
           <GroupLink href="/company">About Lagoon</GroupLink>

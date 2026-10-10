@@ -9,6 +9,7 @@ import { isCampusPath } from "@/lib/routes";
 
 const links = [
   { href: "/hub", label: "Campus" },
+  { href: "/courses", label: "Courses" },
   { href: "/guides", label: "Guides" },
   { href: "/company", label: "About" },
 ];
@@ -77,7 +78,7 @@ export function Navbar() {
               key={href}
               href={href}
               aria-current={
-                pathname === href || (href === "/hub" && campusActive)
+                pathname === href || (href === "/hub" && campusActive) || (href === "/courses" && pathname.startsWith("/courses/"))
                   ? "page"
                   : undefined
               }

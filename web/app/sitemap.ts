@@ -14,6 +14,7 @@ type Entry = {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const interactive: Entry[] = [
     { path: "/",            priority: 1.0,  change: "daily"   },   // marketing homepage
+    { path: "/courses",     priority: 0.9,  change: "weekly"  },
     { path: "/hub",         priority: 0.9,  change: "daily"   },   // live dashboard
     { path: "/leaderboard", priority: 0.85, change: "daily"   },
     { path: "/challenges",  priority: 0.7,  change: "weekly"  },
