@@ -114,7 +114,7 @@ for (const route of ROUTES) {
 test("fixture · running against the pinned empty dataset", async ({ page }) => {
   await page.goto("/leaderboard");
   await expect(
-    page.getByText("No XP earned this week yet"),
+    page.getByText("The week just reset. Open Lagoon today to take the top spot."),
     "the leaderboard returned rows, so this run is hitting a real database — " +
       "run it with `npm run test:visual`, which pins the placeholder credentials",
   ).toBeVisible();

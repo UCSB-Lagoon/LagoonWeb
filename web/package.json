@@ -12,6 +12,7 @@
     "check:brand": "node scripts/check-brand.mjs",
     "check": "npm run typecheck && npm run check:brand && npm run lint",
     "test:e2e": "playwright test",
+    "test:courses": "playwright test --config playwright.courses.config.ts",
     "test:contrast": "playwright test e2e/contrast.spec.ts",
     "test:visual": "playwright test --config playwright.visual.config.ts"
   },

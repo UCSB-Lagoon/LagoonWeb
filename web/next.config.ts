@@ -13,6 +13,8 @@ import type { NextConfig } from "next";
 const config: NextConfig = {
   reactStrictMode: true,
   outputFileTracingIncludes: {
+    "/courses": ["./data/course-grades.json.gz"],
+    "/courses/*": ["./data/course-grades.json.gz"],
     "/admin/handbook": ["./content/onboarding.md"],
     "/[slug]": ["./content/guides/**/*"],
     "/": ["./content/home-body.html", "./content/home.jsonld.json"],

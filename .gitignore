@@ -23,3 +23,5 @@ web/supabase/.temp/
 .DS_Store
 **/.DS_Store
 *.swp
+# Generated only by the populated course integration tests.
+web/e2e/fixtures/course-grades.json.gz

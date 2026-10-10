@@ -22,7 +22,7 @@ export default defineConfig({
   // picking that spec up here (which a bare `playwright test`, i.e.
   // `npm run test:e2e`, otherwise would) runs it against a live database and
   // trips its own fixture guard.
-  testIgnore: /visual\.spec\.ts/,
+  testIgnore: /(?:visual|courses)\.spec\.ts/,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

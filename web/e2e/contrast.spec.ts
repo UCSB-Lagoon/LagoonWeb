@@ -16,7 +16,7 @@ import { MD_CLASS } from "../lib/mini-markdown";
  *     resolve there, and it reported nonsense for the same nav.
  */
 
-const ROUTES = ["/", "/hub", "/stats", "/leaderboard", "/captains", "/guides", "/company", "/ucsb-dining-menu"];
+const ROUTES = ["/", "/hub", "/stats", "/leaderboard", "/captains", "/guides", "/company", "/ucsb-dining-menu", "/courses", "/courses/math-3a"];
 
 /** Pairings that are known-failing and tracked, not silently tolerated. */
 const KNOWN: Array<{ route: string; text: string; why: string }> = [];

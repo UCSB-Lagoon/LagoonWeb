@@ -8,6 +8,11 @@ admin, all in one Next.js project.
 > It's the zero-to-shipping doc. Also rendered in-app at
 > `lagoonucsb.com/admin/handbook` (admin login).
 
+The public **course explorer** lives at `/courses`, with shareable historical
+grade pages at `/courses/[course-code]`. See
+[`docs/course-explorer.md`](./docs/course-explorer.md) for scope, data provenance,
+grade calculations, design, SEO, analytics, maintenance, and tests.
+
 ## Repo layout
 
 ```
