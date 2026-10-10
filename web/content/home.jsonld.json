@@ -3,7 +3,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Lagoon",
-    "url": "https://lagoonucsb.com/",
+    "url": "https://www.lagoonucsb.com/",
     "description": "The UCSB campus app: import your GOLD schedule in about 30 seconds, see who's in your classes, plus grade data, live dining menus, and campus events.",
     "publisher": {
       "@type": "Organization",
@@ -15,14 +15,13 @@
     "@type": "MobileApplication",
     "name": "Lagoon — UCSB Campus App",
     "alternateName": "UCSB Lagoon",
-    "url": "https://lagoonucsb.com/",
-    "image": "https://lagoonucsb.com/og-card.png",
+    "url": "https://www.lagoonucsb.com/",
+    "image": "https://www.lagoonucsb.com/og-card.png",
     "downloadUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
     "installUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
     "applicationCategory": "EducationApplication",
     "applicationSubCategory": "Campus Life",
-    "operatingSystem": "iOS 16.0+",
-    "softwareVersion": "1.0",
+    "operatingSystem": "iOS 17.0+",
     "inLanguage": "en-US",
     "isAccessibleForFree": true,
     "offers": {
@@ -60,19 +59,18 @@
       "Class vibes and course reviews",
       "XP, streaks, and gamification"
     ],
-    "screenshot": "https://lagoonucsb.com/og-card.png",
     "publisher": {
       "@type": "Organization",
       "name": "Lagoon",
-      "url": "https://lagoonucsb.com/"
+      "url": "https://www.lagoonucsb.com/"
     }
   },
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Lagoon",
-    "url": "https://lagoonucsb.com/",
-    "logo": "https://lagoonucsb.com/logo.svg",
+    "url": "https://www.lagoonucsb.com/",
+    "logo": "https://www.lagoonucsb.com/logo.svg",
     "sameAs": [
       "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
     ],

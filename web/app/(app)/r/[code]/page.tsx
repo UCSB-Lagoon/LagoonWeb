@@ -50,16 +50,16 @@ export async function generateMetadata(
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: `https://lagoonucsb.com/r/${code}` },
+    alternates: { canonical: `https://www.lagoonucsb.com/r/${code}` },
     openGraph: {
       type: "website",
       siteName: "Lagoon",
       title,
       description,
-      url: `https://lagoonucsb.com/r/${code}`,
+      url: `https://www.lagoonucsb.com/r/${code}`,
       images: [
         {
-          url: "https://lagoonucsb.com/og-card.png",
+          url: "https://www.lagoonucsb.com/og-card.png",
           type: "image/png",
           width: 1200,
           height: 630,
@@ -72,7 +72,7 @@ export async function generateMetadata(
       title,
       description,
       images: [
-        { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
+        { url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
       ],
     },
   };

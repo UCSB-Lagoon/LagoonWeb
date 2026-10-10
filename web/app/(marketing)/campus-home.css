@@ -97,6 +97,31 @@
     font-size: 13px;
     font-weight: 600;
   }
+  .campus-proof {
+    margin: 0 0 22px;
+    max-width: 360px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .campus-proof cite {
+    display: block;
+    margin-top: 6px;
+    font-style: normal;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .campus-proof a { text-decoration: underline; text-underline-offset: 3px; }
+  .campus-phone-handoff {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin: 0 0 22px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .campus-phone-handoff strong { color: var(--ink); }
+  .campus-phone-handoff img { flex-shrink: 0; border-radius: 6px; background: var(--ink-light); }
   .campus-board {
     background: var(--night);
     color: var(--ink-light);
@@ -538,9 +563,13 @@
     }
     .campus-hero-grid {
       grid-template-columns: 1fr;
-      padding: 38px 0;
-      gap: 40px;
+      padding: 26px 0;
+      gap: 28px;
     }
+    .campus-pitch .campus-eyebrow { margin-bottom: 16px; }
+    .campus-pitch h1 { margin-bottom: 20px; }
+    .campus-small { margin-bottom: 20px; }
+    .campus-phone-handoff { display: none; }
     .campus-pitch h1 {
       font-size: clamp(60px, 13vw, 85px);
     }

@@ -67,8 +67,8 @@ jobs:
       #
       # A brand linter cannot find these: both sides are legal tokens. Only
       # the rendered pixel knows.
-      - name: Contrast
-        run: npm run test:contrast
+      - name: Contrast, navigation and SEO invariants
+        run: npm run test:e2e
 
       # e2e/visual.spec.ts compares committed screenshots.
       #

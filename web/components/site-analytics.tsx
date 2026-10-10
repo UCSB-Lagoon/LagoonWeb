@@ -76,7 +76,7 @@ function RouteAnalytics({ gaId }: { gaId: string }) {
     const click = (e: MouseEvent) => {
       const anchor =
         e.target instanceof Element
-          ? e.target.closest<HTMLAnchorElement>('a[href*="apps.apple.com"]')
+          ? e.target.closest<HTMLAnchorElement>('a[href*="apps.apple.com"]:not([data-lagoon-review])')
           : null;
       if (!anchor) return;
       const source = anchor.getAttribute("data-lagoon-cta") || "inline";

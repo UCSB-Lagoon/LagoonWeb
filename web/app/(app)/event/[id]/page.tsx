@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const title = `${event.title} · ${hostLabel(event)}`;
   const going = goingLine(event);
   const description = `${whenLine(event)} · ${event.venue_label}${going ? ` · ${going}` : ""}. RSVP in Lagoon.`;
-  const url = `https://lagoonucsb.com/event/${event.id}`;
+  const url = `https://www.lagoonucsb.com/event/${event.id}`;
   return {
     title: { absolute: title },
     description,
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     alternates: { canonical: url },
     openGraph: { type: "website", siteName: "Lagoon", title, description, url },
     twitter: { card: "summary_large_image", title, description },
-    other: { "apple-itunes-app": `app-id=6760681142, app-argument=${url}` },
+    other: { "apple-itunes-app": `app-id=6760681142, app-argument=https://lagoonucsb.com/event/${event.id}` },
   };
 }
 

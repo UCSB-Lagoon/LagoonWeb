@@ -6,8 +6,8 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "What to Bring to a UCSB Dorm",
     "og:description": "A realistic UCSB dorm packing guide for freshmen who want the essentials without overpacking.",
-    "og:url": "https://lagoonucsb.com/what-to-bring-to-ucsb-dorm",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/what-to-bring-to-ucsb-dorm",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:image:type": "image/png",
     "og:image:width": "1200",
     "og:image:height": "630",
@@ -16,11 +16,11 @@
     "twitter:card": "summary_large_image",
     "twitter:title": "What to Bring to a UCSB Dorm",
     "twitter:description": "A realistic UCSB dorm packing guide for freshmen who want the essentials without overpacking.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "What to Bring to a UCSB Dorm"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/what-to-bring-to-ucsb-dorm"
+    "canonical": "https://www.lagoonucsb.com/what-to-bring-to-ucsb-dorm"
   },
   "jsonld": [
     {
@@ -34,19 +34,12 @@
       "datePublished": "2026-04-21",
       "description": "A practical packing guide for UCSB dorms covering what to bring, what to skip, and what freshmen actually end up using every week.",
       "headline": "What to Bring to a UCSB Dorm",
-      "mainEntityOfPage": "https://lagoonucsb.com/what-to-bring-to-ucsb-dorm",
+      "image": "https://www.lagoonucsb.com/og-card.png",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/what-to-bring-to-ucsb-dorm",
       "publisher": {
         "@type": "Organization",
-        "name": "Lagoon"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "name": "Lagoon",
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -55,19 +48,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/what-to-bring-to-ucsb-dorm",
+          "item": "https://www.lagoonucsb.com/what-to-bring-to-ucsb-dorm",
           "name": "What to Bring to a UCSB Dorm",
           "position": 3
         }

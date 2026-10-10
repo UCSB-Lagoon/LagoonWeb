@@ -6,8 +6,8 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Move-In Checklist for Freshmen",
     "og:description": "A simple UCSB move-in checklist for dorm setup, essentials, and the first days on campus.",
-    "og:url": "https://lagoonucsb.com/ucsb-move-in-checklist",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/ucsb-move-in-checklist",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:image:type": "image/png",
     "og:image:width": "1200",
     "og:image:height": "630",
@@ -16,11 +16,11 @@
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Move-In Checklist for Freshmen",
     "twitter:description": "A simple UCSB move-in checklist for dorm setup, essentials, and the first days on campus.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "UCSB Move-In Checklist for Freshmen"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/ucsb-move-in-checklist"
+    "canonical": "https://www.lagoonucsb.com/ucsb-move-in-checklist"
   },
   "jsonld": [
     {
@@ -34,19 +34,12 @@
       "datePublished": "2026-04-21",
       "description": "A practical UCSB move-in checklist for freshmen: what to pack, what to set up first, and how to make move-in week feel less chaotic.",
       "headline": "UCSB Move-In Checklist for Freshmen",
-      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-move-in-checklist",
+      "image": "https://www.lagoonucsb.com/og-card.png",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/ucsb-move-in-checklist",
       "publisher": {
         "@type": "Organization",
-        "name": "Lagoon"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "name": "Lagoon",
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -55,19 +48,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/ucsb-move-in-checklist",
+          "item": "https://www.lagoonucsb.com/ucsb-move-in-checklist",
           "name": "UCSB Move-In Checklist",
           "position": 3
         }

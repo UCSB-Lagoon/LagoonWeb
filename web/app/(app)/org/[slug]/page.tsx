@@ -25,14 +25,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const description = next
     ? `Next: ${next.title}, ${whenLine(next)}. See ${org.letters ?? org.name}'s events and RSVP in Lagoon.`
     : org.recruitment_note ?? `${councilTitle(org.council)} at UCSB. See events and which friends are in ${org.letters ?? org.name} on Lagoon.`;
-  const url = `https://lagoonucsb.com/org/${org.slug}`;
+  const url = `https://www.lagoonucsb.com/org/${org.slug}`;
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: url },
     openGraph: { type: "website", siteName: "Lagoon", title, description, url },
     twitter: { card: "summary_large_image", title, description },
-    other: { "apple-itunes-app": `app-id=6760681142, app-argument=${url}` },
+    other: { "apple-itunes-app": `app-id=6760681142, app-argument=https://lagoonucsb.com/org/${org.slug}` },
   };
 }
 

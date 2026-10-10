@@ -755,6 +755,9 @@ body::before {
   margin-top: 30px;
   align-items: start;
 }
+.campus-data-grid > * {
+  min-width: 0;
+}
 .campus-card-heading {
   display: flex;
   justify-content: space-between;

@@ -18,11 +18,12 @@ export function campaignToken(search: string, referrer: string): string {
   const source = params.get("utm_source");
   const campaign = params.get("utm_campaign");
   let token = [source, campaign].filter(Boolean).join("-");
+  if (!token && params.get("src")) token = `go-${params.get("src")}`;
   if (!token && params.get("fbclid")) token = "meta";
   if (!token && referrer) {
     try {
       const host = new URL(referrer).hostname.replace(/^www\./, "");
-      if (!host.endsWith("lagoonucsb.com")) token = host;
+      if (host !== "lagoonucsb.com" && !host.endsWith(".lagoonucsb.com")) token = host;
     } catch {
       /* malformed referrer: fall through */
     }
@@ -62,7 +63,7 @@ export function AppStoreCampaignLinks() {
     const click = (e: MouseEvent) => {
       const anchor =
         e.target instanceof Element
-          ? e.target.closest<HTMLAnchorElement>('a[href*="apps.apple.com"]')
+          ? e.target.closest<HTMLAnchorElement>('a[href*="apps.apple.com"]:not([data-lagoon-review])')
           : null;
       if (!anchor) return;
       try {

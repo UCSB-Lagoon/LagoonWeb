@@ -6,8 +6,8 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Transfer Student Guide",
     "og:description": "What transfer students should learn first about classes, systems, routines, and settling into UCSB.",
-    "og:url": "https://lagoonucsb.com/ucsb-transfer-student-guide",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/ucsb-transfer-student-guide",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:image:type": "image/png",
     "og:image:width": "1200",
     "og:image:height": "630",
@@ -16,11 +16,11 @@
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Transfer Student Guide",
     "twitter:description": "What transfer students should learn first about classes, systems, routines, and settling into UCSB.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "UCSB Transfer Student Guide"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/ucsb-transfer-student-guide"
+    "canonical": "https://www.lagoonucsb.com/ucsb-transfer-student-guide"
   },
   "jsonld": [
     {
@@ -34,19 +34,12 @@
       "datePublished": "2026-04-21",
       "description": "A practical UCSB transfer student guide covering classes, campus routines, making friends, and which systems to learn first so you do not feel behind.",
       "headline": "UCSB Transfer Student Guide",
-      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-transfer-student-guide",
+      "image": "https://www.lagoonucsb.com/og-card.png",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/ucsb-transfer-student-guide",
       "publisher": {
         "@type": "Organization",
-        "name": "Lagoon"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "name": "Lagoon",
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -55,19 +48,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/ucsb-transfer-student-guide",
+          "item": "https://www.lagoonucsb.com/ucsb-transfer-student-guide",
           "name": "Transfer Student Guide",
           "position": 3
         }

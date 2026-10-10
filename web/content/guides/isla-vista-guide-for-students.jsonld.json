@@ -7,19 +7,19 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://lagoonucsb.com/"
+        "item": "https://www.lagoonucsb.com/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Guides",
-        "item": "https://lagoonucsb.com/guides"
+        "item": "https://www.lagoonucsb.com/guides"
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "Isla Vista Guide for UCSB Students",
-        "item": "https://lagoonucsb.com/isla-vista-guide-for-students"
+        "item": "https://www.lagoonucsb.com/isla-vista-guide-for-students"
       }
     ]
   },
@@ -33,7 +33,7 @@
     "inLanguage": "en-US",
     "image": {
       "@type": "ImageObject",
-      "url": "https://lagoonucsb.com/og-card.png",
+      "url": "https://www.lagoonucsb.com/og-card.png",
       "width": 1200,
       "height": 630
     },
@@ -44,13 +44,13 @@
     "publisher": {
       "@type": "Organization",
       "name": "Lagoon",
-      "url": "https://lagoonucsb.com",
+      "url": "https://www.lagoonucsb.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://lagoonucsb.com/logo.svg"
+        "url": "https://www.lagoonucsb.com/logo.svg"
       }
     },
-    "mainEntityOfPage": "https://lagoonucsb.com/isla-vista-guide-for-students"
+    "mainEntityOfPage": "https://www.lagoonucsb.com/isla-vista-guide-for-students"
   },
   {
     "@context": "https://schema.org",

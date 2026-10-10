@@ -7,16 +7,16 @@ export const metadata: Metadata = {
   title: { absolute: "UCSB Student Guides | Lagoon" },
   description:
     "Browse Lagoon's UCSB student guides for freshmen, dorm life, move-in, meal plans, GOLD, class planning, study spots, and everyday campus questions.",
-  alternates: { canonical: "https://lagoonucsb.com/guides" },
+  alternates: { canonical: "https://www.lagoonucsb.com/guides" },
   openGraph: {
     type: "website",
     title: "UCSB Student Guides | Lagoon",
     description:
       "Student-first UCSB guides from Lagoon for freshmen, transfer students, newly admitted students, and current Gauchos.",
-    url: "https://lagoonucsb.com/guides",
+    url: "https://www.lagoonucsb.com/guides",
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     description:
       "Student-first UCSB guides from Lagoon for freshmen, transfer students, newly admitted students, and current Gauchos.",
     images: [
-      { url: "https://lagoonucsb.com/og-card.png", alt: "UCSB Student Guides | Lagoon" },
+      { url: "https://www.lagoonucsb.com/og-card.png", alt: "UCSB Student Guides | Lagoon" },
     ],
   },
 };
@@ -44,14 +44,14 @@ export default async function GuidesIndexPage() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "Lagoon UCSB Guides",
-    url: "https://lagoonucsb.com/guides",
+    url: "https://www.lagoonucsb.com/guides",
     numberOfItems: guides.length,
     itemListOrder: "https://schema.org/ItemListOrderAscending",
     itemListElement: guides.map((g, i) => ({
       "@type": "ListItem",
       position: i + 1,
       name: g.breadcrumbName,
-      url: `https://lagoonucsb.com/${g.slug}`,
+      url: `https://www.lagoonucsb.com/${g.slug}`,
     })),
   };
 

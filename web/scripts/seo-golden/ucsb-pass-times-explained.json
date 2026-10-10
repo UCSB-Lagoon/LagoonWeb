@@ -7,17 +7,17 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
     "og:description": "Where to find your pass time in GOLD, what each pass is for, and the prep that makes registration painless.",
-    "og:url": "https://lagoonucsb.com/ucsb-pass-times-explained",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/ucsb-pass-times-explained",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
     "twitter:description": "Where to find your pass time in GOLD, what each pass is for, and the prep that makes registration painless.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/ucsb-pass-times-explained"
+    "canonical": "https://www.lagoonucsb.com/ucsb-pass-times-explained"
   },
   "jsonld": [
     {
@@ -29,33 +29,15 @@
       },
       "dateModified": "2026-07-03",
       "datePublished": "2026-07-03",
-      "description": "What UCSB pass times are, where to find yours in GOLD, how Pass 1, 2, and 3 work, and how to prep so registration takes minutes.",
+      "description": "What UCSB pass times are, where to find yours in GOLD, how Pass 1, 2, and 3 actually work, and how to prep so registration takes minutes, not a morning.",
       "headline": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-pass-times-explained",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/ucsb-pass-times-explained",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-07-03",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/ucsb-pass-times-explained",
+          "item": "https://www.lagoonucsb.com/ucsb-pass-times-explained",
           "name": "UCSB Pass Times",
           "position": 3
         }

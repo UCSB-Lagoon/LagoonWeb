@@ -11,8 +11,8 @@
  * not a false diff). Deliberately ignores <script> GA/analytics tags and
  * page body: those legitimately change in the migration, SEO must not.
  *
- * Goldens are captured from the current static pages BEFORE migration and
- * are the oracle every later phase is checked against.
+ * Goldens began as pre-migration captures. Intentional SEO changes update
+ * them only after checking canonical, schema and date invariants separately.
  */
 import { mkdir, readFile, writeFile, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";

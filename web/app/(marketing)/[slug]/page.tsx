@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { MIGRATED_GUIDE_SLUGS } from "@/lib/marketing-slugs";
-import { GuideJsonLd, type GuideFrontmatter } from "@/components/seo/guide-jsonld";
+import { GuideJsonLd, guideSchema, type GuideFrontmatter } from "@/components/seo/guide-jsonld";
 import { GuideShell } from "@/components/marketing/guide-shell";
 import { mdxComponents } from "@/components/marketing/mdx";
 
@@ -45,7 +45,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const { frontmatter: fm } = await loadGuide(slug);
-  const url = `https://lagoonucsb.com${fm.canonicalPath}`;
+  const url = `https://www.lagoonucsb.com${fm.canonicalPath}`;
   // Faithful to the original: some pages had og:image dimensions, some
   // only og:image.
   const ogImages = fm.ogImageWidth
@@ -93,7 +93,7 @@ export default async function GuidePage(
   ) as unknown[];
   return (
     <>
-      <GuideJsonLd blocks={blocks} />
+      <GuideJsonLd blocks={guideSchema(blocks, fm)} />
       <GuideShell fm={fm}>{content}</GuideShell>
     </>
   );

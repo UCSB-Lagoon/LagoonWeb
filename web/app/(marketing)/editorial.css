@@ -40,6 +40,14 @@
     background: transparent;
     box-shadow: none;
   }
+  .article-card a.dining-menu-action {
+    color: var(--on-accent);
+    text-decoration: none;
+  }
+  .article-card a,
+  .related-guides a {
+    color: var(--gold-ink);
+  }
   .article-card h2 {
     font-size: 32px;
     letter-spacing: -0.035em;

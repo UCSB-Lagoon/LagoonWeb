@@ -5,16 +5,16 @@ export const metadata: Metadata = {
   title: { absolute: "About Lagoon | Built for Gauchos, by Gauchos" },
   description:
     "Learn about Lagoon, the student-built UCSB campus app for schedules, dining menus, campus events, student news, and grade data.",
-  alternates: { canonical: "https://lagoonucsb.com/company" },
+  alternates: { canonical: "https://www.lagoonucsb.com/company" },
   openGraph: {
     type: "website",
     title: "About Lagoon | Built for Gauchos, by Gauchos",
     description:
       "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
-    url: "https://lagoonucsb.com/company",
+    url: "https://www.lagoonucsb.com/company",
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
       "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         alt: "About Lagoon | Built for Gauchos, by Gauchos",
       },
     ],

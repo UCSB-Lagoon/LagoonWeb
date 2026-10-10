@@ -16,7 +16,7 @@ import { MD_CLASS } from "../lib/mini-markdown";
  *     resolve there, and it reported nonsense for the same nav.
  */
 
-const ROUTES = ["/", "/hub", "/stats", "/leaderboard", "/captains", "/guides", "/company"];
+const ROUTES = ["/", "/hub", "/stats", "/leaderboard", "/captains", "/guides", "/company", "/ucsb-dining-menu"];
 
 /** Pairings that are known-failing and tracked, not silently tolerated. */
 const KNOWN: Array<{ route: string; text: string; why: string }> = [];
@@ -189,10 +189,12 @@ async function contrastFailures(
  * suite has to assert what it is looking at.
  */
 async function goto(page: Page, route: string) {
-  const res = await page.goto(route, { waitUntil: "networkidle" });
+  // Analytics requests can keep a document busy without changing its paint.
+  const res = await page.goto(route, { waitUntil: "load" });
   expect(res, `no response for ${route}`).not.toBeNull();
   expect(res!.status(), `${route} did not render — measuring an error page proves nothing`)
     .toBe(200);
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
 }
 
 for (const route of ROUTES) {

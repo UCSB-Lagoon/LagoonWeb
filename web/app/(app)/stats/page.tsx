@@ -18,19 +18,19 @@ export const metadata: Metadata = {
   title: "Campus by the numbers",
   description:
     "Live, anonymized numbers from Gauchos on Lagoon: when UCSB is in class, which classes everyone's taking, and how the community is growing.",
-  alternates: { canonical: "https://lagoonucsb.com/stats" },
+  alternates: { canonical: "https://www.lagoonucsb.com/stats" },
   openGraph: {
     type: "website",
     title: "Campus by the numbers — Lagoon",
     description: "When UCSB is in class, which classes everyone's taking, and how fast the community is growing. Live and anonymized.",
-    url: "https://lagoonucsb.com/stats",
-    images: [{ url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
+    url: "https://www.lagoonucsb.com/stats",
+    images: [{ url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Campus by the numbers — Lagoon",
     description: "When UCSB is in class, which classes everyone's taking, and how fast the community is growing. Live and anonymized.",
-    images: [{ url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
+    images: [{ url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
   },
 };
 

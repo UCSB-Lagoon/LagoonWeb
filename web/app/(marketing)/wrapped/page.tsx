@@ -14,17 +14,17 @@ export const metadata: Metadata = {
   description:
     "Lagoon turns your UCSB quarter into a shareable recap — your classes, streaks, badges, and the Gauchos you shared them with.",
   robots: { index: false, follow: true },
-  alternates: { canonical: "https://lagoonucsb.com/wrapped" },
+  alternates: { canonical: "https://www.lagoonucsb.com/wrapped" },
   openGraph: {
     type: "website",
     siteName: "Lagoon",
     title: "Gaucho Wrapped — your quarter, in review",
     description:
       "Your classes, streaks, badges, and the Gauchos you shared them with. Free, built at UCSB.",
-    url: "https://lagoonucsb.com/wrapped",
+    url: "https://www.lagoonucsb.com/wrapped",
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     description:
       "Your classes, streaks, badges, and the Gauchos you shared them with. Free, built at UCSB.",
     images: [
-      { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
+      { url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
     ],
   },
 };

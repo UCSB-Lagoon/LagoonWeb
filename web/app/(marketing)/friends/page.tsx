@@ -15,17 +15,17 @@ export const metadata: Metadata = {
   description:
     "A Gaucho shared their classes with you. Get Lagoon, import your GOLD schedule in about 30 seconds, and see how many classes you share.",
   robots: { index: false, follow: true },
-  alternates: { canonical: "https://lagoonucsb.com/friends" },
+  alternates: { canonical: "https://www.lagoonucsb.com/friends" },
   openGraph: {
     type: "website",
     siteName: "Lagoon",
     title: "Compare schedules with your friends",
     description:
       "Import your GOLD schedule in ~30 seconds and see how many classes you share. Free, built at UCSB.",
-    url: "https://lagoonucsb.com/friends",
+    url: "https://www.lagoonucsb.com/friends",
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     description:
       "Import your GOLD schedule in ~30 seconds and see how many classes you share. Free, built at UCSB.",
     images: [
-      { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
+      { url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
     ],
   },
 };

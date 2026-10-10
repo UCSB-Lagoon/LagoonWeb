@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { GuideJsonLd } from "@/components/seo/guide-jsonld";
 import "./campus-home.css";
 
-const URL = "https://lagoonucsb.com/";
+const URL = "https://www.lagoonucsb.com/";
 
 export const viewport: Viewport = { themeColor: "#FFD200" };
 
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     url: URL,
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     description:
       "Snap your GOLD schedule, get a gorgeous Today view + widgets, and see who's in your classes. Free, built at UCSB.",
     images: [
-      { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
+      { url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
     ],
   },
 };

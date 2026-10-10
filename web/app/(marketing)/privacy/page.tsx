@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: { absolute: "Privacy · Lagoon" },
   description:
     "What lagoonucsb.com measures, what it shares with Google and Meta, and how to opt out. The Lagoon app itself runs no ad trackers.",
-  alternates: { canonical: "https://lagoonucsb.com/privacy" },
+  alternates: { canonical: "https://www.lagoonucsb.com/privacy" },
   robots: { index: true, follow: true },
 };
 

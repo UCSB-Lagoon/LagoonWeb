@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: { absolute: title },
     description,
     robots: { index: false, follow: false },
-    alternates: { canonical: `https://lagoonucsb.com/w/${week.id}` },
-    openGraph: { type: "website", siteName: "Lagoon", title, description, url: `https://lagoonucsb.com/w/${week.id}` },
+    alternates: { canonical: `https://www.lagoonucsb.com/w/${week.id}` },
+    openGraph: { type: "website", siteName: "Lagoon", title, description, url: `https://www.lagoonucsb.com/w/${week.id}` },
     twitter: { card: "summary_large_image", title, description },
     other: { "apple-itunes-app": `app-id=6760681142, app-argument=https://lagoonucsb.com/w/${week.id}` },
   };

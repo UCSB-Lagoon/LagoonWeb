@@ -1,8 +1,6 @@
 /**
- * Emits a guide's JSON-LD blocks verbatim from the captured originals
- * (content/guides/<slug>.jsonld.json), so structured data is byte-faithful
- * regardless of shape — full Article, lean Article, or FAQPage. The
- * blocks were extracted from the static pages by scripts/migrate-guide.mjs.
+ * Structure pages emit their stored schemas. Guides retain breadcrumbs and
+ * FAQs, but consolidate their legacy Article blocks using live frontmatter.
  */
 export type GuideFrontmatter = {
   title: string;
@@ -29,6 +27,28 @@ export type GuideFrontmatter = {
   related: { href: string; label: string }[];
   relatedCtaText: string;
 };
+
+/** Frontmatter owns the headline and dates; one Article describes each guide. */
+export function guideSchema(blocks: unknown[], fm: GuideFrontmatter): unknown[] {
+  const schemas = blocks as Record<string, unknown>[];
+  const article = schemas.find((s) => s["@type"] === "Article") ?? {};
+  return [
+    ...schemas.filter((s) => s["@type"] !== "Article"),
+    {
+      ...article,
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: fm.title,
+      description: fm.description,
+      datePublished: fm.datePublished,
+      dateModified: fm.dateModified,
+      mainEntityOfPage: `https://www.lagoonucsb.com${fm.canonicalPath}`,
+      image: fm.image,
+      author: { "@type": "Organization", name: fm.author || "Lagoon" },
+      publisher: { "@type": "Organization", name: "Lagoon", url: "https://www.lagoonucsb.com/" },
+    },
+  ];
+}
 
 export function GuideJsonLd({ blocks }: { blocks: unknown[] }) {
   return (

@@ -10,10 +10,10 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "Lagoon — Your UCSB schedule, beautiful in 30 seconds",
     "og:description": "Snap your GOLD schedule, get a gorgeous Today view + widgets, and see who's in your classes. Free, built at UCSB.",
-    "og:url": "https://lagoonucsb.com",
+    "og:url": "https://www.lagoonucsb.com",
     "og:site_name": "Lagoon",
     "og:locale": "en_US",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:image:type": "image/png",
     "og:image:width": "1200",
     "og:image:height": "630",
@@ -22,19 +22,19 @@
     "twitter:card": "summary_large_image",
     "twitter:title": "Lagoon — Your UCSB schedule, beautiful in 30 seconds",
     "twitter:description": "Snap your GOLD schedule, get a gorgeous Today view + widgets, and see who's in your classes. Free, built at UCSB.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "Lagoon — the UCSB campus app"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com",
+    "canonical": "https://www.lagoonucsb.com",
     "alternate": [
       {
         "hreflang": "en",
-        "href": "https://lagoonucsb.com"
+        "href": "https://www.lagoonucsb.com"
       },
       {
         "hreflang": "x-default",
-        "href": "https://lagoonucsb.com"
+        "href": "https://www.lagoonucsb.com"
       }
     ]
   },
@@ -129,7 +129,7 @@
         "Class vibes and course reviews",
         "XP, streaks, and gamification"
       ],
-      "image": "https://lagoonucsb.com/og-card.png",
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
       "installUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
       "isAccessibleForFree": true,
@@ -140,15 +140,13 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "operatingSystem": "iOS 16.0+",
+      "operatingSystem": "iOS 17.0+",
       "publisher": {
         "@type": "Organization",
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com/"
+        "url": "https://www.lagoonucsb.com/"
       },
-      "screenshot": "https://lagoonucsb.com/og-card.png",
-      "softwareVersion": "1.0",
-      "url": "https://lagoonucsb.com/"
+      "url": "https://www.lagoonucsb.com/"
     },
     {
       "@context": "https://schema.org",
@@ -157,12 +155,12 @@
         "@type": "Place",
         "name": "University of California, Santa Barbara"
       },
-      "logo": "https://lagoonucsb.com/logo.svg",
+      "logo": "https://www.lagoonucsb.com/logo.svg",
       "name": "Lagoon",
       "sameAs": [
         "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
       ],
-      "url": "https://lagoonucsb.com/"
+      "url": "https://www.lagoonucsb.com/"
     },
     {
       "@context": "https://schema.org",
@@ -173,7 +171,7 @@
         "@type": "Organization",
         "name": "Lagoon"
       },
-      "url": "https://lagoonucsb.com/"
+      "url": "https://www.lagoonucsb.com/"
     }
   ]
 }

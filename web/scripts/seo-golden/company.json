@@ -6,8 +6,8 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "About Lagoon | Built for Gauchos, by Gauchos",
     "og:description": "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
-    "og:url": "https://lagoonucsb.com/company",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/company",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:image:type": "image/png",
     "og:image:width": "1200",
     "og:image:height": "630",
@@ -16,11 +16,11 @@
     "twitter:card": "summary_large_image",
     "twitter:title": "About Lagoon | Built for Gauchos, by Gauchos",
     "twitter:description": "The story behind Lagoon and why it was built for the real rhythm of student life at UCSB.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "About Lagoon | Built for Gauchos, by Gauchos"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/company"
+    "canonical": "https://www.lagoonucsb.com/company"
   },
   "jsonld": [
     {
@@ -28,7 +28,7 @@
       "@type": "AboutPage",
       "description": "The story behind Lagoon, the student-built UCSB campus app.",
       "name": "About Lagoon",
-      "url": "https://lagoonucsb.com/company"
+      "url": "https://www.lagoonucsb.com/company"
     },
     {
       "@context": "https://schema.org",
@@ -36,13 +36,13 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/company",
+          "item": "https://www.lagoonucsb.com/company",
           "name": "Company",
           "position": 2
         }

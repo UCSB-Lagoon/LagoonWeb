@@ -7,17 +7,17 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "Isla Vista Guide for UCSB Students",
     "og:description": "What Isla Vista feels like, how students use it, and how to settle into life near UCSB.",
-    "og:url": "https://lagoonucsb.com/isla-vista-guide-for-students",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/isla-vista-guide-for-students",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "Isla Vista Guide for UCSB Students",
     "twitter:description": "What Isla Vista feels like, how students use it, and how to settle into life near UCSB.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "Isla Vista Guide for UCSB Students"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/isla-vista-guide-for-students"
+    "canonical": "https://www.lagoonucsb.com/isla-vista-guide-for-students"
   },
   "jsonld": [
     {
@@ -31,31 +31,13 @@
       "datePublished": "2026-04-21",
       "description": "A practical Isla Vista guide for UCSB students covering what IV feels like, how it fits into student life, and how to find your rhythm there.",
       "headline": "Isla Vista Guide for UCSB Students",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/isla-vista-guide-for-students",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/isla-vista-guide-for-students",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/isla-vista-guide-for-students",
+          "item": "https://www.lagoonucsb.com/isla-vista-guide-for-students",
           "name": "Isla Vista Guide for UCSB Students",
           "position": 3
         }

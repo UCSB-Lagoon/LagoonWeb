@@ -7,17 +7,17 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "Best Study Spots at UCSB",
     "og:description": "Find the best study spots at UCSB for quiet, long sessions, and getting real work done.",
-    "og:url": "https://lagoonucsb.com/best-study-spots-at-ucsb",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/best-study-spots-at-ucsb",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "Best Study Spots at UCSB",
     "twitter:description": "Find the best study spots at UCSB for quiet, long sessions, and getting real work done.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "Best Study Spots at UCSB"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/best-study-spots-at-ucsb"
+    "canonical": "https://www.lagoonucsb.com/best-study-spots-at-ucsb"
   },
   "jsonld": [
     {
@@ -31,31 +31,13 @@
       "datePublished": "2026-04-21",
       "description": "A practical guide to the best study spots at UCSB for quiet focus, longer work sessions, and finding a place that matches how you study.",
       "headline": "Best Study Spots at UCSB",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/best-study-spots-at-ucsb",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/best-study-spots-at-ucsb",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/best-study-spots-at-ucsb",
+          "item": "https://www.lagoonucsb.com/best-study-spots-at-ucsb",
           "name": "Best Study Spots at UCSB",
           "position": 3
         }

@@ -1,23 +1,23 @@
 {
-  "title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
+  "title": "UCSB Dining Menus: Today’s Food, Hours & Dining Commons",
   "metas": {
-    "description": "A practical guide to the UCSB dining menu: how students check today's food, compare dining commons, and use Lagoon to see menus faster.",
+    "description": "Check today’s official UCSB dining menus and hours for Carrillo, De La Guerra and Portola. Find direct menu links and keep dining with your schedule in Lagoon.",
     "author": "Lagoon",
     "robots": "index, follow",
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
-    "og:title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
-    "og:description": "How Gauchos actually check dining menus, compare halls, and decide where to eat without wasting a walk.",
-    "og:url": "https://lagoonucsb.com/ucsb-dining-menu",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:title": "UCSB Dining Menus: Today’s Food, Hours & Dining Commons",
+    "og:description": "Direct links to today’s UCSB dining menus, daily hours and nutrition information.",
+    "og:url": "https://www.lagoonucsb.com/ucsb-dining-menu",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
-    "twitter:title": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
-    "twitter:description": "How Gauchos actually check dining menus, compare halls, and decide where to eat without wasting a walk.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
-    "twitter:image:alt": "UCSB Dining Menu Guide: How Students Check What's Worth Eating"
+    "twitter:title": "UCSB Dining Menus: Today’s Food, Hours & Dining Commons",
+    "twitter:description": "Direct links to today’s UCSB dining menus, daily hours and nutrition information.",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
+    "twitter:image:alt": "UCSB Dining Menus: Today’s Food, Hours & Dining Commons"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/ucsb-dining-menu"
+    "canonical": "https://www.lagoonucsb.com/ucsb-dining-menu"
   },
   "jsonld": [
     {
@@ -27,35 +27,17 @@
         "@type": "Organization",
         "name": "Lagoon"
       },
-      "dateModified": "2026-04-28",
+      "dateModified": "2026-10-09",
       "datePublished": "2026-04-21",
-      "description": "A practical guide to the UCSB dining menu: how students check today's food, compare dining commons, and use Lagoon to see menus faster.",
-      "headline": "UCSB Dining Menu Guide: How Students Check What's Worth Eating",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "description": "Check today’s official UCSB dining menus and hours for Carrillo, De La Guerra and Portola. Find direct menu links and keep dining with your schedule in Lagoon.",
+      "headline": "UCSB Dining Menus: Today’s Food, Hours & Dining Commons",
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-dining-menu",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/ucsb-dining-menu",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/ucsb-dining-menu",
+          "item": "https://www.lagoonucsb.com/ucsb-dining-menu",
           "name": "UCSB Dining Menu Guide",
           "position": 3
         }

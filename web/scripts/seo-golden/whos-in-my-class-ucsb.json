@@ -7,17 +7,17 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "Who's in My Class at UCSB? How to See Classmates Early",
     "og:description": "GOLD won't tell you. Here's how UCSB students find out who shares their classes before the quarter starts.",
-    "og:url": "https://lagoonucsb.com/whos-in-my-class-ucsb",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/whos-in-my-class-ucsb",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "Who's in My Class at UCSB? How to See Classmates Early",
     "twitter:description": "GOLD won't tell you. Here's how UCSB students find out who shares their classes before the quarter starts.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "Who's in My Class at UCSB? How to See Classmates Early"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/whos-in-my-class-ucsb"
+    "canonical": "https://www.lagoonucsb.com/whos-in-my-class-ucsb"
   },
   "jsonld": [
     {
@@ -29,33 +29,15 @@
       },
       "dateModified": "2026-07-03",
       "datePublished": "2026-07-03",
-      "description": "GOLD won't show you who's in your UCSB classes. How students actually find classmates before week one — group chats, Discords, and Lagoon's classmate discovery.",
+      "description": "GOLD won't show you who's in your UCSB classes. Here's how students actually find classmates before week one — group chats, Discords, and Lagoon's classmate discovery.",
       "headline": "Who's in My Class at UCSB? How to See Classmates Early",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/whos-in-my-class-ucsb",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/whos-in-my-class-ucsb",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-07-03",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/whos-in-my-class-ucsb",
+          "item": "https://www.lagoonucsb.com/whos-in-my-class-ucsb",
           "name": "Who's in My Class",
           "position": 3
         }

@@ -16,17 +16,17 @@ export const metadata: Metadata = {
   description:
     "Import your GOLD schedule in about 30 seconds and Lagoon shows you which friends — and how many Gauchos — share every class.",
   robots: { index: false, follow: true },
-  alternates: { canonical: "https://lagoonucsb.com/schedule" },
+  alternates: { canonical: "https://www.lagoonucsb.com/schedule" },
   openGraph: {
     type: "website",
     siteName: "Lagoon",
     title: "See who's in your UCSB classes",
     description:
       "Import your GOLD schedule in ~30 seconds and see which friends share your classes. Free, built at UCSB.",
-    url: "https://lagoonucsb.com/schedule",
+    url: "https://www.lagoonucsb.com/schedule",
     images: [
       {
-        url: "https://lagoonucsb.com/og-card.png",
+        url: "https://www.lagoonucsb.com/og-card.png",
         type: "image/png",
         width: 1200,
         height: 630,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     description:
       "Import your GOLD schedule in ~30 seconds and see which friends share your classes. Free, built at UCSB.",
     images: [
-      { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
+      { url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
     ],
   },
 };

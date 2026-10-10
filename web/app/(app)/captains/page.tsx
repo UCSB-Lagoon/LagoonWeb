@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     title: "Lagoon Captains — launch the UCSB campus app with us",
     description:
       "20 captains. Free hoodie, paid quarterly dinners, $50 Apple gift cards for top referrers, and a direct line to the founders.",
-    url: "https://lagoonucsb.com/captains",
+    url: "https://www.lagoonucsb.com/captains",
     images: ["/og-card.png"],
   },
   twitter: {

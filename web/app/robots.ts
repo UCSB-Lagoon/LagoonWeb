@@ -7,8 +7,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: ["GPTBot", "Google-Extended", "CCBot", "Bytespider", "omgili", "omgilibot"], disallow: "/" },
 
       // Allow standard search + AI search/retrieval.
-      { userAgent: ["Googlebot", "Bingbot", "facebookexternalhit", "Twitterbot"], allow: "/" },
-      { userAgent: ["ClaudeBot", "anthropic-ai", "PerplexityBot", "YouBot"], allow: "/" },
+      // Search and retrieval crawlers use the default public-page rules.
+      // Specific allow-all groups would override the exclusions below.
 
       // Default: allow public pages, block authenticated/private surfaces.
       {
@@ -17,10 +17,10 @@ export default function robots(): MetadataRoute.Robots {
         // /lab is the design lab. It already 404s in production and carries
         // noindex, and app/sitemap.ts is an allowlist that omits it — this is
         // the third guard, not the only one.
-        disallow: ["/api/", "/auth/", "/me", "/login", "/lab"],
+        disallow: ["/api/", "/auth/", "/admin", "/me", "/login", "/lab"],
       },
     ],
-    sitemap: "https://lagoonucsb.com/sitemap.xml",
-    host: "https://lagoonucsb.com",
+    sitemap: "https://www.lagoonucsb.com/sitemap.xml",
+    host: "https://www.lagoonucsb.com",
   };
 }

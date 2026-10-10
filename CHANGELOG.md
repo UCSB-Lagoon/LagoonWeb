@@ -1,5 +1,15 @@
 # Lagoon Web — Changelog
 
+## [2026-10-09] — Clearer download pitch and consistent SEO
+
+- Aligned public canonical, sitemap, social and structured-data URLs with the existing `www.lagoonucsb.com` production redirect. Auth callbacks and app-opening arguments retain their existing destinations.
+- Search crawlers now inherit public-path exclusions, including `/admin`, instead of an allow-all override.
+- Guide frontmatter supplies one Article schema and matching visible/sitemap update dates. Homepage app schema reflects iOS 17+ and omits the stale version and illustrative screenshot claim.
+- Homepage explains screenshot import immediately, adds a sourced App Store review and a desktop QR handoff, and tightens mobile spacing. Existing illustrations remain until the app redesign ships.
+- Dining now leads with direct official daily menus, dining commons filters, hours and nutrition links. Schedule help leads with import steps and explains re-importing after registration changes.
+- QR `src` parameters carry through to App Store campaign tokens. Review links do not count as download conversions; external referrer host matching no longer mistakes lookalike domains for Lagoon.
+- Fixed populated Campus hub cards overflowing narrow screens and low-contrast article/related-guide links in light mode. Added regression coverage for SEO consistency, campaign sources, review-click measurement and dining-page contrast.
+
 ## [2026-10-08] — Chapter and event links show the chapter
 
 ### Added

@@ -7,17 +7,17 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
     "og:description": "Learn where UCSB students find events, what gets lost across channels, and how Lagoon helps keep campus life in one place.",
-    "og:url": "https://lagoonucsb.com/ucsb-campus-events-guide",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/ucsb-campus-events-guide",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
     "twitter:description": "Learn where UCSB students find events, what gets lost across channels, and how Lagoon helps keep campus life in one place.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "UCSB Campus Events Guide: How Students Actually Find Things to Do"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/ucsb-campus-events-guide"
+    "canonical": "https://www.lagoonucsb.com/ucsb-campus-events-guide"
   },
   "jsonld": [
     {
@@ -29,33 +29,15 @@
       },
       "dateModified": "2026-04-28",
       "datePublished": "2026-04-21",
-      "description": "A practical UCSB campus events guide covering where events get posted, why students miss them, and how Lagoon helps.",
+      "description": "A practical UCSB campus events guide covering where events get posted, why students miss good ones, and how Lagoon helps keep campus life in one place.",
       "headline": "UCSB Campus Events Guide: How Students Actually Find Things to Do",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-campus-events-guide",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/ucsb-campus-events-guide",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-05-14",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/ucsb-campus-events-guide",
+          "item": "https://www.lagoonucsb.com/ucsb-campus-events-guide",
           "name": "UCSB Campus Events Guide",
           "position": 3
         }

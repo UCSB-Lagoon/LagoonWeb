@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description:
     "Your GOLD schedule, beautiful in 30 seconds. Free for UCSB students.",
   robots: { index: false, follow: true },
-  alternates: { canonical: "https://lagoonucsb.com/go" },
+  alternates: { canonical: "https://www.lagoonucsb.com/go" },
 };
 
 export default function GoPage() {

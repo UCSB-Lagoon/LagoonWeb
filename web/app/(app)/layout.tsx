@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "UCSB Lagoon — Live campus map, leaderboards & stats",
     description:
       "Interactive UCSB campus map with friends nearby, weekly leaderboards, and live stats from the Lagoon iOS app.",
-    url: "https://lagoonucsb.com",
+    url: "https://www.lagoonucsb.com",
     images: ["/og-card.png"],
   },
   twitter: {

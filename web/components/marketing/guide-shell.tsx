@@ -39,7 +39,7 @@ export function GuideShell({
           </div>
           <p className="eyebrow">{fm.eyebrow}</p>
           <h1>{fm.h1}</h1>
-          <p className="updated-stamp">{fm.updatedStamp}</p>
+          <p className="updated-stamp">Updated: <time dateTime={fm.dateModified}>{new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(fm.dateModified))}</time></p>
           <p>{fm.intro}</p>
         </div>
       </section>

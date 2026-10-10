@@ -15,7 +15,7 @@ export async function generateMetadata(
   { params }: { params: Promise<{ friendId: string }> }
 ): Promise<Metadata> {
   const { friendId } = await params;
-  const url = `https://lagoonucsb.com/compare/${encodeURIComponent(friendId)}`;
+  const url = `https://www.lagoonucsb.com/compare/${encodeURIComponent(friendId)}`;
   const title = "A Gaucho wants to compare schedules — Lagoon";
   const description =
     "Get Lagoon, import your GOLD schedule in about 30 seconds, and see how many classes you share.";
@@ -32,7 +32,7 @@ export async function generateMetadata(
       url,
       images: [
         {
-          url: "https://lagoonucsb.com/og-card.png",
+          url: "https://www.lagoonucsb.com/og-card.png",
           type: "image/png",
           width: 1200,
           height: 630,
@@ -45,7 +45,7 @@ export async function generateMetadata(
       title: "Want to compare schedules?",
       description,
       images: [
-        { url: "https://lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
+        { url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" },
       ],
     },
   };

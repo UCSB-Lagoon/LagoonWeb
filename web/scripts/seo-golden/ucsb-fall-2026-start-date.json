@@ -7,17 +7,17 @@
     "apple-itunes-app": "app-id=6760681142, app-argument=https://lagoonucsb.com/",
     "og:title": "When Does UCSB Start? Fall Quarter 2026 Dates, Explained",
     "og:description": "Fall Quarter 2026 begins September 20 and classes start Thursday, September 24. Every key date, plus how to be ready before your first lecture.",
-    "og:url": "https://lagoonucsb.com/ucsb-fall-2026-start-date",
-    "og:image": "https://lagoonucsb.com/og-card.png",
+    "og:url": "https://www.lagoonucsb.com/ucsb-fall-2026-start-date",
+    "og:image": "https://www.lagoonucsb.com/og-card.png",
     "og:type": "article",
     "twitter:card": "summary_large_image",
     "twitter:title": "When Does UCSB Start? Fall Quarter 2026 Dates, Explained",
     "twitter:description": "Fall Quarter 2026 begins September 20 and classes start Thursday, September 24. Every key date, plus how to be ready before your first lecture.",
-    "twitter:image": "https://lagoonucsb.com/og-card.png",
+    "twitter:image": "https://www.lagoonucsb.com/og-card.png",
     "twitter:image:alt": "When Does UCSB Start? Fall Quarter 2026 Dates, Explained"
   },
   "links": {
-    "canonical": "https://lagoonucsb.com/ucsb-fall-2026-start-date"
+    "canonical": "https://www.lagoonucsb.com/ucsb-fall-2026-start-date"
   },
   "jsonld": [
     {
@@ -31,31 +31,13 @@
       "datePublished": "2026-07-03",
       "description": "UCSB Fall Quarter 2026 begins Sunday, September 20, and instruction starts Thursday, September 24. Key dates, finals week, and what to do before day one.",
       "headline": "When Does UCSB Start? Fall Quarter 2026 Dates, Explained",
-      "image": {
-        "@type": "ImageObject",
-        "height": 630,
-        "url": "https://lagoonucsb.com/og-card.png",
-        "width": 1200
-      },
+      "image": "https://www.lagoonucsb.com/og-card.png",
       "inLanguage": "en-US",
-      "mainEntityOfPage": "https://lagoonucsb.com/ucsb-fall-2026-start-date",
+      "mainEntityOfPage": "https://www.lagoonucsb.com/ucsb-fall-2026-start-date",
       "publisher": {
         "@type": "Organization",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://lagoonucsb.com/logo.svg"
-        },
         "name": "Lagoon",
-        "url": "https://lagoonucsb.com"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "dateModified": "2026-07-03",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "url": "https://www.lagoonucsb.com/"
       }
     },
     {
@@ -64,19 +46,19 @@
       "itemListElement": [
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/",
+          "item": "https://www.lagoonucsb.com/",
           "name": "Home",
           "position": 1
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/guides",
+          "item": "https://www.lagoonucsb.com/guides",
           "name": "Guides",
           "position": 2
         },
         {
           "@type": "ListItem",
-          "item": "https://lagoonucsb.com/ucsb-fall-2026-start-date",
+          "item": "https://www.lagoonucsb.com/ucsb-fall-2026-start-date",
           "name": "UCSB Fall 2026 Start Date",
           "position": 3
         }

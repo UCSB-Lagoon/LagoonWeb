@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { MARKETING_SLUGS } from "@/lib/marketing-slugs";
 import { getGuideIndex } from "@/lib/guide-index";
 
-const BASE = "https://lagoonucsb.com";
+const BASE = "https://www.lagoonucsb.com";
 
 type Entry = {
   path: string;

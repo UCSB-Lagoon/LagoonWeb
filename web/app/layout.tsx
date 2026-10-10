@@ -14,7 +14,7 @@ import "./globals.css";
  * Only metadataBase is global (so relative canonical/OG URLs resolve).
  */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lagoonucsb.com"),
+  metadataBase: new URL("https://www.lagoonucsb.com"),
 };
 
 /**
