@@ -31,8 +31,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: { absolute: title },
     description,
-    alternates: { canonical: "https://lagoonucsb.com/cup" },
-    openGraph: { type: "website", siteName: "Lagoon", title, description, url: "https://lagoonucsb.com/cup" },
+    alternates: { canonical: "https://www.lagoonucsb.com/cup" },
+    openGraph: { type: "website", siteName: "Lagoon", title, description, url: "https://www.lagoonucsb.com/cup" },
     twitter: { card: "summary_large_image", title, description },
   };
 }
