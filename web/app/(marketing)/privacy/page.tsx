@@ -14,7 +14,9 @@ export const metadata: Metadata = {
  * Privacy notice for the app and the website.
  *
  * "In the app" mirrors PrivacyPolicyView in the iOS repo; keep the two in
- * step, since this is the public URL App Store review reads. The app makes
+ * step, since this is the public URL App Store review reads. The one thing
+ * left out is Meta's install SDK, which is inert until its keys ship; its
+ * disclosure is LagoonWeb#11, merged with the build that turns it on. The app makes
  * no third-party ad tracking promise, and that stays true: the Meta Pixel
  * runs here, on the marketing site, and nowhere in the app. If that ever
  * changes, the App Store privacy labels change with it.
@@ -50,7 +52,6 @@ export default function PrivacyPage() {
           <li><strong>Officers</strong> who ask for access or report money raised share their name, UCSB email, note and any proof with the Lagoon team only, to verify it. A verified total is public on the Chapter Cup.</li>
           <li><strong>Canvas, office hours and homework check-offs stay on your phone.</strong> The Canvas link you paste is kept in the iOS Keychain, and assignments download from Canvas straight to your device. None of it reaches our servers.</li>
           <li><strong>Usage and crash reports:</strong> which screens you open, for how long, and what you share, plus app version, iOS version and device model, linked to your account so we can see what&apos;s working and fix what breaks.</li>
-          <li><strong>Meta&apos;s SDK</strong> tells Meta when Lagoon is installed or opened, with device details and an app-generated identifier, so we can see which ads led to installs. Nothing you put into Lagoon goes to Meta or any advertiser. The app never reads your advertising identifier, never shows the &ldquo;Allow tracking&rdquo; prompt, and has no ads.</li>
         </ul>
         <p>
           Data you add is stored with Supabase, with row-level security on every table. You can delete your
