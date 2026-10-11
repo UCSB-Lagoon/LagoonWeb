@@ -1,5 +1,15 @@
 # Lagoon Web — Changelog
 
+## [2026-10-10] — /privacy covers the app
+
+- **/privacy has an "In the app" section** mirroring the in-app policy
+  (`PrivacyPolicyView`, iOS 1.22.0 build 34): what's stored and exactly who
+  sees it for schedules, friends, chapters, your hall, "I'm going", UCSB-email
+  verification and officer reports; that Canvas, office hours and homework stay
+  on the phone; usage and crash reports; Meta's install SDK; account deletion.
+  Before this, the page covered only the website, though it's the public
+  policy URL App Store review reads. Keep the two in step.
+
 ## [2026-10-10] — The Chapter Cup on the web
 
 ### Added
