@@ -6,7 +6,7 @@ import { councilShort, fetchPublicCup, formatCup, standings, type CupBoard } fro
 
 /**
  * /cup — the Chapter Cup (iOS migration 093). Chapters ranked by what they
- * do: verified members on Lagoon, RSVPs to their reviewed events, and money
+ * do: members on Lagoon, RSVPs to their reviewed events, and money
  * raised that Lagoon verified. No votes, no reviews. This is where a member's
  * "we're #2" share lands.
  */
@@ -16,7 +16,7 @@ type Params = { searchParams: Promise<{ board?: string; r?: string; s?: string; 
 export const dynamic = "force-dynamic";
 
 const BOARDS: { id: CupBoard; title: string; unit: string }[] = [
-  { id: "members", title: "Members", unit: "verified members on Lagoon" },
+  { id: "members", title: "Members", unit: "members on Lagoon" },
   { id: "turnout", title: "Turnout", unit: "RSVPs to its events this season" },
   { id: "raised", title: "Raised", unit: "raised for its philanthropy this season" },
 ];
@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const leader = standings(cup, "members")[0];
   const title = `Chapter Cup${cup.season ? ` · ${cup.season.name}` : ""} · Lagoon`;
   const description = leader
-    ? `${leader.row.letters ?? leader.row.name} leads with ${leader.value} verified members. UCSB chapters ranked by what they do, never by what anyone says about them.`
+    ? `${leader.row.letters ?? leader.row.name} leads with ${leader.value} members on Lagoon. UCSB chapters ranked by what they do, never by what anyone says about them.`
     : "UCSB chapters ranked by what they do: members on Lagoon, turnout at their events, and money raised. No votes, no reviews.";
   return {
     title: { absolute: title },
@@ -75,7 +75,7 @@ export default async function CupPage({ searchParams }: Params) {
       {rows.length === 0 ? (
         <p className="mt-8 text-base text-ink-500">
           {board === "members"
-            ? "No chapter is on the board yet. A chapter joins at five verified members on Lagoon."
+            ? "No chapter is on the board yet. A chapter joins at five members on Lagoon."
             : "Nothing on this board yet this season."}
         </p>
       ) : (
@@ -101,13 +101,13 @@ export default async function CupPage({ searchParams }: Params) {
         kind="cup"
         appPath="cup"
         label="Count for your chapter — get Lagoon free"
-        note="Join your chapter on Lagoon with your UCSB email and you count toward its members."
+        note="Join your chapter on Lagoon and you count toward its members."
       />
 
       <section className="mt-12 text-sm text-ink-500 space-y-2">
         <h2 className="text-xs font-black tracking-[0.14em] uppercase text-ink-500">How it&apos;s counted</h2>
         <p>
-          Members are Lagoon accounts with a UCSB email that say they&apos;re in the chapter, shown from five. Turnout counts
+          Members are Lagoon accounts that say they&apos;re in the chapter, shown from five. Turnout counts
           RSVPs to the chapter&apos;s events, each reviewed by Lagoon. Raised counts amounts an officer reported and Lagoon
           verified. There are no votes, no reviews and no comments.
         </p>

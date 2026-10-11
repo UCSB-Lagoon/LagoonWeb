@@ -27,7 +27,7 @@ export default async function Image() {
         <div style={{ marginTop: 18, fontSize: 72, fontWeight: 800, letterSpacing: -2 }}>Who&apos;s showing up</div>
         <div style={{ display: "flex", flexDirection: "column", marginTop: 26 }}>
           {top.length === 0 ? (
-            <div style={{ fontSize: 32, color: MUTED }}>The board opens at five verified members.</div>
+            <div style={{ fontSize: 32, color: MUTED }}>The board opens at five members.</div>
           ) : (
             top.map(({ rank, row, value }) => (
               <div key={row.slug} style={{ display: "flex", alignItems: "center", fontSize: 34, marginBottom: 6 }}>
