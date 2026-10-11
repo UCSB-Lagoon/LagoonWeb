@@ -95,7 +95,7 @@ export default async function CupPage({ searchParams }: Params) {
           ))}
         </ol>
       )}
-      <p className="mt-3 text-xs text-ink-400">Each number: {meta.unit}.</p>
+      {rows.length > 0 && <p className="mt-3 text-xs text-ink-400">Each number: {meta.unit}.</p>}
 
       <ShareCTA
         kind="cup"
