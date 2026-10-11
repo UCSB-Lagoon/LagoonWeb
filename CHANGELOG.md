@@ -20,6 +20,12 @@
   a universal link would open the app to nothing; the page opens the app
   through the scheme instead. Claim it once 1.22 is most of the installs.
 
+### Added (Codex's, restored)
+- **/stats link preview** (`/stats/opengraph-image`): the live Gaucho count and
+  the cumulative sign-up climb, replacing the generic `og-card.png`. It reads
+  the same public aggregate as the page, shows "Check back soon" rather than
+  a made-up number when the query fails, and refreshes every 30 seconds.
+
 ### Fixed
 - The `/stats` empty state ("Numbers are taking a breather") had no `<h1>`, so
   `e2e/navigation.spec.ts` failed on CI, where the placeholder database always
