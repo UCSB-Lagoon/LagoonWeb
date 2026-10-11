@@ -44,6 +44,7 @@ const ALLOW = [
   ["app/(app)/w/[id]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
   ["app/(app)/org/[slug]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
   ["app/(app)/event/[id]/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
+  ["app/(app)/cup/opengraph-image.tsx", "next/og renders with Satori, which can't resolve CSS custom properties"],
 ];
 /** Metadata keys that take a literal colour by spec. */
 const ALLOWED_KEYS = /themeColor|theme_color|background_color/;

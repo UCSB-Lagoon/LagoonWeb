@@ -1,5 +1,39 @@
 # Lagoon Web — Changelog
 
+## [2026-10-10] — The Chapter Cup on the web
+
+### Added
+- **/cup: the Chapter Cup** (iOS repo, migration 093, `public_chapter_cup`).
+  UCSB chapters ranked on three boards, each from something counted rather
+  than said: verified members on Lagoon (shown from five), RSVPs to their
+  reviewed events this season, and money raised that Lagoon verified. Ties
+  share a rank. No votes, reviews or comments. A member's "where we stand"
+  share from the app lands here, and the CTA opens `lagoon://cup`.
+- Its link preview: the top five on the members board, number one on gold.
+- **/admin/orgs: "Money raised to verify."** Officers report an amount, note and
+  optional proof in the app; it counts on the Raised board only after
+  Verify here (`admin_org_raised_queue`, `admin_org_raised_review`). Each new
+  report also posts to Discord through `org-notify`.
+
+### Not changed, on purpose
+- The AASA does **not** claim `/cup`. Builds before 33 have no route for it, so
+  a universal link would open the app to nothing; the page opens the app
+  through the scheme instead. Claim it once 1.22 is most of the installs.
+
+### Added (Codex's, restored)
+- **/stats link preview** (`/stats/opengraph-image`): the live Gaucho count and
+  the cumulative sign-up climb, replacing the generic `og-card.png`. It reads
+  the same public aggregate as the page, shows "Check back soon" rather than
+  a made-up number when the query fails, and refreshes every 30 seconds.
+
+### Fixed
+- The `/stats` empty state ("Numbers are taking a breather") had no `<h1>`, so
+  `e2e/navigation.spec.ts` failed on CI, where the placeholder database always
+  serves the empty state. It's the page's heading now.
+- `/cup`'s preview has no params, so Next prerendered it at build time, where
+  CI has no database; it renders per request like the page, and a failed read
+  shows the empty board instead of throwing.
+
 ## [2026-10-09] — Public course explorer
 
 - Added `/courses`: no-login UCSB course-code search, department filters, and paginated course summaries. Added navigation, footer, homepage, and grade-guide entry points.

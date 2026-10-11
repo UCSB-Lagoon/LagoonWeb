@@ -23,6 +23,10 @@ type Report = {
   id: string; org_id: string; org_name: string; org_status: string;
   reason: string; note: string | null; created_at: string; reporter_email: string | null;
 };
+type Raised = {
+  id: string; org_name: string; org_letters: string | null; amount_cents: number; note: string;
+  proof_url: string | null; raised_on: string; created_at: string; reported_by: string | null;
+};
 type Queue = { claims: Claim[]; officers: Officer[]; reports: Report[] };
 
 /**
@@ -48,6 +52,8 @@ export default async function AdminOrgsPage() {
   const admin = createAdminClient();
   const { data, error } = await admin.rpc("admin_org_queue" as never);
   const queue = (data as Queue | null) ?? { claims: [], officers: [], reports: [] };
+  const { data: raisedData } = await admin.rpc("admin_org_raised_queue" as never);
+  const raised = (raisedData as Raised[] | null) ?? [];
   const endpoint = "/api/admin/orgs";
 
   return (
@@ -135,6 +141,43 @@ export default async function AdminOrgsPage() {
                   )}
                   <RpcActionButton endpoint={endpoint} icon={CheckCheck} label="Resolve"
                     body={{ action: "resolve_report", report_id: r.id }} />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section>
+        <h2 className="font-display text-xl font-bold text-ink-900 mb-1">Money raised to verify</h2>
+        <p className="text-sm text-ink-500 mb-3">
+          Officers report philanthropy totals for the Chapter Cup. Check the proof link (or the chapter&apos;s
+          fundraiser page) before verifying: only verified amounts count.
+        </p>
+        {raised.length === 0 ? (
+          <div className="card p-8 text-center text-ink-500">Nothing waiting.</div>
+        ) : (
+          <ul className="space-y-3">
+            {raised.map((r) => (
+              <li key={r.id} className="card p-5 flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">{r.org_letters} {r.org_name}</p>
+                  <h3 className="font-display font-bold text-lg text-ink-900">
+                    {(r.amount_cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" })}
+                  </h3>
+                  <p className="text-sm text-ink-700">{r.note} · raised {r.raised_on} · by {r.reported_by ?? "?"}</p>
+                  {r.proof_url ? (
+                    <a className="text-sm underline" href={r.proof_url} target="_blank" rel="noreferrer">Proof</a>
+                  ) : (
+                    <p className="text-sm text-ink-400">No proof link</p>
+                  )}
+                </div>
+                <div className="flex gap-1.5">
+                  <RpcActionButton endpoint={endpoint} tone="good" icon={Check} label="Verify"
+                    body={{ action: "raised", report_id: r.id, verify: true }} />
+                  <RpcActionButton endpoint={endpoint} tone="bad" icon={X} label="Don't count"
+                    confirm="Leave this amount out of the Cup?"
+                    body={{ action: "raised", report_id: r.id, verify: false }} />
                 </div>
               </li>
             ))}

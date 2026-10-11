@@ -6,6 +6,7 @@ import { callAdminRpc, requireAdmin, UUID_RE } from "@/lib/admin-rpc";
  *   { action: "officer", org_id, user_id, status: approved|rejected|revoked }
  *   { action: "org_status", org_id, status: unclaimed|claimed|hidden }
  *   { action: "resolve_report", report_id }
+ *   { action: "raised", report_id, verify: boolean }   (Chapter Cup, migration 093)
  */
 export async function POST(req: Request) {
   const denied = await requireAdmin();
@@ -27,6 +28,11 @@ export async function POST(req: Request) {
       const org = id("org_id");
       if (!org || !["unclaimed", "claimed", "hidden"].includes(body.status as string)) break;
       return callAdminRpc("admin_org_set_status", { p_org: org, p_status: body.status });
+    }
+    case "raised": {
+      const report = id("report_id");
+      if (!report || typeof body.verify !== "boolean") break;
+      return callAdminRpc("admin_org_raised_review", { p_id: report, p_verify: body.verify });
     }
     case "resolve_report": {
       const report = id("report_id");

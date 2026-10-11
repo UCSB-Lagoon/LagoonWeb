@@ -177,3 +177,62 @@ export const goingLine = (e: Pick<PublicOrgEvent, "rsvp_count" | "capacity">) =>
   const going = `${e.rsvp_count} going`;
   return e.capacity ? `${going} · ${e.capacity} spots` : going;
 };
+
+// ── Chapter Cup (iOS migration 093, `public_chapter_cup`) ─────────────────
+
+export type CupRow = {
+  slug: string;
+  name: string;
+  letters: string | null;
+  council: PublicOrg["council"];
+  /** Verified members on Lagoon; null below five. */
+  members: number | null;
+  turnout: number;
+  raised_cents: number;
+};
+export type PublicCup = { season: { name: string; starts_on: string } | null; rows: CupRow[] };
+export type CupBoard = "members" | "turnout" | "raised";
+
+const DEMO_CUP: PublicCup = {
+  season: { name: "Fall 2026", starts_on: "2026-09-24" },
+  rows: [
+    { slug: "alpha-chi-omega", name: "Alpha Chi Omega", letters: "ΑΧΩ", council: "panhellenic", members: 96, turnout: 158, raised_cents: 893500 },
+    { slug: "delta-gamma", name: "Delta Gamma", letters: "ΔΓ", council: "panhellenic", members: 81, turnout: 140, raised_cents: 0 },
+    { slug: "kappa-sigma", name: "Kappa Sigma", letters: "ΚΣ", council: "ifc", members: 74, turnout: 212, raised_cents: 412000 },
+    { slug: "sigma-chi", name: "Sigma Chi", letters: "ΣΧ", council: "ifc", members: 52, turnout: 96, raised_cents: 215000 },
+    { slug: "alpha-kappa-psi", name: "Alpha Kappa Psi", letters: "ΑΚΨ", council: "pfc", members: 38, turnout: 75, raised_cents: 0 },
+    { slug: "lambda-theta-alpha", name: "Lambda Theta Alpha", letters: "ΛΘΑ", council: "usfc", members: 12, turnout: 41, raised_cents: 60000 },
+  ],
+};
+
+export async function fetchPublicCup(demo = false): Promise<PublicCup> {
+  if (DEV && demo) return DEMO_CUP;
+  try {
+    const { data, error } = await anon().rpc("public_chapter_cup");
+    if (error) throw error;
+    return (data as PublicCup | null) ?? { season: null, rows: [] };
+  } catch (error) {
+    console.warn("[cup] public_chapter_cup failed", error instanceof Error ? error.message : error);
+    return { season: null, rows: [] };
+  }
+}
+
+export function standings(cup: PublicCup, board: CupBoard): { rank: number; row: CupRow; value: number }[] {
+  const value = (r: CupRow) => (board === "members" ? r.members : board === "turnout" ? r.turnout || null : r.raised_cents || null);
+  const scored = cup.rows
+    .map((row) => ({ row, value: value(row) }))
+    .filter((x): x is { row: CupRow; value: number } => x.value !== null && x.value > 0)
+    .sort((a, b) => (b.value - a.value) || a.row.name.localeCompare(b.row.name));
+  const out: { rank: number; row: CupRow; value: number }[] = [];
+  scored.forEach((x, i) => {
+    const rank = i > 0 && scored[i - 1].value === x.value ? out[i - 1].rank : i + 1;
+    out.push({ rank, ...x });
+  });
+  return out;
+}
+
+export function formatCup(value: number, board: CupBoard): string {
+  if (board !== "raised") return String(value);
+  const dollars = value / 100;
+  return dollars >= 1000 ? `$${(dollars / 1000).toFixed(dollars >= 10000 ? 0 : 1)}k` : `$${Math.round(dollars)}`;
+}
