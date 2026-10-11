@@ -1,5 +1,13 @@
 # Lagoon Web — Changelog
 
+## [2026-10-10] — No UCSB-email verification
+
+- The app dropped its "Verify you're a Gaucho" step before release (iOS
+  migration 095, 1.22.0 build 35). Hall names are mutual opt-in, and the Chapter
+  Cup counts every member. `/cup` (the page, its unit line, its metadata, its
+  share note and its preview's empty state) and `/privacy` (the chapter count,
+  the hall, and the removed verification bullet) say so.
+
 ## [2026-10-10] — /privacy covers the app
 
 - **/privacy has an "In the app" section** mirroring the in-app policy

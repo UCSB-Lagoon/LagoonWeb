@@ -185,7 +185,7 @@ export type CupRow = {
   name: string;
   letters: string | null;
   council: PublicOrg["council"];
-  /** Verified members on Lagoon; null below five. */
+  /** Members on Lagoon; null below five. */
   members: number | null;
   turnout: number;
   raised_cents: number;
