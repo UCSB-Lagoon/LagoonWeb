@@ -1,5 +1,12 @@
 # Lagoon Web — Changelog
 
+## [2026-10-09] — Public course explorer
+
+- Added `/courses`: no-login UCSB course-code search, department filters, and paginated course summaries. Added navigation, footer, homepage, and grade-guide entry points.
+- Added shareable course pages with instructor/quarter filters, weighted grade metrics, accessible distributions, quarterly history, related courses, and a contextual app download link.
+- Added a verified, compressed Daily Nexus snapshot, explicit unavailable/404/non-letter states, canonical and social metadata, breadcrumbs, a course sitemap, and course engagement events. Source verification found duplicate imports and stale coverage in the existing app database; the website uses the original source without modifying that database.
+- Added populated offline integration tests, rendered contrast coverage, and CI enforcement. Full design, data, SEO, analytics, and maintenance documentation: `docs/course-explorer.md`.
+
 ## [2026-10-09] — Clearer download pitch and consistent SEO
 
 - Aligned public canonical, sitemap, social and structured-data URLs with the existing `www.lagoonucsb.com` production redirect. Auth callbacks and app-opening arguments retain their existing destinations.

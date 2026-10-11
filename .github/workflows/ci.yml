@@ -90,6 +90,9 @@ jobs:
         continue-on-error: true
         run: npm run test:visual
 
+      - name: Course explorer (populated offline data)
+        run: npm run test:courses
+
       # The Linux baselines the step above needs, produced by the step above:
       # Playwright writes a missing snapshot to disk and then fails the test,
       # so a red first run still leaves the files here. The artifact carries
