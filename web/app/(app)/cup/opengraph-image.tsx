@@ -7,7 +7,9 @@ import { fetchPublicCup, formatCup, standings } from "@/lib/orgs-public";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "The Chapter Cup on Lagoon";
-export const revalidate = 300;
+// No params, so Next would prerender it at build time, where there is no
+// database to read. Render per request, like the page.
+export const dynamic = "force-dynamic";
 
 export default async function Image() {
   const cup = await fetchPublicCup();

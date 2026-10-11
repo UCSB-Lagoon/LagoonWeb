@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     title: "Campus by the numbers — Lagoon",
     description: "When UCSB is in class, which classes everyone's taking, and how fast the community is growing. Live and anonymized.",
     url: "https://www.lagoonucsb.com/stats",
-    images: [{ url: "https://www.lagoonucsb.com/stats/opengraph-image", width: 1200, height: 630, alt: "Campus by the numbers — live, anonymized Lagoon community growth" }],
+    images: [{ url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Campus by the numbers — Lagoon",
     description: "When UCSB is in class, which classes everyone's taking, and how fast the community is growing. Live and anonymized.",
-    images: [{ url: "https://www.lagoonucsb.com/stats/opengraph-image", width: 1200, height: 630, alt: "Campus by the numbers — live, anonymized Lagoon community growth" }],
+    images: [{ url: "https://www.lagoonucsb.com/og-card.png", alt: "Lagoon — the UCSB campus app" }],
   },
 };
 
@@ -44,7 +44,7 @@ export default async function StatsPage() {
       <div className="campus-page stx">
         <CampusNav current="/stats" />
         <div className="stx-card">
-          <h2 className="stx-h2">Numbers are taking a breather.</h2>
+          <h1 className="stx-h2">Numbers are taking a breather.</h1>
           <p className="stx-lede">Check back in a minute for the latest campus activity.</p>
         </div>
       </div>

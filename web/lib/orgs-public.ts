@@ -207,12 +207,14 @@ const DEMO_CUP: PublicCup = {
 
 export async function fetchPublicCup(demo = false): Promise<PublicCup> {
   if (DEV && demo) return DEMO_CUP;
-  const { data, error } = await anon().rpc("public_chapter_cup");
-  if (error) {
-    console.warn("[cup] public_chapter_cup failed", error.message);
+  try {
+    const { data, error } = await anon().rpc("public_chapter_cup");
+    if (error) throw error;
+    return (data as PublicCup | null) ?? { season: null, rows: [] };
+  } catch (error) {
+    console.warn("[cup] public_chapter_cup failed", error instanceof Error ? error.message : error);
     return { season: null, rows: [] };
   }
-  return (data as PublicCup | null) ?? { season: null, rows: [] };
 }
 
 export function standings(cup: PublicCup, board: CupBoard): { rank: number; row: CupRow; value: number }[] {
