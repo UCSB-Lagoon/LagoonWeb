@@ -26,7 +26,7 @@ export default function PrivacyPage() {
     <div className="article-shell">
       <header className="page-hero">
         <h1>Privacy</h1>
-        <p>For the Lagoon app and lagoonucsb.com. Last updated 10 October 2026.</p>
+        <p>For the Lagoon app and lagoonucsb.com. Last updated 30 October 2026.</p>
       </header>
 
       <article className="article-card">
@@ -45,6 +45,8 @@ export default function PrivacyPage() {
         <ul>
           <li><strong>Your schedule</strong> is stored on your phone and synced to your account so friends can see shared classes and free time.</li>
           <li><strong>Friends, study groups and messages</strong> are seen by the people in them.</li>
+          <li><strong>Your phone number</strong> (optional) is never shown to anyone. It lets friends who already have your number find you on Lagoon.</li>
+          <li><strong>Your contacts</strong>, if you let Lagoon check them: the phone numbers and email addresses in them are compared with Lagoon accounts to show you who&apos;s here. Lagoon never stores your contacts, and their names never leave your phone. Invites you text go through Messages.</li>
           <li><strong>Chapters.</strong> The chapter you say you&apos;re in is shown only to your friends, and you can hide it from them too. Everyone else sees a member count from five members; that count is public on the <Link href="/cup">Chapter Cup</Link>. Officers see the name and year of people who RSVP to their events.</li>
           <li><strong>Your hall</strong> (optional): the residence hall or apartment you pick. If you show up there, friends who live there see you, and so do other students who live there and show up too. If you don&apos;t, nobody sees your name. The hall&apos;s count appears once three people have joined.</li>
           <li><strong>&ldquo;I&apos;m going&rdquo;</strong> on a campus event: your friends see your first name; everyone else sees only a count, once three people are going.</li>

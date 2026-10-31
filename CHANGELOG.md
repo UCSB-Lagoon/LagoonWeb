@@ -1,5 +1,13 @@
 # Lagoon Web — Changelog
 
+## [2026-10-30] — /privacy covers contacts; "Open it there" keeps attribution
+
+- **/privacy** covers the optional phone number and finding friends from
+  contacts, in step with `PrivacyPolicyView` for iOS 1.25.0 (40), the first
+  build that ships them (iOS migration 098).
+- **ShareCTA's "Already have Lagoon? Open it there"** adds `?s=<kind>` to its
+  `lagoon://` link, so 1.25.0 counts those opens as share launches.
+
 ## [2026-10-10] — No UCSB-email verification
 
 - The app dropped its "Verify you're a Gaucho" step before release (iOS
