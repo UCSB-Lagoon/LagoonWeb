@@ -42,6 +42,15 @@ export async function updateSession(request: NextRequest) {
   // lib/supabase/server.ts would throw before any of them rendered.
   if (!url || !key) return response;
 
+  // No Supabase auth cookie means there is no session to refresh — that is
+  // every crawler and every anonymous visitor, i.e. nearly all traffic.
+  // Skipping the client entirely keeps those requests to a cookie lookup
+  // instead of a `getUser()` round trip. This middleware was ~half of the
+  // team's Fluid Active CPU when the Hobby cap paused deployments (Nov 2026).
+  // Without a session, `user` would be null anyway, so behaviour is unchanged.
+  const hasSession = request.cookies.getAll().some((c) => c.name.startsWith("sb-"));
+  if (!hasSession && !searchParams.has("error")) return response;
+
   const supabase = createServerClient<Database>(
     url,
     key,
@@ -61,7 +70,7 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = hasSession ? (await supabase.auth.getUser()).data.user : null;
 
   // Supabase reports a failed link as ?error=…&error_code=… on the same
   // fallback URL. Already signed in (the usual cause: the link was clicked
