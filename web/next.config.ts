@@ -27,6 +27,16 @@ const config: NextConfig = {
     "/sitemap.xml": ["./content/guides/**/*"],
     "/company": ["./content/company-body.html", "./content/company.jsonld.json"],
   },
+  // Filtered course views (?instructor= / ?quarter=) are the same static page
+  // filtered in the browser, so the page can't emit a per-URL noindex meta.
+  // Mark them noindex at the edge instead: no function runs for this.
+  async headers() {
+    return ["instructor", "quarter"].map((key) => ({
+      source: "/courses/:slug",
+      has: [{ type: "query" as const, key }],
+      headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }],
+    }));
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "*.supabase.co" },
