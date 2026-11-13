@@ -48,10 +48,12 @@ test("course detail includes every source record and filters actual records", as
   await expect(page.locator(".course-stat-strip").getByText("3.09", { exact: true })).toBeVisible();
   await expect(page.locator(".course-stat-strip").getByText("45.5%", { exact: true })).toBeVisible();
   await page.getByLabel("Instructor", { exact: true }).selectOption("GARCIA M");
+  const filtered = page.waitForResponse(res => res.url().includes("instructor=") && res.request().resourceType() === "document");
   await page.getByRole("button", { name: "Apply filters" }).click();
   await expect(page.locator(".course-stat-strip").getByText("3.17", { exact: true })).toBeVisible();
   await expect(page.locator(".course-stat-strip").getByText("66.7%", { exact: true })).toBeVisible();
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  // The page is static (filtered client-side), so noindex comes as a header, not a meta tag.
+  expect((await filtered).headers()["x-robots-tag"]).toMatch(/noindex/);
   await page.getByLabel("Quarter", { exact: true }).selectOption("Fall 2025");
   await page.getByRole("button", { name: "Apply filters" }).click();
   await expect(page.getByText("No records for this combination.")).toBeVisible();
