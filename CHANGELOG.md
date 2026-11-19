@@ -1,5 +1,14 @@
 # Lagoon Web — Changelog
 
+## [2026-11-18] — /privacy covers Secret Santa and the daily settings snapshot
+
+- **/privacy** says what a Secret Santa stores and who sees it (members'
+  first names and last initials by link; only you see who you drew; only
+  the person who drew you reads your wishlist; the organizer sees neither),
+  and that deleting your account removes it. Usage reports now mention the
+  once-a-day settings snapshot. Both are in step with `PrivacyPolicyView` for
+  iOS 1.26.0 (41), the first build that ships them (iOS migration 104).
+
 ## [2026-10-30] — /privacy covers contacts; "Open it there" keeps attribution
 
 - **/privacy** covers the optional phone number and finding friends from

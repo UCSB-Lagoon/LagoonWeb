@@ -26,7 +26,7 @@ export default function PrivacyPage() {
     <div className="article-shell">
       <header className="page-hero">
         <h1>Privacy</h1>
-        <p>For the Lagoon app and lagoonucsb.com. Last updated 30 October 2026.</p>
+        <p>For the Lagoon app and lagoonucsb.com. Last updated 18 November 2026.</p>
       </header>
 
       <article className="article-card">
@@ -50,14 +50,16 @@ export default function PrivacyPage() {
           <li><strong>Chapters.</strong> The chapter you say you&apos;re in is shown only to your friends, and you can hide it from them too. Everyone else sees a member count from five members; that count is public on the <Link href="/cup">Chapter Cup</Link>. Officers see the name and year of people who RSVP to their events.</li>
           <li><strong>Your hall</strong> (optional): the residence hall or apartment you pick. If you show up there, friends who live there see you, and so do other students who live there and show up too. If you don&apos;t, nobody sees your name. The hall&apos;s count appears once three people have joined.</li>
           <li><strong>&ldquo;I&apos;m going&rdquo;</strong> on a campus event: your friends see your first name; everyone else sees only a count, once three people are going.</li>
+          <li><strong>Secret Santa</strong>, if you join one: that you&apos;re in it, and the wishlist you write. Anyone with the exchange&apos;s link sees its name and members&apos; first names and last initials. Only you can see who you&apos;re buying for, and only the person who drew you can read your wishlist. The organizer can&apos;t see either.</li>
           <li><strong>Officers</strong> who ask for access or report money raised share their name, UCSB email, note and any proof with the Lagoon team only, to verify it. A verified total is public on the Chapter Cup.</li>
           <li><strong>Canvas, office hours and homework check-offs stay on your phone.</strong> The Canvas link you paste is kept in the iOS Keychain, and assignments download from Canvas straight to your device. None of it reaches our servers.</li>
-          <li><strong>Usage and crash reports:</strong> which screens you open, for how long, and what you share, plus app version, iOS version and device model, linked to your account so we can see what&apos;s working and fix what breaks.</li>
+          <li><strong>Usage and crash reports:</strong> which screens you open, for how long, and what you share, plus app version, iOS version and device model, linked to your account so we can see what&apos;s working and fix what breaks. Once a day this includes a few settings: whether you have a schedule, whether notifications are on, which Lagoon widgets you&apos;ve added and your text size.</li>
         </ul>
         <p>
           Data you add is stored with Supabase, with row-level security on every table. You can delete your
           account in the app at any time. That removes your profile, friends, reviews, groups, chapter
-          memberships, RSVPs, officer roles, your hall and your &ldquo;going&rdquo; RSVPs from our servers.
+          memberships, RSVPs, officer roles, your hall, your &ldquo;going&rdquo; RSVPs, and your Secret Santa wishlists and memberships
+          (and any exchange you organized) from our servers.
         </p>
 
         <h2>What this website measures</h2>
