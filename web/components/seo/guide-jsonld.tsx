@@ -26,6 +26,13 @@ export type GuideFrontmatter = {
   metaPills: string[];
   related: { href: string; label: string }[];
   relatedCtaText: string;
+  /**
+   * Optional answer-first summary: who / what / when, with dates, in two or
+   * three sentences an answer engine can quote. Rendered at the top of the
+   * article and emitted as the Article's `abstract`. Facts only from the
+   * repo's checked tables or the guide's own copy.
+   */
+  summary?: string;
 };
 
 /** Frontmatter owns the headline and dates; one Article describes each guide. */
@@ -42,6 +49,7 @@ export function guideSchema(blocks: unknown[], fm: GuideFrontmatter): unknown[] 
       description: fm.description,
       datePublished: fm.datePublished,
       dateModified: fm.dateModified,
+      ...(fm.summary ? { abstract: fm.summary } : {}),
       mainEntityOfPage: `https://www.lagoonucsb.com${fm.canonicalPath}`,
       image: fm.image,
       author: { "@type": "Organization", name: fm.author || "Lagoon" },

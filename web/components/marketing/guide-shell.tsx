@@ -45,7 +45,15 @@ export function GuideShell({
       </section>
 
       <section className="section-block">
-        <article className="article-shell article-card">{children}</article>
+        <article className="article-shell article-card">
+          {fm.summary && (
+            <div className="callout guide-summary">
+              <strong>In short</strong>
+              <p>{fm.summary}</p>
+            </div>
+          )}
+          {children}
+        </article>
       </section>
 
       <section className="related-guides" aria-labelledby="related-guides-title">

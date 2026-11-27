@@ -7,6 +7,7 @@ import { aggregateGrades, formatCount, formatGpa, formatRate, quarterOrder } fro
 import { CourseCard } from "@/components/courses/course-card";
 import { CourseCta, CourseSource, CourseUnavailable } from "@/components/courses/course-shared";
 import { CourseEvents } from "@/components/courses/course-events";
+import { courseAnswer, courseDataset, courseDescription } from "@/lib/course-schema";
 
 type Props = { params: Promise<{ slug: string }>; searchParams: Promise<{ instructor?: string; quarter?: string }> };
 
@@ -17,10 +18,14 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   let course;
   try { course = await getCourse(slug); } catch { return { title: "Course data unavailable | Lagoon", robots: { index: false, follow: true }, alternates: { canonical: path } }; }
   if (!course) return { title: "Course not found | Lagoon", robots: { index: false, follow: true } };
-  let available = true;
-  try { available = (await getCourseGrades(course.department, course.number)).length > 0; } catch { available = false; }
+  let rows: Awaited<ReturnType<typeof getCourseGrades>> = [];
+  try { rows = await getCourseGrades(course.department, course.number); } catch { rows = []; }
+  const available = rows.length > 0;
   const title = `${course.id} UCSB Grade Distribution & Instructor History | Lagoon`;
-  const description = `Explore historical ${course.id} grades at UCSB, including average GPA, A-range grades, and breakdowns by instructor and quarter. Free, no login required.`;
+  // Real numbers in the snippet, from the full history (never the filters).
+  const description = available
+    ? courseDescription(course.id, rows)
+    : `Explore historical ${course.id} grades at UCSB, including average GPA, A-range grades, and breakdowns by instructor and quarter. Free, no login required.`;
   return {
     title: { absolute: title }, description, alternates: { canonical: path },
     robots: { index: available && Object.keys(filters).length === 0, follow: true },
@@ -49,10 +54,13 @@ export default async function CoursePage({ params, searchParams }: Props) {
   const history = [...new Set(selected.map(row => row.quarter))].sort((a, b) => quarterOrder(b) - quarterOrder(a));
   const index = await getCourseIndex();
   const related = index.filter(other => other.department === course.department && other.slug !== slug).sort((a, b) => b.enrolled - a.enrolled).slice(0, 3);
+  const answer = courseAnswer(course.id, rows);
   const schema = {
     "@context": "https://schema.org", "@type": "WebPage", name: `${course.id} UCSB grade distribution`,
-    description: `Historical grade distributions for ${course.id}, with instructor and quarter filters.`,
+    description: answer,
     url: `${COURSE_ORIGIN}/courses/${slug}`, citation: GRADE_SOURCE,
+    isPartOf: { "@type": "WebSite", "@id": `${COURSE_ORIGIN}/#website` },
+    mainEntity: courseDataset(course.id, slug, rows),
     breadcrumb: { "@type": "BreadcrumbList", itemListElement: [
       { "@type": "ListItem", position: 1, name: "Courses", item: `${COURSE_ORIGIN}/courses` },
       { "@type": "ListItem", position: 2, name: course.id, item: `${COURSE_ORIGIN}/courses/${slug}` },
@@ -63,7 +71,7 @@ export default async function CoursePage({ params, searchParams }: Props) {
     <header className="course-detail-hero">
       <Link href="/courses" className="course-back"><ArrowLeft size={16} aria-hidden="true" /> All courses</Link>
       <div className="course-hero-top"><span className="course-kicker">{course.department} · UC Santa Barbara</span><span className="course-kicker">Historical grades</span></div>
-      <h1>{course.id}</h1><p>A clearer picture of the classes ahead.</p>
+      <h1>{course.id}</h1><p>{answer}</p>
       <div className="course-hero-foot"><span>{formatCount(rows.length)} published records</span><span>{quarters[quarters.length - 1]} — {quarters[0]}</span></div>
     </header>
     <section className="course-grade-section" aria-labelledby="grade-heading">
