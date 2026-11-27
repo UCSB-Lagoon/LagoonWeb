@@ -29,6 +29,8 @@
 - **Every App Store link** uses the canonical
   `/us/app/lagoon-ucsb-campus/id6760681142` (the old `/ucsb-lagoon/` slug
   redirected).
+- **IndexNow**: key file in `public/`, and `npm run indexnow` after a
+  production deploy tells Bing which URLs changed (see the script header).
 - **Winter 2027 Pass 2 / Pass 3** are published with the Registrar's split:
   graduate students open a day earlier (Nov 16 / Nov 30) than undergrads
   (Nov 17 / Dec 1).
