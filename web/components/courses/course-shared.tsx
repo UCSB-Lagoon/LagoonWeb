@@ -5,7 +5,7 @@ import { GRADE_SOURCE, getCourseDataInfo } from "@/lib/courses";
 export function CourseCta() {
   return <aside className="course-cta">
     <div><span className="course-kicker">Your next quarter</span><h2>Find your classes.<br />Make them your day.</h2><p>Once you’ve registered, import your GOLD schedule into Lagoon. Your classes, in one beautiful Today view.</p></div>
-    <a href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142" className="course-button" data-lagoon-cta="courses">Get Lagoon for iPhone <ArrowUpRight size={18} aria-hidden="true" /></a>
+    <a href="https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142" className="course-button" data-lagoon-cta="courses">Get Lagoon for iPhone <ArrowUpRight size={18} aria-hidden="true" /></a>
   </aside>;
 }
 

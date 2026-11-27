@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
-const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142";
 const COOKIE_NAME = "lagoon_ref";
 const SIXTY_DAYS = 60 * 60 * 24 * 60;
 

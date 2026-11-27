@@ -23,6 +23,15 @@
   other AI crawlers, the private-path disallows repeated. A deliberate
   reversal of the May block, in its own commit.
 - SEO goldens updated for the 12 pages whose JSON-LD changed on purpose.
+- **Homepage grade-data FAQ** says "more than 10,000 UCSB courses since
+  Fall 2009" (app table 10,498, web snapshot 10,653, same Daily Nexus
+  source), not "over 500".
+- **Every App Store link** uses the canonical
+  `/us/app/lagoon-ucsb-campus/id6760681142` (the old `/ucsb-lagoon/` slug
+  redirected).
+- **Winter 2027 Pass 2 / Pass 3** are published with the Registrar's split:
+  graduate students open a day earlier (Nov 16 / Nov 30) than undergrads
+  (Nov 17 / Dec 1).
 
 ## [2026-11-18] — /privacy covers Secret Santa and the daily settings snapshot
 

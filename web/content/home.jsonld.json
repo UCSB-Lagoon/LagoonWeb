@@ -127,7 +127,7 @@
         "name": "Where does Lagoon's grade data come from?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Grade distributions are aggregated from UCSB's publicly released grade reports — including average GPA, A-rate, and D/F-rate for over 500 courses."
+          "text": "Grade distributions come from the Daily Nexus public dataset of UCSB Registrar grade records, obtained through public records requests. They cover more than 10,000 UCSB courses since Fall 2009, with average GPA, A-range and D/F rates by instructor and quarter."
         }
       },
       {

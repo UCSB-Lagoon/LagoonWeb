@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
 };
 
-const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142";
 const DOW_LONG = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export default async function StatsPage() {

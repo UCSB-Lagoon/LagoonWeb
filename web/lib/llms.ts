@@ -27,18 +27,20 @@ export const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id676
  *  - Quarter, instruction and finals dates: UCSB quarter API, cached 2026-11-22.
  *  - Holidays: CampusHolidays (UC academic holidays 2026–27).
  *  - Fees: BARC, checked 2026-10-09. Financial aid: Financial Aid & Scholarships, checked 2026-10-09.
- * Winter Pass 2 / Pass 3 opening days are deliberately absent: the registrar
- * table and the UCSB API disagree by a day.
+ *  - Winter 2027 passes: registrar.sa.ucsb.edu/calendars/registration-pass-times,
+ *    checked 2026-11-26. Pass 2 and Pass 3 open a day earlier for graduate
+ *    students; the UCSB API's single passNBegin field is the graduate date.
  */
 const UCSB_DATES = [
   "Fall 2026: instruction ends Friday, December 4, 2026; finals run Saturday, December 5 through Friday, December 11, 2026.",
   "Winter 2027: classes start Monday, January 4, 2027; instruction ends Friday, March 12; finals run Saturday, March 13 through Friday, March 19, 2027.",
   "No classes: Thanksgiving, November 26–27, 2026; Martin Luther King Jr. Day, January 18, 2027; Presidents' Day, February 15, 2027.",
+  "Winter 2027 registration in GOLD: Pass 1 ran November 2–8, 2026 for everyone; Pass 2 opened November 16 (graduate students) and November 17 (undergraduates) and ended November 22; Pass 3 opens Monday, November 30 for graduate students and Tuesday, December 1 for undergraduates, and runs through March 12, 2027. Pass times are Pacific time; each student's exact window is in GOLD.",
   "Winter 2027 undergraduate fees are due on the BARC bill by 4 PM on Tuesday, December 15, 2026; Spring 2027 fees by 4 PM on Monday, March 15, 2027.",
   "FAFSA / California Dream Act priority deadline for 2027–28 aid (Cal Grant included): Tuesday, March 2, 2027.",
   "Spring 2027 pass times had not been published as of November 26, 2026; they appear in GOLD.",
 ];
-const DATES_SOURCE = "Sources: UCSB's quarter calendar via the UCSB API (cached November 22, 2026), the UC academic holiday calendar, BARC (bfs.ucsb.edu/barc/deadlines) and Financial Aid & Scholarships (finaid.ucsb.edu/calendar), checked October 9, 2026. Always confirm with the Registrar: https://registrar.sa.ucsb.edu/calendars/academic-calendars";
+const DATES_SOURCE = "Sources: UCSB's quarter calendar via the UCSB API (cached November 22, 2026), the Registrar's registration pass times page (checked November 26, 2026), the UC academic holiday calendar, BARC (bfs.ucsb.edu/barc/deadlines) and Financial Aid & Scholarships (finaid.ucsb.edu/calendar), checked October 9, 2026. Always confirm with the Registrar: https://registrar.sa.ucsb.edu/calendars/academic-calendars";
 
 const FEATURES = [
   "**Schedule import:** imports a UCSB GOLD class schedule in about 30 seconds, three ways: a screenshot of GOLD, an in-app GOLD sign-in (the student signs in themselves, Duo included; Lagoon never sees the password), or pasted text. Lagoon never registers for classes or acts in GOLD on anyone's behalf.",

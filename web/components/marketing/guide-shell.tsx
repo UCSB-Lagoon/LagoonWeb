@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import type { GuideFrontmatter } from "@/components/seo/guide-jsonld";
 
-const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142";
 
 /**
  * Related-guide hrefs come from guide frontmatter, so they're whatever an
