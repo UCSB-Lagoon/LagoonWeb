@@ -21,6 +21,8 @@ export type GuideSummary = {
   breadcrumbName: string;
   datePublished: string;
   dateModified: string;
+  /** Answer-first summary, when the guide has one. */
+  summary: string;
 };
 
 const WANTED = [
@@ -29,6 +31,7 @@ const WANTED = [
   "breadcrumbName",
   "datePublished",
   "dateModified",
+  "summary",
 ] as const;
 
 function parseFrontmatter(source: string): Record<string, string> {
@@ -66,6 +69,7 @@ export function getGuideIndex(): Promise<GuideSummary[]> {
         breadcrumbName: fm.breadcrumbName ?? fm.title ?? slug,
         datePublished: fm.datePublished ?? "",
         dateModified: fm.dateModified ?? fm.datePublished ?? "",
+        summary: fm.summary ?? "",
       };
     })
   );

@@ -1,5 +1,40 @@
 # Lagoon Web — Changelog
 
+## [2026-11-26] — Search and AI-answer visibility (`SEO_AI_PLAN.md`)
+
+- **`SEO_AI_PLAN.md`** audits robots, sitemaps, canonicals, metadata,
+  JSON-LD, linking and rendering, and lists what's next in priority order,
+  including the steps that need the owner's accounts.
+- **Answer-first summaries** on 11 high-intent guides (`summary`
+  frontmatter → an "In short" box at the top of the article + Article
+  `abstract`). Dates come from the UCSB quarter API and the iOS repo's
+  `RegistrarDeadlines`; update them when those change.
+- **Course pages** open with a quotable sentence and a meta description
+  carrying the real GPA / A-range / D/F figures (full history, never the
+  filters), and describe their data as a `Dataset`; so does `/courses`.
+- **`/llms.txt`** is generated at build time (`lib/llms.ts`): corrected
+  facts, guide list and course count can't drift. **`/llms-full.txt`** is
+  new: every guide's text in one file. `public/llms.txt` is gone.
+- **Homepage JSON-LD**: FAQPage had 6 of the 7 visible questions; `@id`s
+  link WebSite / app / Organization; `featureList` lists shipped features
+  only; App Store URLs use the canonical slug. Two visible FAQ entries
+  added (dining hours, homework and deadlines).
+- **robots.txt** lets GPTBot, Google-Extended and CCBot in, named with the
+  other AI crawlers, the private-path disallows repeated. A deliberate
+  reversal of the May block, in its own commit.
+- SEO goldens updated for the 12 pages whose JSON-LD changed on purpose.
+- **Homepage grade-data FAQ** says "more than 10,000 UCSB courses since
+  Fall 2009" (app table 10,498, web snapshot 10,653, same Daily Nexus
+  source), not "over 500".
+- **Every App Store link** uses the canonical
+  `/us/app/lagoon-ucsb-campus/id6760681142` (the old `/ucsb-lagoon/` slug
+  redirected).
+- **IndexNow**: key file in `public/`, and `npm run indexnow` after a
+  production deploy tells Bing which URLs changed (see the script header).
+- **Winter 2027 Pass 2 / Pass 3** are published with the Registrar's split:
+  graduate students open a day earlier (Nov 16 / Nov 30) than undergrads
+  (Nov 17 / Dec 1).
+
 ## [2026-11-18] — /privacy covers Secret Santa and the daily settings snapshot
 
 - **/privacy** says what a Secret Santa stores and who sees it (members'

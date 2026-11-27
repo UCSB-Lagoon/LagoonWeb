@@ -189,7 +189,7 @@ export function courseList(w: SharedWeek, max = 4): string {
 
 // ── Install ──────────────────────────────────────────────────────────────
 
-export const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+export const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142";
 
 /** Tagged so App Store Connect → Campaigns counts installs per share kind. */
 export function appStoreURL(kind: string): string {

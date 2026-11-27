@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
-const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142";
 
 export const viewport: Viewport = { themeColor: "#ffd76a" };
 

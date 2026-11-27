@@ -56,7 +56,7 @@ export default async function HomePage() {
         </div>
         <a
           className="lagoon-button"
-          href="https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+          href="https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142"
           data-lagoon-cta="campus"
         >
           Download free ↗

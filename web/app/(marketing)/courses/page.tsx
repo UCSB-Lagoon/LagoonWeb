@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
-import { getCourseIndex, coverage, COURSE_ORIGIN } from "@/lib/courses";
+import { getCourseIndex, getCoverageSpan, coverage, COURSE_ORIGIN } from "@/lib/courses";
+import { catalogDataset } from "@/lib/course-schema";
 import { courseSearch, formatCount } from "@/lib/course-grades";
 import { CourseCard } from "@/components/courses/course-card";
 import { CourseCta, CourseSource, CourseUnavailable } from "@/components/courses/course-shared";
@@ -36,8 +37,11 @@ export default async function CoursesPage({ searchParams }: Props) {
   const page = Math.min(pages, Math.max(1, Number.parseInt(params.page ?? "1", 10) || 1));
   const shown = matches.slice((page - 1) * 24, page * 24);
   const latest = coverage(courses ?? []);
+  const span = courses?.length ? await getCoverageSpan().catch(() => null) : null;
+  const dataset = courses?.length && span ? catalogDataset(courses.length, span.earliest, span.latest) : null;
   const pageUrl = (n: number) => { const query = new URLSearchParams(); if (q) query.set("q", q); if (department) query.set("department", department); if (n > 1) query.set("page", String(n)); return `/courses${query.size ? `?${query}` : ""}`; };
   return <>
+    {dataset && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(dataset).replace(/</g, "\\u003c") }} />}
     <header className="course-hero">
       <div className="course-hero-top"><span className="course-kicker">The Lagoon course explorer</span><span className="course-kicker">UC Santa Barbara</span></div>
       <h1>A little clarity.<br /><span>A better quarter.</span></h1>

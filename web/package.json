@@ -14,7 +14,8 @@
     "test:e2e": "playwright test",
     "test:courses": "playwright test --config playwright.courses.config.ts",
     "test:contrast": "playwright test e2e/contrast.spec.ts",
-    "test:visual": "playwright test --config playwright.visual.config.ts"
+    "test:visual": "playwright test --config playwright.visual.config.ts",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "@mdx-js/react": "^3.1.1",

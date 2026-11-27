@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import type { GuideFrontmatter } from "@/components/seo/guide-jsonld";
 
-const APP_STORE = "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142";
+const APP_STORE = "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142";
 
 /**
  * Related-guide hrefs come from guide frontmatter, so they're whatever an
@@ -45,7 +45,15 @@ export function GuideShell({
       </section>
 
       <section className="section-block">
-        <article className="article-shell article-card">{children}</article>
+        <article className="article-shell article-card">
+          {fm.summary && (
+            <div className="callout guide-summary">
+              <strong>In short</strong>
+              <p>{fm.summary}</p>
+            </div>
+          )}
+          {children}
+        </article>
       </section>
 
       <section className="related-guides" aria-labelledby="related-guides-title">

@@ -75,3 +75,15 @@ export const getCourseDataInfo = cache(async () => {
 export function coverage(courses: CourseSummary[]) {
   return courses.reduce((latest, course) => quarterOrder(course.latest) > quarterOrder(latest) ? course.latest : latest, "");
 }
+
+/** First and last quarter anywhere in the snapshot, e.g. Fall 2009 – Summer 2026. */
+export const getCoverageSpan = cache(async () => {
+  const data = await readSnapshot();
+  let earliest = "", latest = "";
+  for (const [, , packed] of data.courses) for (const row of packed) {
+    const quarter = row[0];
+    if (!earliest || quarterOrder(quarter) < quarterOrder(earliest)) earliest = quarter;
+    if (!latest || quarterOrder(quarter) > quarterOrder(latest)) latest = quarter;
+  }
+  return { earliest, latest };
+});
