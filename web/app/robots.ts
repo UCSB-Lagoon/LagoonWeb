@@ -14,8 +14,10 @@ const PRIVATE = ["/api/", "/auth/", "/admin", "/me", "/login", "/lab"];
  * "not for model training"). The site is public marketing for a free app,
  * and being in what ChatGPT, Gemini and Claude know and cite is the point,
  * so they get the same access as everyone else (SEO_AI_PLAN.md, item 5).
- * Google-Extended has no effect on Google Search or AI Overviews; those use
- * Googlebot, which falls under `*`.
+ * Google documents that Google-Extended "does not impact a site's inclusion
+ * in Google Search nor is it used as a ranking signal"; it controls Gemini
+ * training and grounding. Googlebot falls under `*`.
+ * https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers
  *
  * A named group REPLACES the `*` group for that crawler, so each one must
  * repeat the PRIVATE disallows.

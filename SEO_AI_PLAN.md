@@ -49,7 +49,7 @@ API dates in `marketing/CALENDAR.md`. No invented stats, reviews or counts.
    *Sources:* Fall 2026 and Winter 2027 instruction and finals dates come from the UCSB quarter API (`marketing/CALENDAR.md`). Deadlines come from `RegistrarDeadlines` (L&S, checked 2026-10-04; BARC and Financial Aid checked 2026-10-09). **Not published:** Winter Pass 2 and Pass 3 opening days, because the registrar table and the UCSB API disagree by a day (open follow-up in `calendar.json`).
 
 3. **Answer-first line + real numbers on course pages.**
-   *Why:* "CMPSC 16 UCSB grade distribution" is a question with a numeric answer. The page should say "3.22 average GPA, 53.3% A-range, Fall 2009 – Spring 2026" in its first paragraph and in its meta description, not a tagline. The numbers are computed from the unfiltered history, so the canonical page never changes with query filters.
+   *Why:* "CMPSC 16 UCSB grade distribution" is a question with a numeric answer. The page should say "3.22 average GPA, 53.3% A-range, Winter 2010 – Spring 2026" in its first paragraph and in its meta description, not a tagline. The numbers are computed from the unfiltered history, so the canonical page never changes with query filters.
    Add a `Dataset` description (source, creator, coverage) to course pages and `/courses`.
 
 4. **Complete the homepage structured data.** Add the missing 7th FAQ to FAQPage; add `@id`s and link publisher → Organization; replace flagged-off features in `featureList` with shipped ones (Today view, real dining hours, Canvas homework and deadlines, friends' free time, Pass Time, lock-screen class countdown, Quarter Wrapped); point App Store URLs at the canonical slug.
@@ -58,14 +58,14 @@ API dates in `marketing/CALENDAR.md`. No invented stats, reviews or counts.
 
 5. **robots.txt: let GPTBot, Google-Extended and CCBot in** (still blocking Bytespider and omgili, still disallowing the private paths for everyone). **Separate commit, and a policy reversal:**
    - *For:* the content is marketing for a free app. Being in the training data is how ChatGPT and Gemini "know" Lagoon without a live search, and Google-Extended also gates grounding in Gemini apps.
-   - *Unaffected:* Google Search and AI Overviews. Google documents that Google-Extended doesn't affect Search inclusion or ranking; AI Overviews use Googlebot.
+   - *Unaffected:* Google Search. Google's crawler docs say Google-Extended "does not impact a site's inclusion in Google Search nor is it used as a ranking signal"; it controls Gemini training and grounding ([source](https://developers.google.com/search/docs/crawling-indexing/google-common-crawlers)). The docs don't mention AI Overviews.
    - *Against:* the May 2026 block was deliberate.
-   - **Needs the owner's yes before merge.** Revert that one commit to keep the block.
+   - **Needs the owner's yes before merge.** To keep the block, revert the robots commit *and* restore the "not licensed for AI model training" line, which went out with the llms.txt rewrite in the content commit.
 
 ### P1: next, needs the owner or more data
 
 6. **Apex → www redirect: 307 → 308.** Vercel → Project → Domains → set `lagoonucsb.com` to "Redirect to www.lagoonucsb.com" with the permanent (308) option. *Why:* a temporary redirect tells crawlers to keep the apex URL; external links to `lagoonucsb.com` don't fully consolidate. (Owner's Vercel account.)
-7. **Google Search Console + Bing Webmaster Tools.** Verify the `www` property, submit both sitemaps, and watch Coverage and the "Discovered – not indexed" count on the 10,653 course pages. Bing matters more than it looks: ChatGPT search and Copilot draw on Bing's index. (Owner's Google and Microsoft accounts.)
+7. **Google Search Console + Bing Webmaster Tools.** Verify the `www` property, submit both sitemaps, and watch Coverage and the "Discovered – not indexed" count on the 10,653 course pages. Bing matters more than it looks: Copilot runs on Bing's index, and ChatGPT search has used Bing as one of its sources. (Owner's Google and Microsoft accounts.)
 8. **IndexNow** for course and guide updates: a key file in `public/` plus a ping on deploy. Only worth it once Bing is verified. (Owner's Bing account; the key is public by design.)
 9. **Homepage "500+ courses" wording.** The FAQ says grade data covers "over 500 courses"; the web snapshot has 10,653 courses (Daily Nexus dataset, retrieved 2026-10-10). The app reads a different table (`grade_distributions`, ~10,498 distinct courses), so the owner should pick the figure that's true for both before changing the line. Left unchanged here.
 10. **A dated "UCSB academic calendar 2026–27" page** built from `RegistrarDeadlines` + `CampusHolidays` + the quarter API, regenerated when those tables change. It would answer "when is UCSB finals week / when are fees due" directly. Wait until Spring 2027 dates post, so the page isn't mostly "not published yet".
