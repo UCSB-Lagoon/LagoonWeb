@@ -1,5 +1,29 @@
 # Lagoon Web — Changelog
 
+## [2026-11-26] — Search and AI-answer visibility (`SEO_AI_PLAN.md`)
+
+- **`SEO_AI_PLAN.md`** audits robots, sitemaps, canonicals, metadata,
+  JSON-LD, linking and rendering, and lists what's next in priority order,
+  including the steps that need the owner's accounts.
+- **Answer-first summaries** on 11 high-intent guides (`summary`
+  frontmatter → an "In short" box at the top of the article + Article
+  `abstract`). Dates come from the UCSB quarter API and the iOS repo's
+  `RegistrarDeadlines`; update them when those change.
+- **Course pages** open with a quotable sentence and a meta description
+  carrying the real GPA / A-range / D/F figures (full history, never the
+  filters), and describe their data as a `Dataset`; so does `/courses`.
+- **`/llms.txt`** is generated at build time (`lib/llms.ts`): corrected
+  facts, guide list and course count can't drift. **`/llms-full.txt`** is
+  new: every guide's text in one file. `public/llms.txt` is gone.
+- **Homepage JSON-LD**: FAQPage had 6 of the 7 visible questions; `@id`s
+  link WebSite / app / Organization; `featureList` lists shipped features
+  only; App Store URLs use the canonical slug. Two visible FAQ entries
+  added (dining hours, homework and deadlines).
+- **robots.txt** lets GPTBot, Google-Extended and CCBot in, named with the
+  other AI crawlers, the private-path disallows repeated. A deliberate
+  reversal of the May block, in its own commit.
+- SEO goldens updated for the 12 pages whose JSON-LD changed on purpose.
+
 ## [2026-11-18] — /privacy covers Secret Santa and the daily settings snapshot
 
 - **/privacy** says what a Secret Santa stores and who sees it (members'

@@ -41,6 +41,66 @@
   "jsonld": [
     {
       "@context": "https://schema.org",
+      "@id": "https://www.lagoonucsb.com/#app",
+      "@type": "MobileApplication",
+      "alternateName": [
+        "Lagoon",
+        "UCSB Lagoon",
+        "Lagoon — UCSB Campus App"
+      ],
+      "applicationCategory": "EducationApplication",
+      "applicationSubCategory": "Campus Life",
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student",
+        "geographicArea": {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US",
+            "addressLocality": "Santa Barbara",
+            "addressRegion": "CA",
+            "postalCode": "93106"
+          },
+          "name": "University of California, Santa Barbara"
+        }
+      },
+      "description": "A free, independent, student-built iPhone app for UC Santa Barbara students. It imports your GOLD schedule in about 30 seconds and brings your Today view, dining commons hours and menus, Canvas homework, registrar deadlines, friends' free time, classmate counts and historical grade distributions into one app. Not an official UCSB service.",
+      "downloadUrl": "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142",
+      "featureList": [
+        "30-second GOLD schedule import (screenshot, in-app GOLD sign-in, or paste)",
+        "Today view: your next class, the gaps in your day, meals and what's due",
+        "Home-screen widgets and a lock-screen class countdown",
+        "Real UCSB dining commons hours and menus",
+        "Canvas homework, registrar deadlines and fee dates in one due list",
+        "Friends' free time: who's free now and when you're both free",
+        "Classmate discovery: friends in your classes and anonymous classmate counts",
+        "Historical UCSB grade distributions by instructor and quarter",
+        "Pass Time registration planner with first choices and backups",
+        "Finals countdown and quarter view",
+        "Live campus map with friends and campus events",
+        "Quarter Wrapped: your quarter in review"
+      ],
+      "image": "https://www.lagoonucsb.com/og-card.png",
+      "inLanguage": "en-US",
+      "installUrl": "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142",
+      "isAccessibleForFree": true,
+      "name": "Lagoon: UCSB Campus App",
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "operatingSystem": "iOS 17.0+",
+      "publisher": {
+        "@id": "https://www.lagoonucsb.com/#organization"
+      },
+      "url": "https://www.lagoonucsb.com/"
+    },
+    {
+      "@context": "https://schema.org",
+      "@id": "https://www.lagoonucsb.com/#faq",
       "@type": "FAQPage",
       "mainEntity": [
         {
@@ -90,86 +150,58 @@
             "text": "Lagoon is built exclusively for UCSB undergraduates and graduate students. Sign-in requires a valid UCSB account."
           },
           "name": "Who can use Lagoon?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lagoon is an independent, student-built app for the UCSB community. It is not an official university service."
+          },
+          "name": "Is Lagoon affiliated with UCSB?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Lagoon shows each dining commons' real hours for today and tomorrow, from UCSB Dining's own data, next to the dining commons menus. Hours change during breaks and holidays, and Lagoon follows them."
+          },
+          "name": "Does Lagoon show UCSB dining hall hours and menus?"
+        },
+        {
+          "@type": "Question",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Paste your Canvas calendar-feed link and Lagoon lists your assignments next to registrar deadlines, BARC fee dates and financial aid dates. The feed link stays on your phone."
+          },
+          "name": "Does Lagoon track Canvas homework and UCSB deadlines?"
         }
       ]
     },
     {
       "@context": "https://schema.org",
-      "@type": "MobileApplication",
-      "alternateName": "UCSB Lagoon",
-      "applicationCategory": "EducationApplication",
-      "applicationSubCategory": "Campus Life",
-      "audience": {
-        "@type": "EducationalAudience",
-        "educationalRole": "student",
-        "geographicArea": {
-          "@type": "Place",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "US",
-            "addressLocality": "Santa Barbara",
-            "addressRegion": "CA",
-            "postalCode": "93106"
-          },
-          "name": "University of California, Santa Barbara"
-        }
-      },
-      "downloadUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
-      "featureList": [
-        "30-second GOLD schedule import (screenshot, sign-in, or paste)",
-        "Home-screen schedule widgets and Today view",
-        "Classmate discovery — see who shares your classes",
-        "Real UCSB grade distributions and A-rate data",
-        "GOLD schedule sync and quarter view",
-        "Live UCSB dining commons menus",
-        "Live campus map with friends and anonymous pins",
-        "Campus events and Daily Nexus headlines",
-        "Study groups",
-        "GE requirement tracker",
-        "Class vibes and course reviews",
-        "XP, streaks, and gamification"
-      ],
-      "image": "https://www.lagoonucsb.com/og-card.png",
-      "inLanguage": "en-US",
-      "installUrl": "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142",
-      "isAccessibleForFree": true,
-      "name": "Lagoon — UCSB Campus App",
-      "offers": {
-        "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "operatingSystem": "iOS 17.0+",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon",
-        "url": "https://www.lagoonucsb.com/"
-      },
-      "url": "https://www.lagoonucsb.com/"
-    },
-    {
-      "@context": "https://schema.org",
+      "@id": "https://www.lagoonucsb.com/#organization",
       "@type": "Organization",
       "areaServed": {
         "@type": "Place",
         "name": "University of California, Santa Barbara"
       },
+      "description": "Lagoon is an independent, student-built app for the UC Santa Barbara community. It is not an official university service.",
       "logo": "https://www.lagoonucsb.com/logo.svg",
       "name": "Lagoon",
       "sameAs": [
-        "https://apps.apple.com/us/app/ucsb-lagoon/id6760681142"
+        "https://apps.apple.com/us/app/lagoon-ucsb-campus/id6760681142"
       ],
       "url": "https://www.lagoonucsb.com/"
     },
     {
       "@context": "https://schema.org",
+      "@id": "https://www.lagoonucsb.com/#website",
       "@type": "WebSite",
-      "description": "The UCSB campus app: import your GOLD schedule in about 30 seconds, see who's in your classes, plus grade data, live dining menus, and campus events.",
+      "description": "Lagoon is a free, independent iPhone app for UC Santa Barbara students: import your GOLD schedule in about 30 seconds, see who's in your classes, plus dining commons hours and menus, Canvas homework and deadlines, and historical grade data.",
+      "inLanguage": "en-US",
       "name": "Lagoon",
       "publisher": {
-        "@type": "Organization",
-        "name": "Lagoon"
+        "@id": "https://www.lagoonucsb.com/#organization"
       },
       "url": "https://www.lagoonucsb.com/"
     }

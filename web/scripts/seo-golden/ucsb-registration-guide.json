@@ -26,11 +26,12 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
+      "abstract": "At UCSB you register for classes in GOLD during your assigned pass times, Pass 1, Pass 2 and Pass 3, each with a unit cap; build a main schedule and a backup before your window opens. Dates to know: the last day to change a Fall 2026 grading option is Friday, December 4 (Letters & Science, checked against the Registrar on October 4, 2026), and Winter 2027 fees are due on your BARC bill by 4 PM on Tuesday, December 15, 2026. Spring 2027 pass times had not been published as of November 26, 2026.",
       "author": {
         "@type": "Organization",
         "name": "Lagoon"
       },
-      "dateModified": "2026-04-21",
+      "dateModified": "2026-11-26",
       "datePublished": "2026-04-21",
       "description": "A practical UCSB registration guide covering how students think through passes, schedule prep, backups, and what to do before registration opens.",
       "headline": "UCSB Registration Guide",

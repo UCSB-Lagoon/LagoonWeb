@@ -23,11 +23,12 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
+      "abstract": "Lagoon’s free course explorer at lagoonucsb.com/courses shows historical grade distributions for more than 10,000 UCSB courses, from Fall 2009 through Summer 2026: average GPA, the share of A-range and D/F grades, and breakdowns by instructor and quarter. The data is the Daily Nexus public dataset of UCSB Registrar records, obtained through public records requests, and no account is needed.",
       "author": {
         "@type": "Organization",
         "name": "Lagoon"
       },
-      "dateModified": "2026-10-09",
+      "dateModified": "2026-11-26",
       "datePublished": "2026-04-21",
       "description": "A practical guide to using UCSB grade distributions without making bad schedule decisions. Learn what grade data is good for and how Lagoon surfaces it.",
       "headline": "UCSB Grade Distributions Guide: How to Use Grade Data Well",

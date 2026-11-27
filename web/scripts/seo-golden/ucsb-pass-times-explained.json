@@ -23,11 +23,12 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
+      "abstract": "A pass time is your personal window to register in GOLD. UCSB runs three passes each quarter, each with a unit cap that rises as the passes progress: use Pass 1 for must-have and fast-filling classes, Pass 2 to fill out a full schedule and Pass 3 for swaps and waitlists. Your pass times appear in GOLD before registration opens; Lagoon’s Pass Time lets you enter yours, rank first choices and backups, and count down on your lock screen.",
       "author": {
         "@type": "Organization",
         "name": "Lagoon"
       },
-      "dateModified": "2026-07-03",
+      "dateModified": "2026-11-26",
       "datePublished": "2026-07-03",
       "description": "What UCSB pass times are, where to find yours in GOLD, how Pass 1, 2, and 3 actually work, and how to prep so registration takes minutes, not a morning.",
       "headline": "UCSB Pass Times Explained: Pass 1, 2, 3 & How to Prep",
